@@ -1,10 +1,14 @@
 
 variable "environment" {
-  default = "dev"
+  default     = "dev"
   description = "Environment name"
 }
 
-location = "West Europe"
+variable "location" {
+  default     = "West Europe"
+  description = "Location of resources"
+}
+
 
 # We strongly recommend using the required_providers block to set the
 # Azure Provider source and version being used
@@ -25,7 +29,7 @@ provider "azurerm" {
 
 
 resource "azurerm_resource_group" "rg" {
-  location = "${var.location}"
+  location = var.location
   name     = "rg-azure-infra-${var.environment}"
 
 }
@@ -35,3 +39,4 @@ resource "azurerm_resource_group" "rg" {
 #   name     = "example-resources"
 #   location = "West Europe"
 # }
+
