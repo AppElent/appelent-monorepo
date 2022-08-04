@@ -26,17 +26,8 @@ provider "azurerm" {
   features {}
 }
 
-
-
 resource "azurerm_resource_group" "rg" {
   location = var.location
   name     = "rg-azure-infra-${var.environment}"
-
 }
-
-# # Create a resource group
-# resource "azurerm_resource_group" "example" {
-#   name     = "example-resources"
-#   location = "West Europe"
-# }
 
