@@ -18,6 +18,9 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./infrastructure
     steps:
     - name: Set environment for branch
       run: |
