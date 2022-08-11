@@ -29,6 +29,10 @@ jobs:
         if [[ "${{github.base_ref}}" == "develop" || "${{github.ref}}" == "refs/heads/develop" ]]; then
           echo "ENV=dev" >> "$GITHUB_ENV"
         fi
+        
+    - run:  github
+    
+    - run: env.ENV
 
     - run:  env
 
