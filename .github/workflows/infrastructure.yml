@@ -32,8 +32,6 @@ jobs:
           echo "ENV=dev" >> "$GITHUB_ENV"
         fi
 
-    - run:  env
-
     - uses: actions/checkout@v2
       with:
         submodules: true
