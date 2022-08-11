@@ -30,7 +30,7 @@ jobs:
           echo "ENV=dev" >> "$GITHUB_ENV"
         fi
         
-    - run:  github
+    - run: ${{github}}
     
     - run: env.ENV
 
