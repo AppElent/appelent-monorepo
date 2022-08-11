@@ -1,20 +1,20 @@
-name: Azure Static Web Apps CI/CD
+name: Azure Static Web App Wappiemeter
 
 on:
   push:
     branches:
       - main
       - develop
+    paths:
+    - static_web_apps/wappiemeter/**
   pull_request:
     types: [opened, synchronize, reopened, closed]
     branches:
       - main
+    paths:
+    - static_web_apps/wappiemeter/**
 
 jobs:
-  build_infrastructure:
-    if: github.event_name == 'push' || (github.event_name == 'pull_request' && github.event.action != 'closed')
-    runs-on: ubuntu-latest
-    name: Build Azure Static Web App
   build_and_deploy_job:
     if: github.event_name == 'push' || (github.event_name == 'pull_request' && github.event.action != 'closed')
     runs-on: ubuntu-latest
