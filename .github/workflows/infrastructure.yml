@@ -23,8 +23,6 @@ jobs:
       run: |
         if [[ "${{github.base_ref}}" == "main" || "${{github.ref}}" == "refs/heads/main" ]]; then
             echo "ENV=prd" >> "$GITHUB_ENV"
-        else
-            #echo "ENV=production" >> "$GITHUB_ENV"
         fi
 
 
