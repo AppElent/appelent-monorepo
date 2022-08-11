@@ -48,9 +48,7 @@ jobs:
 
     - name: Terraform Init
       id: init
-      run: |
-        terraform workspace select ${{ env.ENV }} || terraform workspace new ${{ env.ENV }}
-        terraform init
+      run: terraform init
 
     - name: Terraform Validate
       id: validate
