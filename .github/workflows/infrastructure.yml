@@ -55,7 +55,8 @@ jobs:
     - name: Terraform Plan
       id: plan
       run: |
-        terraform workspace select ${{ env.ENV }} && terraform plan -no-color -target=module.heroku_config
+        terraform workspace select ${{ env.ENV }} || terraform workspace new ${{ env.ENV }}
+        terraform plan -no-color -target=module.heroku_config
       continue-on-error: true
 
     - uses: actions/github-script@v6
@@ -98,5 +99,6 @@ jobs:
     - name: Terraform Apply
       id: apply
       run: |
-        terraform workspace select ${{ env.ENV }} && terraform apply -target=module.heroku_config -auto-approve
+        terraform workspace select ${{ env.ENV }} || terraform workspace new ${{ env.ENV }}
+        terraform apply -target=module.heroku_config -auto-approve
       continue-on-error: true
