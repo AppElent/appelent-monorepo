@@ -24,7 +24,6 @@ jobs:
         if [[ "${{github.base_ref}}" == "main" || "${{github.ref}}" == "refs/heads/main" ]]; then
             echo "ENV=prd" >> "$GITHUB_ENV"
         fi
-        echo "${{github}}"
 
         if [[ "${{github.base_ref}}" == "develop" || "${{github.ref}}" == "refs/heads/develop" ]]; then
           echo "ENV=dev" >> "$GITHUB_ENV"
