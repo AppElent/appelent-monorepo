@@ -1,22 +1,46 @@
-name: Azure Static Web Apps CI/CD
+name: Terraform Infrastructure Build Workflow
 
 on:
-  workflow_call:
-    inputs:
-      username:
-        required: true
-        type: string
-    ##secrets:
-    ##  envPAT:
-    ##    required: true
+  push:
+    branches:
+      - main
+      - develop
+    paths:
+    - infrastructure/**
+  pull_request:
+    types: [opened, synchronize, reopened, closed]
+    branches:
+      - main
+    paths:
+    - infrastructure/**
+  workflow_dispatch:
 
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
+    - name: Set environment for branch
+      run: |
+        if [[ "${{github.base_ref}}" == "main" || "${{github.ref}}" == "refs/heads/main" ]]; then
+            echo "ENV=prd" >> "$GITHUB_ENV"
+        else
+            #echo "ENV=production" >> "$GITHUB_ENV"
+        fi
+
+
+        if [[ "${{github.base_ref}}" == "develop" || "${{github.ref}}" == "refs/heads/develop" ]]; then
+          echo "ENV=dev" >> "$GITHUB_ENV"
+        fi
+
+    - run:  env
+
+    - uses: actions/checkout@v2
+      with:
+        submodules: true
+
     - uses: hashicorp/setup-terraform@v2
       with:
-        cli_config_credentials_token: ${{ secrets.TF_API_TOKEN }}
+        cli_config_credentials_token: ${{ secrets.TF_TOKEN_APP_TERRAFORM_IO }}
 
     - name: Terraform fmt
       id: fmt
@@ -33,7 +57,8 @@ jobs:
 
     - name: Terraform Plan
       id: plan
-      run: terraform plan -no-color
+      run: |
+        terraform workspace select ${{ env.ENV }} && terraform plan -no-color -target=module.heroku_config
       continue-on-error: true
 
     - uses: actions/github-script@v6
@@ -72,3 +97,9 @@ jobs:
             repo: context.repo.repo,
             body: output
           })
+
+    - name: Terraform Apply
+      id: apply
+      run: |
+        terraform workspace select ${{ env.ENV }} && terraform apply -target=module.heroku_config -auto-approve
+      continue-on-error: true
