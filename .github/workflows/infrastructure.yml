@@ -30,11 +30,13 @@ jobs:
         if [[ "${{github.base_ref}}" == "main" || "${{github.ref}}" == "refs/heads/main" ]]; then
             echo "ENV=prd" >> "$GITHUB_ENV"
             echo "TF_WORKSPACE=prd" >> "$GITHUB_ENV"
+            mv prd.tfvars terraform.tfvars
         fi
 
         if [[ "${{github.base_ref}}" == "develop" || "${{github.ref}}" == "refs/heads/develop" ]]; then
           echo "ENV=dev" >> "$GITHUB_ENV"
           echo "TF_WORKSPACE=dev" >> "$GITHUB_ENV"
+          mv dev.tfvars terraform.tfvars
         fi
 
     - uses: hashicorp/setup-terraform@v2
