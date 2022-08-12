@@ -21,3 +21,9 @@ module "heroku_config" {
   heroku_app_name          = "appelent-${lower(random_string.random_string01.result)}-${var.environment}"
   create_postgres_database = true
 }
+
+resource "heroku_app" "app2" {
+  name   = "appelent-test123-stackoverflow"
+  region = "eu"
+  stack  = "heroku-22"
+}
