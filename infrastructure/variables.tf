@@ -18,3 +18,7 @@ variable "cosmosdb_name" {
   default     = "appelent-cdb"
   description = "Name of cosmos DB"
 }
+
+variable "heroku_api_key" {
+  description = "Heroku API key"
+}
