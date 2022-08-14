@@ -59,7 +59,7 @@ jobs:
     - name: Terraform Plan
       id: plan
       run: |
-        terraform apply -target=heroku_app.app2
+        terraform apply -target=heroku_app.app2 -auto-approve
         #terraform plan -no-color -target=heroku_app.app2 -out=planfile
       continue-on-error: true
 
