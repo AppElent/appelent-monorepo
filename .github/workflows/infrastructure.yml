@@ -58,7 +58,7 @@ jobs:
 
     - name: Terraform Plan
       id: plan
-      run: env && terraform plan -no-color -target=heroku_app.app2
+      run: env && terraform plan -no-color -target=heroku_app.app2 -out=planfile
       continue-on-error: true
 
     - uses: actions/github-script@v6
@@ -100,5 +100,5 @@ jobs:
 
     - name: Terraform Apply
       id: apply
-      run: echo "TF_LOG_PROVIDER=DEBUG" >> "$GITHUB_ENV" && env && terraform apply -target=heroku_app.app2 -auto-approve
+      run: echo "TF_LOG_PROVIDER=DEBUG" >> "$GITHUB_ENV" && env && terraform apply -target=heroku_app.app2 -auto-approve planfile
       continue-on-error: true
