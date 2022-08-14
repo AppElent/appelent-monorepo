@@ -58,11 +58,7 @@ jobs:
 
     - name: Terraform Plan
       id: plan
-      run: |
-        echo "terraform apply -no-color -target=heroku_app.app2 -auto-approve -var=heroku_api_key=${{ secrets.HEROKU_API_KEY }}"
-        terraform apply -no-color -target=heroku_app.app2 -auto-approve -var="heroku_api_key=${{ secrets.HEROKU_API_KEY }}"
-        #terraform plan -no-color -target=heroku_app.app2 -out=planfile
-      continue-on-error: true
+      run: terraform plan -no-color -target=heroku_app.app2 -out=planfile
 
     - uses: actions/github-script@v6
       if: github.event_name == 'pull_request'
@@ -103,5 +99,4 @@ jobs:
 
     - name: Terraform Apply
       id: apply
-      run: terraform apply -auto-approve planfile
-      continue-on-error: true
+      run: terraform apply -no-color -target=heroku_app.app2 -auto-approve -var="heroku_api_key=${{ secrets.HEROKU_API_KEY }}" -var="heroku_email=${{ secrets.HEROKU_EMAIL }}"
