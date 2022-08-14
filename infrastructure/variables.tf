@@ -22,3 +22,7 @@ variable "cosmosdb_name" {
 variable "heroku_api_key" {
   description = "Heroku API key"
 }
+
+variable "heroku_email" {
+  description = "Heroku Email"
+}
