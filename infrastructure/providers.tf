@@ -20,5 +20,6 @@ provider "azurerm" {
 }
 
 provider "heroku" {
-  # Configuration options
+  email   = "ericjansen@live.nl"
+  api_key = var.heroku_api_key
 }
