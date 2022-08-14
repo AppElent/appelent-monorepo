@@ -100,5 +100,5 @@ jobs:
 
     - name: Terraform Apply
       id: apply
-      run: echo "TF_LOG_PROVIDER=DEBUG" >> "$GITHUB_ENV" && env && terraform apply -target=heroku_app.app2 -auto-approve planfile
+      run: terraform apply -auto-approve planfile
       continue-on-error: true
