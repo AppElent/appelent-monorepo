@@ -8,18 +8,6 @@ terraform {
   }
 }
 
-provider "heroku" {
-  email   = var.heroku_email
-  api_key = var.heroku_api_key
-}
-
-variable "heroku_email" {
-  description = "Emailaddress of heroku account"
-}
-variable "heroku_api_key" {
-  description = "API Key of heroku account"
-}
-
 variable "heroku_app_name" {
   description = "Name of the herokuapp to be created"
 }

@@ -18,13 +18,3 @@ variable "cosmosdb_name" {
   default     = "appelent-cdb"
   description = "Name of cosmos DB"
 }
-
-variable "heroku_api_key" {
-  default     = "test"
-  description = "Heroku API key"
-}
-
-variable "heroku_email" {
-  default     = "test"
-  description = "Heroku Email"
-}
