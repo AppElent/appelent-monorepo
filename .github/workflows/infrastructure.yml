@@ -58,7 +58,7 @@ jobs:
 
     - name: Terraform Plan
       id: plan
-      run: terraform plan -no-color -target="module.heroku_config" -out=planfile
+      run: terraform plan -no-color -target="module.heroku_config" -out=planfile && cat planfile
 
     - uses: actions/github-script@v6
       if: github.event_name == 'pull_request'
