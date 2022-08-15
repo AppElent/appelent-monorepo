@@ -99,6 +99,4 @@ jobs:
 
     - name: Terraform Apply
       id: apply
-      run: |
-        terraform apply "planfile" -no-color -auto-approve
-        #terraform apply "planfile" -no-color -auto-approve -var="heroku_api_key=${{ secrets.HEROKU_API_KEY }}" -var="heroku_email=${{ secrets.HEROKU_EMAIL }}"
+      run: terraform apply -no-color -auto-approve -var="heroku_api_key=${{ secrets.HEROKU_API_KEY }}" -var="heroku_email=${{ secrets.HEROKU_EMAIL }}" planfile
