@@ -23,3 +23,9 @@ module "heroku_config" {
   heroku_email             = var.heroku_email
   create_postgres_database = true
 }
+
+resource "heroku_app" "app3" {
+  name = "appelent-test123-herokumodule"
+  region = "eu"
+  stack = "heroku-22"
+}
