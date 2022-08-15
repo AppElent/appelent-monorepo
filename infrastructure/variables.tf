@@ -20,9 +20,11 @@ variable "cosmosdb_name" {
 }
 
 variable "heroku_api_key" {
+  default     = "test"
   description = "Heroku API key"
 }
 
 variable "heroku_email" {
+  default     = "test"
   description = "Heroku Email"
 }
