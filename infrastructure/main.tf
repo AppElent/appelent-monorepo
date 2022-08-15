@@ -19,5 +19,7 @@ resource "random_string" "random_string01" {
 module "heroku_config" {
   source                   = "./modules/heroku_app"
   heroku_app_name          = "appelent-${lower(random_string.random_string01.result)}-${var.environment}"
+  heroku_api_key           = var.heroku_api_key
+  heroku_email             = var.heroku_email
   create_postgres_database = true
 }
