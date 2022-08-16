@@ -20,4 +20,5 @@ module "heroku_config" {
   source                   = "./modules/heroku_app"
   heroku_app_name          = "appelent-${lower(random_string.random_string01.result)}-${var.environment}"
   create_postgres_database = true
+  add_to_pipeline          = true
 }

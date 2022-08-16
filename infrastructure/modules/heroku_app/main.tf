@@ -21,6 +21,10 @@ variable "create_postgres_database" {
   default = false
 }
 
+variable "add_to_pipeline" {
+  default = false
+}
+
 resource "heroku_app" "app" {
   name   = var.heroku_app_name
   region = var.heroku_app_location
@@ -31,6 +35,18 @@ resource "heroku_addon" "postgres" {
   app_id = heroku_app.app.id
   plan   = "heroku-postgresql:hobby-basic"
   count  = var.create_postgres_database ? 1 : 0
+}
+
+resource "heroku_pipeline" "pipeline" {
+  name  = var.heroku_app_name
+  count = var.add_to_pipeline ? 1 : 0
+}
+
+resource "heroku_pipeline_coupling" "production" {
+  app_id   = heroku_app.app.id
+  pipeline = heroku_pipeline.pipeline[count.index].id
+  stage    = "production"
+  count    = var.add_to_pipeline ? 1 : 0
 }
 
 output "heroku_app_config" {
