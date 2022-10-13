@@ -1,2 +1,2 @@
-location             = "West Europe"
+location    = "West Europe"
 environment = "prd"

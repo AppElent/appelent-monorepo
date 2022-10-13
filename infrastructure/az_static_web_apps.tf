@@ -6,7 +6,7 @@ module "az_static_web_app" {
   location            = var.location
   sku                 = "Free"
 
-#   custom_domain_name = "wappiemetertest2"
-#   dns_zone_name      = azurerm_dns_zone.appelent.name
-#   dns_ttl            = 300
+  #   custom_domain_name = "wappiemetertest2"
+  #   dns_zone_name      = azurerm_dns_zone.appelent.name
+  #   dns_ttl            = 300
 }
