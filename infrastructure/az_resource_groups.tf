@@ -4,6 +4,12 @@ resource "azurerm_resource_group" "rg" {
   name     = "rg-appelent-${var.environment}"
 }
 
+// RG based per environment
+resource "azurerm_resource_group" "rg_data" {
+  location = var.location
+  name     = "rg-appelent-data-${var.environment}"
+}
+
 // RG used as shared RG between environments
 resource "azurerm_resource_group" "rg_shared" {
   location = var.location
@@ -14,4 +20,10 @@ resource "azurerm_resource_group" "rg_shared" {
 resource "azurerm_resource_group" "rg_swa" {
   location = var.location
   name     = "rg-appelent-swa"
+}
+
+// Resource group for testing
+resource azurerm_resource_group "rg_testing" {
+  location = var.location
+  name = "rg-appelent-testing"
 }

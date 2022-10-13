@@ -29,13 +29,3 @@ resource "azurerm_role_assignment" "akv_admin_rolessignment" {
   principal_id         = data.azuread_user.eric.object_id
 }
 
-resource "random_string" "postgres_password" {
-  length  = 40
-  special = false
-}
-
-resource "azurerm_key_vault_secret" "akv_secret_postgres" {
-  name         = "postgres-${var.environment}"
-  value        = random_string.postgres_password.result
-  key_vault_id = azurerm_key_vault.deployment_keyvault.id
-}

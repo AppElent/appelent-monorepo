@@ -9,3 +9,7 @@ variable "location" {
   description = "Location of resources"
 }
 
+variable "github_repository" {
+  default = "appelent-monorepo"
+  description = "Name of the GitHub repository where the code resides"
+}
