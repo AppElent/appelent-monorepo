@@ -14,6 +14,7 @@ resource "azurerm_postgresql_flexible_server" "postgresql" {
   administrator_password = random_string.postgres_password.result
 
   storage_mb = 32768
+  zone = 2
 
   sku_name   = "B_Standard_B1ms"
 }

@@ -27,3 +27,11 @@ resource "azurerm_dns_cname_record" "proxy" {
   record              = "home.appelent.com."
 }
 
+resource "azurerm_dns_a_record" "catch" {
+  name                = "*"
+  zone_name           = azurerm_dns_zone.appelent.name
+  resource_group_name = azurerm_resource_group.rg.name
+  ttl                 = 300
+  records              = ["20.8.57.182"]
+}
+
