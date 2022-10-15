@@ -5,12 +5,12 @@ resource "azurerm_resource_group" "rg_acmebot" {
 }
 
 resource "azurerm_key_vault" "acmebot_keyvault" {
-  name                        = "kv-appelent-acmebot"
-  location                    = azurerm_resource_group.rg_acmebot.location
-  resource_group_name         = azurerm_resource_group.rg_acmebot.name
-  tenant_id                   = data.azurerm_client_config.current.tenant_id
-  soft_delete_retention_days  = 7
-  purge_protection_enabled    = true
+  name                       = "kv-appelent-acmebot"
+  location                   = azurerm_resource_group.rg_acmebot.location
+  resource_group_name        = azurerm_resource_group.rg_acmebot.name
+  tenant_id                  = data.azurerm_client_config.current.tenant_id
+  soft_delete_retention_days = 7
+  purge_protection_enabled   = true
 
   sku_name                  = "standard"
   enable_rbac_authorization = true
@@ -27,28 +27,38 @@ module "keyvault_acmebot" {
   workspace_name        = "log-appelent-acmebot"
   resource_group_name   = azurerm_resource_group.rg_acmebot.name
   location              = azurerm_resource_group.rg_acmebot.location
-  mail_address          = data.azuread_user.eric.mail
+  mail_address          = data.azuread_user.me.mail
   vault_uri             = azurerm_key_vault.acmebot_keyvault.vault_uri
 
   azure_dns = {
     subscription_id = data.azurerm_client_config.current.subscription_id
   }
 
-#   app_settings = {
-#     "MICROSOFT_PROVIDER_AUTHENTICATION_SECRET" = "IB-8Q~mEisjIlBLtP94G4ak3r~ZzCl4NESY2Wbyb"
-#   }
+  #   app_settings = {
+  #     "MICROSOFT_PROVIDER_AUTHENTICATION_SECRET" = "IB-8Q~mEisjIlBLtP94G4ak3r~ZzCl4NESY2Wbyb"
+  #   }
 
-#   auth_settings = {
-    
-#   }
+  #   auth_settings = {
+
+  #   }
 }
 
 resource "azuread_application" "acmebot_application" {
-    display_name = "app-appelent-acmebot"
+  display_name = "app-appelent-acmebot"
 
-    feature_tags {
-      enterprise = true
-    }
+  feature_tags {
+    enterprise = true
+  }
+}
+
+resource "azuread_service_principal" "argocd" {
+  application_id                = azuread_application.acmebot_application.application_id
+  owners                        = azuread_application.acmebot_application.owners
+  preferred_single_sign_on_mode = "saml"
+  //login_url                     = "https://argocd.mysite.ca/auth/login"
+  feature_tags {
+    custom_single_sign_on = true
+  }
 }
 
 resource "azurerm_role_assignment" "akv_acmebot_roleassignment" {

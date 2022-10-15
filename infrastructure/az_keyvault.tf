@@ -1,5 +1,5 @@
-data "azuread_user" "eric" {
-  user_principal_name = "eric.jansen_teamrockstars.nl#EXT#@appelent.onmicrosoft.com"
+data "azuread_user" "me" {
+  user_principal_name = var.upn
 }
 
 resource "azurerm_key_vault" "deployment_keyvault" {
@@ -26,6 +26,6 @@ resource "azurerm_role_assignment" "akv_sp_roleassignment" {
 resource "azurerm_role_assignment" "akv_admin_rolessignment" {
   scope                = azurerm_key_vault.deployment_keyvault.id
   role_definition_name = "Key Vault Administrator"
-  principal_id         = data.azuread_user.eric.object_id
+  principal_id         = data.azuread_user.me.object_id
 }
 
