@@ -1,5 +1,5 @@
 data "azuread_user" "me" {
-  user_principal_name = var.upn
+  user_principal_name = "eric.jansen_teamrockstars.nl#EXT#@appelent.onmicrosoft.com"
 }
 
 // Current context (logged in user and tenant)

@@ -1,9 +1,9 @@
-resource "azurerm_kubernetes_cluster" "aks_dev" {
-  name                = "aks-appelent-dev"
-  location            = azurerm_resource_group.rg_dev.location
-  resource_group_name = azurerm_resource_group.rg_dev.name
-  dns_prefix          = "aks-appelent-dev"
-  node_resource_group = "rg-appelent-aks-dev-resources"
+resource "azurerm_kubernetes_cluster" "aks" {
+  name                = "aks-appelent"
+  location            = azurerm_resource_group.rg_shared.location
+  resource_group_name = azurerm_resource_group.rg_shared.name
+  dns_prefix          = "aks-appelent"
+  node_resource_group = "rg-appelent-aks-resources"
 
   default_node_pool {
     name       = "default"

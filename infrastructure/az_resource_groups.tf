@@ -14,6 +14,11 @@ resource "azurerm_resource_group" "rg_shared" {
   name     = "rg-appelent-shared"
 }
 
+resource "azurerm_resource_group" "rg_shared_data" {
+  location = var.location
+  name     = "rg-appelent-shared-data"
+}
+
 
 // RG based per environment
 resource "azurerm_resource_group" "rg_dev_data" {

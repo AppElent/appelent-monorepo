@@ -1,6 +1,4 @@
-data "azuread_user" "me" {
-  user_principal_name = var.upn
-}
+
 
 resource "azurerm_key_vault" "deployment_keyvault" {
   name                        = "kv-appelent-deploy"
