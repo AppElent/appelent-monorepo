@@ -4,7 +4,7 @@
 # }
 
 resource "azurerm_postgresql_flexible_server" "postgresql_dev" {
-  name                = "pgql-appelent"
+  name                = "pgql-appelent-dev"
   resource_group_name = azurerm_resource_group.rg_dev_data.name
   location            = azurerm_resource_group.rg_dev_data.location
   version             = "14"
