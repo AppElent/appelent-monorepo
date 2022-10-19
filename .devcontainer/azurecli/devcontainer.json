@@ -35,6 +35,12 @@
 		"terraform": "latest",
 		"kubectl-helm-minikube": "latest",
 		"azure-cli": "latest",
-		"powershell": "latest"
+		"powershell": "latest",
+		"github-cli": "latest",
+		"dotnet": {
+			"version": "latest",
+			"runtimeOnly": false
+		},
+		"aws-cli": "latest"
 	}
 }
