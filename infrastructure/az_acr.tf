@@ -1,0 +1,7 @@
+resource "azurerm_container_registry" "acr" {
+  name                = "acrappelent"
+  resource_group_name = azurerm_resource_group.rg_shared.name
+  location            = azurerm_resource_group.rg_shared.location
+  sku                 = "Basic"
+  admin_enabled       = false
+}

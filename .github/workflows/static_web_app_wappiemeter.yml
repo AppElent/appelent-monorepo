@@ -6,13 +6,16 @@ on:
       - main
       - develop
     paths:
-    - static_web_apps/wappiemeter/**
+    - static_web_apps/wappiemeter/** #deze moet aangepast worden
   pull_request:
     types: [opened, synchronize, reopened, closed]
     branches:
       - main
     paths:
     - static_web_apps/wappiemeter/**
+
+env:
+  STATICWEBAPPNAME: "swa-appelent-wappiemeter" #deze moet aangepast worden
 
 jobs:
   build_and_deploy_job:
@@ -23,11 +26,22 @@ jobs:
       - uses: actions/checkout@v2
         with:
           submodules: true
+      - name: Azure Login
+        uses: azure/login@v1
+        with:
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
+      - name: Static Web App - get API key for deployment
+        id: static_web_app_apikey
+        uses: azure/CLI@v1
+        with:
+          inlineScript: |
+            APIKEY=$(az staticwebapp secrets list --name '${{ env.STATICWEBAPPNAME }}' | jq -r '.properties.apiKey')
+            echo "::set-output name=APIKEY::$APIKEY"
       - name: Build And Deploy
         id: builddeploy
         uses: Azure/static-web-apps-deploy@v1
         with:
-          azure_static_web_apps_api_token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN_VICTORIOUS_GRASS_0A1D77703 }}
+          azure_static_web_apps_api_token: ${{ steps.static_web_app_apikey.outputs.APIKEY }}
           repo_token: ${{ secrets.GITHUB_TOKEN }} # Used for Github integrations (i.e. PR comments)
           action: "upload"
           ###### Repository/Build Configurations - These values can be configured to match your app requirements. ######

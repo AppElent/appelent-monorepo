@@ -1,9 +1,9 @@
 
 resource "azurerm_cosmosdb_account" "cosmosdb" {
   location            = var.location
-  name                = var.cosmosdb_name
+  name                = "cdb-appelent"
   offer_type          = "Standard"
-  resource_group_name = azurerm_resource_group.rg_shared.name
+  resource_group_name = azurerm_resource_group.rg_shared_data.name
   enable_free_tier    = true
   consistency_policy {
     consistency_level = "Strong"

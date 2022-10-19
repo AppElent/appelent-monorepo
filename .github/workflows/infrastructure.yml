@@ -3,8 +3,7 @@ name: Terraform Infrastructure Build Workflow
 on:
   push:
     branches:
-      - main
-      - develop
+      - "main"
     paths:
     - infrastructure/**
   pull_request:
@@ -32,15 +31,15 @@ jobs:
     - name: Set environment for branch
       run: |
         if [[ "${{github.base_ref}}" == "main" || "${{github.ref}}" == "refs/heads/main" ]]; then
-            echo "ENV=prd" >> "$GITHUB_ENV"
-            echo "TF_WORKSPACE=prd" >> "$GITHUB_ENV"
-            mv prd.tfvars terraform.tfvars
+            #echo "ENV=prd" >> "$GITHUB_ENV"
+            #echo "TF_WORKSPACE=prd" >> "$GITHUB_ENV"
+            #mv variables_prd.tfvars terraform.tfvars
         fi
 
         if [[ "${{github.base_ref}}" == "develop" || "${{github.ref}}" == "refs/heads/develop" ]]; then
-          echo "ENV=dev" >> "$GITHUB_ENV"
-          echo "TF_WORKSPACE=dev" >> "$GITHUB_ENV"
-          mv dev.tfvars terraform.tfvars
+          #echo "ENV=dev" >> "$GITHUB_ENV"
+          #echo "TF_WORKSPACE=dev" >> "$GITHUB_ENV"
+          #mv variables_dev.tfvars terraform.tfvars
         fi
 
     - uses: hashicorp/setup-terraform@v2

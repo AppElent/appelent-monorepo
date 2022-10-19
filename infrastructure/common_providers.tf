@@ -11,6 +11,14 @@ terraform {
       source  = "heroku/heroku"
       version = ">= 5.1.1"
     }
+    github = {
+      source  = "integrations/github"
+      version = ">= 5.4.0"
+    }
+    azuread = {
+      source  = "hashicorp/azuread"
+      version = ">= 2.29.0"
+    }
   }
 }
 
@@ -21,4 +29,12 @@ provider "azurerm" {
 
 provider "heroku" {
 
+}
+
+provider "github" {
+  # Configuration options
+}
+
+provider "azuread" {
+  # Configuration options
 }
