@@ -20,6 +20,11 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 dotenv_file = os.path.join(BASE_DIR, ".env")
 if os.path.isfile(dotenv_file):
     dotenv.load_dotenv(dotenv_file)
+    
+environment = ("LOCAL" if os.getenv("ENVIRONMENT") is None else os.getenv("ENVIRONMENT")).upper()
+
+# Setting custom user model
+AUTH_USER_MODEL = 'users.User'
 
 
 # Quick-start development settings - unsuitable for production
@@ -45,6 +50,8 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     'rest_framework',
     'api',
+    'users',
+    'oauth',
 ]
 
 MIDDLEWARE = [
@@ -90,6 +97,19 @@ WSGI_APPLICATION = "crud_api.wsgi.application"
 
 DATABASES = {}
 DATABASES['default'] = dj_database_url.config(conn_max_age=600)
+
+CACHES = {
+    'default': {
+        'BACKEND': 'django.core.cache.backends.locmem.LocMemCache',
+        'LOCATION': 'unique-string',
+    },
+}
+
+if os.getenv("REDIS_URL"):
+    CACHES["default"] = {
+        'BACKEND': 'django.core.cache.backends.redis.RedisCache',
+        'LOCATION': os.getenv("REDIS_URL"),
+    }
 
 
 # Password validation

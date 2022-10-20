@@ -11,6 +11,8 @@ dj-database-url = "*"
 python-dotenv = "*"
 psycopg2 = "*"
 firebase-admin = "*"
+gunicorn = "*"
+authlib = "*"
 
 [dev-packages]
 
