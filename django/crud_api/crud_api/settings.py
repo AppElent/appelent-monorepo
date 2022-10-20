@@ -14,6 +14,7 @@ from pathlib import Path
 import dotenv
 import os
 import dj_database_url
+from django.core.management.utils import get_random_secret_key
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -31,7 +32,7 @@ AUTH_USER_MODEL = 'users.User'
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = "django-insecure-)cc-5mrnh60&a62(t$uw1@t-u-xuq3zmg6fl-%^j#1d=67cp77"
+SECRET_KEY = os.getenv("SECRET_KEY", default=get_random_secret_key())
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -95,8 +96,16 @@ WSGI_APPLICATION = "crud_api.wsgi.application"
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
-DATABASES = {}
-DATABASES['default'] = dj_database_url.config(conn_max_age=600)
+if os.getenv("DATABASE_URL"):
+    DATABASES = {}
+    DATABASES['default'] = dj_database_url.config(conn_max_age=600)
+else:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': BASE_DIR / 'db.sqlite3',
+        }
+    }
 
 CACHES = {
     'default': {
