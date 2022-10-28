@@ -19,10 +19,10 @@ terraform {
       source  = "hashicorp/azuread"
       version = ">= 2.29.0"
     }
-    cloudamqp = {
-      source = "cloudamqp/cloudamqp"
-      version = ">= 1.19.3"
-    }
+    # cloudamqp = {
+    #   source  = "cloudamqp/cloudamqp"
+    #   version = ">= 1.19.3"
+    # }
   }
 }
 
@@ -43,6 +43,7 @@ provider "azuread" {
   # Configuration options
 }
 
-provider "cloudamqp" {
-  # Configuration options
-}
+# provider "cloudamqp" {
+#   # Configuration options
+#   apikey = 
+# }

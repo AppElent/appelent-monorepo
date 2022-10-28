@@ -14,6 +14,10 @@ resource "azurerm_kubernetes_cluster" "aks" {
   identity {
     type = "SystemAssigned"
   }
+
+  lifecycle {
+    ignore_changes = [key_vault_secrets_provider]
+  }
 }
 
 resource "azurerm_role_assignment" "aks_acr_pull" {
@@ -25,6 +29,12 @@ resource "azurerm_role_assignment" "aks_acr_pull" {
 resource "azurerm_role_assignment" "aks_network_contributor" {
   principal_id         = azurerm_kubernetes_cluster.aks.kubelet_identity[0].object_id
   role_definition_name = "Network Contributor"
+  scope                = "/subscriptions/${data.azurerm_client_config.current.subscription_id}"
+}
+
+resource "azurerm_role_assignment" "aks_key_vault_secrets_user" {
+  principal_id         = azurerm_kubernetes_cluster.aks.kubelet_identity[0].object_id
+  role_definition_name = "Key Vault Secrets Officer"
   scope                = "/subscriptions/${data.azurerm_client_config.current.subscription_id}"
 }
 
