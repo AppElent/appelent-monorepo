@@ -9,7 +9,7 @@ resource "azurerm_api_management" "apim" {
     type = "SystemAssigned"
   }
 
-  sku_name = "Developer_1"
+  sku_name = "Consumption_0"
 }
 
 data "azurerm_key_vault_certificate" "apim_custom_domain_cert" {

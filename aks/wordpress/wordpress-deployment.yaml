@@ -1,0 +1,41 @@
+apiVersion: apps/v1 
+kind: Deployment
+metadata:
+  name: wordpress
+  labels:
+    app: wordpress
+spec:
+  selector:
+    matchLabels:
+      app: wordpress
+      tier: frontend
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: wordpress
+        tier: frontend
+    spec:
+      containers:
+      - image: wordpress:php8.1
+        name: wordpress
+        env:
+        - name: WORDPRESS_DB_HOST
+          value: msql-appelent-dev.mysql.database.azure.com
+        - name: WORDPRESS_DB_NAME
+          value: test02
+        - name: WORDPRESS_DB_USER
+          value: mysql
+        - name: WORDPRESS_DB_PASSWORD
+          value: 2lOUZ37FmBWwdKQiftIVJSGr34xPXz1fpGwL0714
+        ports:
+        - containerPort: 80
+          name: wordpress
+        volumeMounts:
+        - name: wordpress-persistent-storage
+          mountPath: "/var/www/html" 
+      volumes:
+      - name: wordpress-persistent-storage
+        persistentVolumeClaim:
+          claimName: wordpress-pvc
