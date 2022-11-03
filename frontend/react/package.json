@@ -1,0 +1,8 @@
+{
+    "name": "frontend-monorepo",
+    "private": true,
+    "workspaces": [
+        "demo",
+        "packages/*"
+    ]
+}
