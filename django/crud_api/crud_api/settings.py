@@ -100,6 +100,7 @@ if os.getenv("DATABASE_URL"):
     DATABASES = {}
     DATABASES['default'] = dj_database_url.config(conn_max_age=600)
 else:
+    # default database is sqlite locally. Watch out: This database is not persistent across container restarts
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.sqlite3',
@@ -107,18 +108,23 @@ else:
         }
     }
 
-CACHES = {
+
+
+if os.getenv("REDIS_URL"):
+    CACHES = {
+        "default": {
+            'BACKEND': 'django.core.cache.backends.redis.RedisCache',
+            'LOCATION': os.getenv("REDIS_URL"),
+        }
+    }
+else:
+    # default cache is local memory cache
+    CACHES = {
     'default': {
         'BACKEND': 'django.core.cache.backends.locmem.LocMemCache',
         'LOCATION': 'unique-string',
     },
 }
-
-if os.getenv("REDIS_URL"):
-    CACHES["default"] = {
-        'BACKEND': 'django.core.cache.backends.redis.RedisCache',
-        'LOCATION': os.getenv("REDIS_URL"),
-    }
 
 
 # Password validation
