@@ -1,0 +1,55 @@
+on:
+#  push:
+#    branches:
+#      - main
+#      - develop
+#    paths:
+#    - django/crud_api/**
+  workflow_dispatch:
+
+jobs:
+   build:
+      runs-on: ubuntu-latest
+      steps:
+         - uses: actions/checkout@master
+
+         - uses: Azure/docker-login@v1
+           with:
+              login-server: contoso.azurecr.io
+              username: ${{ secrets.REGISTRY_USERNAME }}
+              password: ${{ secrets.REGISTRY_PASSWORD }}
+          
+         - run: |
+             echo $(az ad sp list --display-name "Deployment Credential" --query "[].appId" --output tsv) >> "$GITHUB_ENV"
+             echo $secrets.AZURE_CREDENTIALS
+
+         - run: |
+              docker build . -t contoso.azurecr.io/k8sdemo:${{ github.sha }}
+              docker push contoso.azurecr.io/k8sdemo:${{ github.sha }}
+
+         - uses: azure/setup-kubectl@v2.0
+
+         # Set the target AKS cluster.
+         - uses: Azure/aks-set-context@v1
+           with:
+              creds: '${{ secrets.AZURE_CREDENTIALS }}'
+              cluster-name: aks-appelent
+              resource-group: rg-appelent-shared
+
+         - uses: Azure/k8s-create-secret@v1.1
+           with:
+              container-registry-url: contoso.azurecr.io
+              container-registry-username: 
+              container-registry-password: ${{ secrets.REGISTRY_PASSWORD }}
+              secret-name: demo-k8s-secret
+
+         - uses: Azure/k8s-deploy@v3.1
+           with:
+              action: deploy
+              manifests: |
+                 manifests/deployment.yml
+                 manifests/service.yml
+              images: |
+                 demo.azurecr.io/k8sdemo:${{ github.sha }}
+              imagepullsecrets: |
+                 demo-k8s-secret

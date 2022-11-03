@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: checkmyip 
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: checkmyip
+  template:
+    metadata:
+      labels:
+        app: checkmyip
+    spec:
+      containers:
+      - name: checkmyip
+        image: dragas/checkmyip
+        ports:
+        - containerPort: 80
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: checkmyip-service
+spec:
+  type: ClusterIP
+  ports:
+  - port: 80
+  selector:
+    app: checkmyip

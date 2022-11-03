@@ -6,7 +6,7 @@ on:
       - main
       - develop
     paths:
-    - static_web_apps/wappiemeter/** #deze moet aangepast worden
+    - frontend/react/wappiemeter/** #deze moet aangepast worden
   pull_request:
     types: [opened, synchronize, reopened, closed]
     branches:

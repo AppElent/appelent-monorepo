@@ -38,13 +38,20 @@ spec:
             name: nginx-demo
             port:
               number: 80
-      # - path: /(.*)
-      #   pathType: Prefix
-      #   backend:
-      #     service:
-      #       name: nginx-demo
-      #       port:
-      #         number: 80
+      - path: /checkmyip(/|$)(.*)
+        pathType: Prefix
+        backend:
+          service:
+            name: checkmyip-service
+            port:
+              number: 80
+      - path: /(.*)
+        pathType: Prefix
+        backend:
+          service:
+            name: nginx-demo
+            port:
+              number: 80
 ---
 # apiVersion: networking.k8s.io/v1
 # kind: Ingress
