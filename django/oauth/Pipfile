@@ -12,6 +12,8 @@ dj-database-url = "*"
 psycopg2 = "*"
 firebase-admin = "*"
 authlib = "*"
+django-health-check = "*"
+azure-cosmos = "*"
 
 [dev-packages]
 

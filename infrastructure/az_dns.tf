@@ -67,3 +67,10 @@ resource "azurerm_dns_a_record" "catch_kubernetes" {
   records             = ["20.126.244.220"]
 }
 
+resource "azurerm_dns_a_record" "catch_all" {
+  name                = "*"
+  zone_name           = azurerm_dns_zone.appelent.name
+  resource_group_name = azurerm_resource_group.rg_networking.name
+  ttl                 = 300
+  records             = ["20.126.244.220"]
+}

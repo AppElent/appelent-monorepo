@@ -22,6 +22,8 @@ dotenv_file = os.path.join(BASE_DIR, ".env")
 if os.path.isfile(dotenv_file):
     dotenv.load_dotenv(dotenv_file)
 
+environment = ("LOCAL" if os.getenv("ENVIRONMENT") is None else os.getenv("ENVIRONMENT")).upper()
+
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
@@ -33,7 +35,7 @@ SECRET_KEY = os.getenv("SECRET_KEY", default=get_random_secret_key())
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [".appelent.com", "localhost", "127.0.0.1"]
 
 
 # Application definition
@@ -47,6 +49,11 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     'rest_framework',
     'api',
+    'health_check',                             # required
+    'health_check.db',                          # stock Django health checkers
+    'health_check.cache',
+    'health_check.storage',
+    'health_check.contrib.migrations',
 ]
 
 MIDDLEWARE = [
@@ -83,12 +90,18 @@ WSGI_APPLICATION = "oauth.wsgi.application"
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
-DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": BASE_DIR / "db.sqlite3",
+import dj_database_url
+if os.getenv("DATABASE_URL"):
+    DATABASES = {}
+    DATABASES['default'] = dj_database_url.config(conn_max_age=600)
+else:
+    # default database is sqlite locally. Watch out: This database is not persistent across container restarts
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': BASE_DIR / 'db.sqlite3',
+        }
     }
-}
 
 if os.getenv("REDIS_URL"):
     CACHES = {

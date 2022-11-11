@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: django-oauth
+  labels:
+    app: django-oauth
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: django-oauth
+  template:
+    metadata:
+      labels: 
+        app: django-oauth
+    spec:
+      containers:
+        - name: django-oauth
+          image: acrappelent.azurecr.io/django-oauth:v0.6
+          ports:
+            - containerPort: 8000
+          env:
+            - name: DATABASE_URL
+              value:
+                postgres://psqladmin:pw@pgql-appelent-dev.postgres.database.azure.com/django-oauth-dev
+            - name: SECRET_KEY
+              value: asd
+            - name: ENVIRONMENT
+              value: dev

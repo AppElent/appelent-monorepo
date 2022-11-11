@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "3f994fc2250df18f48f025e0e1f80c62129182598b519b86894ffa89c4b3c365"
+            "sha256": "af0f1aa9106317a23666ffd30a51341e97bea4fed2225aa389225dcca697eaa7"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -31,6 +31,22 @@
             ],
             "index": "pypi",
             "version": "==1.1.0"
+        },
+        "azure-core": {
+            "hashes": [
+                "sha256:223b0e90cbdd1f03c41b195b03239899843f20d00964dbb85e64386873414a2d",
+                "sha256:726ffd1ded04a2c1cb53f9d9155cbb05ac5c1c2a29af4ef622e93e1c0a8bc92b"
+            ],
+            "markers": "python_version >= '3.7'",
+            "version": "==1.26.1"
+        },
+        "azure-cosmos": {
+            "hashes": [
+                "sha256:50060a29a57021c5687e68129ae751295cc0a0cf7970fd1e0fd86b3cd7d34de4",
+                "sha256:e2d993af0ce7598fbfee2c3c9776dcd47b75a47f3ccbe43bb372a601cd3d5f20"
+            ],
+            "index": "pypi",
+            "version": "==4.3.0"
         },
         "cachecontrol": {
             "hashes": [
@@ -188,6 +204,14 @@
             ],
             "index": "pypi",
             "version": "==0.7.9"
+        },
+        "django-health-check": {
+            "hashes": [
+                "sha256:20dc5ccb516a4e7163593fd4026f0a7531e3027b47d23ebe3bd9dbc99ac4354c",
+                "sha256:d1b8671e79d1de6e3dd1a9c69566222b0bfcfacca8b90511a4407b2d0d3d2778"
+            ],
+            "index": "pypi",
+            "version": "==3.17.0"
         },
         "djangorestframework": {
             "hashes": [
@@ -637,6 +661,14 @@
             ],
             "markers": "python_version >= '3.5'",
             "version": "==0.4.3"
+        },
+        "typing-extensions": {
+            "hashes": [
+                "sha256:1511434bb92bf8dd198c12b1cc812e800d4181cfcb867674e0f8279cc93087aa",
+                "sha256:16fa4864408f655d35ec496218b85f79b3437c829e93320c7c9215ccfd92489e"
+            ],
+            "markers": "python_version >= '3.7'",
+            "version": "==4.4.0"
         },
         "uritemplate": {
             "hashes": [
