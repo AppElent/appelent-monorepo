@@ -8,11 +8,7 @@ import urllib
 from requests.models import PreparedRequest
 import os
 import json
-
-#from ..serializers import OAuth2TokenSerializer
-#from ..models import OAuth2Token, Oauth2State
-#rom ..singletons import oauth, check_registered
-#from ..modules.oauth import get_provider, save_token, get_session, update_token
+import requests
 
 from azure.cosmos import CosmosClient
 
@@ -27,7 +23,10 @@ database = client.get_database_client("oauth_providers")
 container = database.get_container_client(container_name)
 providers = []
 for item in container.query_items(query=query, enable_cross_partition_query=True):
+    if item.get("well-known-endpoint"):
+        item["config"] = requests.get(item["well-known-endpoint"]).json()
     providers.append(item)
+
 
 def get_provider(name):
     return next((x for x in providers if x.get('id') == name), None)
@@ -41,12 +40,15 @@ def authorize(request, name):
     if provider is None:
         return Response('Cannot get OauthProvider because ' + name + ' is not set up in OauthProvider table', status=status.HTTP_412_PRECONDITION_FAILED)
 
-    #determine scope and other variables
-    scope = provider["default_scope"] if request.GET.get('scope') is None else request.GET.get('scope')
+    #determine scope and other request variables
+    scope = provider.get("default_scope") if request.GET.get('scope') is None else request.GET.get('scope')
     redirect_url = request.GET.get('redirect_url')
+
+    # set variables
+    authorize_url = provider.get("authorize_url") if provider.get("authorize_url") else provider.get("config").get("authorization_endpoint")
   
     oauth_session = OAuth2Session(provider["client_id"], redirect_uri=provider["redirect_url"], scope=scope)
-    authorization_url, state = oauth_session.create_authorization_url(provider["authorize_url"])
+    authorization_url, state = oauth_session.create_authorization_url(authorize_url)
 
     # Create saved state object and save it
     state_object = {"scope": scope, "redirect_url": redirect_url}
@@ -81,6 +83,9 @@ def get_access_token(request, name):
     else:
         cache.delete('oauth:' + urlstate)
 
+    # set variables
+    token_url = provider.get("token_url") if provider.get("token_url") else provider.get("config").get("token_endpoint")
+
     if request.method == 'GET' and savedstate["redirect_url"] is not None:
         # If method is GET, we return from API endpoint and should first return with a redirect to the provided redirect Url
         # First we have to save the authorization response so that we can use this when we request the token
@@ -108,7 +113,7 @@ def get_access_token(request, name):
     # Retrieve access token
     oauth_session = OAuth2Session(provider["client_id"], redirect_uri=provider["redirect_url"], scope=savedstate["scope"], state=urlstate)
     token = oauth_session.fetch_token(
-        provider["access_token_url"],
+        token_url,
         authorization_response=authorization_response,
         # Google specific extra parameter used for client
         # authentication
@@ -130,7 +135,11 @@ def refresh_access_token(request, name):
         return Response('Cannot get OauthProvider because ' + name + ' is not set up in OauthProvider table', status=status.HTTP_412_PRECONDITION_FAILED)
 
 
-
+@api_view(['POST'])
+def revoke_access_token(request, name):
+    provider = get_provider(name)
+    if provider is None:
+        return Response('Cannot get OauthProvider because ' + name + ' is not set up in OauthProvider table', status=status.HTTP_412_PRECONDITION_FAILED)
 
     # try:
     #     instance = OAuth2Token.objects.get(user=savedstate.user, name=name)
