@@ -1,4 +1,11 @@
 from rest_framework import permissions
+from . import authentication
+from firebase_admin import auth
+import json
+
+user = auth.get_user("KqVejHU9lzXX8xbpdKtXTLhm3yg1")
+print('user', user.uid, user.custom_claims)
+
 
 class IsOwnerOrReadOnly(permissions.BasePermission):
     """
@@ -14,6 +21,7 @@ class IsOwnerOrReadOnly(permissions.BasePermission):
 
         # Instance must have an attribute named `owner`.
         return obj.owner == request.user
+
 
 class IsOwner(permissions.BasePermission):
     """
