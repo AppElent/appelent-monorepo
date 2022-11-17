@@ -3,20 +3,21 @@ name: Template - Build docker image
 on:
   workflow_dispatch:
     inputs:
-      working-dir:
+      working_dir:
         required: true
         type: string
         description: Working directory
-    secrets:
-      token:
+      repository_name:
         required: true
+        type: string
+        description: Name of the docker repository
 
 jobs:
   build:
     runs-on: ubuntu-latest
     defaults:
       run:
-        working-directory: ${{ env.working-dir }}
+        working-directory: ${{ inputs.working_dir }} #./django/api #
     steps:
       - uses: actions/checkout@v2
 
@@ -48,6 +49,6 @@ jobs:
           username: ${{ env.ARM_CLIENT_ID }}
           password: ${{ env.ARM_CLIENT_SECRET }}
 
-      # - run: |
-      #     docker build . -t contoso.azurecr.io/k8sdemo:${{ github.sha }}
-      #     docker push contoso.azurecr.io/k8sdemo:${{ github.sha }}
+      - run: |
+          docker build . -t ${{ env.loginServer }}/${{ inputs.repository_name }}:${{ github.sha }} -t ${{ env.loginServer }}/${{ inputs.repository_name }}:latest
+          docker image push --all-tags ${{ env.loginServer }}/${{ inputs.repository_name }}
