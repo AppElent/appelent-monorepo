@@ -1,0 +1,8 @@
+kind: ConfigMap 
+apiVersion: v1 
+metadata:
+  name: django-oauth-configmap
+data:
+  # Configuration values can be set as key-value properties
+  database_user: mongodb
+  database_uri: postgres://psqladmin:{your_password}@pgql-appelent-dev.postgres.database.azure.com/postgres?sslmode=require

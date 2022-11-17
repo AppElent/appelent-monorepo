@@ -1,0 +1,11 @@
+{
+    "name": "frontend-monorepo",
+    "private": true,
+    "workspaces": [
+        "demo",
+        "packages/*"
+    ],
+    "dependencies": {
+        "prettier": "^2.7.1"
+    }
+}

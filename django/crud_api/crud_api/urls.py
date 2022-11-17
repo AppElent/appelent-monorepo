@@ -20,5 +20,5 @@ urlpatterns = [
     path("admin/", admin.site.urls),
     # All API routes
     path('api/', include('api.urls')),
-    path('oauth/', include('oauth.urls')),
+    #path('oauth/', include('oauth.urls')),
 ]

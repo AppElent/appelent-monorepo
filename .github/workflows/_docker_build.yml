@@ -1,0 +1,42 @@
+name: Template - Build docker image
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Prepare environment variables
+        env:
+          AZURE_CREDENTIALS: ${{ secrets.AZURE_CREDENTIALS }}
+        run: |
+          # Parse Azure secret into Terraform variables
+          $servicePrincipal = ($env:AZURE_CREDENTIALS | ConvertFrom-Json)
+          $env:ARM_CLIENT_ID = $servicePrincipal.clientId
+          $env:ARM_CLIENT_SECRET = $servicePrincipal.clientSecret
+          $env:ARM_SUBSCRIPTION_ID = $servicePrincipal.subscriptionId
+          $env:ARM_TENANT_ID = $servicePrincipal.tenantId
+          # Save environment variable setup for subsequent steps
+          Get-ChildItem -Path Env: -Recurse -Include ARM_*,TF_VAR_* | ForEach-Object {Write-Output "$($_.Name)=$($_.Value)"} >> $env:GITHUB_ENV
+        shell: pwsh
+
+      - uses: azure/login@v1
+        with:
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
+
+      - name: "Get ACR details"
+        run: |
+          echo "loginServer=$(az acr show -n acrappelent --query loginServer)" >> "$GITHUB_ENV"
+
+      - uses: Azure/docker-login@v1
+        with:
+          login-server: ${{ loginServer }}
+          username: ${{ env.ARM_CLIENT_ID }}
+          password: ${{ env.ARM_CLIENT_SECRET }}
+
+      # - run: |
+      #     docker build . -t contoso.azurecr.io/k8sdemo:${{ github.sha }}
+      #     docker push contoso.azurecr.io/k8sdemo:${{ github.sha }}
