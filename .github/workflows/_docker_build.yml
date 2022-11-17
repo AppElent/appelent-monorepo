@@ -17,7 +17,7 @@ jobs:
     runs-on: ubuntu-latest
     defaults:
       run:
-        working-directory: ${{ env.working_dir }}#./django/api #
+        working-directory: ${{ inputs.working_dir }} #./django/api #
     steps:
       - uses: actions/checkout@v2
 
@@ -50,5 +50,5 @@ jobs:
           password: ${{ env.ARM_CLIENT_SECRET }}
 
       - run: |
-          docker build . -t ${{ env.loginServer }}/${{ env.repository_name }}:${{ github.sha }} -t ${{ env.loginServer }}/${{ env.repository_name }}:latest
-          docker image push --all-tags ${{ env.loginServer }}/${{ env.repository_name }}
+          docker build . -t ${{ env.loginServer }}/${{ inputs.repository_name }}:${{ github.sha }} -t ${{ env.loginServer }}/${{ inputs.repository_name }}:latest
+          docker image push --all-tags ${{ env.loginServer }}/${{ inputs.repository_name }}
