@@ -7,16 +7,13 @@ on:
         required: true
         type: string
         description: Working directory
-    secrets:
-      token:
-        required: true
 
 jobs:
   build:
     runs-on: ubuntu-latest
     defaults:
       run:
-        working-directory: ${{ env.working-dir }}
+        working-directory: ./django/api #${{ env.working-dir }}
     steps:
       - uses: actions/checkout@v2
 
