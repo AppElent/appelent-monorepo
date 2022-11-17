@@ -7,13 +7,17 @@ on:
         required: true
         type: string
         description: Working directory
+      repository_name:
+        required: true
+        type: string
+        description: Name of the docker repository
 
 jobs:
   build:
     runs-on: ubuntu-latest
     defaults:
       run:
-        working-directory: ./django/api #${{ env.working-dir }}
+        working-directory: ${{ env.working-dir }} #./django/api #
     steps:
       - uses: actions/checkout@v2
 
@@ -45,6 +49,6 @@ jobs:
           username: ${{ env.ARM_CLIENT_ID }}
           password: ${{ env.ARM_CLIENT_SECRET }}
 
-      # - run: |
-      #     docker build . -t contoso.azurecr.io/k8sdemo:${{ github.sha }}
-      #     docker push contoso.azurecr.io/k8sdemo:${{ github.sha }}
+      - run: |
+          docker build . -t ${{ env.loginServer }}/${{ env.repository_name }}:${{ github.sha }} -t ${{ env.loginServer }}/${{ env.repository_name }}:latest
+          docker image push --all-tags ${{ env.loginServer }}/${{ env.repository_name }}
