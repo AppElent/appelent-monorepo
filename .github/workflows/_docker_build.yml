@@ -2,10 +2,21 @@ name: Template - Build docker image
 
 on:
   workflow_dispatch:
+    inputs:
+      working-dir:
+        required: true
+        type: string
+        description: Working directory
+    secrets:
+      token:
+        required: true
 
 jobs:
   build:
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ${{ env.working-dir }}
     steps:
       - uses: actions/checkout@v2
 
@@ -33,7 +44,7 @@ jobs:
 
       - uses: Azure/docker-login@v1
         with:
-          login-server: ${{ loginServer }}
+          login-server: ${{ env.loginServer }}
           username: ${{ env.ARM_CLIENT_ID }}
           password: ${{ env.ARM_CLIENT_SECRET }}
 
