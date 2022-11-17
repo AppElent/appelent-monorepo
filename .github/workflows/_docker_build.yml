@@ -3,7 +3,7 @@ name: Template - Build docker image
 on:
   workflow_dispatch:
     inputs:
-      working-dir:
+      working_dir:
         required: true
         type: string
         description: Working directory
@@ -17,7 +17,7 @@ jobs:
     runs-on: ubuntu-latest
     defaults:
       run:
-        working-directory: ${{ env.working-dir }} #./django/api #
+        working-directory: ${{ env.working_dir }}#./django/api #
     steps:
       - uses: actions/checkout@v2
 
