@@ -41,7 +41,7 @@ jobs:
 
       - name: "Get ACR details"
         run: |
-          echo "loginServer=$(az acr show -n acrappelent --query loginServer)" >> "$GITHUB_ENV"
+          echo "loginServer=$(az acr show -n acrappelent --query loginServer)" >> "$GITHUB_ENV" -o tsv
 
       - uses: Azure/docker-login@v1
         with:
