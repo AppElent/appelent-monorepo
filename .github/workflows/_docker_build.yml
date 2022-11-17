@@ -1,3 +1,5 @@
+name: Template - Build docker image
+
 on:
   workflow_dispatch:
 
