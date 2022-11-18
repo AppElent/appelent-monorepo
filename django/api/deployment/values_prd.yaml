@@ -1,0 +1,14 @@
+environment:
+  value: prd
+  keyvaultname: kv-appelent-prd
+
+ingress:
+  hosts:
+    - host: api.appelent.com
+      paths:
+        - path: /(.*)
+          pathType: ImplementationSpecific
+  tls:
+    - hosts:
+        - api.appelent.com
+      secretName: tls-secret-django-api
