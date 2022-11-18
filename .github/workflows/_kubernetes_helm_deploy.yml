@@ -15,7 +15,7 @@ on:
         required: false
         type: string
         description: Location of values.yml file
-      namsepsace:
+      namespace:
         required: true
         type: string
         description: Kubernetes namespace
