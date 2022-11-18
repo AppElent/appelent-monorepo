@@ -57,6 +57,6 @@ jobs:
 
       - name: Deploy
         run: |
-          helm upgrade --install --atomic --timeout 1m rest ./django-api -f $inputs.values_file \
-            --namespace $inputs.namespace --create-namespace
+          helm upgrade --install --atomic --timeout 1m rest ./django-api -f ${{ inputs.values_file }} \
+            --namespace ${{ inputs.namespace }} --create-namespace
             #--set image.tag=${{ needs.setup.outputs.tag }}
