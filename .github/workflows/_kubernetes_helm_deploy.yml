@@ -1,0 +1,22 @@
+name: Template - Kubernetes Helm Deploy
+
+on:
+  workflow_dispatch:
+    inputs:
+      working_dir:
+        required: true
+        type: string
+        description: Working directory
+      repository_name:
+        required: true
+        type: string
+        description: Name of the docker repository
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ${{ inputs.working_dir }} #./django/api #
+    steps:
+      - uses: actions/checkout@v2

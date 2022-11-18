@@ -1,0 +1,29 @@
+name: Django API Deploy
+
+on:
+  push:
+    branches:
+      - main
+      - develop
+    paths:
+    - django/api/** 
+
+jobs:
+  build:
+    if: github.ref == 'refs/heads/develop'
+    uses: ./.github/workflows/_docker_build.yml
+    with:
+      working_dir: ./django/api
+      repository_name: django-api
+    secrets: inherit
+  # deploy:
+  #   runs-on: ubuntu-latest
+  #   name: Deploy Job
+  #   steps:
+  #     - uses: actions/checkout@v2
+  #       with:
+  #         submodules: true
+  #     - name: Azure Login
+  #       uses: azure/login@v1
+  #       with:
+  #         creds: ${{ secrets.AZURE_CREDENTIALS }}

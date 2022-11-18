@@ -11,6 +11,14 @@ on:
         required: true
         type: string
         description: Name of the docker repository
+  workflow_call:
+    inputs:
+      working_dir:
+        required: true
+        type: string
+      repository_name:
+        required: true
+        type: string
 
 jobs:
   build:
