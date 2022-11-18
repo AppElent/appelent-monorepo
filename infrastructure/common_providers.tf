@@ -43,10 +43,6 @@ provider "azuread" {
   # Configuration options
 }
 
-# provider "cloudamqp" {
-#   # Configuration options
-#   apikey = 
-# }
 
 provider "mysql" {
   # Configuration options
