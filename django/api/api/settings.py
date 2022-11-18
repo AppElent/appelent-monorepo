@@ -39,7 +39,14 @@ SECRET_KEY = os.getenv("SECRET_KEY", default=get_random_secret_key())
 DEBUG = True
 
 CSRF_TRUSTED_ORIGINS = ['https://*.preview.app.github.dev']
-ALLOWED_HOSTS = ['preview.app.github.dev', 'localhost', '127.0.0.1']
+#ALLOWED_HOSTS = ['preview.app.github.dev', 'localhost', '127.0.0.1', '.appelent.com']
+ALLOWED_HOSTS = ['*']
+
+CORS_ALLOWED_ORIGINS = [
+    'http://localhost:3000'
+]
+
+ALLOWED_CIDR_NETS = ['10.244.0.0/16']
 
 
 # Application definition
@@ -60,9 +67,12 @@ INSTALLED_APPS = [
     'health_check.cache',
     'health_check.storage',
     'health_check.contrib.migrations',
+    'corsheaders',
 ]
 
 MIDDLEWARE = [
+    'allow_cidr.middleware.AllowCIDRMiddleware',
+    "corsheaders.middleware.CorsMiddleware",
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",

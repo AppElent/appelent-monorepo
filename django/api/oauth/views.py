@@ -54,6 +54,7 @@ def authorize(request, name):
     scope = provider["default_scope"] if request.GET.get(
         'scope') is None else request.GET.get('scope')
     redirect_url = request.GET.get('redirect_url')
+    config = request.GET.get('config')
 
     oauth_session = OAuth2Session(
         provider["client_id"], redirect_uri=provider["redirect_url"], scope=scope)
@@ -61,7 +62,7 @@ def authorize(request, name):
         provider["authorize_url"])
 
     # Create saved state object and save it
-    state_object = {"scope": scope, "redirect_url": redirect_url}
+    state_object = {"scope": scope, "redirect_url": redirect_url, "config": config}
     cache.set(get_cache_key(state), state_object, 300)
 
     # If query param is set return redirect
@@ -103,7 +104,8 @@ def get_access_token(request, name):
 
         # Add query state param
         redirect_url = savedstate["redirect_url"]
-        params = {'state': urlstate}
+        config = savedstate.get("config")
+        params = {'state': urlstate, 'config': config}
         #quoted_params = urllib.parse.urlencode(params)
         #full_url = redirect_url + quoted_params
         req = PreparedRequest()
@@ -133,8 +135,8 @@ def get_access_token(request, name):
     print('token', token)
 
     #result = save_token(name, savedstate.user, token)
-    if savedstate["redirect_url"] is not None:
-        return HttpResponseRedirect(savedstate["redirect_url"])
+    if savedstate["redirect_url"] is not None and request.method == 'GET':
+        return HttpResponseRedirect(savedstate["redirect_url"] + '?state=' + urlstate + '&config=' + config)
     return Response(token, status=status.HTTP_200_OK)
 
 

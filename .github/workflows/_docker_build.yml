@@ -2,10 +2,30 @@ name: Template - Build docker image
 
 on:
   workflow_dispatch:
+    inputs:
+      working_dir:
+        required: true
+        type: string
+        description: Working directory
+      repository_name:
+        required: true
+        type: string
+        description: Name of the docker repository
+  workflow_call:
+    inputs:
+      working_dir:
+        required: true
+        type: string
+      repository_name:
+        required: true
+        type: string
 
 jobs:
   build:
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ${{ inputs.working_dir }} #./django/api #
     steps:
       - uses: actions/checkout@v2
 
@@ -13,7 +33,7 @@ jobs:
         env:
           AZURE_CREDENTIALS: ${{ secrets.AZURE_CREDENTIALS }}
         run: |
-          # Parse Azure secret into Terraform variables
+          # Parse Azure secret into variables
           $servicePrincipal = ($env:AZURE_CREDENTIALS | ConvertFrom-Json)
           $env:ARM_CLIENT_ID = $servicePrincipal.clientId
           $env:ARM_CLIENT_SECRET = $servicePrincipal.clientSecret
@@ -29,14 +49,14 @@ jobs:
 
       - name: "Get ACR details"
         run: |
-          echo "loginServer=$(az acr show -n acrappelent --query loginServer)" >> "$GITHUB_ENV"
+          echo "loginServer=$(az acr show -n acrappelent --query loginServer -o tsv)" >> "$GITHUB_ENV"
 
       - uses: Azure/docker-login@v1
         with:
-          login-server: ${{ loginServer }}
+          login-server: ${{ env.loginServer }}
           username: ${{ env.ARM_CLIENT_ID }}
           password: ${{ env.ARM_CLIENT_SECRET }}
 
-      # - run: |
-      #     docker build . -t contoso.azurecr.io/k8sdemo:${{ github.sha }}
-      #     docker push contoso.azurecr.io/k8sdemo:${{ github.sha }}
+      - run: |
+          docker build . -t ${{ env.loginServer }}/${{ inputs.repository_name }}:${{ github.sha }} -t ${{ env.loginServer }}/${{ inputs.repository_name }}:latest
+          docker image push --all-tags ${{ env.loginServer }}/${{ inputs.repository_name }}

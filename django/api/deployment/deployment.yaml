@@ -1,0 +1,47 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: django-api
+  labels:
+    app: django-api
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: django-api
+  template:
+    metadata:
+      labels: 
+        app: django-api
+    spec:
+      containers:
+        - name: django-api
+          image: acrappelent.azurecr.io/django-api:v0.3
+          ports:
+            - containerPort: 8000
+          env:
+            - name: DATABASE_SERVER_URL
+              valueFrom:
+                secretKeyRef:
+                  name: django-api-secrets 
+                  key: django-database-server-url
+            - name: DATABASE_URL
+              value: $(DATABASE_SERVER_URL)/django-api
+            - name: SECRET_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: django-api-secrets 
+                  key: django-env-secret
+            - name: ENVIRONMENT
+              value: dev
+          volumeMounts:
+          - name: secrets
+            mountPath: "/mnt/secrets-store"
+            readOnly: true
+      volumes:
+      - name: secrets
+        csi:
+          driver: secrets-store.csi.k8s.io
+          readOnly: true
+          volumeAttributes:
+            secretProviderClass: "django-api-secretproviderclass"
