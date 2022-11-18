@@ -50,7 +50,6 @@ ALLOWED_CIDR_NETS = ['10.244.0.0/16']
 
 
 # Application definition
-
 INSTALLED_APPS = [
     "django.contrib.admin",
     "django.contrib.auth",
