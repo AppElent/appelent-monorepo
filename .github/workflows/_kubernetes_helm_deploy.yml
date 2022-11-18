@@ -11,6 +11,14 @@ on:
         required: true
         type: string
         description: Name of the docker repository
+      values_file:
+        required: false
+        type: string
+        description: Location of values.yml file
+      namsepsace:
+        required: true
+        type: string
+        description: Kubernetes namespace
 
 jobs:
   build:
@@ -20,3 +28,35 @@ jobs:
         working-directory: ${{ inputs.working_dir }} #./django/api #
     steps:
       - uses: actions/checkout@v2
+
+      - uses: azure/login@v1
+        with:
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
+
+      # - name: Sets env vars for dev
+      #   run: |
+      #     echo "DOCKER_IMAGE_NAME=my.docker.repo/awesome-image:release" >> $GITHUB_ENV
+      #     echo "K8S_NAMESPACE=django-api-dev" >> $GITHUB_ENV
+      #     # Rename values file for environment
+      #     mv values_dev.yaml values.yaml
+      #   if: github.ref == 'refs/heads/develop'
+
+      # # This step is run when the tag is staging-XXX
+      # - name: Sets env vars for main
+      #   run: |
+      #     echo "DOCKER_IMAGE_NAME=my.docker.repo/awesome-image:staging" >> $GITHUB_ENV
+      #     echo "K8S_NAMESPACE=django-api-prd" >> $GITHUB_ENV
+      #     # Rename values file for environment
+      #     mv values_prd.yaml values.yaml
+      #   if: github.ref == 'refs/heads/main'
+
+      - uses: azure/aks-set-context@v3
+        with:
+          resource-group: 'rg-appelent-shared'
+          cluster-name: 'aks-appelent'
+
+      - name: Deploy
+        run: |
+          helm upgrade --install --atomic --timeout 1m rest ./django-api -f $inputs.values_file \
+            --namespace $inputs.namespace --create-namespace
+            #--set image.tag=${{ needs.setup.outputs.tag }}
