@@ -44,6 +44,7 @@ jobs:
       values_file: ${{ needs.prepare_deploy.outputs.values_file }}
       release_name: django-api
       namespace: ${{ needs.prepare_deploy.outputs.k8s_namespace }}
+      helm_name: ./django-api
     secrets: inherit
 
   # deploy:

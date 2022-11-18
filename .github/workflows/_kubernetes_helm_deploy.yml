@@ -11,7 +11,7 @@ on:
         required: false
         type: string
         description: Location of values.yml file
-      namsepsace:
+      namespace:
         required: true
         type: string
         description: Kubernetes namespace
@@ -19,6 +19,10 @@ on:
         required: true
         type: string
         description: Helm release name
+      helm_name:
+        required: true
+        type: string
+        description: Helm name
 
 jobs:
   deploy:
@@ -40,6 +44,6 @@ jobs:
 
       - name: Deploy
         run: |
-          helm upgrade --install --atomic --timeout 1m ${{ inputs.release_name }} ./django-api -f $inputs.values_file \
-            --namespace $inputs.namespace --create-namespace
+          helm upgrade --install --atomic --timeout 1m ${{ inputs.release_name }} ${{ inputs.helm_name }} -f ${{ inputs.values_file }} \
+            --namespace ${{ inputs.namespace }} --create-namespace
             #--set image.tag=${{ needs.setup.outputs.tag }}
