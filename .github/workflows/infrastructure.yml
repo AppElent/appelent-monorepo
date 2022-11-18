@@ -13,11 +13,10 @@ on:
     paths:
     - infrastructure/**
   workflow_dispatch:
-  
-env:
-  HEROKU_EMAIL: ${{ secrets.HEROKU_EMAIL }}
-  HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
 
+concurrency:
+  group: ${{ github.workflow }} # ${{ github.head_ref || github.ref_name }} 
+  
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -61,7 +60,7 @@ jobs:
 
     - name: Terraform Plan
       id: plan
-      run: terraform plan -no-color -target="module.heroku_config" -out=planfile
+      run: terraform plan -no-color -out=planfile
 
     - uses: actions/github-script@v6
       if: github.event_name == 'pull_request'
