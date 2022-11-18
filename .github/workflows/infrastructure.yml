@@ -101,4 +101,5 @@ jobs:
 
     - name: Terraform Apply
       id: apply
+      if: github.event.pull_request.merged == 'true'
       run: terraform apply -no-color -auto-approve planfile
