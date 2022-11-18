@@ -16,6 +16,36 @@ jobs:
       working_dir: ./django/api
       repository_name: django-api
     secrets: inherit
+
+  prepare_deploy:
+    runs-on: ubuntu-latest
+    outputs:
+      k8s_namespace: ${{ steps.envs.outputs.K8S_NAMESPACE }}
+      values_file: ${{ steps.envs.outputs.VALUES_FILE }}
+    steps:
+      - name: Set environment for branch
+        id: envs
+        run: |
+          if [[ "${{github.base_ref}}" == "main" || "${{github.ref}}" == "refs/heads/main" ]]; then
+              echo "K8S_NAMESPACE=django-api-prd" >> $GITHUB_OUTPUT
+              echo "VALUES_FILE=./values_prd.yaml" >> $GITHUB_OUTPUT
+          fi
+
+          if [[ "${{github.base_ref}}" == "develop" || "${{github.ref}}" == "refs/heads/develop" ]]; then
+            echo "K8S_NAMESPACE=django-api-dev" >> $GITHUB_OUTPUT
+            echo "VALUES_FILE=./values_dev.yaml" >> $GITHUB_OUTPUT
+          fi
+
+  deploy:
+    uses: ./.github/workflows/_kubernetes_helm_deploy.yml
+    needs: [build, prepare_deploy]
+    with:
+      working_dir: ./django/api/deployment
+      values_file: ${{ needs.prepare_deploy.outputs.values_file }}
+      release_name: django-api
+      namespace: ${{ needs.prepare_deploy.outputs.k8s_namespace }}
+    secrets: inherit
+
   # deploy:
   #   runs-on: ubuntu-latest
   #   name: Deploy Job
