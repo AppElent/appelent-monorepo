@@ -1,0 +1,97 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "django-api.fullname" . }}
+  labels:
+    {{- include "django-api.labels" . | nindent 4 }}
+spec:
+  {{- if not .Values.autoscaling.enabled }}
+  replicas: {{ .Values.replicaCount }}
+  {{- end }}
+  selector:
+    matchLabels:
+      {{- include "django-api.selectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      {{- with .Values.podAnnotations }}
+      annotations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      labels:
+        {{- include "django-api.selectorLabels" . | nindent 8 }}
+    spec:
+      {{- with .Values.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      serviceAccountName: {{ include "django-api.serviceAccountName" . }}
+      securityContext:
+        {{- toYaml .Values.podSecurityContext | nindent 8 }}
+      containers:
+        - name: {{ .Chart.Name }}
+          securityContext:
+            {{- toYaml .Values.securityContext | nindent 12 }}
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          ports:
+            - name: http
+              containerPort: 8000
+              protocol: TCP
+          env:
+            - name: DATABASE_SERVER_URL
+              valueFrom:
+                secretKeyRef:
+                  name: django-api-secrets 
+                  key: django-database-server-url
+            - name: DATABASE_URL
+              value: $(DATABASE_SERVER_URL)/django-api
+            - name: SECRET_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: django-api-secrets 
+                  key: django-env-secret
+            - name: COSMOS_ACCESS_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: django-api-secrets 
+                  key: COSMOS-ACCESS-KEY
+            - name: FIREBASE_CREDS
+              valueFrom:
+                secretKeyRef:
+                  name: django-api-secrets 
+                  key: FIREBASE-CREDS
+            - name: ENVIRONMENT
+              value: {{ .Values.environment.value }}
+          volumeMounts:
+          - name: secrets
+            mountPath: "/mnt/secrets-store"
+            readOnly: true
+          livenessProbe:
+            httpGet:
+              path: /
+              port: http
+          readinessProbe:
+            httpGet:
+              path: /
+              port: http
+          resources:
+            {{- toYaml .Values.resources | nindent 12 }}
+      volumes:
+      - name: secrets
+        csi:
+          driver: secrets-store.csi.k8s.io
+          readOnly: true
+          volumeAttributes:
+            secretProviderClass: "django-api-secretproviderclass"
+      {{- with .Values.nodeSelector }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.affinity }}
+      affinity:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.tolerations }}
+      tolerations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}

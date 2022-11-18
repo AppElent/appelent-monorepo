@@ -44,3 +44,5 @@ class User(AbstractUser):
     objects = UserManager()
 
     #https://www.fomfus.com/articles/how-to-use-email-as-username-for-django-authentication-removing-the-username
+
+User._meta.get_field('email').blank = False

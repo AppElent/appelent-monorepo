@@ -14,10 +14,13 @@ class UserAdmin(DjangoUserAdmin):
     list_display = ('email', 'first_name', 'last_name', 'is_superuser', )
     search_fields = ('email', 'first_name', 'last_name')
     list_filter = ('is_superuser',)
-    readonly_fields = ('email', 'username', )
+    readonly_fields = ( 'username', )
     fieldsets = DjangoUserAdmin.fieldsets
     # fieldsets = (
     #     (None, {'fields': ('email', 'password', 'firebase_uid')}),)
+    add_fieldsets = DjangoUserAdmin.add_fieldsets + (
+        (None, {'fields': ('email',)}),
+    )
 
 
 # Add extra fields

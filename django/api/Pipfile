@@ -14,8 +14,10 @@ firebase-admin = "*"
 authlib = "*"
 django-health-check = "*"
 azure-cosmos = "*"
+django-cors-headers = "*"
+django-allow-cidr = "*"
 
 [dev-packages]
 
 [requires]
-python_version = "3.10"
+python_version = "3.11"
