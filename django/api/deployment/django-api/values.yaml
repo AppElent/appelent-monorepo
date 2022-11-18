@@ -5,7 +5,7 @@
 replicaCount: 1
 
 image:
-  repository: acrappelent.azurecr.io/django-api-test
+  repository: acrappelent.azurecr.io/django-api
   pullPolicy: IfNotPresent
   # Overrides the image tag whose default is the chart appVersion.
   tag: "latest"
@@ -58,14 +58,14 @@ ingress:
     # kubernetes.io/ingress.class: nginx
     # kubernetes.io/tls-acme: "true"
   hosts:
-    - host: dev2.api.appelent.com
+    - host: dev.api.appelent.com
       paths:
         - path: /(.*)
           pathType: ImplementationSpecific
   tls:
     - hosts:
-        - dev2.api.appelent.com
-      secretName: tls-secret-django-api-dev
+        - dev.api.appelent.com
+      secretName: tls-secret-django-api
 
   #  - secretName: chart-example-tls
   #    hosts:

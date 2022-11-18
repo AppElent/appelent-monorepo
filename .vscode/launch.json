@@ -5,18 +5,18 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "Django: Oauth",
+            "name": "Python: Django",
             "type": "python",
             "request": "launch",
-            "program": "${workspaceFolder}\\django\\oauth\\manage.py",
+            "program": "${workspaceFolder}\\django\\api\\manage.py",
             "args": [
                 "runserver"
             ],
             "django": true,
             "justMyCode": true,
             "env": {
-                "PYTHONPATH": "C:\\Users\\ericj\\.virtualenvs\\oauth-mFDh4ghm"
-              }
+                "PYTHONPATH": "C:\\Users\\ericj\\.virtualenvs\\api-5PO9FBGi"
+            }
         }
     ]
 }

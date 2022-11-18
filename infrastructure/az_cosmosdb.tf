@@ -14,3 +14,15 @@ resource "azurerm_cosmosdb_account" "cosmosdb" {
   }
 
 }
+
+resource "azurerm_key_vault_secret" "cdb_secret_key_dev" {
+  name         = "COSMOS-ACCESS-KEY"
+  value        = azurerm_cosmosdb_account.cosmosdb.primary_key
+  key_vault_id = azurerm_key_vault.keyvault_dev.id
+}
+
+resource "azurerm_key_vault_secret" "cdb_secret_key_prd" {
+  name         = "COSMOS-ACCESS-KEY"
+  value        = azurerm_cosmosdb_account.cosmosdb.primary_key
+  key_vault_id = azurerm_key_vault.keyvault_prd.id
+}

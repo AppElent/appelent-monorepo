@@ -36,7 +36,7 @@ AUTH_USER_MODEL = 'users.User'
 SECRET_KEY = os.getenv("SECRET_KEY", default=get_random_secret_key())
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False if environment = "PRD" else True
 
 CSRF_TRUSTED_ORIGINS = ['https://*.preview.app.github.dev']
 #ALLOWED_HOSTS = ['preview.app.github.dev', 'localhost', '127.0.0.1', '.appelent.com']
@@ -50,7 +50,6 @@ ALLOWED_CIDR_NETS = ['10.244.0.0/16']
 
 
 # Application definition
-
 INSTALLED_APPS = [
     "django.contrib.admin",
     "django.contrib.auth",
@@ -112,7 +111,6 @@ WSGI_APPLICATION = "api.wsgi.application"
 
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
-
 if os.getenv("DATABASE_URL"):
     DATABASES = {}
     DATABASES['default'] = dj_database_url.config(conn_max_age=600)

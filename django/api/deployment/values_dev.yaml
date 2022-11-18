@@ -1,0 +1,3 @@
+environment:
+  value: dev
+  keyvaultname: kv-appelent-dev

@@ -7,21 +7,42 @@ on:
         required: true
         type: string
         description: Working directory
-      repository_name:
-        required: true
-        type: string
-        description: Name of the docker repository
       values_file:
         required: false
         type: string
         description: Location of values.yml file
-      namsepsace:
+      namespace:
         required: true
         type: string
         description: Kubernetes namespace
+      release_name:
+        required: true
+        type: string
+        description: Helm release name
+      helm_name:
+        required: true
+        type: string
+        description: Helm name
+  workflow_call:
+    inputs:
+      working_dir:
+        required: true
+        type: string
+      values_file:
+        required: false
+        type: string
+      namespace:
+        required: true
+        type: string
+      release_name:
+        required: true
+        type: string
+      helm_name:
+        required: true
+        type: string
 
 jobs:
-  build:
+  deploy:
     runs-on: ubuntu-latest
     defaults:
       run:
@@ -33,23 +54,6 @@ jobs:
         with:
           creds: ${{ secrets.AZURE_CREDENTIALS }}
 
-      # - name: Sets env vars for dev
-      #   run: |
-      #     echo "DOCKER_IMAGE_NAME=my.docker.repo/awesome-image:release" >> $GITHUB_ENV
-      #     echo "K8S_NAMESPACE=django-api-dev" >> $GITHUB_ENV
-      #     # Rename values file for environment
-      #     mv values_dev.yaml values.yaml
-      #   if: github.ref == 'refs/heads/develop'
-
-      # # This step is run when the tag is staging-XXX
-      # - name: Sets env vars for main
-      #   run: |
-      #     echo "DOCKER_IMAGE_NAME=my.docker.repo/awesome-image:staging" >> $GITHUB_ENV
-      #     echo "K8S_NAMESPACE=django-api-prd" >> $GITHUB_ENV
-      #     # Rename values file for environment
-      #     mv values_prd.yaml values.yaml
-      #   if: github.ref == 'refs/heads/main'
-
       - uses: azure/aks-set-context@v3
         with:
           resource-group: 'rg-appelent-shared'
@@ -57,6 +61,6 @@ jobs:
 
       - name: Deploy
         run: |
-          helm upgrade --install --atomic --timeout 1m rest ./django-api -f $inputs.values_file \
-            --namespace $inputs.namespace --create-namespace
+          helm upgrade --install --atomic --timeout 1m ${{ inputs.release_name }} ${{ inputs.helm_name }} -f ${{ inputs.values_file }} \
+            --namespace ${{ inputs.namespace }} --create-namespace
             #--set image.tag=${{ needs.setup.outputs.tag }}
