@@ -1,9 +1,9 @@
 resource "random_string" "django_key_dev" {
-  length  = 40
+  length = 40
 }
 
 resource "random_string" "django_key_prd" {
-  length  = 40
+  length = 40
 }
 
 resource "azurerm_key_vault_secret" "akv_secret_django_dev" {
