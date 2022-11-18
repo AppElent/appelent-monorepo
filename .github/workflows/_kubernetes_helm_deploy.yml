@@ -23,6 +23,23 @@ on:
         required: true
         type: string
         description: Helm name
+  workflow_call:
+    inputs:
+      working_dir:
+        required: true
+        type: string
+      values_file:
+        required: false
+        type: string
+      namespace:
+        required: true
+        type: string
+      release_name:
+        required: true
+        type: string
+      helm_name:
+        required: true
+        type: string
 
 jobs:
   deploy:
