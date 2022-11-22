@@ -23,6 +23,10 @@ on:
         required: true
         type: string
         description: Helm name
+      helm_repo:
+        required: false
+        type: string
+        description: Helm repo
   workflow_call:
     inputs:
       working_dir:
@@ -39,6 +43,9 @@ on:
         type: string
       helm_name:
         required: true
+        type: string
+      helm_repo:
+        required: false
         type: string
 
 jobs:
@@ -58,6 +65,11 @@ jobs:
         with:
           resource-group: 'rg-appelent-shared'
           cluster-name: 'aks-appelent'
+
+      - name: Add Helm repo
+        if: ${{ inputs.helm_repo }}
+        run: |
+          helm repo add my-repo ${{ inputs.helm_repo }}
 
       - name: Deploy
         run: |
