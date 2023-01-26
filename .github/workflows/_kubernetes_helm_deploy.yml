@@ -73,6 +73,6 @@ jobs:
 
       - name: Deploy
         run: |
-          helm upgrade --install --atomic --timeout 1m ${{ inputs.release_name }} ${{ inputs.helm_name }} -f ${{ inputs.values_file }} \
+          helm upgrade --install --atomic --timeout 5m ${{ inputs.release_name }} ${{ inputs.helm_name }} -f ${{ inputs.values_file }} \
             --namespace ${{ inputs.namespace }} --create-namespace
             #--set image.tag=${{ needs.setup.outputs.tag }}

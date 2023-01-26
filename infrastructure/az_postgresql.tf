@@ -19,6 +19,13 @@ resource "azurerm_postgresql_flexible_server" "postgresql_dev" {
   sku_name = "B_Standard_B1ms"
 }
 
+resource "azurerm_postgresql_flexible_server_firewall_rule" "allow_azure_resources_dev" {
+  name             = "Allow-Azure-resources"
+  server_id        = azurerm_postgresql_flexible_server.postgresql_dev.id
+  start_ip_address = "0.0.0.0"
+  end_ip_address   = "0.0.0.0"
+}
+
 resource "random_string" "postgres_dev_password" {
   length  = 40
   special = false
@@ -46,6 +53,13 @@ resource "azurerm_postgresql_flexible_server" "postgresql_prd" {
   sku_name = "B_Standard_B1ms"
 }
 
+resource "azurerm_postgresql_flexible_server_firewall_rule" "allow_azure_resources_prd" {
+  name             = "Allow-Azure-resources"
+  server_id        = azurerm_postgresql_flexible_server.postgresql_prd.id
+  start_ip_address = "0.0.0.0"
+  end_ip_address   = "0.0.0.0"
+}
+
 resource "random_string" "postgres_prd_password" {
   length  = 40
   special = false
@@ -54,6 +68,16 @@ resource "random_string" "postgres_prd_password" {
 locals {
   database_server_url_dev = "postgres://${azurerm_postgresql_flexible_server.postgresql_dev.administrator_login}:${random_string.postgres_dev_password.result}@${azurerm_postgresql_flexible_server.postgresql_dev.name}.postgres.database.azure.com"
   database_server_url_prd = "postgres://${azurerm_postgresql_flexible_server.postgresql_prd.administrator_login}:${random_string.postgres_prd_password.result}@${azurerm_postgresql_flexible_server.postgresql_prd.name}.postgres.database.azure.com"
+}
+
+resource "azurerm_postgresql_flexible_server_database" "django_api_dev" {
+  name      = "django-api"
+  server_id = azurerm_postgresql_flexible_server.postgresql_dev.id
+}
+
+resource "azurerm_postgresql_flexible_server_database" "django_api_prd" {
+  name      = "django-api"
+  server_id = azurerm_postgresql_flexible_server.postgresql_prd.id
 }
 
 

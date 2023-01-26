@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 import { OauthClientProvider, useOauthClient } from "./OauthClient";
 
 const ChildComponent = () => {
@@ -18,8 +18,10 @@ const ChildComponent = () => {
 export default function Oauth() {
   const configurations = {
     enelogic: {
-      redirectUrl: "/enelogic/authorize?redirect=true",
-      tokenUrl: "/enelogic/token",
+      redirectUrl:
+        "/oauth/enelogic/authorize?redirect=true&redirect_url=http://localhost:3000/oauth&config=enelogic",
+      tokenUrl: "/oauth/enelogic/token",
+      scope: "account",
     },
   };
 

@@ -2,8 +2,9 @@
 const nextConfig = {
   experimental: {
     appDir: true,
-    transpilePackages: ['@appelent/helpers']
+    transpilePackages: ["@appelent/helpers"],
   },
-}
+  reactStrictMode: false,
+};
 
-module.exports = nextConfig
+module.exports = nextConfig;
