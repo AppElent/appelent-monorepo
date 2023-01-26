@@ -1,0 +1,15 @@
+auth:
+  username: user
+  password: pass
+
+ingress:
+  enabled: true
+  path: /(.*)
+  hostname: rabbitmq-dev.appelent.com
+  annotations:
+    {
+      cert-manager.io/cluster-issuer: "letsencrypt",
+      nginx.ingress.kubernetes.io/use-regex: "true"
+    }
+  tls: true
+  ingressClassName: nginx

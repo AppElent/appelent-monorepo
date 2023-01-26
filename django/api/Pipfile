@@ -1,0 +1,23 @@
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+django = "*"
+djangorestframework = "*"
+django-crum = "*"
+dj-database-url = "*"
+python-dotenv = "*"
+psycopg2 = "*"
+firebase-admin = "*"
+authlib = "*"
+django-health-check = "*"
+azure-cosmos = "*"
+django-cors-headers = "*"
+django-allow-cidr = "*"
+
+[dev-packages]
+
+[requires]
+python_version = "3.11"

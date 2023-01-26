@@ -4,5 +4,8 @@
     "workspaces": [
         "demo",
         "packages/*"
-    ]
+    ],
+    "dependencies": {
+        "prettier": "^2.7.1"
+    }
 }

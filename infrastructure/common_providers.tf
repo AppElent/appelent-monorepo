@@ -7,10 +7,6 @@ terraform {
       source  = "hashicorp/azurerm"
       version = ">= 3.0.0"
     }
-    heroku = {
-      source  = "heroku/heroku"
-      version = ">= 5.1.1"
-    }
     github = {
       source  = "integrations/github"
       version = ">= 5.4.0"
@@ -19,10 +15,6 @@ terraform {
       source  = "hashicorp/azuread"
       version = ">= 2.29.0"
     }
-    # cloudamqp = {
-    #   source  = "cloudamqp/cloudamqp"
-    #   version = ">= 1.19.3"
-    # }
     mysql = {
       source  = "petoju/mysql"
       version = ">= 3.0.23"
@@ -43,10 +35,6 @@ provider "azurerm" {
   features {}
 }
 
-provider "heroku" {
-
-}
-
 provider "github" {
   # Configuration options
 }
@@ -55,10 +43,6 @@ provider "azuread" {
   # Configuration options
 }
 
-# provider "cloudamqp" {
-#   # Configuration options
-#   apikey = 
-# }
 
 provider "mysql" {
   # Configuration options

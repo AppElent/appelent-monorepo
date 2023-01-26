@@ -1,0 +1,34 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: django-crud-api
+  labels:
+    app: django-crud-api
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: django-crud-api
+  template:
+    metadata:
+      labels: 
+        app: django-crud-api
+    spec:
+      containers:
+        - name: django-crud-api
+          image: acrappelent.azurecr.io/django-crud-api:v0.1
+          ports:
+            - containerPort: 8000
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: django-crud-api-service
+spec:
+  selector:
+    app: django-crud-api
+  ports:
+  - protocol: TCP
+    port: 8000
+    targetPort: 8000
+  type: NodePort

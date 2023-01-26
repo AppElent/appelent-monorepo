@@ -21,8 +21,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 dotenv_file = os.path.join(BASE_DIR, ".env")
 if os.path.isfile(dotenv_file):
     dotenv.load_dotenv(dotenv_file)
-    
-environment = ("LOCAL" if os.getenv("ENVIRONMENT") is None else os.getenv("ENVIRONMENT")).upper()
+
+environment = ("LOCAL" if os.getenv("ENVIRONMENT")
+               is None else os.getenv("ENVIRONMENT")).upper()
 
 # Setting custom user model
 AUTH_USER_MODEL = 'users.User'
@@ -37,7 +38,8 @@ SECRET_KEY = os.getenv("SECRET_KEY", default=get_random_secret_key())
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+CSRF_TRUSTED_ORIGINS = ['https://*.preview.app.github.dev']
+ALLOWED_HOSTS = ['preview.app.github.dev', 'localhost']
 
 
 # Application definition
@@ -52,7 +54,6 @@ INSTALLED_APPS = [
     'rest_framework',
     'api',
     'users',
-    'oauth',
 ]
 
 MIDDLEWARE = [
@@ -68,8 +69,8 @@ MIDDLEWARE = [
 REST_FRAMEWORK = {
     # other settings...
 
-    #'DEFAULT_AUTHENTICATION_CLASSES': [],
-    #'DEFAULT_PERMISSION_CLASSES': [],
+    # 'DEFAULT_AUTHENTICATION_CLASSES': [],
+    # 'DEFAULT_PERMISSION_CLASSES': [],
 }
 
 ROOT_URLCONF = "crud_api.urls"
@@ -109,7 +110,6 @@ else:
     }
 
 
-
 if os.getenv("REDIS_URL"):
     CACHES = {
         "default": {
@@ -120,11 +120,11 @@ if os.getenv("REDIS_URL"):
 else:
     # default cache is local memory cache
     CACHES = {
-    'default': {
-        'BACKEND': 'django.core.cache.backends.locmem.LocMemCache',
-        'LOCATION': 'unique-string',
-    },
-}
+        'default': {
+            'BACKEND': 'django.core.cache.backends.locmem.LocMemCache',
+            'LOCATION': 'unique-string',
+        },
+    }
 
 
 # Password validation
