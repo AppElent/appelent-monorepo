@@ -10,7 +10,7 @@ import { RTL } from '../components/rtl';
 import { SplashScreen } from '../components/splash-screen';
 import { Toaster } from '../components/toaster';
 import { SettingsConsumer, SettingsProvider } from '../contexts/settings-context';
-import { AuthConsumer, AuthProvider } from '../contexts/auth/jwt-context';
+import { AuthConsumer, AuthProvider } from '../contexts/auth/firebase-context';
 import { gtmConfig } from '../config';
 import { gtm } from '../libs/gtm';
 import { store } from '../store';

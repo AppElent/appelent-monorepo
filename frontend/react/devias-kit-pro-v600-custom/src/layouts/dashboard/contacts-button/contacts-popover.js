@@ -1,5 +1,5 @@
-import { formatDistanceStrict } from 'date-fns';
-import PropTypes from 'prop-types';
+import { formatDistanceStrict } from "date-fns";
+import PropTypes from "prop-types";
 import {
   Avatar,
   Box,
@@ -9,10 +9,10 @@ import {
   ListItemAvatar,
   ListItemText,
   Popover,
-  Typography
-} from '@mui/material';
-import { Presence } from '../../../components/presence';
-import { customLocale } from '../../../utils/date-locale';
+  Typography,
+} from "@mui/material";
+import { Presence } from "../../../components/presence";
+import { customLocale } from "../../../utils/date-locale";
 
 export const ContactsPopover = (props) => {
   const { anchorEl, contacts = [], onClose, open = false, ...other } = props;
@@ -21,75 +21,66 @@ export const ContactsPopover = (props) => {
     <Popover
       anchorEl={anchorEl}
       anchorOrigin={{
-        horizontal: 'center',
-        vertical: 'bottom'
+        horizontal: "center",
+        vertical: "bottom",
       }}
       disableScrollLock
       onClose={onClose}
       open={open}
       PaperProps={{ sx: { width: 320 } }}
-      {...other}>
+      {...other}
+    >
       <Box sx={{ p: 2 }}>
-        <Typography variant="h6">
-          Contacts
-        </Typography>
+        <Typography variant="h6">Contacts</Typography>
       </Box>
-      <Box sx={{ p: 2 }}>
-        <List disablePadding>
-          {contacts.map((contact) => {
-            const showOnline = contact.isActive;
-            const lastActivity = !contact.isActive && contact.lastActivity
-              ? formatDistanceStrict(contact.lastActivity, new Date(), {
-                addSuffix: true,
-                locale: customLocale
-              })
-              : undefined;
+      {contacts.length === 0 ? (
+        <Box sx={{ p: 2 }}>
+          <Typography variant="subtitle2">There are no contacts</Typography>
+        </Box>
+      ) : (
+        <Box sx={{ p: 2 }}>
+          <List disablePadding>
+            {contacts.map((contact) => {
+              const showOnline = contact.isActive;
+              const lastActivity =
+                !contact.isActive && contact.lastActivity
+                  ? formatDistanceStrict(contact.lastActivity, new Date(), {
+                      addSuffix: true,
+                      locale: customLocale,
+                    })
+                  : undefined;
 
-            return (
-              <ListItem
-                disableGutters
-                key={contact.id}
-              >
-                <ListItemAvatar>
-                  <Avatar
-                    src={contact.avatar}
-                    sx={{ cursor: 'pointer' }}
+              return (
+                <ListItem disableGutters key={contact.id}>
+                  <ListItemAvatar>
+                    <Avatar src={contact.avatar} sx={{ cursor: "pointer" }} />
+                  </ListItemAvatar>
+                  <ListItemText
+                    disableTypography
+                    primary={
+                      <Link
+                        color="text.primary"
+                        noWrap
+                        sx={{ cursor: "pointer" }}
+                        underline="none"
+                        variant="subtitle2"
+                      >
+                        {contact.name}
+                      </Link>
+                    }
                   />
-                </ListItemAvatar>
-                <ListItemText
-                  disableTypography
-                  primary={(
-                    <Link
-                      color="text.primary"
-                      noWrap
-                      sx={{ cursor: 'pointer' }}
-                      underline="none"
-                      variant="subtitle2"
-                    >
-                      {contact.name}
-                    </Link>
+                  {showOnline && <Presence size="small" status="online" />}
+                  {lastActivity && (
+                    <Typography color="text.secondary" noWrap variant="caption">
+                      {lastActivity}
+                    </Typography>
                   )}
-                />
-                {showOnline && (
-                  <Presence
-                    size="small"
-                    status="online"
-                  />
-                )}
-                {lastActivity && (
-                  <Typography
-                    color="text.secondary"
-                    noWrap
-                    variant="caption"
-                  >
-                    {lastActivity}
-                  </Typography>
-                )}
-              </ListItem>
-            );
-          })}
-        </List>
-      </Box>
+                </ListItem>
+              );
+            })}
+          </List>
+        </Box>
+      )}
     </Popover>
   );
 };
@@ -98,5 +89,5 @@ ContactsPopover.propTypes = {
   anchorEl: PropTypes.any,
   contacts: PropTypes.array,
   onClose: PropTypes.func,
-  open: PropTypes.bool
+  open: PropTypes.bool,
 };

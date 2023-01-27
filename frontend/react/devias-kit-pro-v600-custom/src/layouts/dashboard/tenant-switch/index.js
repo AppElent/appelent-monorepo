@@ -20,6 +20,7 @@ export const TenantSwitch = (props) => {
 
   const handleTenantChange = useCallback((tenant) => {
     setOpenPopover(false);
+    console.log(tenant)
   }, []);
 
   return (

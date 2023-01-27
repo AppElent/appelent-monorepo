@@ -1,11 +1,11 @@
-import { useCallback } from 'react';
-import NextLink from 'next/link';
-import { useRouter } from 'next/navigation';
-import PropTypes from 'prop-types';
-import toast from 'react-hot-toast';
-import CreditCard01Icon from '@untitled-ui/icons-react/build/esm/CreditCard01';
-import Settings04Icon from '@untitled-ui/icons-react/build/esm/Settings04';
-import User03Icon from '@untitled-ui/icons-react/build/esm/User03';
+import { useCallback } from "react";
+import NextLink from "next/link";
+import { useRouter } from "next/navigation";
+import PropTypes from "prop-types";
+import toast from "react-hot-toast";
+import CreditCard01Icon from "@untitled-ui/icons-react/build/esm/CreditCard01";
+import Settings04Icon from "@untitled-ui/icons-react/build/esm/Settings04";
+import User03Icon from "@untitled-ui/icons-react/build/esm/User03";
 import {
   Box,
   Button,
@@ -15,16 +15,17 @@ import {
   ListItemText,
   Popover,
   SvgIcon,
-  Typography
-} from '@mui/material';
-import { useAuth } from '../../../hooks/use-auth';
-import { paths } from '../../../paths';
-import { Issuer } from '../../../utils/auth';
+  Typography,
+} from "@mui/material";
+import { useAuth } from "../../../hooks/use-auth";
+import { paths } from "../../../paths";
+import { Issuer } from "../../../utils/auth";
 
 export const AccountPopover = (props) => {
   const { anchorEl, onClose, open, ...other } = props;
   const router = useRouter();
   const auth = useAuth();
+  console.log(auth);
 
   const handleLogout = useCallback(async () => {
     try {
@@ -52,14 +53,14 @@ export const AccountPopover = (props) => {
         }
 
         default: {
-          console.warn('Using an unknown Auth Issuer, did not log out');
+          console.warn("Using an unknown Auth Issuer, did not log out");
         }
       }
 
       router.push(paths.index);
     } catch (err) {
       console.error(err);
-      toast.error('Something went wrong!');
+      toast.error("Something went wrong!");
     }
   }, [auth, router, onClose]);
 
@@ -67,34 +68,30 @@ export const AccountPopover = (props) => {
     <Popover
       anchorEl={anchorEl}
       anchorOrigin={{
-        horizontal: 'center',
-        vertical: 'bottom'
+        horizontal: "center",
+        vertical: "bottom",
       }}
       disableScrollLock
       onClose={onClose}
       open={!!open}
       PaperProps={{ sx: { width: 200 } }}
-      {...other}>
+      {...other}
+    >
       <Box sx={{ p: 2 }}>
-        <Typography variant="body1">
-          Anika Visser
-        </Typography>
-        <Typography
-          color="text.secondary"
-          variant="body2"
-        >
-          demo@devias.io
+        <Typography variant="body1">{auth?.user?.name}</Typography>
+        <Typography color="text.secondary" variant="body2">
+          {auth.user.email}
         </Typography>
       </Box>
       <Divider />
       <Box sx={{ p: 1 }}>
-        <ListItemButton
+        {/* <ListItemButton
           component={NextLink}
           href={paths.dashboard.social.profile}
           sx={{
             borderRadius: 1,
             px: 1,
-            py: 0.5
+            py: 0.5,
           }}
         >
           <ListItemIcon>
@@ -103,20 +100,16 @@ export const AccountPopover = (props) => {
             </SvgIcon>
           </ListItemIcon>
           <ListItemText
-            primary={(
-              <Typography variant="body1">
-                Profile
-              </Typography>
-            )}
+            primary={<Typography variant="body1">Profile</Typography>}
           />
-        </ListItemButton>
+        </ListItemButton> */}
         <ListItemButton
           component={NextLink}
           href={paths.dashboard.account}
           sx={{
             borderRadius: 1,
             px: 1,
-            py: 0.5
+            py: 0.5,
           }}
         >
           <ListItemIcon>
@@ -125,14 +118,10 @@ export const AccountPopover = (props) => {
             </SvgIcon>
           </ListItemIcon>
           <ListItemText
-            primary={(
-              <Typography variant="body1">
-                Settings
-              </Typography>
-            )}
+            primary={<Typography variant="body1">Settings</Typography>}
           />
         </ListItemButton>
-        <ListItemButton
+        {/* <ListItemButton
           component={NextLink}
           href={paths.dashboard.index}
           sx={{
@@ -153,21 +142,17 @@ export const AccountPopover = (props) => {
               </Typography>
             )}
           />
-        </ListItemButton>
+        </ListItemButton> */}
       </Box>
-      <Divider sx={{ my: '0 !important' }} />
+      <Divider sx={{ my: "0 !important" }} />
       <Box
         sx={{
-          display: 'flex',
+          display: "flex",
           p: 1,
-          justifyContent: 'center'
+          justifyContent: "center",
         }}
       >
-        <Button
-          color="inherit"
-          onClick={handleLogout}
-          size="small"
-        >
+        <Button color="inherit" onClick={handleLogout} size="small">
           Logout
         </Button>
       </Box>
@@ -178,5 +163,5 @@ export const AccountPopover = (props) => {
 AccountPopover.propTypes = {
   anchorEl: PropTypes.any,
   onClose: PropTypes.func,
-  open: PropTypes.bool
+  open: PropTypes.bool,
 };

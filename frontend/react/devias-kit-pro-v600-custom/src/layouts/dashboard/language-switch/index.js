@@ -1,12 +1,13 @@
-import { useCallback, useRef, useState } from 'react';
-import { useTranslation } from 'react-i18next';
-import { Box, IconButton, Tooltip } from '@mui/material';
-import { LanguagePopover } from './language-popover';
+import { useCallback, useRef, useState } from "react";
+import { useTranslation } from "react-i18next";
+import { Box, IconButton, Tooltip } from "@mui/material";
+import { LanguagePopover } from "./language-popover";
 
 const languages = {
-  en: '/assets/flags/flag-uk.svg',
-  de: '/assets/flags/flag-de.svg',
-  es: '/assets/flags/flag-es.svg'
+  en: "/assets/flags/flag-uk.svg",
+  de: "/assets/flags/flag-de.svg",
+  es: "/assets/flags/flag-es.svg",
+  nl: "/assets/flags/flag-nl.webp",
 };
 
 export const LanguageSwitch = () => {
@@ -27,16 +28,13 @@ export const LanguageSwitch = () => {
   return (
     <>
       <Tooltip title="Language">
-        <IconButton
-          onClick={handlePopoverOpen}
-          ref={anchorRef}
-        >
+        <IconButton onClick={handlePopoverOpen} ref={anchorRef}>
           <Box
             sx={{
               width: 28,
-              '& img': {
-                width: '100%'
-              }
+              "& img": {
+                width: "100%",
+              },
             }}
           >
             <img src={flag} />

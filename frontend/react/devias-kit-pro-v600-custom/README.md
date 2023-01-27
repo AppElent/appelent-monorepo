@@ -32,3 +32,21 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+
+Aangepast:
+
+- firebase config toegevoegd voor auth
+- geinstalleerde packages:
+- geinstalleerde devpackages: prettier
+- raw userdata aan useauth toegevoegd in src/contexts/auth/firebase-context
+- GTM ID
+- jsconfig: {
+  "compilerOptions": {
+  "baseUrl": "src"
+  }
+  }
+- folders: custom / modules
+- utils: user
+- i18n: nl.js toevoegen, i18n.js (init), layouts/dashboard/language-switch/language-popover en index.js (language options) en flag-nl.webp
+- Profile: naam/email, billing weg, profile weg (account popover useMockedUser)
+  TODO: language, profile, account, notifications

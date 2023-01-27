@@ -13,16 +13,17 @@ export const auth0Config = {
 };
 
 export const firebaseConfig = {
-  apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
-  appId: process.env.NEXT_PUBLIC_FIREBASE_APP_ID,
-  authDomain: process.env.NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN,
-  messagingSenderId: process.env.NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID,
-  projectId: process.env.NEXT_PUBLIC_FIREBASE_PROJECT_ID,
-  storageBucket: process.env.NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET
+  apiKey: "AIzaSyDAwdqU-4k5Azb1fNF9RFLAlT-RaMSDUPo",
+  authDomain: "appelent-bc868.firebaseapp.com",
+  projectId: "appelent-bc868",
+  storageBucket: "appelent-bc868.appspot.com",
+  messagingSenderId: "726562505952",
+  appId: "1:726562505952:web:d05c0d37da55129551fc85",
+  measurementId: "G-SCBJ5EM94B"
 };
 
 export const gtmConfig = {
-  containerId: process.env.NEXT_PUBLIC_GTM_CONTAINER_ID
+  containerId: 'G-SCBJ5EM94B'
 };
 
 export const mapboxConfig = {
