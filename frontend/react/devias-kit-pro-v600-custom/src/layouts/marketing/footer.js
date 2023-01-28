@@ -41,10 +41,10 @@ const sections = [
       //   title: "License",
       //   path: "#",
       // },
-      // {
-      //   title: "Contact",
-      //   path: "#",
-      // },
+      {
+        title: "Contact",
+        path: paths.contact,
+      },
     ],
   },
   // {

@@ -1,10 +1,10 @@
-import { useCallback, useRef, useState } from 'react';
-import PropTypes from 'prop-types';
-import ChevronDownIcon from '@untitled-ui/icons-react/build/esm/ChevronDown';
-import { Box, IconButton, Stack, SvgIcon, Typography } from '@mui/material';
-import { TenantPopover } from './tenant-popover';
+import { useCallback, useRef, useState } from "react";
+import PropTypes from "prop-types";
+import ChevronDownIcon from "@untitled-ui/icons-react/build/esm/ChevronDown";
+import { Box, IconButton, Stack, SvgIcon, Typography } from "@mui/material";
+import { TenantPopover } from "./tenant-popover";
 
-const tenants = ['Devias', 'Acme Corp'];
+const tenants = ["Test", "Production"];
 
 export const TenantSwitch = (props) => {
   const anchorRef = useRef(null);
@@ -20,34 +20,21 @@ export const TenantSwitch = (props) => {
 
   const handleTenantChange = useCallback((tenant) => {
     setOpenPopover(false);
-    console.log(tenant)
+    console.log(tenant);
   }, []);
 
   return (
     <>
-      <Stack
-        alignItems="center"
-        direction="row"
-        spacing={2}
-        {...props}>
+      <Stack alignItems="center" direction="row" spacing={2} {...props}>
         <Box sx={{ flexGrow: 1 }}>
-          <Typography
-            color="inherit"
-            variant="h6"
-          >
-            Devias
+          <Typography color="inherit" variant="h6">
+            AppElent
           </Typography>
-          <Typography
-            color="neutral.400"
-            variant="body2"
-          >
+          <Typography color="neutral.400" variant="body2">
             Production
           </Typography>
         </Box>
-        <IconButton
-          onClick={handlePopoverOpen}
-          ref={anchorRef}
-        >
+        <IconButton onClick={handlePopoverOpen} ref={anchorRef}>
           <SvgIcon sx={{ fontSize: 16 }}>
             <ChevronDownIcon />
           </SvgIcon>
@@ -66,5 +53,5 @@ export const TenantSwitch = (props) => {
 
 TenantSwitch.propTypes = {
   // @ts-ignore
-  sx: PropTypes.object
+  sx: PropTypes.object,
 };

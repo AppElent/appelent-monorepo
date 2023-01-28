@@ -1,17 +1,25 @@
-import Head from 'next/head';
-import NextLink from 'next/link';
-import ArrowLeftIcon from '@untitled-ui/icons-react/build/esm/ArrowLeft';
-import Mail01Icon from '@untitled-ui/icons-react/build/esm/Mail01';
-import { Avatar, Box, Container, Link, Stack, SvgIcon, Typography } from '@mui/material';
-import { usePageView } from '../hooks/use-page-view';
-import { paths } from '../paths';
-import { ContactForm } from '../sections/contact/contact-form';
-import { LogoSamsung } from '../components/companies-logos/logo-samsung';
-import { LogoVisma } from '../components/companies-logos/logo-visma';
-import { LogoBolt } from '../components/companies-logos/logo-bolt';
-import { LogoAws } from '../components/companies-logos/logo-aws';
-import { LogoAccenture } from '../components/companies-logos/logo-accenture';
-import { LogoAtt } from '../components/companies-logos/logo-att';
+import Head from "next/head";
+import NextLink from "next/link";
+import ArrowLeftIcon from "@untitled-ui/icons-react/build/esm/ArrowLeft";
+import Mail01Icon from "@untitled-ui/icons-react/build/esm/Mail01";
+import {
+  Avatar,
+  Box,
+  Container,
+  Link,
+  Stack,
+  SvgIcon,
+  Typography,
+} from "@mui/material";
+import { usePageView } from "../hooks/use-page-view";
+import { paths } from "../paths";
+import { ContactForm } from "../sections/contact/contact-form";
+import { LogoSamsung } from "../components/companies-logos/logo-samsung";
+import { LogoVisma } from "../components/companies-logos/logo-visma";
+import { LogoBolt } from "../components/companies-logos/logo-bolt";
+import { LogoAws } from "../components/companies-logos/logo-aws";
+import { LogoAccenture } from "../components/companies-logos/logo-accenture";
+import { LogoAtt } from "../components/companies-logos/logo-att";
 
 const Page = () => {
   usePageView();
@@ -19,33 +27,27 @@ const Page = () => {
   return (
     <>
       <Head>
-        <title>
-          Contact | Devias Kit PRO
-        </title>
+        <title>Contact | Devias Kit PRO</title>
       </Head>
       <Box
         component="main"
         sx={{
-          display: 'grid',
+          display: "grid",
           gridTemplateColumns: {
-            lg: 'repeat(2, 1fr)',
-            xs: 'repeat(1, 1fr)'
+            lg: "repeat(2, 1fr)",
+            xs: "repeat(1, 1fr)",
           },
-          flexGrow: 1
+          flexGrow: 1,
         }}
       >
         <Box
           sx={{
-            backgroundColor: (theme) => theme.palette.mode === 'dark'
-              ? 'neutral.800'
-              : 'neutral.50',
-            py: 8
+            backgroundColor: (theme) =>
+              theme.palette.mode === "dark" ? "neutral.800" : "neutral.50",
+            py: 8,
           }}
         >
-          <Container
-            maxWidth="md"
-            sx={{ pl: { lg: 15 } }}
-          >
+          <Container maxWidth="md" sx={{ pl: { lg: 15 } }}>
             <Stack spacing={3}>
               <div>
                 <Link
@@ -53,22 +55,18 @@ const Page = () => {
                   component={NextLink}
                   href={paths.index}
                   sx={{
-                    alignItems: 'center',
-                    display: 'inline-flex'
+                    alignItems: "center",
+                    display: "inline-flex",
                   }}
                   underline="hover"
                 >
                   <SvgIcon sx={{ mr: 1 }}>
                     <ArrowLeftIcon />
                   </SvgIcon>
-                  <Typography variant="subtitle2">
-                    Home
-                  </Typography>
+                  <Typography variant="subtitle2">Home</Typography>
                 </Link>
               </div>
-              <Typography variant="h3">
-                Contact
-              </Typography>
+              <Typography variant="h3">Contact</Typography>
             </Stack>
             <Stack
               alignItems="center"
@@ -76,13 +74,13 @@ const Page = () => {
               spacing={2}
               sx={{
                 mb: 6,
-                mt: 8
+                mt: 8,
               }}
             >
               <Avatar
                 sx={{
-                  backgroundColor: 'primary.main',
-                  color: 'primary.contrastText'
+                  backgroundColor: "primary.main",
+                  color: "primary.contrastText",
                 }}
                 variant="rounded"
               >
@@ -90,28 +88,15 @@ const Page = () => {
                   <Mail01Icon />
                 </SvgIcon>
               </Avatar>
-              <Typography variant="overline">
-                Contact sales
-              </Typography>
+              <Typography variant="overline">Contact developer</Typography>
             </Stack>
-            <Typography
-              sx={{ mb: 3 }}
-              variant="h1"
-            >
-              Talk to our account expert
+            <Typography sx={{ mb: 3 }} variant="h1">
+              Submit ticket
             </Typography>
-            <Typography
-              sx={{ mb: 3 }}
-              variant="body1"
-            >
-              Have questions about integrating our APIs? Fill out the form
-              and a senior web expert will be in touch shortly.
+            <Typography sx={{ mb: 3 }} variant="body1">
+              Have questions or want to file a report?
             </Typography>
-            <Typography
-              color="primary"
-              sx={{ mb: 3 }}
-              variant="h6"
-            >
+            {/* <Typography color="primary" sx={{ mb: 3 }} variant="h6">
               Join 6,000+ forward-thinking companies:
             </Typography>
             <Stack
@@ -120,10 +105,10 @@ const Page = () => {
               flexWrap="wrap"
               gap={4}
               sx={{
-                color: 'text.primary',
-                '& > *': {
-                  flex: '0 0 auto'
-                }
+                color: "text.primary",
+                "& > *": {
+                  flex: "0 0 auto",
+                },
               }}
             >
               <LogoSamsung />
@@ -132,28 +117,25 @@ const Page = () => {
               <LogoAws />
               <LogoAccenture />
               <LogoAtt />
-            </Stack>
+            </Stack> */}
           </Container>
         </Box>
         <Box
           sx={{
-            backgroundColor: 'background.paper',
+            backgroundColor: "background.paper",
             px: 6,
-            py: 15
+            py: 15,
           }}
         >
           <Container
             maxWidth="md"
             sx={{
               pr: {
-                lg: 15
-              }
+                lg: 15,
+              },
             }}
           >
-            <Typography
-              sx={{ pb: 3 }}
-              variant="h6"
-            >
+            <Typography sx={{ pb: 3 }} variant="h6">
               Fill the form below
             </Typography>
             <ContactForm />

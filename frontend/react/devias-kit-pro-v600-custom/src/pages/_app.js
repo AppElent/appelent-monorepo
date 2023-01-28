@@ -48,8 +48,10 @@ const App = (props) => {
 
   const getLayout = Component.getLayout ?? ((page) => page);
 
-  const [firestoreData, firestoreDataLoading, firestoreDataError] =
-    useCollectionData(collection(db, "dummy"));
+  const [dummyData, dummyDataLoading, dummyDataError] = useCollectionData(
+    collection(db, "dummy")
+  );
+  const dataLoading = dummyDataLoading;
 
   return (
     <CacheProvider value={emotionCache}>
@@ -60,9 +62,16 @@ const App = (props) => {
       <CustomApp
         firebaseData={{
           firestore: {
-            data: firestoreData,
-            loading: firestoreDataLoading,
-            error: firestoreDataError,
+            collections: {
+              dummy: {
+                data: dummyData,
+                loading: dummyDataLoading,
+                error: dummyDataError,
+                ref: collection(db, "dummy"),
+              },
+            },
+            documents: {},
+            queries: {},
           },
         }}
       >
@@ -88,7 +97,8 @@ const App = (props) => {
                         });
 
                         // Prevent guards from redirecting
-                        const showSlashScreen = !auth.isInitialized;
+                        const showSlashScreen =
+                          !auth.isInitialized || dataLoading;
 
                         return (
                           <ThemeProvider theme={theme}>

@@ -1,7 +1,7 @@
-import { useCallback, useState } from 'react';
-import SearchMdIcon from '@untitled-ui/icons-react/build/esm/SearchMd';
-import { IconButton, SvgIcon, Tooltip } from '@mui/material';
-import { SearchDialog } from './search-dialog';
+import { useCallback, useState } from "react";
+import SearchMdIcon from "@untitled-ui/icons-react/build/esm/SearchMd";
+import { IconButton, SvgIcon, Tooltip } from "@mui/material";
+import { SearchDialog } from "./search-dialog";
 
 export const SearchButton = () => {
   const [openDialog, setOpenDialog] = useState(false);
@@ -16,7 +16,7 @@ export const SearchButton = () => {
 
   return (
     <>
-      <Tooltip title="Search">
+      {/* <Tooltip title="Search">
         <IconButton onClick={handleOpen}>
           <SvgIcon>
             <SearchMdIcon />
@@ -26,7 +26,7 @@ export const SearchButton = () => {
       <SearchDialog
         onClose={handleClose}
         open={openDialog}
-      />
+      /> */}
     </>
   );
 };
