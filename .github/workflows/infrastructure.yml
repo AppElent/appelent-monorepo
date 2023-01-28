@@ -7,7 +7,7 @@ on:
     paths:
     - infrastructure/**
   pull_request:
-    types: [opened, synchronize, reopened, closed]
+    types: [opened]
     branches:
       - main
     paths:

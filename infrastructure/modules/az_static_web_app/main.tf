@@ -19,7 +19,7 @@ variable "sku" {
 
 
 variable "custom_domain_name" {
-  description = "Location of Heroku app"
+  description = "Custom domain name"
   default     = ""
 }
 
@@ -31,6 +31,11 @@ variable "dns_zone_name" {
 variable "dns_ttl" {
   description = "TTL for custom DNS record"
   default     = 300
+}
+
+variable "dns_rg" {
+  description = "DNS resource group name"
+  default     = ""
 }
 
 resource "azurerm_static_site" "staticsite" {
@@ -53,7 +58,7 @@ resource "azurerm_dns_cname_record" "cname_record" {
 
   name                = var.custom_domain_name
   zone_name           = var.dns_zone_name
-  resource_group_name = var.resource_group_name
+  resource_group_name = var.dns_rg
   ttl                 = var.dns_ttl
   record              = azurerm_static_site.staticsite.default_host_name
 }

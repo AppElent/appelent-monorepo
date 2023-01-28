@@ -17,7 +17,7 @@ resource "azurerm_key_vault" "acmebot_keyvault" {
 
 module "keyvault_acmebot" {
   source  = "shibayan/keyvault-acmebot/azurerm"
-  version = "~> 2.0"
+  version = "~> 2.1.0"
 
   function_app_name     = "func-appelent-acmebot"
   app_service_plan_name = "asp-appelent-acmebot"

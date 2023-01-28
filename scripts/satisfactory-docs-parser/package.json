@@ -1,0 +1,15 @@
+{
+  "name": "satisfactory-docs-parser",
+  "version": "1.0.0",
+  "description": "Parse docs.json file",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "parse-docs": "parse-docs"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "satisfactory-docs-parser": "^7.0.1"
+  }
+}
