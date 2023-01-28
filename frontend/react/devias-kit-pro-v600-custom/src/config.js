@@ -41,5 +41,5 @@ export const siteSettings = {
   version: "v1.0.0",
   copyright: "AppElent",
   url: "https://url.appelent.com",
-  loginRedirect: paths.dashboard,
+  loginRedirect: paths.app.index,
 };

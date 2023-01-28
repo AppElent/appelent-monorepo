@@ -31,6 +31,9 @@ export const paths = {
     register: "/auth/register",
     reset: "/auth/forgot-password",
   },
+  app: {
+    index: "/app",
+  },
   authDemo: {
     forgotPassword: {
       classic: "/auth-demo/forgot-password/classic",
