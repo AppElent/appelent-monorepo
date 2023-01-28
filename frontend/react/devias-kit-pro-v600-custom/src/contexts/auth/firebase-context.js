@@ -1,10 +1,4 @@
-import {
-  createContext,
-  useCallback,
-  useEffect,
-  useReducer,
-  useState,
-} from "react";
+import { createContext, useCallback, useEffect, useReducer } from "react";
 import PropTypes from "prop-types";
 import {
   createUserWithEmailAndPassword,
@@ -25,6 +19,7 @@ const auth = getAuth(firebaseApp);
 var ActionType;
 (function (ActionType) {
   ActionType["AUTH_STATE_CHANGED"] = "AUTH_STATE_CHANGED";
+  ActionType["USER_CHANGED"] = "USER_CHANGED";
 })(ActionType || (ActionType = {}));
 
 const initialState = {
@@ -43,6 +38,17 @@ const reducer = (state, action) => {
       isInitialized: true,
       user,
     };
+  } else if (action.type === "USER_CHANGED") {
+    const { user } = action.payload;
+    console.log(user);
+
+    return {
+      ...state,
+      user: {
+        ...state.user,
+        ...user,
+      },
+    };
   }
 
   return state;
@@ -60,10 +66,23 @@ export const AuthContext = createContext({
 export const AuthProvider = (props) => {
   const { children } = props;
   const [state, dispatch] = useReducer(reducer, initialState);
-  const [userState, setUserState] = useState({
-    name: undefined,
-    email: undefined,
-  });
+
+  const changeUserSettings = useCallback(
+    (settings) => {
+      console.log(settings, state);
+      dispatch({
+        type: ActionType.USER_CHANGED,
+        payload: {
+          ...state,
+          user: {
+            ...state.user,
+            name: settings.displayName,
+          },
+        },
+      });
+    },
+    [dispatch]
+  );
 
   const handleAuthStateChanged = useCallback(
     (user) => {
@@ -80,9 +99,7 @@ export const AuthProvider = (props) => {
               email: user.email || "user@demo.com",
               name: user.displayName || "Unknown user",
               plan: "Premium",
-              update: updateUser(user),
-              state: userState,
-              setUserState,
+              update: updateUser(user, changeUserSettings),
               raw: user,
             },
           },

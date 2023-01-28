@@ -36,7 +36,7 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/deploym
 Aangepast:
 
 - firebase config toegevoegd voor auth
-- geinstalleerde packages:
+- geinstalleerde packages: react-firebase-hooks, react-query
 - geinstalleerde devpackages: prettier
 - raw userdata aan useauth toegevoegd in src/contexts/auth/firebase-context
 - GTM ID
@@ -49,4 +49,5 @@ Aangepast:
 - utils: user
 - i18n: nl.js toevoegen, i18n.js (init), layouts/dashboard/language-switch/language-popover en index.js (language options) en flag-nl.webp
 - Profile: naam/email, billing weg, profile weg (account popover useMockedUser)
+- firebase hooks:
   TODO: language, profile, account, notifications

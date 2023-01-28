@@ -5,79 +5,81 @@ import {
   Link,
   Stack,
   Typography,
-  Unstable_Grid2 as Grid
-} from '@mui/material';
-import { Logo } from '../../components/logo';
-import { paths } from '../../paths';
-import NextLink from 'next/link';
+  Unstable_Grid2 as Grid,
+} from "@mui/material";
+import { Logo } from "../../components/logo";
+import { paths } from "../../paths";
+import NextLink from "next/link";
+import { siteSettings } from "config";
 
 const sections = [
+  // {
+  //   title: "Menu",
+  //   items: [
+  //     {
+  //       title: "Browse Components",
+  //       path: paths.components.index,
+  //     },
+  //     {
+  //       title: "Documentation",
+  //       path: paths.docs.welcome,
+  //     },
+  //   ],
+  // },
   {
-    title: 'Menu',
+    title: "Legal",
     items: [
       {
-        title: 'Browse Components',
-        path: paths.components.index
+        title: "Terms & Conditions",
+        path: paths.general.terms,
       },
       {
-        title: 'Documentation',
-        path: paths.docs.welcome
-      }
-    ]
+        title: "Privacy Policy",
+        path: paths.general.privacy,
+      },
+      // {
+      //   title: "License",
+      //   path: "#",
+      // },
+      // {
+      //   title: "Contact",
+      //   path: "#",
+      // },
+    ],
   },
-  {
-    title: 'Legal',
-    items: [
-      {
-        title: 'Terms & Conditions',
-        path: '#'
-      },
-      {
-        title: 'License',
-        path: '#'
-      },
-      {
-        title: 'Contact',
-        path: '#'
-      }
-    ]
-  },
-  {
-    title: 'Social',
-    items: [
-      {
-        title: 'Instagram',
-        path: '#'
-      },
-      {
-        title: 'LinkedIn',
-        path: '#'
-      }
-    ]
-  }
+  // {
+  //   title: "Social",
+  //   items: [
+  //     // {
+  //     //   title: "Instagram",
+  //     //   path: "#",
+  //     // },
+  //     // {
+  //     //   title: "LinkedIn",
+  //     //   path: "https://www.linkedin.com/in/ericjansen1/",
+  //     // },
+  //   ],
+  // },
 ];
 
 export const Footer = (props) => (
   <Box
     sx={{
-      backgroundColor: (theme) => theme.palette.mode === 'dark'
-        ? 'neutral.800'
-        : 'neutral.50',
-      borderTopColor: 'divider',
-      borderTopStyle: 'solid',
+      backgroundColor: (theme) =>
+        theme.palette.mode === "dark" ? "neutral.800" : "neutral.50",
+      borderTopColor: "divider",
+      borderTopStyle: "solid",
       borderTopWidth: 1,
       pb: 6,
       pt: {
         md: 15,
-        xs: 6
-      }
+        xs: 6,
+      },
     }}
-    {...props}>
+    {...props}
+  >
     <Container maxWidth="lg">
-      <Grid
-        container
-        spacing={3}
-      >
+      <Grid container spacing={3}>
         <Grid
           xs={12}
           sm={4}
@@ -85,8 +87,8 @@ export const Footer = (props) => (
           sx={{
             order: {
               xs: 4,
-              md: 1
-            }
+              md: 1,
+            },
           }}
         >
           <Stack spacing={1}>
@@ -97,38 +99,35 @@ export const Footer = (props) => (
               display="inline-flex"
               href={paths.index}
               spacing={1}
-              sx={{ textDecoration: 'none' }}
+              sx={{ textDecoration: "none" }}
             >
               <Box
                 sx={{
-                  display: 'inline-flex',
+                  display: "inline-flex",
                   height: 24,
-                  width: 24
+                  width: 24,
                 }}
               >
                 <Logo />
               </Box>
               <Box
                 sx={{
-                  color: 'text.primary',
-                  fontFamily: '\'Plus Jakarta Sans\', sans-serif',
+                  color: "text.primary",
+                  fontFamily: "'Plus Jakarta Sans', sans-serif",
                   fontSize: 14,
                   fontWeight: 800,
-                  letterSpacing: '0.3px',
+                  letterSpacing: "0.3px",
                   lineHeight: 2.5,
-                  '& span': {
-                    color: 'primary.main'
-                  }
+                  "& span": {
+                    color: "primary.main",
+                  },
                 }}
               >
-                Devias Kit <span>PRO</span>
+                {siteSettings.title} <span>{siteSettings.plan}</span>
               </Box>
             </Stack>
-            <Typography
-              color="text.secondary"
-              variant="caption"
-            >
-              © 2022 Devias IO
+            <Typography color="text.secondary" variant="caption">
+              © {new Date().getFullYear()} {siteSettings.copyright}
             </Typography>
           </Stack>
         </Grid>
@@ -141,23 +140,20 @@ export const Footer = (props) => (
             sx={{
               order: {
                 md: index + 2,
-                xs: index + 1
-              }
+                xs: index + 1,
+              },
             }}
           >
-            <Typography
-              color="text.secondary"
-              variant="overline"
-            >
+            <Typography color="text.secondary" variant="overline">
               {section.title}
             </Typography>
             <Stack
               component="ul"
               spacing={1}
               sx={{
-                listStyle: 'none',
+                listStyle: "none",
                 m: 0,
-                p: 0
+                p: 0,
               }}
             >
               {section.items.map((item) => (
@@ -169,9 +165,9 @@ export const Footer = (props) => (
                 >
                   <Box
                     sx={{
-                      backgroundColor: 'primary.main',
+                      backgroundColor: "primary.main",
                       height: 2,
-                      width: 12
+                      width: 12,
                     }}
                   />
                   <Link
@@ -188,10 +184,7 @@ export const Footer = (props) => (
         ))}
       </Grid>
       <Divider sx={{ my: 6 }} />
-      <Typography
-        color="text.secondary"
-        variant="caption"
-      >
+      <Typography color="text.secondary" variant="caption">
         All Rights Reserved.
       </Typography>
     </Container>

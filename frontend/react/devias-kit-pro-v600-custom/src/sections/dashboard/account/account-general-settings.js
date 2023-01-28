@@ -1,3 +1,4 @@
+import { useCallback, useState } from "react";
 import PropTypes from "prop-types";
 import Camera01Icon from "@untitled-ui/icons-react/build/esm/Camera01";
 import User01Icon from "@untitled-ui/icons-react/build/esm/User01";
@@ -42,6 +43,11 @@ export const AccountGeneralSettings = (props) => {
       }
     },
   });
+  const [isEditing, setIsEditing] = useState(false);
+
+  const handleEdit = useCallback(() => {
+    setIsEditing((prevState) => !prevState);
+  }, []);
 
   return (
     <Stack spacing={4} {...props}>
@@ -142,7 +148,7 @@ export const AccountGeneralSettings = (props) => {
                 <Stack alignItems="center" direction="row" spacing={2}>
                   <TextField
                     defaultValue={email}
-                    disabled
+                    disabled={!isEditing}
                     label="Email Address"
                     required
                     sx={{
@@ -152,9 +158,9 @@ export const AccountGeneralSettings = (props) => {
                       },
                     }}
                   />
-                  {/* <Button color="inherit" size="small">
-                    Edit
-                  </Button> */}
+                  <Button onClick={handleEdit}>
+                    {isEditing ? "Save" : "Edit"}
+                  </Button>
                 </Stack>
               </Stack>
             </Grid>

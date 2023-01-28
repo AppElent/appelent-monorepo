@@ -1,8 +1,9 @@
-import { useCallback, useEffect, useState } from 'react';
-import { useRouter } from 'next/navigation';
-import PropTypes from 'prop-types';
-import { useAuth } from '../hooks/use-auth';
-import { paths } from '../paths';
+import { useCallback, useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
+import PropTypes from "prop-types";
+import { useAuth } from "../hooks/use-auth";
+import { paths } from "../paths";
+import { siteSettings } from "config";
 
 export const GuestGuard = (props) => {
   const { children } = props;
@@ -12,18 +13,20 @@ export const GuestGuard = (props) => {
 
   const check = useCallback(() => {
     if (isAuthenticated) {
-      router.replace(paths.dashboard.index);
+      router.replace(siteSettings.loginRedirect);
     } else {
       setChecked(true);
     }
   }, [isAuthenticated, router]);
 
   // Only check on mount, this allows us to redirect the user manually when auth state changes
-  useEffect(() => {
+  useEffect(
+    () => {
       check();
     },
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    []);
+    []
+  );
 
   if (!checked) {
     return null;
@@ -36,5 +39,5 @@ export const GuestGuard = (props) => {
 };
 
 GuestGuard.propTypes = {
-  children: PropTypes.node
+  children: PropTypes.node,
 };
