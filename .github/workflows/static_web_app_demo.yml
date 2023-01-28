@@ -1,4 +1,4 @@
-name: Azure Static Web App Wappiemeter
+name: Azure Static Web App Demo
 
 on:
   workflow_dispatch:
@@ -8,7 +8,7 @@ on:
       - main
       - develop
     paths:
-    - frontend/react/wappiemeter/** #deze moet aangepast worden
+    - frontend/react/devias-kit-pro-v600-custom/** #deze moet aangepast worden
   pull_request:
     types: [opened, synchronize, reopened, closed]
     branches:
@@ -17,7 +17,7 @@ on:
     - frontend/react/wappiemeter/**
 
 env:
-  STATICWEBAPPNAME: "swa-appelent-wappiemeter" #deze moet aangepast worden
+  STATICWEBAPPNAME: "swa-appelent-demo" #deze moet aangepast worden
 
 jobs:
   build_and_deploy_job:
