@@ -14,13 +14,16 @@ on:
     branches:
       - main
     paths:
-    - frontend/react/wappiemeter/**
+    - frontend/react/devias-kit-pro-v600-custom/** #deze moet aangepast worden
 
 env:
   STATICWEBAPPNAME: "swa-appelent-demo" #deze moet aangepast worden
 
 jobs:
   build_and_deploy_job:
+    defaults:
+      run:
+        working-directory: /frontend/react/devias-kit-pro-v600-custom #deze moet aangepast worden
     if: github.event_name == 'push' || (github.event_name == 'pull_request' && github.event.action != 'closed')
     runs-on: ubuntu-latest
     name: Build and Deploy Job
