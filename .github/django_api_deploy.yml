@@ -42,6 +42,7 @@ jobs:
   deploy:
     uses: ./.github/workflows/_kubernetes_helm_deploy.yml
     needs: [build, prepare_deploy]
+    if: always()
     with:
       working_dir: ./django/api/deployment
       values_file: ${{ needs.prepare_deploy.outputs.values_file }}
