@@ -1,12 +1,12 @@
 name: Django API Deploy
 
 on:
-  push:
-    branches:
-      - main
-      - develop
-    paths:
-    - django/api/** 
+  # push:
+  #   branches:
+  #     - main
+  #     - develop
+    # paths:
+    # - django/api/** 
 
 concurrency:
   group: ${{ github.workflow }} # ${{ github.head_ref || github.ref_name }} 

@@ -1,0 +1,26 @@
+name: Django API Deploy
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+    - django/api/** 
+
+concurrency:
+  group: ${{ github.workflow }} # ${{ github.head_ref || github.ref_name }} 
+
+jobs:
+  build:
+    uses: ./.github/workflows/_docker_build.yml
+    with:
+      working_dir: ./django/api
+      repository_name: django-api
+    secrets: inherit
+
+  deploy:
+    uses: ./.github/workflows/djanngo_api_deploy.yml
+    needs: [build, prepare_deploy]
+    with:
+      environment: development
+    secrets: inherit
