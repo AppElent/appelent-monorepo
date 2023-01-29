@@ -1,4 +1,4 @@
-name: NextJS App Demo Build
+name: Django API Build
 
 on:
   workflow_dispatch:
@@ -7,7 +7,7 @@ on:
     branches:
       - main
     paths:
-    - frontend/react/devias-kit-pro-v600-custom/** 
+    - django/api/** 
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
@@ -16,13 +16,13 @@ jobs:
   build:
     uses: ./.github/workflows/_docker_build.yml
     with:
-      working_dir: ./frontend/react/devias-kit-pro-v600-custom
+      working_dir: ./django/api
       repository_name: demo
     secrets: inherit
 
   deploy:
-    uses: ./.github/workflows/nextjs_demo_deploy.yml
-    needs: [build, prepare_deploy]
+    uses: ./.github/workflows/django_api_deploy.yml
+    needs: [build]
     with:
       environment: development
     secrets: inherit
