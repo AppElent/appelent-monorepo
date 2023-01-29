@@ -21,6 +21,8 @@ concurrency:
 jobs:
   prepare_build: 
     runs-on: ubuntu-latest
+    outputs:
+      deploy_dev: ${{ steps.output.outputs.DEPLOY_DEV }}
     steps:
       - name: Dummy step
         run: env
@@ -40,6 +42,15 @@ jobs:
         with:
           name: env-local
           path: ./.env.local
+      - name: Set output vars
+        id: output
+        run: |
+          if [[ "${{inputs.deploy_dev}}" == "true" || ${{github.event_name}} != 'workflow_dispatch' ]]; then
+              echo "DEPLOY_DEV=true" >> $GITHUB_OUTPUT
+          else
+              echo "DEPLOY_DEV=false" >> $GITHUB_OUTPUT
+          fi
+
 
   build:
     uses: ./.github/workflows/_docker_build.yml
@@ -53,6 +64,7 @@ jobs:
 
   deploy:
     uses: ./.github/workflows/nextjs_demo_deploy.yml
+    if: ${{ needs.prepare_build.outputs.DEPLOY_DEV == 'true' }}
     needs: [build]
     with:
       environment: development
