@@ -25,4 +25,5 @@ jobs:
     needs: [build]
     with:
       environment: development
+      image_tag: latest
     secrets: inherit

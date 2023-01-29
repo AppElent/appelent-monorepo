@@ -13,7 +13,6 @@ on:
         type: string
         description: Image tag
         default: latest
-        required: true
 
   workflow_call:
     inputs:
@@ -24,7 +23,6 @@ on:
         type: string
         description: Image tag
         default: latest
-        required: true
 
 
 concurrency:
