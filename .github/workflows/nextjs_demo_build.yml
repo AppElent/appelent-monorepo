@@ -17,7 +17,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Dummy step
-        run: ls
+        run: env
       # - uses: Azure/login@v1
       #   with:
       #     creds: ${{ secrets.AZURE_CREDENTIALS }}
@@ -26,14 +26,14 @@ jobs:
       #     keyvault: "kv-appelent-shared"
       #     secrets: 'containerPassword, containerUsername'
       #   id: myGetSecretAction
-      # - name: Create .env.local file
-      #   run: |
-      #     touch .env.local
-      #     echo NEXT_PUBLIC_FB_CLIENT_API_KEY=${{ secrets.NEXT_PUBLIC_FB_CLIENT_API_KEY }} >> .env.local
-      # - uses: actions/upload-artifact@v3
-      #   with:
-      #     name: env-local
-      #     path: ./.env.local
+      - name: Create .env.local file
+        run: |
+          touch .env.local
+          echo NEXT_PUBLIC_GITHUB_REF=${{ github.ref }} >> .env.local
+      - uses: actions/upload-artifact@v3
+        with:
+          name: env-local
+          path: ./.env.local
 
   build:
     uses: ./.github/workflows/_docker_build.yml
@@ -41,8 +41,8 @@ jobs:
     with:
       working_dir: ./frontend/react/devias-kit-pro-v600-custom
       repository_name: demo
-      # artifact_name: env-local
-      # artifact_path: ./frontend/react/devias-kit-pro-v600-custom
+      artifact_name: env-local
+      artifact_path: ./frontend/react/devias-kit-pro-v600-custom
     secrets: inherit
 
   deploy:
