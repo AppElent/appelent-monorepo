@@ -1,0 +1,52 @@
+name: NextJS App Demo Deploy
+
+on:
+  workflow_dispatch:
+    inputs:
+      environment:
+        type: choice
+        description: Select environment to deploy
+        options:
+          - development
+          - production
+
+  workflow_call:
+    inputs:
+      environment:
+        description: Environment to deploy
+        type: string
+
+
+concurrency:
+  group: ${{ github.workflow }} # ${{ github.head_ref || github.ref_name }} 
+
+jobs:
+  prepare_deploy:
+    runs-on: ubuntu-latest
+    outputs:
+      k8s_namespace: ${{ steps.envs.outputs.K8S_NAMESPACE }}
+      values_file: ${{ steps.envs.outputs.VALUES_FILE }}
+    steps:
+      - name: Set environment for branch
+        id: envs
+        run: |
+          if [[ "${{inputs.environment}}" == "production" ]]; then
+              echo "K8S_NAMESPACE=nextjs-demo-prd" >> $GITHUB_OUTPUT
+              echo "VALUES_FILE=./values_prd.yaml" >> $GITHUB_OUTPUT
+          fi
+
+          if [[ "${{inputs.environment}}" == "development" ]]; then
+            echo "K8S_NAMESPACE=nextjs-demo-dev" >> $GITHUB_OUTPUT
+            echo "VALUES_FILE=./values_dev.yaml" >> $GITHUB_OUTPUT
+          fi
+
+  deploy:
+    uses: ./.github/workflows/_kubernetes_helm_deploy.yml
+    needs: [prepare_deploy]
+    with:
+      working_dir: ./frontend/react/devias-kit-pro-v600-custom/deployment
+      values_file: ${{ needs.prepare_deploy.outputs.values_file }}
+      release_name: nextjs-demo
+      namespace: ${{ needs.prepare_deploy.outputs.k8s_namespace }}
+      helm_name: ./nextjs-app
+    secrets: inherit
