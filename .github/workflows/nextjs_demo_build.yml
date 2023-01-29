@@ -10,7 +10,7 @@ on:
     - frontend/react/devias-kit-pro-v600-custom/** 
 
 concurrency:
-  group: ${{ github.workflow }} # ${{ github.head_ref || github.ref_name }} 
+  group: ${{ github.workflow }}-${{ github.ref }}
 
 jobs:
   build:
@@ -41,7 +41,7 @@ jobs:
 
   deploy:
     uses: ./.github/workflows/nextjs_demo_deploy.yml
-    needs: [build]
+    needs: [build, prepare_deploy]
     with:
       environment: development
     secrets: inherit
