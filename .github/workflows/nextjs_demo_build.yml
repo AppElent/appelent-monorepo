@@ -2,7 +2,13 @@ name: NextJS App Demo Build
 
 on:
   workflow_dispatch:
-    
+    inputs:
+      deploy_dev:
+        type: boolean
+        description: Deploy to development environment
+      deploy_prd:
+        type: boolean
+        description: Deploy to production environment
   push:
     branches:
       - main
@@ -50,5 +56,14 @@ jobs:
     needs: [build]
     with:
       environment: development
+      image_tag: latest
+    secrets: inherit
+
+  deploy_prod:
+    uses: ./.github/workflows/nextjs_demo_deploy.yml
+    if: ${{inputs.deploy_prd == true}}
+    needs: [build]
+    with:
+      environment: production
       image_tag: latest
     secrets: inherit

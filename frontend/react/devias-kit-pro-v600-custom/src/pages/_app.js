@@ -60,8 +60,7 @@ const App = (props) => {
   // );
   // const dataLoading = dummyDataLoading;
   // console.log(dummyData, dummyDataLoading, dummyDataError);
-  console.log(process.env.NEXT_PUBLIC_GITHUB_SHA);
-  console.log(process.env);
+  console.log("Environment variables", process.env.NEXT_PUBLIC_GITHUB_SHA);
 
   // {
   //   firestore: {
