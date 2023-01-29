@@ -2,7 +2,7 @@ nameOverride: nextjs-demo
 
 image:
   repository: acrappelent.azurecr.io/demo
-  pullPolicy: IfNotPresent
+  pullPolicy: Always
   # Overrides the image tag whose default is the chart appVersion.
   tag: "latest"
 
