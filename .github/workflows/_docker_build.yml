@@ -54,7 +54,7 @@ jobs:
         with:
           name: ${{inputs.artifact_name}}
       
-      - name: templs
+      - name: LS
         run: ls -a
 
       - name: Prepare environment variables
@@ -85,6 +85,6 @@ jobs:
           username: ${{ env.ARM_CLIENT_ID }}
           password: ${{ env.ARM_CLIENT_SECRET }}
 
-      # - run: |
-      #     docker build . -t ${{ env.loginServer }}/${{ inputs.repository_name }}:${{ github.sha }} -t ${{ env.loginServer }}/${{ inputs.repository_name }}:latest
-      #     docker image push --all-tags ${{ env.loginServer }}/${{ inputs.repository_name }}
+      - run: |
+          docker build . -t ${{ env.loginServer }}/${{ inputs.repository_name }}:${{ github.sha }} -t ${{ env.loginServer }}/${{ inputs.repository_name }}:latest
+          docker image push --all-tags ${{ env.loginServer }}/${{ inputs.repository_name }}
