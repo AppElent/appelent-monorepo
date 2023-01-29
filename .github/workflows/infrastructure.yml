@@ -1,11 +1,11 @@
 name: Terraform Infrastructure Build Workflow
 
 on:
-  push:
-    branches:
-      - "main"
-    paths:
-    - infrastructure/**
+  # push:
+  #   branches:
+  #     - "main"
+  #   paths:
+  #   - infrastructure/**
   pull_request:
     types: [opened]
     branches:

@@ -49,4 +49,5 @@ jobs:
       release_name: nextjs-demo
       namespace: ${{ needs.prepare_deploy.outputs.k8s_namespace }}
       helm_name: ./nextjs-app
+      image_tag: latest
     secrets: inherit
