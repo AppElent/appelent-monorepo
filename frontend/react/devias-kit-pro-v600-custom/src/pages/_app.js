@@ -52,6 +52,7 @@ const App = (props) => {
     collection(db, "dummy")
   );
   const dataLoading = dummyDataLoading;
+  console.log(dummyData, dummyDataLoading, dummyDataError);
 
   return (
     <CacheProvider value={emotionCache}>

@@ -1,0 +1,47 @@
+name: NextJS App Demo Build
+
+on:
+  workflow_dispatch:
+    
+  push:
+    branches:
+      - main
+    paths:
+    - frontend/react/devias-kit-pro-v600-custom/** 
+
+concurrency:
+  group: ${{ github.workflow }} # ${{ github.head_ref || github.ref_name }} 
+
+jobs:
+  build:
+    uses: ./.github/workflows/_docker_build.yml
+    with:
+      working_dir: ./frontend/react/devias-kit-pro-v600-custom
+      repository_name: demo
+    secrets: inherit
+
+  prepare_deploy:
+    runs-on: ubuntu-latest
+    outputs:
+      k8s_namespace: ${{ steps.envs.outputs.K8S_NAMESPACE }}
+      values_file: ${{ steps.envs.outputs.VALUES_FILE }}
+    steps:
+      - name: Set environment for branch
+        id: envs
+        run: |
+          if [[ "${{github.base_ref}}" == "main" || "${{github.ref}}" == "refs/heads/main" ]]; then
+              echo "K8S_NAMESPACE=nextjs-demo-prd" >> $GITHUB_OUTPUT
+              echo "VALUES_FILE=./values_prd.yaml" >> $GITHUB_OUTPUT
+          fi
+
+          if [[ "${{github.base_ref}}" == "develop" || "${{github.ref}}" == "refs/heads/develop" ]]; then
+            echo "K8S_NAMESPACE=nextjs-demo-dev" >> $GITHUB_OUTPUT
+            echo "VALUES_FILE=./values_dev.yaml" >> $GITHUB_OUTPUT
+          fi
+
+  deploy:
+    uses: ./.github/workflows/nextjs_demo_deploy.yml
+    needs: [build]
+    with:
+      environment: development
+    secrets: inherit

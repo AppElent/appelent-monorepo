@@ -33,6 +33,8 @@ export const paths = {
   },
   app: {
     index: "/app",
+    account: "/app/account",
+    list: "/app/list",
   },
   authDemo: {
     forgotPassword: {

@@ -1,9 +1,15 @@
-import { createContext, useCallback, useEffect, useMemo, useState } from 'react';
-import PropTypes from 'prop-types';
+import {
+  createContext,
+  useCallback,
+  useEffect,
+  useMemo,
+  useState,
+} from "react";
+import PropTypes from "prop-types";
 // @ts-ignore
-import isEqual from 'lodash.isequal';
+import isEqual from "lodash.isequal";
 
-const STORAGE_KEY = 'app.settings';
+const STORAGE_KEY = "app.settings";
 
 const storage = globalThis.localStorage;
 
@@ -34,29 +40,29 @@ const storeSettings = (value) => {
 };
 
 const initialSettings = {
-  colorPreset: 'indigo',
-  contrast: 'normal',
-  direction: 'ltr',
-  layout: 'vertical',
-  navColor: 'evident',
-  paletteMode: 'light',
+  colorPreset: "indigo",
+  contrast: "normal",
+  direction: "ltr",
+  layout: "vertical",
+  navColor: "evident",
+  paletteMode: "dark",
   responsiveFontSizes: true,
-  stretch: false
+  stretch: false,
 };
 
 const initialState = {
   ...initialSettings,
   isInitialized: false,
-  openDrawer: false
+  openDrawer: false,
 };
 
 export const SettingsContext = createContext({
   ...initialState,
-  handleDrawerClose: () => { },
-  handleDrawerOpen: () => { },
-  handleReset: () => { },
-  handleUpdate: () => { },
-  isCustom: false
+  handleDrawerClose: () => {},
+  handleDrawerOpen: () => {},
+  handleReset: () => {},
+  handleUpdate: () => {},
+  isCustom: false,
 });
 
 export const SettingsProvider = (props) => {
@@ -70,7 +76,7 @@ export const SettingsProvider = (props) => {
       setState((prevState) => ({
         ...prevState,
         ...restored,
-        isInitialized: true
+        isInitialized: true,
       }));
     }
   }, []);
@@ -79,7 +85,7 @@ export const SettingsProvider = (props) => {
     deleteSettings();
     setState((prevState) => ({
       ...prevState,
-      ...initialSettings
+      ...initialSettings,
     }));
   }, []);
 
@@ -94,12 +100,12 @@ export const SettingsProvider = (props) => {
         paletteMode: prevState.paletteMode,
         responsiveFontSizes: prevState.responsiveFontSizes,
         stretch: prevState.stretch,
-        ...settings
+        ...settings,
       });
 
       return {
         ...prevState,
-        ...settings
+        ...settings,
       };
     });
   }, []);
@@ -107,14 +113,14 @@ export const SettingsProvider = (props) => {
   const handleDrawerOpen = useCallback(() => {
     setState((prevState) => ({
       ...prevState,
-      openDrawer: true
+      openDrawer: true,
     }));
   }, []);
 
   const handleDrawerClose = useCallback(() => {
     setState((prevState) => ({
       ...prevState,
-      openDrawer: false
+      openDrawer: false,
     }));
   }, []);
 
@@ -127,7 +133,7 @@ export const SettingsProvider = (props) => {
       navColor: state.navColor,
       paletteMode: state.paletteMode,
       responsiveFontSizes: state.responsiveFontSizes,
-      stretch: state.stretch
+      stretch: state.stretch,
     });
   }, [state]);
 
@@ -139,7 +145,7 @@ export const SettingsProvider = (props) => {
         handleDrawerOpen,
         handleReset,
         handleUpdate,
-        isCustom
+        isCustom,
       }}
     >
       {children}
@@ -148,7 +154,7 @@ export const SettingsProvider = (props) => {
 };
 
 SettingsProvider.propTypes = {
-  children: PropTypes.node.isRequired
+  children: PropTypes.node.isRequired,
 };
 
 export const SettingsConsumer = SettingsContext.Consumer;

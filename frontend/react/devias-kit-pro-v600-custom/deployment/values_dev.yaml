@@ -1,0 +1,28 @@
+image:
+  repository: acrappelent.azurecr.io/demo
+  pullPolicy: IfNotPresent
+  # Overrides the image tag whose default is the chart appVersion.
+  tag: "latest"
+
+env:
+  normal: 
+    test1: value1
+    test2: value2
+  secret:
+    password1: test
+
+ingress:
+  annotations:
+    {
+      nginx.ingress.kubernetes.io/use-regex: "true",
+      cert-manager.io/cluster-issuer: letsencrypt-stg,
+    }
+  hosts:
+    - host: dev.demo.appelent.com
+      paths:
+        - path: /(.*)
+          pathType: ImplementationSpecific
+  tls:
+    - hosts:
+        - dev.demo.appelent.com
+      secretName: tls-secret-demo
