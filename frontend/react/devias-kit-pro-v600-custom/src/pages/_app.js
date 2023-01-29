@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import Head from "next/head";
 import { Provider as ReduxProvider } from "react-redux";
 import { CacheProvider } from "@emotion/react";
@@ -30,8 +30,7 @@ import { SettingsButton } from "../components/settings-button";
 import { SettingsDrawer } from "../components/settings-drawer";
 
 import CustomApp from "modules/custom-app";
-import { collection } from "firebase/firestore";
-import { useCollectionData } from "react-firebase-hooks/firestore";
+import { firebaseInitialData } from "hooks/use-global-data";
 
 const clientSideEmotionCache = createEmotionCache();
 
@@ -43,18 +42,41 @@ const useAnalytics = () => {
 
 const App = (props) => {
   const { Component, emotionCache = clientSideEmotionCache, pageProps } = props;
+  const [firebaseData, setFirebaseData] = useState(firebaseInitialData);
+
+  useEffect(() => {
+    setFirebaseData((prevState) => ({
+      ...prevState,
+      setData: setFirebaseData,
+    }));
+  }, []);
 
   useAnalytics();
 
   const getLayout = Component.getLayout ?? ((page) => page);
 
-  const [dummyData, dummyDataLoading, dummyDataError] = useCollectionData(
-    collection(db, "dummy")
-  );
-  const dataLoading = dummyDataLoading;
-  console.log(dummyData, dummyDataLoading, dummyDataError);
-  console.log(process.env.NEXT_PUBLIC_GITHUB_REF);
+  // const [dummyData, dummyDataLoading, dummyDataError] = useCollectionData(
+  //   collection(db, "dummy")
+  // );
+  // const dataLoading = dummyDataLoading;
+  // console.log(dummyData, dummyDataLoading, dummyDataError);
+  console.log(process.env.NEXT_PUBLIC_GITHUB_SHA);
   console.log(process.env);
+
+  // {
+  //   firestore: {
+  //     collections: {
+  //       dummy: {
+  //         data: dummyData,
+  //         loading: dummyDataLoading,
+  //         error: dummyDataError,
+  //         ref: collection(db, "dummy"),
+  //       },
+  //     },
+  //     documents: {},
+  //     queries: {},
+  //   },
+  // }
 
   return (
     <CacheProvider value={emotionCache}>
@@ -62,22 +84,7 @@ const App = (props) => {
         <title>{siteSettings.title}</title>
         <meta name="viewport" content="initial-scale=1, width=device-width" />
       </Head>
-      <CustomApp
-        firebaseData={{
-          firestore: {
-            collections: {
-              dummy: {
-                data: dummyData,
-                loading: dummyDataLoading,
-                error: dummyDataError,
-                ref: collection(db, "dummy"),
-              },
-            },
-            documents: {},
-            queries: {},
-          },
-        }}
-      >
+      <CustomApp firebaseData={firebaseData}>
         <ReduxProvider store={store}>
           <LocalizationProvider dateAdapter={AdapterDateFns}>
             <AuthProvider>
@@ -100,8 +107,7 @@ const App = (props) => {
                         });
 
                         // Prevent guards from redirecting
-                        const showSlashScreen =
-                          !auth.isInitialized || dataLoading;
+                        const showSlashScreen = !auth.isInitialized;
 
                         return (
                           <ThemeProvider theme={theme}>
