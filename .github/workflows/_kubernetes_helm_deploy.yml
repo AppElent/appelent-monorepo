@@ -66,6 +66,9 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
+      - name: Environment variables
+        run: env
+
       - uses: azure/login@v1
         with:
           creds: ${{ secrets.AZURE_CREDENTIALS }}

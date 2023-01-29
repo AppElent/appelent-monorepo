@@ -62,7 +62,7 @@ jobs:
       artifact_path: ./frontend/react/devias-kit-pro-v600-custom
     secrets: inherit
 
-  deploy:
+  deploy_dev:
     uses: ./.github/workflows/nextjs_demo_deploy.yml
     if: ${{ needs.prepare_build.outputs.deploy_dev == 'true' }}
     needs: [build]
