@@ -64,7 +64,7 @@ jobs:
 
   deploy:
     uses: ./.github/workflows/nextjs_demo_deploy.yml
-    if: ${{ needs.prepare_build.outputs.DEPLOY_DEV == 'true' }}
+    if: ${{ needs.prepare_build.outputs.deploy_dev == 'true' }}
     needs: [build]
     with:
       environment: development
