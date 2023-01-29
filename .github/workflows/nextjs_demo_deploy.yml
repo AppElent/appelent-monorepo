@@ -25,9 +25,6 @@ on:
         default: latest
 
 
-concurrency:
-  group: ${{ github.workflow }}-${{ github.ref }}
-
 jobs:
   prepare_deploy:
     runs-on: ubuntu-latest
