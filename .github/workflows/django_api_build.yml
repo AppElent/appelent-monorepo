@@ -41,9 +41,18 @@ jobs:
       repository_name: demo
     secrets: inherit
 
-  deploy:
+  deploy_development:
     uses: ./.github/workflows/django_api_deploy.yml
+    if: ${{ needs.prepare_build.outputs.deploy_dev == 'true' }}
     needs: [build]
     with:
       environment: development
+    secrets: inherit
+
+  deploy_production:
+    uses: ./.github/workflows/django_api_deploy.yml
+    if: ${{inputs.deploy_prd == true}}
+    needs: [build]
+    with:
+      environment: production
     secrets: inherit
