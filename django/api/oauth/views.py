@@ -8,6 +8,7 @@ import urllib
 from requests.models import PreparedRequest
 import os
 import json
+import datetime
 
 #from ..serializers import OAuth2TokenSerializer
 #from ..models import OAuth2Token, Oauth2State
@@ -42,6 +43,14 @@ def get_provider(name):
 
 def get_cache_key(key):
     return 'oauth:' + key
+
+def create_token(request, token, name):
+    tokenResult = {
+        'token': token,
+        'refresh_token_url': request.scheme + '://' +  request.get_host() + '/oauth/' + name + '/refresh',
+        'expiration': datetime.datetime.fromtimestamp(token["expires_at"]).isoformat()
+    }
+    return tokenResult
 
 
 @api_view(['GET'])
@@ -132,12 +141,13 @@ def get_access_token(request, name):
         client_secret=provider["client_secret"]
     )
 
-    print('token', token)
+    tokenResult = create_token(request, token, name)
+    #print('test', token["expires_at"], datetime.datetime.fromtimestamp(token["expires_at"]))
 
     #result = save_token(name, savedstate.user, token)
     if savedstate["redirect_url"] is not None and request.method == 'GET':
         return HttpResponseRedirect(savedstate["redirect_url"] + '?state=' + urlstate + '&config=' + config)
-    return Response(token, status=status.HTTP_200_OK)
+    return Response(tokenResult, status=status.HTTP_200_OK)
 
 
 @api_view(['POST'])
@@ -146,6 +156,15 @@ def refresh_access_token(request, name):
     if provider is None:
         return Response('Cannot get OauthProvider because ' + name + ' is not set up in OauthProvider table', status=status.HTTP_412_PRECONDITION_FAILED)
 
+    oauth_session = OAuth2Session(
+        provider["client_id"], provider["client_secret"])
+
+    refresh_token_url = provider['refresh_token_url'] if not provider["refresh_token_url"] is not None  else provider["access_token_url"]
+    print(refresh_token_url)
+    newToken = oauth_session.refresh_token(refresh_token_url, refresh_token=request.data["token"])
+    tokenResult = create_token(request, newToken, name)
+
+    return Response(tokenResult, status=status.HTTP_200_OK)
     # try:
     #     instance = OAuth2Token.objects.get(user=savedstate.user, name=name)
     #     serializer = OAuth2TokenSerializer(data=token, instance=instance)

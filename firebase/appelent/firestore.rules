@@ -1,41 +1,47 @@
 rules_version = '2';
 service cloud.firestore {
   match /databases/{database}/documents {
+  
+    // Dummy collection allow everyone
+    match /dummy/{dummyId} {
+      allow read, write: if true
+    }
+
+    // Dummy collection allow everyone
+    match /users/{userId}/{document=**} {
+      allow read, write: if request.auth.uid == userId
+
+    }
+
+    // Satisfactory
+    match /satisfactory_games/{gameId} {
+      // Allow read update and delete only to the owner of the game
+      allow update, delete: if request.auth != null && request.auth.uid == resource.data.owner;
+
+      // Allow read, update to all players
+      allow read, update: if request.auth.uid in resource.data.players;
+
+      // Allow everyone to create new games
+      allow create: if request.auth != null;
+
+      function gameData() {
+          return get(/databases/$(database)/documents/games/$(gameId)).data
+      }
+
+       match /factories/{factory} {
+        allow read, write, create: if request.auth.uid in gameData().players;
+        //allow read, write: if true;
+      }
+    }
+
+    // allow creation of issues
+    match /issues/{issueId} {
+      allow create: if true;
+    }
+
+    allow read, write: if false;
+    
     match /{document=**} {
-      
-
-      // Dummy collection allow everyone
-      match /dummy/{dummyId} {
-        allow read, write: if true
-      }
-
-
-      // Satisfactory
-      match /satisfactory_games/{gameId} {
-      	// Allow read update and delete only to the owner of the game
-        allow update, delete: if request.auth != null && request.auth.uid == resource.data.owner;
-        
-        // Allow read, update to all players
-        allow read, update: if request.auth.uid in resource.data.players;
-        
-        // Allow everyone to create new games
-        allow create: if request.auth != null;
-        
-        function gameData() {
-            return get(/databases/$(database)/documents/games/$(gameId)).data
-        }
-        
-         match /factories/{factory} {
-          allow read, write, create: if request.auth.uid in gameData().players;
-          //allow read, write: if true;
-        }
-      }
-
-      // allow creation of issues
-      match /issues/{issueId} {
-        allow create: if true;
-      }
-      
       allow read, write: if false;
     }
   }

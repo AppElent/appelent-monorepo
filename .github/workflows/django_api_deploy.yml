@@ -39,12 +39,12 @@ jobs:
         id: envs
         run: |
           if [[ "${{inputs.environment}}" == "production" ]]; then
-              echo "K8S_NAMESPACE=nextjs-demo-prd" >> $GITHUB_OUTPUT
+              echo "K8S_NAMESPACE=django-api-prd" >> $GITHUB_OUTPUT
               echo "VALUES_FILE=./values_prd.yaml" >> $GITHUB_OUTPUT
           fi
 
           if [[ "${{inputs.environment}}" == "development" ]]; then
-            echo "K8S_NAMESPACE=nextjs-demo-dev" >> $GITHUB_OUTPUT
+            echo "K8S_NAMESPACE=django-api-dev" >> $GITHUB_OUTPUT
             echo "VALUES_FILE=./values_dev.yaml" >> $GITHUB_OUTPUT
           fi
 
@@ -54,8 +54,8 @@ jobs:
     with:
       working_dir: ./frontend/react/devias-kit-pro-v600-custom/deployment
       values_file: ${{ needs.prepare_deploy.outputs.values_file }}
-      release_name: nextjs-demo
+      release_name: django-api
       namespace: ${{ needs.prepare_deploy.outputs.k8s_namespace }}
-      helm_name: ./nextjs-app
+      helm_name: ./django=api
       image_tag: ${{ inputs.image_tag }}
     secrets: inherit
