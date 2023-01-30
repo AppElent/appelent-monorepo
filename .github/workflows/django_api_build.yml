@@ -2,7 +2,13 @@ name: Django API Build
 
 on:
   workflow_dispatch:
-    
+    inputs:
+      deploy_dev:
+        type: boolean
+        description: Deploy to development environment
+      deploy_prd:
+        type: boolean
+        description: Deploy to production environment
   push:
     branches:
       - main
@@ -13,8 +19,23 @@ concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
 
 jobs:
+  prepare_build: 
+    runs-on: ubuntu-latest
+    outputs:
+      deploy_dev: ${{ steps.output.outputs.DEPLOY_DEV }}
+    steps:
+      - name: Set output vars
+        id: output
+        run: |
+          if [[ "${{inputs.deploy_dev}}" == "true" || ${{github.event_name}} != 'workflow_dispatch' ]]; then
+              echo "DEPLOY_DEV=true" >> $GITHUB_OUTPUT
+          else
+              echo "DEPLOY_DEV=false" >> $GITHUB_OUTPUT
+          fi
+
   build:
     uses: ./.github/workflows/_docker_build.yml
+    needs: [prepare_build]
     with:
       working_dir: ./django/api
       repository_name: demo
