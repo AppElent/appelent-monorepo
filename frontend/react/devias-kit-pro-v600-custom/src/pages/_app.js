@@ -16,7 +16,7 @@ import {
 import { AuthConsumer, AuthProvider } from "../contexts/auth/firebase-context";
 import { gtmConfig, siteSettings } from "../config";
 import { gtm } from "../libs/gtm";
-import { db } from "libs/firebase";
+
 import { store } from "../store";
 import { createTheme } from "../theme";
 import { createEmotionCache } from "../utils/create-emotion-cache";
@@ -60,8 +60,7 @@ const App = (props) => {
   // );
   // const dataLoading = dummyDataLoading;
   // console.log(dummyData, dummyDataLoading, dummyDataError);
-  console.log(process.env.NEXT_PUBLIC_GITHUB_SHA);
-  console.log(process.env);
+  console.log("Environment variables", process.env.NEXT_PUBLIC_GITHUB_SHA);
 
   // {
   //   firestore: {

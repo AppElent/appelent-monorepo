@@ -35,6 +35,7 @@ export const paths = {
     index: "/app",
     account: "/app/account",
     list: "/app/list",
+    oauth: "/app/oauth",
   },
   authDemo: {
     forgotPassword: {

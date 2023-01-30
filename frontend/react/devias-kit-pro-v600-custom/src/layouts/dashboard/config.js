@@ -96,6 +96,15 @@ export const getSections = (t) => [
           </SvgIcon>
         ),
       },
+      {
+        title: t(tokens.nav.auth),
+        path: paths.app.oauth,
+        icon: (
+          <SvgIcon fontSize="small">
+            <LayoutAlt02Icon />
+          </SvgIcon>
+        ),
+      },
       //   {
       //     title: t(tokens.nav.customers),
       //     path: paths.dashboard.customers.index,

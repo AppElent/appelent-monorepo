@@ -2,7 +2,13 @@ name: NextJS App Demo Build
 
 on:
   workflow_dispatch:
-    
+    inputs:
+      deploy_dev:
+        type: boolean
+        description: Deploy to development environment
+      deploy_prd:
+        type: boolean
+        description: Deploy to production environment
   push:
     branches:
       - main
@@ -15,6 +21,8 @@ concurrency:
 jobs:
   prepare_build: 
     runs-on: ubuntu-latest
+    outputs:
+      deploy_dev: ${{ steps.output.outputs.DEPLOY_DEV }}
     steps:
       - name: Dummy step
         run: env
@@ -34,6 +42,15 @@ jobs:
         with:
           name: env-local
           path: ./.env.local
+      - name: Set output vars
+        id: output
+        run: |
+          if [[ "${{inputs.deploy_dev}}" == "true" || ${{github.event_name}} != 'workflow_dispatch' ]]; then
+              echo "DEPLOY_DEV=true" >> $GITHUB_OUTPUT
+          else
+              echo "DEPLOY_DEV=false" >> $GITHUB_OUTPUT
+          fi
+
 
   build:
     uses: ./.github/workflows/_docker_build.yml
@@ -45,10 +62,20 @@ jobs:
       artifact_path: ./frontend/react/devias-kit-pro-v600-custom
     secrets: inherit
 
-  deploy:
+  deploy_dev:
     uses: ./.github/workflows/nextjs_demo_deploy.yml
+    if: ${{ needs.prepare_build.outputs.deploy_dev == 'true' }}
     needs: [build]
     with:
       environment: development
+      image_tag: latest
+    secrets: inherit
+
+  deploy_prod:
+    uses: ./.github/workflows/nextjs_demo_deploy.yml
+    if: ${{inputs.deploy_prd == true}}
+    needs: [build]
+    with:
+      environment: production
       image_tag: latest
     secrets: inherit

@@ -2,6 +2,9 @@ import { useEffect } from "react";
 import { collection } from "firebase/firestore";
 import { useCollectionData } from "react-firebase-hooks/firestore";
 import { db, useFirebaseData } from "libs/firebase";
+import { getAuth } from "firebase/auth";
+import { useFirestoreCollectionData } from "./use-firestore-collection-data";
+import { useFirestoreCollectionDataObject } from "./use-firestore-collection-data-object";
 
 export const firebaseInitialData = {
   firestore: {
@@ -15,9 +18,13 @@ export const firebaseInitialData = {
 };
 
 export const useGlobalData = () => {
-  const [dummyData, dummyDataLoading, dummyDataError] = useCollectionData(
-    collection(db, "dummy")
-  );
+  const auth = getAuth();
+  const [dummyData, dummyDataLoading, dummyDataError] =
+    useFirestoreCollectionData(collection(db, "dummy"));
+  const [tokenData, tokenDataLoading, tokenDataError] =
+    useFirestoreCollectionDataObject(
+      collection(db, `users/${auth.currentUser.uid}/tokens`)
+    );
   const firebase = useFirebaseData();
 
   // Function to report after initialization
@@ -28,7 +35,7 @@ export const useGlobalData = () => {
         isInitialized: true,
       }));
     }
-  }, [dummyDataLoading]);
+  }, [dummyDataLoading, tokenDataLoading]);
 
   //Update state on data change
   useEffect(() => {
@@ -36,16 +43,31 @@ export const useGlobalData = () => {
       firebase.setData((prevState) => ({
         ...prevState,
         firestore: {
+          ...prevState.firestore,
           collections: {
+            ...prevState.firestore.collections,
             dummy: {
               data: dummyData,
               loading: dummyDataLoading,
               error: dummyDataError,
               ref: collection(db, "dummy"),
             },
+            tokens: {
+              data: tokenData,
+              loading: tokenDataLoading,
+              error: tokenDataError,
+              ref: collection(db, "tokens"),
+            },
           },
         },
       }));
     }
-  }, [dummyData, dummyDataLoading, dummyDataError]);
+  }, [
+    dummyData,
+    dummyDataLoading,
+    dummyDataError,
+    tokenData,
+    tokenDataLoading,
+    tokenDataError,
+  ]);
 };
