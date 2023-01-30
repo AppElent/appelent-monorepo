@@ -38,7 +38,7 @@ jobs:
     needs: [prepare_build]
     with:
       working_dir: ./django/api
-      repository_name: demo
+      repository_name: django-api
     secrets: inherit
 
   deploy_development:
