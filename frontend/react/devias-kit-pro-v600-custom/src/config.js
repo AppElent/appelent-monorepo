@@ -43,3 +43,38 @@ export const siteSettings = {
   url: "https://url.appelent.com",
   loginRedirect: paths.app.index,
 };
+
+export const oauthConfigurations = {
+  enelogic: {
+    name: "enelogic",
+    redirectUrl: "/oauth/enelogic/authorize",
+    // redirectQueryParams: {
+    //   redirect_url: true,
+    //   //redirect_after_token: "",
+    // },
+    options: {
+      redirect_to: true,
+      redirect_back: true,
+      //redirect_after_token: "",
+    },
+    tokenUrl: "/oauth/enelogic/token",
+    scope: "account",
+    baseUrl: "http://localhost:8000",
+  },
+  enelogic2: {
+    name: "enelogic2",
+    redirectUrl: "/oauth/enelogic/authorize",
+    // redirectQueryParams: {
+    //   redirect_url: true,
+    //   //redirect_after_token: "",
+    // },
+    options: {
+      redirect_to: true,
+      redirect_back: true,
+      //redirect_after_token: "",
+    },
+    tokenUrl: "/oauth/enelogic/token",
+    scope: "account",
+    baseUrl: "http://localhost:8000",
+  },
+};

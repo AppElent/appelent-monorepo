@@ -1,10 +1,18 @@
-import { createContext, useContext } from "react";
+import { createContext, useContext, useState } from "react";
 import { QueryClientProvider } from "react-query";
 import { getAuth } from "firebase/auth";
 import { FirebaseContext } from "libs/firebase";
 
+const SettingsContext = createContext();
+
+export const useSettings = () => useContext(SettingsContext);
+
 const CustomApp = ({ httpsRedirect, queryClient, firebaseData, children }) => {
   const auth = getAuth();
+  const environment = process.env.NEXT_PUBLIC_ENVIRONMENT
+    ? process.env.NEXT_PUBLIC_ENVIRONMENT
+    : "undefined";
+  const [settings, setSettings] = useState({ environment });
 
   /**
    * HTTPS redirect
@@ -19,7 +27,16 @@ const CustomApp = ({ httpsRedirect, queryClient, firebaseData, children }) => {
     )}`;
   }
 
-  let returnComponent = <>{children}</>;
+  const settingsData = {
+    ...settings,
+    set: setSettings,
+  };
+
+  let returnComponent = (
+    <SettingsContext.Provider value={settingsData}>
+      {children}
+    </SettingsContext.Provider>
+  );
 
   // if queryClient present add it
   if (queryClient) {

@@ -16,7 +16,7 @@ import {
 import { AuthConsumer, AuthProvider } from "../contexts/auth/firebase-context";
 import { gtmConfig, siteSettings } from "../config";
 import { gtm } from "../libs/gtm";
-import { db } from "libs/firebase";
+
 import { store } from "../store";
 import { createTheme } from "../theme";
 import { createEmotionCache } from "../utils/create-emotion-cache";

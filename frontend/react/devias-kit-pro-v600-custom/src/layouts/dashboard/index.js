@@ -22,7 +22,7 @@ export const Layout = withAuthGuard((props) => {
   const settings = useSettings();
   const sections = useTranslatedSections();
   const firebase = useFirebaseData();
-  useGlobalData(firebase);
+  useGlobalData();
   console.log(firebase);
 
   if (settings.layout === "horizontal") {
