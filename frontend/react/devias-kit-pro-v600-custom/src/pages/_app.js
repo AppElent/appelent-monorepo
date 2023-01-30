@@ -24,7 +24,7 @@ import { createEmotionCache } from "../utils/create-emotion-cache";
 import "../libs/nprogress";
 // Remove if mapbox is not used
 import "../libs/mapbox";
-// Remove if locales are not used
+// Remove if locales are not use
 import "../locales/i18n";
 import { SettingsButton } from "../components/settings-button";
 import { SettingsDrawer } from "../components/settings-drawer";

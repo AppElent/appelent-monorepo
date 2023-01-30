@@ -149,7 +149,7 @@ def get_access_token(request, name):
         return HttpResponseRedirect(savedstate["redirect_url"] + '?state=' + urlstate + '&config=' + config)
     return Response(tokenResult, status=status.HTTP_200_OK)
 
- 
+
 @api_view(['POST'])
 def refresh_access_token(request, name):
     provider = get_provider(name)
