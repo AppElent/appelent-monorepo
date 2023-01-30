@@ -16,6 +16,7 @@ django-health-check = "*"
 azure-cosmos = "*"
 django-cors-headers = "*"
 django-allow-cidr = "*"
+gunicorn = "*"
 
 [dev-packages]
 
