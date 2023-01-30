@@ -47,6 +47,7 @@ jobs:
     needs: [build]
     with:
       environment: development
+      image_tag: ${{ github.sha }}
     secrets: inherit
 
   deploy_production:
@@ -55,4 +56,5 @@ jobs:
     needs: [build]
     with:
       environment: production
+      image_tag: ${{ github.sha }}
     secrets: inherit

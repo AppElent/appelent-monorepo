@@ -101,7 +101,7 @@ export const getSections = (t) => [
         path: paths.app.oauth,
         icon: (
           <SvgIcon fontSize="small">
-            <LayoutAlt02Icon />
+            <Lock01Icon />
           </SvgIcon>
         ),
       },
