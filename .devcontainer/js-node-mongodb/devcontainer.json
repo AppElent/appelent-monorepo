@@ -33,6 +33,8 @@
 		"azure-cli": "latest",
 		"powershell": "latest",
 		"github-cli": "latest",
+		"ghcr.io/devcontainers-contrib/features/firebase-cli:2": {},
+		"ghcr.io/devcontainers/features/python:1": {},
 		"dotnet": {
 			"version": "latest",
 			"runtimeOnly": false
