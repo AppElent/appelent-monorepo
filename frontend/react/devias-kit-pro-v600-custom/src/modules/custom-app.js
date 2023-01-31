@@ -4,8 +4,10 @@ import { getAuth } from "firebase/auth";
 import { FirebaseContext } from "libs/firebase";
 
 const SettingsContext = createContext();
+const GlobalDataContext = createContext();
 
 export const useSettings = () => useContext(SettingsContext);
+export const useGlobalData = () => useContext(GlobalDataContext)
 
 const CustomApp = ({ httpsRedirect, queryClient, firebaseData, children }) => {
   const auth = getAuth();
