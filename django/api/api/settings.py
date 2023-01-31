@@ -36,7 +36,7 @@ AUTH_USER_MODEL = 'users.User'
 SECRET_KEY = os.getenv("SECRET_KEY", default=get_random_secret_key())
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False if environment == "PRD" else True
+DEBUG = True # if environment == "PRD" else True
 
 CSRF_TRUSTED_ORIGINS = ['https://*.preview.app.github.dev']
 #ALLOWED_HOSTS = ['preview.app.github.dev', 'localhost', '127.0.0.1', '.appelent.com']
@@ -174,7 +174,7 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
-
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 STATIC_URL = "static/"
 
 # Default primary key field type
