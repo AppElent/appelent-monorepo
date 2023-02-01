@@ -55,6 +55,14 @@ const Page = () => {
           >
             Refresh enelogic
           </button>
+          <button
+            onClick={async () => {
+              const token = await oauth.getToken();
+              alert(JSON.stringify(token));
+            }}
+          >
+            Get enelogic token
+          </button>
           <button onClick={() => oauth2.redirect()}>Redirect enelogic2</button>
         </>
       </Box>

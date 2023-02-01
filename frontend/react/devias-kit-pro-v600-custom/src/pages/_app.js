@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useReducer, useState } from "react";
 import Head from "next/head";
 import { Provider as ReduxProvider } from "react-redux";
 import { CacheProvider } from "@emotion/react";
@@ -29,8 +29,8 @@ import "../locales/i18n";
 import { SettingsButton } from "../components/settings-button";
 import { SettingsDrawer } from "../components/settings-drawer";
 
-import CustomApp from "modules/custom-app";
-import { firebaseInitialData } from "hooks/use-global-data";
+import CustomApp from "libs/custom-app";
+import { initialGlobalData, reducer } from "libs/global-data";
 
 const clientSideEmotionCache = createEmotionCache();
 
@@ -42,40 +42,20 @@ const useAnalytics = () => {
 
 const App = (props) => {
   const { Component, emotionCache = clientSideEmotionCache, pageProps } = props;
-  const [firebaseData, setFirebaseData] = useState(firebaseInitialData);
+  const [data, dispatch] = useReducer(reducer, initialGlobalData);
 
-  useEffect(() => {
-    setFirebaseData((prevState) => ({
-      ...prevState,
-      setData: setFirebaseData,
-    }));
-  }, []);
+  console.log("Globaldata", data);
+
+  // useEffect(() => {
+  //   dispatch({ type: "INITIALIZE", payload: dispatch });
+  // }, []);
+  // console.log(data);
 
   useAnalytics();
 
   const getLayout = Component.getLayout ?? ((page) => page);
 
-  // const [dummyData, dummyDataLoading, dummyDataError] = useCollectionData(
-  //   collection(db, "dummy")
-  // );
-  // const dataLoading = dummyDataLoading;
-  // console.log(dummyData, dummyDataLoading, dummyDataError);
   console.log("Environment variables", process.env.NEXT_PUBLIC_GITHUB_SHA);
-
-  // {
-  //   firestore: {
-  //     collections: {
-  //       dummy: {
-  //         data: dummyData,
-  //         loading: dummyDataLoading,
-  //         error: dummyDataError,
-  //         ref: collection(db, "dummy"),
-  //       },
-  //     },
-  //     documents: {},
-  //     queries: {},
-  //   },
-  // }
 
   return (
     <CacheProvider value={emotionCache}>
@@ -83,32 +63,33 @@ const App = (props) => {
         <title>{siteSettings.title}</title>
         <meta name="viewport" content="initial-scale=1, width=device-width" />
       </Head>
-      <CustomApp firebaseData={firebaseData}>
-        <ReduxProvider store={store}>
-          <LocalizationProvider dateAdapter={AdapterDateFns}>
-            <AuthProvider>
-              <AuthConsumer>
-                {(auth) => (
-                  <SettingsProvider>
-                    <SettingsConsumer>
-                      {(settings) => {
-                        // Prevent theme flicker when restoring custom settings from browser storage
-                        if (!settings.isInitialized) {
-                          // return null;
-                        }
 
-                        const theme = createTheme({
-                          colorPreset: settings.colorPreset,
-                          contrast: settings.contrast,
-                          direction: settings.direction,
-                          paletteMode: settings.paletteMode,
-                          responsiveFontSizes: settings.responsiveFontSizes,
-                        });
+      <ReduxProvider store={store}>
+        <LocalizationProvider dateAdapter={AdapterDateFns}>
+          <AuthProvider>
+            <AuthConsumer>
+              {(auth) => (
+                <SettingsProvider>
+                  <SettingsConsumer>
+                    {(settings) => {
+                      // Prevent theme flicker when restoring custom settings from browser storage
+                      if (!settings.isInitialized) {
+                        // return null;
+                      }
 
-                        // Prevent guards from redirecting
-                        const showSlashScreen = !auth.isInitialized;
+                      const theme = createTheme({
+                        colorPreset: settings.colorPreset,
+                        contrast: settings.contrast,
+                        direction: settings.direction,
+                        paletteMode: settings.paletteMode,
+                        responsiveFontSizes: settings.responsiveFontSizes,
+                      });
 
-                        return (
+                      // Prevent guards from redirecting
+                      const showSlashScreen = !auth.isInitialized;
+
+                      return (
+                        <CustomApp globalData={{ data, dispatch }}>
                           <ThemeProvider theme={theme}>
                             <Head>
                               <meta
@@ -153,16 +134,16 @@ const App = (props) => {
                               <Toaster />
                             </RTL>
                           </ThemeProvider>
-                        );
-                      }}
-                    </SettingsConsumer>
-                  </SettingsProvider>
-                )}
-              </AuthConsumer>
-            </AuthProvider>
-          </LocalizationProvider>
-        </ReduxProvider>
-      </CustomApp>
+                        </CustomApp>
+                      );
+                    }}
+                  </SettingsConsumer>
+                </SettingsProvider>
+              )}
+            </AuthConsumer>
+          </AuthProvider>
+        </LocalizationProvider>
+      </ReduxProvider>
     </CacheProvider>
   );
 };

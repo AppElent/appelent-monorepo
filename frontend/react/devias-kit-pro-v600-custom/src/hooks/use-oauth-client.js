@@ -5,11 +5,12 @@ import { getUrlParams } from "utils/get-url-params";
 import toast from "react-hot-toast";
 import { getAuth } from "firebase/auth";
 import { setDoc, doc } from "firebase/firestore";
-import { db } from "libs/firebase";
+import { db, useFirebaseData } from "libs/firebase";
 
 export const useOauthClient = (configuration) => {
   const router = useRouter();
   const { pathname, query } = router;
+  const firebaseData = useFirebaseData();
   //const [token, setToken] = useState();
 
   useEffect(() => {
@@ -109,13 +110,16 @@ export const useOauthClient = (configuration) => {
 
   const getToken = useCallback(
     async (data, key) => {
+      if (!data) {
+        data = firebaseData.firestore.collections.tokens.data;
+      }
       const saveKey = key ? key : configuration.name;
       const token = data[saveKey];
       if (token) {
         const expires_at = token.token.expires_at;
         if (new Date().getTime() < expires_at) {
           //token needs to be refreshed
-          const newAccessToken = refreshToken(token);
+          const newAccessToken = await refreshToken(token);
           token.token = newAccessToken;
           await saveToken(token);
         } else {

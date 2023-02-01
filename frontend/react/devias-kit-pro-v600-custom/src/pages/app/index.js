@@ -25,6 +25,7 @@ import { OverviewJobs } from "../../sections/dashboard/overview/overview-jobs";
 import { OverviewOpenTickets } from "../../sections/dashboard/overview/overview-open-tickets";
 import { OverviewTips } from "../../sections/dashboard/overview/overview-tips";
 import { siteSettings } from "config";
+import { useGlobalDataFirestoreCollection } from "libs/global-data-firestore";
 
 const now = new Date();
 

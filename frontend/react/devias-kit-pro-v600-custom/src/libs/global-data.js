@@ -1,64 +1,116 @@
-import { useEffect } from "react";
+import { createContext, useContext, useEffect } from "react";
+import { siteSettings } from "config";
 import { collection } from "firebase/firestore";
-import { useCollectionData } from "react-firebase-hooks/firestore";
-import { db, useFirebaseData } from "libs/firebase";
+import { db } from "./firebase";
 import { getAuth } from "firebase/auth";
-import { useFirestoreCollectionData } from "./use-firestore-collection-data";
-import { useFirestoreCollectionDataObject } from "./use-firestore-collection-data-object";
+const auth = getAuth();
 
-export const firebaseInitialData = {
+export const initialGlobalData = {
   firestore: {
-    collections: {},
+    collections: {
+      dummy: {
+        query: collection(db, "dummy"),
+      },
+    },
+    collectionObjects: {
+      tokens: {
+        query: collection(db, `users/${auth?.currentUser?.uid}/tokens`),
+      },
+    },
     documents: {},
     queries: {},
     isInitialized: false,
   },
   isInitialized: false,
-  setData: () => {},
+  settings: {
+    ...siteSettings,
+  },
+  dispatch: () => {},
 };
 
-export const GlobalDataFirestoreCollection = ({ query, options }) => {
-  const data = useGlobalDataFirestoreCollection(query, options);
-  return <></>;
-};
+//Set dataobjects to load
 
-export const useGlobalDataFirestoreCollection = (key, query, options) => {
-  const [data, loading, error] = useFirestoreCollectionData(query, options);
-  // const [tokenData, tokenDataLoading, tokenDataError] =
-  //   useFirestoreCollectionDataObject(
-  //     collection(db, `users/${auth.currentUser.uid}/tokens`)
-  //   );
-  const firebase = useFirebaseData();
+// const dataObjects = {
+//   firestore: {
+//     collections: {
+//       dummy: {
+//         query: collection(db, "dummy"),
+//       },
+//     },
+//     collectionObjects: {
+//       tokens: {
+//         query: collection(db, `users/${auth?.currentUser?.uid}/tokens`),
+//       },
+//     },
+//     documents: {},
+//     queries: {},
+//   },
+//   isInitialized: false,
+//   settings: {
+//     ...siteSettings,
+//   },
+// };
 
-  // Function to report after initialization
-  // useEffect(() => {
-  //   if (!dummyDataLoading && firebase.setData) {
-  //     firebase.setData((prevState) => ({
-  //       ...prevState,
-  //       isInitialized: true,
-  //     }));
-  //   }
-  // }, [dummyDataLoading, tokenDataLoading]);
+export const GlobalDataContext = createContext();
 
-  //Update state on data change
+export const useGlobalData = () => useContext(GlobalDataContext);
+
+export const useLoadData = (key) => {
+  const { dispatch } = useGlobalData();
   useEffect(() => {
-    if (firebase.setData) {
-      firebase.setData((prevState) => ({
-        ...prevState,
-        firestore: {
-          ...prevState.firestore,
-          collections: {
-            ...prevState.firestore.collections,
-            [key]: {
-              data,
-              loading,
-              error,
-              ref: query,
-              options,
-            },
-          },
-        },
-      }));
-    }
-  }, [data, loading, error]);
+    dispatch({
+      type: ActionType.LOAD_DATA,
+      payload: key,
+    });
+  }, []);
+};
+
+export let ActionType;
+(function (ActionType) {
+  ActionType["INITIALIZE"] = "INITIALIZE";
+  ActionType["LOAD_DATA"] = "LOAD_DATA";
+  ActionType["STORE_DATA"] = "STORE_DATA";
+})(ActionType || (ActionType = {}));
+
+function set(schema, path, value) {
+  //var schema = newState; // a moving reference to internal objects within obj
+  var pList = path.split(".");
+  var len = pList.length;
+  for (var i = 0; i < len - 1; i++) {
+    var elem = pList[i];
+    if (!schema[elem]) schema[elem] = {};
+    schema = schema[elem];
+  }
+
+  schema[pList[len - 1]] = value;
+}
+
+export const reducer = (state, action) => {
+  console.log("Globaldatadispatch", state, action);
+  let newState = state;
+  switch (action.type) {
+    case "INITIALIZE":
+      newState = { ...state, dispatch: action.payload.dispatch };
+      return newState;
+    case "LOAD_DATA":
+      set(newState, action.payload + ".loadData", true);
+
+      return newState;
+    case "SET_DATA":
+      set(newState, action.payload.key, action.payload.value);
+
+      return newState;
+    case "STORE_DATA":
+      set(newState, action.payload.storeKey + ".data", action.payload.data);
+      set(
+        newState,
+        action.payload.storeKey + ".loading",
+        action.payload.loading
+      );
+      set(newState, action.payload.storeKey + ".error", action.payload.error);
+
+      return newState;
+    default:
+      return state;
+  }
 };
