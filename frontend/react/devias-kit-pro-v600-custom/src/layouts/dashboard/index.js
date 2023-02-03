@@ -6,7 +6,6 @@ import { HorizontalLayout } from "./horizontal-layout";
 import { VerticalLayout } from "./vertical-layout";
 import { getSections } from "./config";
 import { withAuthGuard } from "../../hocs/with-auth-guard";
-import { useLoadData } from "libs/global-data";
 
 const useTranslatedSections = () => {
   const { t } = useTranslation();
@@ -17,10 +16,6 @@ const useTranslatedSections = () => {
 export const Layout = withAuthGuard((props) => {
   const settings = useSettings();
   const sections = useTranslatedSections();
-  // const firebase = useFirebaseData();
-  // useGlobalData();
-  // console.log(firebase);
-  useLoadData("firestore.collections.dummy");
 
   if (settings.layout === "horizontal") {
     return (

@@ -42,6 +42,7 @@ export const siteSettings = {
   copyright: "AppElent",
   url: "https://url.appelent.com",
   loginRedirect: paths.app.index,
+  backend: "http://localhost:8000",
 };
 
 export const oauthConfigurations = {

@@ -1,16 +1,26 @@
 import { useEffect, useState } from "react";
-import { useCollectionData } from "react-firebase-hooks/firestore";
+import { useCollection } from "react-firebase-hooks/firestore";
 
 export const useFirestoreCollectionData = (query, options, process) => {
-  const [values, loading, error, snapshot] = useCollectionData(query, options);
+  const [values, loading, error, snapshot] = useCollection(query, options);
   const [valuesNew, setValuesNew] = useState();
 
   useEffect(() => {
     if (values) {
-      let valueArray = values;
+      let valueArray = [];
+      values.forEach((value) => {
+        const returnObject = {
+          ...value.data(),
+          id: value.id,
+          docRef: value,
+        };
+        valueArray.push(returnObject);
+      });
+
       if (process) {
-        valueArray = process(valueObject);
+        valueArray = process(valueArray);
       }
+
       setValuesNew(valueArray);
     } else {
       setValuesNew(values);

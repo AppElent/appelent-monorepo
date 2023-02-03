@@ -1,43 +1,57 @@
+import { getAuth } from "firebase/auth";
+import { doc } from "firebase/firestore";
+import { useAuth } from "hooks/use-auth";
 import { createContext, useContext, useEffect, useState } from "react";
 import { QueryClientProvider } from "react-query";
-import { getAuth } from "firebase/auth";
-import { ActionType, GlobalDataContext, useGlobalData } from "./global-data";
+import { db } from "./firebase";
+
+import { GlobalDataContext, useGlobalData, useLoadData } from "./global-data";
 import { useLoadFirestore } from "./global-data-firestore";
 
 const CustomApp = ({ httpsRedirect, queryClient, globalData, children }) => {
-  /**
-   * HTTPS redirect
-   */
-  if (
-    httpsRedirect &&
-    window.location.protocol !== "https:" &&
-    process.env.NODE_ENV !== "development"
-  ) {
-    window.location.href = `https:${window.location.href.substring(
-      window.location.protocol.length
-    )}`;
-  }
-
-  const auth = getAuth();
-  const environment = process.env.NEXT_PUBLIC_ENVIRONMENT
-    ? process.env.NEXT_PUBLIC_ENVIRONMENT
-    : "undefined";
-
-  console.log(globalData);
-
   useEffect(() => {
-    globalData.dispatch({
-      type: ActionType.INITIALIZE,
-      payload: { dispatch: globalData.dispatch },
-    });
+    // Client-side-only code
+    /**
+     * HTTPS redirect
+     */
+    if (
+      httpsRedirect &&
+      window.location.protocol !== "https:" &&
+      process.env.NODE_ENV !== "development"
+    ) {
+      window.location.href = `https:${window.location.href.substring(
+        window.location.protocol.length
+      )}`;
+    }
   }, []);
 
+  return (
+    <GlobalDataContext.Provider value={globalData}>
+      <CustomAppChild queryClient={queryClient}>{children}</CustomAppChild>
+    </GlobalDataContext.Provider>
+  );
+};
+
+const CustomAppChild = ({ queryClient, children }) => {
+  const globalData = useGlobalData();
+  const auth = getAuth();
+  useAuth();
+
+  const userDataLoadKey = auth.currentUser
+    ? "firestore.documents.userSettings"
+    : undefined;
+  const userdata = useLoadData(userDataLoadKey, {
+    document: doc(db, `users/${auth?.currentUser?.uid}`),
+  });
+
   let returnComponent = <>{children}</>;
+
+  const firestoreComponents = useLoadFirestore(globalData);
 
   returnComponent = (
     <>
       {returnComponent}
-      {/* {firestoreComponents} */}
+      {firestoreComponents}
     </>
   );
 
@@ -51,23 +65,14 @@ const CustomApp = ({ httpsRedirect, queryClient, globalData, children }) => {
   }
 
   // if firebaseContext present, add it
-  if (globalData) {
-    returnComponent = (
-      <GlobalDataContext.Provider value={globalData.data}>
-        <CustomAppChild>{returnComponent}</CustomAppChild>
-      </GlobalDataContext.Provider>
-    );
-  }
+  returnComponent = (
+    <GlobalDataContext.Provider value={globalData}>
+      {/* <GlobalDataFirestoreCollection /> */}
+      {returnComponent}
+    </GlobalDataContext.Provider>
+  );
 
   return returnComponent;
-};
-
-const CustomAppChild = ({ children }) => {
-  const globalData = useGlobalData();
-  console.log(globalData);
-  const firestoreComponents = useLoadFirestore(globalData);
-  console.log(123, globalData, firestoreComponents);
-  return <>{children}</>;
 };
 
 export default CustomApp;

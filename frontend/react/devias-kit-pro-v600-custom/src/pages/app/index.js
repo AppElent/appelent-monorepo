@@ -26,13 +26,36 @@ import { OverviewOpenTickets } from "../../sections/dashboard/overview/overview-
 import { OverviewTips } from "../../sections/dashboard/overview/overview-tips";
 import { siteSettings } from "config";
 import { useGlobalDataFirestoreCollection } from "libs/global-data-firestore";
+import { useGlobalData, useLoadData } from "libs/global-data";
+import { data } from "api/calendar/data";
+import { getAuth } from "firebase/auth";
+import { collection, doc } from "firebase/firestore";
+import { db } from "libs/firebase";
+import { SplashScreen } from "components/splash-screen";
 
 const now = new Date();
 
 const Page = () => {
   const settings = useSettings();
-
   usePageView();
+  const auth = getAuth();
+
+  const { data } = useLoadData("firestore.collections.dummy");
+  const key = "firestore.collectionObjects.tokens";
+
+  const { data: data2 } =
+    useLoadData("firestore.collections.dummy2", {
+      collection: collection(db, "dummy"),
+    }) || {};
+  const { data: data3 } = useLoadData("firestore.collections.dummy3") || {};
+  const { data: tokens } =
+    useLoadData(key, {
+      collection: collection(db, `users/${auth?.currentUser?.uid}/tokens`),
+    }) || {};
+  const { data: documentData } =
+    useLoadData("firestore.documents.dummy", {
+      document: doc(db, "dummy/dumm01"),
+    }) || {};
 
   return (
     <>
@@ -47,6 +70,37 @@ const Page = () => {
         }}
       >
         <Container maxWidth={settings.stretch ? false : "xl"}>
+          Doc data: {JSON.stringify(documentData)}
+          <br />
+          <br />
+          Dummy data:{" "}
+          {JSON.stringify(
+            data?.map((doc) => {
+              const { docRef, ...rest } = doc || {};
+              return rest;
+            })
+          )}
+          <br />
+          <br />
+          Dummy data2:{" "}
+          {JSON.stringify(
+            data2?.map((doc) => {
+              const { docRef, ...rest } = doc || {};
+              return rest;
+            })
+          )}
+          <br />
+          <br />
+          Dummy data3:{" "}
+          {JSON.stringify(
+            data3?.map((doc) => {
+              const { docRef, ...rest } = doc || {};
+              return rest;
+            })
+          )}
+          <br />
+          <br />
+          Tokens data: {JSON.stringify(tokens)}
           {/* <Grid
             container
             disableEqualOverflow

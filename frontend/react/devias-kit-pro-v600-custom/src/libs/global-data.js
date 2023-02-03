@@ -1,68 +1,55 @@
 import { createContext, useContext, useEffect } from "react";
 import { siteSettings } from "config";
-import { collection } from "firebase/firestore";
+import { collection, limit, orderBy } from "firebase/firestore";
 import { db } from "./firebase";
 import { getAuth } from "firebase/auth";
-const auth = getAuth();
+import _ from "lodash";
+import { current } from "@reduxjs/toolkit";
 
-export const initialGlobalData = {
-  firestore: {
-    collections: {
-      dummy: {
-        query: collection(db, "dummy"),
+export const getInitialGlobalData = () => {
+  return {
+    firestore: {
+      collections: {
+        dummy: {
+          options: { collection: collection(db, "dummy") },
+        },
+        dummy3: {
+          options: {
+            collection: collection(db, "dummy"),
+            query: [limit(3), orderBy("testfield01")],
+          },
+        },
       },
-    },
-    collectionObjects: {
-      tokens: {
-        query: collection(db, `users/${auth?.currentUser?.uid}/tokens`),
+      collectionObjects: {
+        tokens: {},
       },
+      documents: {},
+      isInitialized: false,
     },
-    documents: {},
-    queries: {},
     isInitialized: false,
-  },
-  isInitialized: false,
-  settings: {
-    ...siteSettings,
-  },
-  dispatch: () => {},
+    settings: {
+      ...siteSettings,
+    },
+  };
 };
-
-//Set dataobjects to load
-
-// const dataObjects = {
-//   firestore: {
-//     collections: {
-//       dummy: {
-//         query: collection(db, "dummy"),
-//       },
-//     },
-//     collectionObjects: {
-//       tokens: {
-//         query: collection(db, `users/${auth?.currentUser?.uid}/tokens`),
-//       },
-//     },
-//     documents: {},
-//     queries: {},
-//   },
-//   isInitialized: false,
-//   settings: {
-//     ...siteSettings,
-//   },
-// };
 
 export const GlobalDataContext = createContext();
 
 export const useGlobalData = () => useContext(GlobalDataContext);
 
-export const useLoadData = (key) => {
-  const { dispatch } = useGlobalData();
+export const useLoadData = (key, options) => {
+  const globalData = useGlobalData();
+  const data = _.get(globalData, key);
   useEffect(() => {
-    dispatch({
-      type: ActionType.LOAD_DATA,
-      payload: key,
-    });
-  }, []);
+    if (globalData.dispatch && key) {
+      globalData.dispatch({
+        type: ActionType.LOAD_DATA,
+        payload: { key, options },
+      });
+    }
+  }, [key, globalData.dispatch]);
+
+  return data;
 };
 
 export let ActionType;
@@ -70,46 +57,68 @@ export let ActionType;
   ActionType["INITIALIZE"] = "INITIALIZE";
   ActionType["LOAD_DATA"] = "LOAD_DATA";
   ActionType["STORE_DATA"] = "STORE_DATA";
+  ActionType["SET_DATA"] = "SET_DATA";
 })(ActionType || (ActionType = {}));
 
-function set(schema, path, value) {
-  //var schema = newState; // a moving reference to internal objects within obj
-  var pList = path.split(".");
-  var len = pList.length;
-  for (var i = 0; i < len - 1; i++) {
-    var elem = pList[i];
-    if (!schema[elem]) schema[elem] = {};
-    schema = schema[elem];
-  }
+const setProperty = (obj, path, value) => {
+  const [head, ...rest] = path.split(".");
 
-  schema[pList[len - 1]] = value;
-}
+  return {
+    ...obj,
+    [head]: rest.length ? setProperty(obj[head], rest.join("."), value) : value,
+  };
+};
 
 export const reducer = (state, action) => {
   console.log("Globaldatadispatch", state, action);
-  let newState = state;
+  //let newState = global.structuredClone(state);
+  let newState = state; //JSONfn.clone(state);
+  let currentValue;
+  state;
   switch (action.type) {
-    case "INITIALIZE":
-      newState = { ...state, dispatch: action.payload.dispatch };
-      return newState;
     case "LOAD_DATA":
-      set(newState, action.payload + ".loadData", true);
+      currentValue = _.get(newState, action.payload.key + ".loadData");
+      if (currentValue) {
+        return state;
+      }
+      newState = _.set(newState, action.payload.key + ".loadData", true);
 
-      return newState;
+      if (action.payload.options) {
+        newState = _.set(
+          newState,
+          action.payload.key + ".options",
+          action.payload.options
+        );
+      }
+
+      return { ...newState };
     case "SET_DATA":
-      set(newState, action.payload.key, action.payload.value);
+      currentValue = _.get(newState, action.payload.key);
+      if (currentValue === action.payload.value) return state;
 
-      return newState;
-    case "STORE_DATA":
-      set(newState, action.payload.storeKey + ".data", action.payload.data);
-      set(
-        newState,
-        action.payload.storeKey + ".loading",
-        action.payload.loading
-      );
-      set(newState, action.payload.storeKey + ".error", action.payload.error);
+      newState = _.set(newState, action.payload.key, action.payload.value);
 
-      return newState;
+      return { ...newState };
+    // case "STORE_DATA":
+    //   //console.log("voor", newState);
+    //   newState = _.set(
+    //     newState,
+    //     action.payload.storeKey + ".data",
+    //     action.payload.data
+    //   );
+    //   newState = _.set(
+    //     newState,
+    //     action.payload.storeKey + ".loading",
+    //     action.payload.loading
+    //   );
+    //   newState = _.set(
+    //     newState,
+    //     action.payload.storeKey + ".error",
+    //     action.payload.error
+    //   );
+    //   //console.log("na", newState, { ...newState });
+
+    //   return { ...newState };
     default:
       return state;
   }

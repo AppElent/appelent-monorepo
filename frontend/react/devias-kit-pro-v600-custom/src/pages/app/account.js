@@ -13,12 +13,13 @@ import {
 import { usePageView } from "../../hooks/use-page-view";
 import { Layout as DashboardLayout } from "../../layouts/dashboard";
 import { AccountBillingSettings } from "../../sections/dashboard/account/account-billing-settings";
-import { AccountGeneralSettings } from "../../sections/dashboard/account/account-general-settings";
+import { AccountGeneralSettings } from "../../sections/app/account/account-general-settings";
 import { AccountNotificationsSettings } from "../../sections/dashboard/account/account-notifications-settings";
 import { AccountTeamSettings } from "../../sections/dashboard/account/account-team-settings";
 import { AccountSecuritySettings } from "../../sections/dashboard/account/account-security-settings";
 import { useAuth } from "hooks/use-auth";
 import { siteSettings } from "config";
+import { useGlobalData } from "libs/global-data";
 
 const now = new Date();
 
@@ -33,6 +34,7 @@ const tabs = [
 const Page = () => {
   const { user } = useAuth();
   const [currentTab, setCurrentTab] = useState("general");
+  const { settings, dispatch } = useGlobalData();
 
   usePageView();
 
@@ -77,6 +79,13 @@ const Page = () => {
               email={user.email || ""}
               name={user.name || ""}
               user={user || {}}
+              settings={settings}
+              updatesettings={(value) =>
+                dispatch({
+                  type: "SET_DATA",
+                  payload: { key: "settings.backend", value },
+                })
+              }
             />
           )}
           {/* {currentTab === "billing" && (

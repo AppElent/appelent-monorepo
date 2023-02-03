@@ -1,4 +1,4 @@
-import { useEffect, useReducer, useState } from "react";
+import { useEffect, useReducer } from "react";
 import Head from "next/head";
 import { Provider as ReduxProvider } from "react-redux";
 import { CacheProvider } from "@emotion/react";
@@ -30,7 +30,8 @@ import { SettingsButton } from "../components/settings-button";
 import { SettingsDrawer } from "../components/settings-drawer";
 
 import CustomApp from "libs/custom-app";
-import { initialGlobalData, reducer } from "libs/global-data";
+import { reducer, getInitialGlobalData } from "libs/global-data";
+import { getAuth } from "firebase/auth";
 
 const clientSideEmotionCache = createEmotionCache();
 
@@ -42,14 +43,9 @@ const useAnalytics = () => {
 
 const App = (props) => {
   const { Component, emotionCache = clientSideEmotionCache, pageProps } = props;
-  const [data, dispatch] = useReducer(reducer, initialGlobalData);
-
-  console.log("Globaldata", data);
-
-  // useEffect(() => {
-  //   dispatch({ type: "INITIALIZE", payload: dispatch });
-  // }, []);
-  // console.log(data);
+  const auth = getAuth();
+  const [data, dispatch] = useReducer(reducer, getInitialGlobalData(auth));
+  console.log("Globaldata", data, auth);
 
   useAnalytics();
 
@@ -67,29 +63,30 @@ const App = (props) => {
       <ReduxProvider store={store}>
         <LocalizationProvider dateAdapter={AdapterDateFns}>
           <AuthProvider>
-            <AuthConsumer>
-              {(auth) => (
-                <SettingsProvider>
-                  <SettingsConsumer>
-                    {(settings) => {
-                      // Prevent theme flicker when restoring custom settings from browser storage
-                      if (!settings.isInitialized) {
-                        // return null;
-                      }
+            <CustomApp globalData={{ ...data, dispatch }} httpsRedirect={true}>
+              <AuthConsumer>
+                {(auth) => (
+                  <SettingsProvider>
+                    <SettingsConsumer>
+                      {(settings) => {
+                        // Prevent theme flicker when restoring custom settings from browser storage
+                        if (!settings.isInitialized) {
+                          // return null;
+                        }
 
-                      const theme = createTheme({
-                        colorPreset: settings.colorPreset,
-                        contrast: settings.contrast,
-                        direction: settings.direction,
-                        paletteMode: settings.paletteMode,
-                        responsiveFontSizes: settings.responsiveFontSizes,
-                      });
+                        const theme = createTheme({
+                          colorPreset: settings.colorPreset,
+                          contrast: settings.contrast,
+                          direction: settings.direction,
+                          paletteMode: settings.paletteMode,
+                          responsiveFontSizes: settings.responsiveFontSizes,
+                        });
 
-                      // Prevent guards from redirecting
-                      const showSlashScreen = !auth.isInitialized;
+                        // Prevent guards from redirecting
+                        const showSlashScreen = !auth.isInitialized;
 
-                      return (
-                        <CustomApp globalData={{ data, dispatch }}>
+                        return (
+                          // <CustomApp globalData={{ ...data, dispatch }} httpsRedirect={true}>
                           <ThemeProvider theme={theme}>
                             <Head>
                               <meta
@@ -134,13 +131,13 @@ const App = (props) => {
                               <Toaster />
                             </RTL>
                           </ThemeProvider>
-                        </CustomApp>
-                      );
-                    }}
-                  </SettingsConsumer>
-                </SettingsProvider>
-              )}
-            </AuthConsumer>
+                        );
+                      }}
+                    </SettingsConsumer>
+                  </SettingsProvider>
+                )}
+              </AuthConsumer>
+            </CustomApp>
           </AuthProvider>
         </LocalizationProvider>
       </ReduxProvider>

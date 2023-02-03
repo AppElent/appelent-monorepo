@@ -13,6 +13,8 @@ import { firebaseApp } from "../../libs/firebase";
 import { Issuer } from "../../utils/auth";
 
 import { updateUser } from "utils/user";
+import { useGlobalData } from "libs/global-data";
+import { updateDoc } from "firebase/firestore";
 
 const auth = getAuth(firebaseApp);
 
@@ -67,23 +69,6 @@ export const AuthProvider = (props) => {
   const { children } = props;
   const [state, dispatch] = useReducer(reducer, initialState);
 
-  const changeUserSettings = useCallback(
-    (settings) => {
-      console.log(settings, state);
-      dispatch({
-        type: ActionType.USER_CHANGED,
-        payload: {
-          ...state,
-          user: {
-            ...state.user,
-            name: settings.displayName,
-          },
-        },
-      });
-    },
-    [dispatch]
-  );
-
   const handleAuthStateChanged = useCallback(
     (user) => {
       if (user) {
@@ -99,7 +84,7 @@ export const AuthProvider = (props) => {
               email: user.email || "user@demo.com",
               name: user.displayName || "Unknown user",
               plan: "Premium",
-              update: updateUser(user, changeUserSettings),
+              update: updateUser(user),
               raw: user,
             },
           },

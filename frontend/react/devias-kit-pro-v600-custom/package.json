@@ -50,6 +50,8 @@
     "formik": "2.2.9",
     "gray-matter": "4.0.3",
     "i18next": "21.9.1",
+    "json-fn": "^1.1.1",
+    "lodash": "^4.17.21",
     "lodash.debounce": "4.0.8",
     "lodash.isequal": "4.5.0",
     "mapbox-gl": "2.11.0",

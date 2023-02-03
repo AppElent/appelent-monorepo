@@ -1,7 +1,12 @@
-import { useEffect } from "react";
+import React, { useEffect } from "react";
 import { useFirestoreCollectionData } from "hooks/use-firestore-collection-data";
 import { useFirestoreCollectionDataObject } from "hooks/use-firestore-collection-data-object";
 import { ActionType, useGlobalData } from "./global-data";
+import { orderBy, query, limit, doc } from "firebase/firestore";
+import { db } from "./firebase";
+import { getAuth } from "firebase/auth";
+import _ from "lodash";
+import { useFirestoreDocument } from "hooks/use-firestore-document";
 
 export const firestoreKeys = [
   "collections",
@@ -12,94 +17,93 @@ export const firestoreKeys = [
 
 export const useLoadFirestore = (globalData) => {
   let dataComponents = [];
-  console.log(456, globalData);
+  //const globalData = useGlobalData();
   for (const firestoreKey of firestoreKeys) {
     for (const key in globalData.firestore?.[firestoreKey]) {
       const value = globalData.firestore?.[firestoreKey][key];
-      console.log(
-        firestoreKey,
-        key,
-        value,
-        value.loadData,
-        globalData.firestore.collections.dummy.loadData
-      );
       if (value.loadData) {
-        console.log("jawel1", value.loadData);
-        if (firestoreKey === "collections") {
-          console.log("jawel");
-          dataComponents.push(
-            <GlobalDataFirestoreCollection
-              key={key}
-              storeKey={`firestore.${firestoreKey}.${key}`}
-              query={value.query}
-              options={value.options}
-            />
-          );
-        } else if (firestoreKey === "collectionObjects") {
-          dataComponents.push(
-            <GlobalDataFirestoreCollectionObject
-              key={key}
-              storeKey={`firestore.${firestoreKey}.${key}`}
-              query={value.query}
-              options={value.options}
-            />
-          );
-        }
+        dataComponents.push(
+          <GlobalDataFirestore
+            key={firestoreKey + key}
+            storeKey={`firestore.${firestoreKey}.${key}`}
+            options={value.options}
+          />
+        );
       }
     }
   }
-  console.log(dataComponents);
   return dataComponents;
 };
 
-export const GlobalDataFirestoreCollection = ({ storeKey, query, options }) => {
-  useGlobalDataFirestoreCollection(storeKey, query, options);
-  console.log(123, storeKey);
-  return <></>;
+const getQuery = (givenCollection, givenQuery) => {
+  if (!givenCollection) return undefined;
+  if (!givenQuery) return givenCollection;
+  return query(givenCollection, ...givenQuery);
 };
 
-export const useGlobalDataFirestoreCollection = (storeKey, query, options) => {
-  const [data, loading, error] = useFirestoreCollectionData(query, options);
-  const { dispatch } = useGlobalData();
-  console.log(123, data, loading, error);
+export const GlobalDataFirestore = ({ storeKey, options }) => {
+  //useGlobalDataFirestoreCollection(storeKey);
+  const { dispatch, ...globalData } = useGlobalData();
+  let {
+    query: givenQuery,
+    options: givenOptions,
+    collection: givenCollection,
+    document: givenDocument,
+  } = options || {};
+  const type = storeKey.split(".")[1];
+  givenQuery = givenQuery
+    ? givenQuery
+    : _.get(globalData, storeKey + ".options.query");
+  givenOptions = givenOptions
+    ? givenOptions
+    : _.get(globalData, storeKey + ".options.options");
+  givenCollection = givenCollection
+    ? givenCollection
+    : _.get(globalData, storeKey + ".options.collection");
+  givenDocument = givenDocument
+    ? givenDocument
+    : _.get(globalData, storeKey + ".options.collection");
+  const newQuery =
+    type === "documents"
+      ? givenDocument
+      : getQuery(givenCollection, givenQuery);
+
+  const hooks = {
+    collections: useFirestoreCollectionData,
+    collectionObjects: useFirestoreCollectionDataObject,
+    documents: useFirestoreDocument,
+  };
+
+  //const auth = getAuth();
+  const [data, loading, error] = hooks[type](newQuery, givenOptions);
+
   //Update state on data change
   useEffect(() => {
-    if (dispatch) {
+    if (dispatch && data != undefined) {
       dispatch({
-        type: ActionType.STORE_DATA,
-        payload: { storeKey, data, loading, error },
+        type: ActionType.SET_DATA,
+        payload: { key: storeKey + ".data", value: data },
       });
     }
-  }, [data, loading, error]);
-};
+  }, [data]);
 
-export const GlobalDataFirestoreCollectionObject = ({
-  storeKey,
-  query,
-  options,
-}) => {
-  useGlobalDataFirestoreCollectionObject(storeKey, query, options);
-  return <></>;
-};
-
-export const useGlobalDataFirestoreCollectionObject = (
-  storeKey,
-  query,
-  options
-) => {
-  const [data, loading, error] = useFirestoreCollectionDataObject(
-    query,
-    options
-  );
-  const { dispatch } = useGlobalData();
-
-  //Update state on data change
   useEffect(() => {
-    if (dispatch) {
+    if (dispatch && loading != undefined) {
       dispatch({
-        type: ActionType.STORE_DATA,
-        payload: { storeKey, data, loading, error },
+        type: ActionType.SET_DATA,
+        payload: { key: storeKey + ".loading", value: loading },
       });
     }
-  }, [data, loading, error]);
+  }, [loading]);
+
+  useEffect(() => {
+    if (dispatch && error != undefined) {
+      dispatch({
+        type: ActionType.SET_DATA,
+        payload: { key: storeKey + ".error", value: error },
+      });
+    }
+  }, [error]);
+
+  return <></>;
 };
