@@ -29,9 +29,10 @@ import { useGlobalDataFirestoreCollection } from "libs/global-data-firestore";
 import { useGlobalData, useLoadData } from "libs/global-data";
 import { data } from "api/calendar/data";
 import { getAuth } from "firebase/auth";
-import { collection, doc } from "firebase/firestore";
+import { collection, doc, setDoc } from "firebase/firestore";
 import { db } from "libs/firebase";
 import { SplashScreen } from "components/splash-screen";
+import { useConfirm } from "libs/confirmation-dialog";
 
 const now = new Date();
 
@@ -56,6 +57,7 @@ const Page = () => {
     useLoadData("firestore.documents.dummy", {
       document: doc(db, "dummy/dumm01"),
     }) || {};
+  const confirm = useConfirm({ title: "Zeker???" });
 
   return (
     <>
@@ -69,6 +71,23 @@ const Page = () => {
           py: 8,
         }}
       >
+        <Button
+          onClick={() =>
+            confirm({
+              // onConfirm: () => {
+              //   console.log("jeap");
+              //   setDoc(documentData.docRef, { testgui3: true });
+              // },
+              process: () => {
+                console.log("PROCESS ---------");
+              },
+              title: "Zeker??",
+            })
+          }
+          variant="contained"
+        >
+          Doc test
+        </Button>
         <Container maxWidth={settings.stretch ? false : "xl"}>
           Doc data: {JSON.stringify(documentData)}
           <br />

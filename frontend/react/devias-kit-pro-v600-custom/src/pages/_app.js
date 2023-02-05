@@ -63,41 +63,45 @@ const App = (props) => {
       <ReduxProvider store={store}>
         <LocalizationProvider dateAdapter={AdapterDateFns}>
           <AuthProvider>
-            <CustomApp globalData={{ ...data, dispatch }} httpsRedirect={true}>
-              <AuthConsumer>
-                {(auth) => (
-                  <SettingsProvider>
-                    <SettingsConsumer>
-                      {(settings) => {
-                        // Prevent theme flicker when restoring custom settings from browser storage
-                        if (!settings.isInitialized) {
-                          // return null;
-                        }
+            <AuthConsumer>
+              {(auth) => (
+                <SettingsProvider>
+                  <SettingsConsumer>
+                    {(settings) => {
+                      // Prevent theme flicker when restoring custom settings from browser storage
+                      if (!settings.isInitialized) {
+                        // return null;
+                      }
 
-                        const theme = createTheme({
-                          colorPreset: settings.colorPreset,
-                          contrast: settings.contrast,
-                          direction: settings.direction,
-                          paletteMode: settings.paletteMode,
-                          responsiveFontSizes: settings.responsiveFontSizes,
-                        });
+                      const theme = createTheme({
+                        colorPreset: settings.colorPreset,
+                        contrast: settings.contrast,
+                        direction: settings.direction,
+                        paletteMode: settings.paletteMode,
+                        responsiveFontSizes: settings.responsiveFontSizes,
+                      });
 
-                        // Prevent guards from redirecting
-                        const showSlashScreen = !auth.isInitialized;
+                      // Prevent guards from redirecting
+                      const showSlashScreen = !auth.isInitialized;
 
-                        return (
-                          // <CustomApp globalData={{ ...data, dispatch }} httpsRedirect={true}>
-                          <ThemeProvider theme={theme}>
-                            <Head>
-                              <meta
-                                name="color-scheme"
-                                content={settings.paletteMode}
-                              />
-                              <meta
-                                name="theme-color"
-                                content={theme.palette.neutral[900]}
-                              />
-                            </Head>
+                      return (
+                        // <CustomApp globalData={{ ...data, dispatch }} httpsRedirect={true}>
+
+                        <ThemeProvider theme={theme}>
+                          <Head>
+                            <meta
+                              name="color-scheme"
+                              content={settings.paletteMode}
+                            />
+                            <meta
+                              name="theme-color"
+                              content={theme.palette.neutral[900]}
+                            />
+                          </Head>
+                          <CustomApp
+                            globalData={{ ...data, dispatch }}
+                            httpsRedirect={true}
+                          >
                             <RTL direction={settings.direction}>
                               <CssBaseline />
                               {showSlashScreen ? (
@@ -130,14 +134,14 @@ const App = (props) => {
                               )}
                               <Toaster />
                             </RTL>
-                          </ThemeProvider>
-                        );
-                      }}
-                    </SettingsConsumer>
-                  </SettingsProvider>
-                )}
-              </AuthConsumer>
-            </CustomApp>
+                          </CustomApp>
+                        </ThemeProvider>
+                      );
+                    }}
+                  </SettingsConsumer>
+                </SettingsProvider>
+              )}
+            </AuthConsumer>
           </AuthProvider>
         </LocalizationProvider>
       </ReduxProvider>

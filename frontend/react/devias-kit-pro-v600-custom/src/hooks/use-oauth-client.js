@@ -5,12 +5,13 @@ import { getUrlParams } from "utils/get-url-params";
 import toast from "react-hot-toast";
 import { getAuth } from "firebase/auth";
 import { setDoc, doc } from "firebase/firestore";
-import { db, useFirebaseData } from "libs/firebase";
+import { db } from "libs/firebase";
+import { useGlobalData } from "libs/global-data";
 
 export const useOauthClient = (configuration) => {
   const router = useRouter();
   const { pathname, query } = router;
-  const firebaseData = useFirebaseData();
+  const firebaseData = useGlobalData();
   //const [token, setToken] = useState();
 
   useEffect(() => {

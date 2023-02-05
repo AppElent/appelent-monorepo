@@ -11,7 +11,7 @@ export const useFirestoreCollectionDataObject = (query, options, process) => {
       let valueObject = {};
       values.forEach((value) => {
         const id = value.id;
-        valueObject[id] = { id, ...value.data(), docRef: value };
+        valueObject[id] = { id, ...value.data(), docRef: value.ref };
       });
 
       if (process) {

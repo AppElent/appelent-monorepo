@@ -12,7 +12,7 @@ export const useFirestoreCollectionData = (query, options, process) => {
         const returnObject = {
           ...value.data(),
           id: value.id,
-          docRef: value,
+          docRef: value.ref,
         };
         valueArray.push(returnObject);
       });

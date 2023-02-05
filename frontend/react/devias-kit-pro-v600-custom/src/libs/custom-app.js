@@ -3,6 +3,7 @@ import { doc } from "firebase/firestore";
 import { useAuth } from "hooks/use-auth";
 import { createContext, useContext, useEffect, useState } from "react";
 import { QueryClientProvider } from "react-query";
+import { ConfirmProvider } from "./confirmation-dialog";
 import { db } from "./firebase";
 
 import { GlobalDataContext, useGlobalData, useLoadData } from "./global-data";
@@ -27,7 +28,14 @@ const CustomApp = ({ httpsRedirect, queryClient, globalData, children }) => {
 
   return (
     <GlobalDataContext.Provider value={globalData}>
-      <CustomAppChild queryClient={queryClient}>{children}</CustomAppChild>
+      <ConfirmProvider
+        defaultOptions={{
+          confirmationButtonProps: { variant: "contained", color: "error" },
+          cancellationButtonProps: { variant: "contained" },
+        }}
+      >
+        <CustomAppChild queryClient={queryClient}>{children}</CustomAppChild>
+      </ConfirmProvider>
     </GlobalDataContext.Provider>
   );
 };
