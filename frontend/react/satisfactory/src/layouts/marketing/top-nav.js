@@ -21,7 +21,20 @@ import { PagesPopover } from "./pages-popover";
 import { TopNavItem } from "./top-nav-item";
 import { siteSettings } from "config";
 
-const items = [];
+const items = [
+  {
+    title: "App",
+    path: paths.app.index,
+  },
+  // {
+  //   title: "Pages",
+  //   children: <PagesPopover />,
+  // },
+  // {
+  //   title: "Docs",
+  //   path: paths.docs.welcome,
+  // },
+];
 
 const TOP_NAV_HEIGHT = 64;
 
@@ -165,14 +178,14 @@ export const TopNav = (props) => {
               </Box>
             </Stack>
           )}
-          {/* <Stack
+          <Stack
             alignItems="center"
             direction="row"
             justifyContent="flex-end"
             spacing={2}
             sx={{ flexGrow: 1 }}
           >
-            <Button
+            {/* <Button
               component="a"
               size={mdUp ? "medium" : "small"}
               href="https://mui.com/store/items/devias-kit-pro"
@@ -180,7 +193,7 @@ export const TopNav = (props) => {
               variant="contained"
             >
               Purchase Now
-            </Button>
+            </Button> */}
             {!mdUp && (
               <IconButton onClick={onMobileNavOpen}>
                 <SvgIcon fontSize="small">
@@ -188,7 +201,7 @@ export const TopNav = (props) => {
                 </SvgIcon>
               </IconButton>
             )}
-          </Stack> */}
+          </Stack>
         </Stack>
       </Container>
     </Box>
