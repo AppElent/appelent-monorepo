@@ -48,18 +48,20 @@ export const ItemDetailsContainer = (props) => {
           spacing={3}
         >
           <Typography variant="h6">Details</Typography>
-          <Button
-            color="inherit"
-            onClick={onEdit}
-            size="small"
-            startIcon={
-              <SvgIcon>
-                <Edit02Icon />
-              </SvgIcon>
-            }
-          >
-            Edit
-          </Button>
+          {onEdit && (
+            <Button
+              color="inherit"
+              onClick={onEdit}
+              size="small"
+              startIcon={
+                <SvgIcon>
+                  <Edit02Icon />
+                </SvgIcon>
+              }
+            >
+              Edit
+            </Button>
+          )}
         </Stack>
         {/* <PropertyList>
           <PropertyListItem

@@ -124,20 +124,22 @@ export const ItemListSearch = (props) => {
             value={formik.values.search}
           />
         </Box>
-        <TextField
-          label="Sort By"
-          name="sort"
-          onChange={handleSortChange}
-          select
-          SelectProps={{ native: true }}
-          value={sortDir}
-        >
-          {sortOptions.map((option) => (
-            <option key={option.value} value={option.value}>
-              {option.label}
-            </option>
-          ))}
-        </TextField>
+        {sortOptions && sortOptions.length > 0 && (
+          <TextField
+            label="Sort By"
+            name="sort"
+            onChange={handleSortChange}
+            select
+            SelectProps={{ native: true }}
+            value={sortDir}
+          >
+            {sortOptions.map((option) => (
+              <option key={option.value} value={option.value}>
+                {option.label}
+              </option>
+            ))}
+          </TextField>
+        )}
       </Stack>
     </div>
   );
@@ -149,6 +151,6 @@ ItemListSearch.propTypes = {
   sortBy: PropTypes.string,
   sortDir: PropTypes.oneOf(["asc", "desc"]),
   tabOptions: PropTypes.array,
-  sortOptions: PropTypes.array.isRequired,
+  sortOptions: PropTypes.array,
   directQuery: PropTypes.bool,
 };

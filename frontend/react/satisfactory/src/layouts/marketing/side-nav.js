@@ -1,84 +1,89 @@
-import { usePathname } from 'next/navigation';
-import NextLink from 'next/link';
-import PropTypes from 'prop-types';
-import { Box, ButtonBase, Drawer, Stack } from '@mui/material';
-import { Logo } from '../../components/logo';
-import { paths } from '../../paths';
-import { SideNavItem } from './side-nav-item';
+import { usePathname } from "next/navigation";
+import NextLink from "next/link";
+import PropTypes from "prop-types";
+import { Box, ButtonBase, Drawer, Stack } from "@mui/material";
+import { Logo } from "../../components/logo";
+import { paths } from "../../paths";
+import { SideNavItem } from "./side-nav-item";
+import { siteSettings } from "config";
 
 const items = [
   {
-    title: 'Components',
-    path: paths.components.index
+    title: "App",
+    path: paths.app.index,
   },
-  {
-    title: 'Pages',
-    children: [
-      {
-        subheader: 'Dashboard',
-        items: [
-          {
-            title: 'Overview',
-            path: paths.dashboard.index
-          },
-          {
-            title: 'Customers',
-            path: paths.dashboard.customers.index
-          },
-          {
-            title: 'Logistics',
-            path: paths.dashboard.logistics.index
-          },
-          {
-            title: 'File Manager',
-            path: paths.dashboard.fileManager
-          },
-          {
-            title: 'Academy',
-            path: paths.dashboard.academy.index
-          }
-        ]
-      },
-      {
-        subheader: 'Other',
-        items: [
-          {
-            title: 'Blog',
-            path: paths.dashboard.blog.index
-          },
-          {
-            title: 'Pricing',
-            path: paths.pricing
-          },
-          {
-            title: 'Contact',
-            path: paths.contact
-          },
-          {
-            title: 'Checkout',
-            path: paths.checkout
-          },
-          {
-            title: 'Error',
-            path: paths[404]
-          }
-        ]
-      }
-    ]
-  },
-  {
-    title: 'Docs',
-    path: paths.docs.welcome
-  }
+  // {
+  //   title: "Pages",
+  //   children: [
+  //     {
+  //       subheader: "Dashboard",
+  //       items: [
+  //         {
+  //           title: "Overview",
+  //           path: paths.dashboard.index,
+  //         },
+  //         {
+  //           title: "Customers",
+  //           path: paths.dashboard.customers.index,
+  //         },
+  //         {
+  //           title: "Logistics",
+  //           path: paths.dashboard.logistics.index,
+  //         },
+  //         {
+  //           title: "File Manager",
+  //           path: paths.dashboard.fileManager,
+  //         },
+  //         {
+  //           title: "Academy",
+  //           path: paths.dashboard.academy.index,
+  //         },
+  //       ],
+  //     },
+  //     {
+  //       subheader: "Other",
+  //       items: [
+  //         {
+  //           title: "Blog",
+  //           path: paths.dashboard.blog.index,
+  //         },
+  //         {
+  //           title: "Pricing",
+  //           path: paths.pricing,
+  //         },
+  //         {
+  //           title: "Contact",
+  //           path: paths.contact,
+  //         },
+  //         {
+  //           title: "Checkout",
+  //           path: paths.checkout,
+  //         },
+  //         {
+  //           title: "Error",
+  //           path: paths[404],
+  //         },
+  //       ],
+  //     },
+  //   ],
+  // },
+  // {
+  //   title: "Docs",
+  //   path: paths.docs.welcome,
+  // },
 ];
 
-const renderItems = ({ depth = 0, items, pathname }) => items.reduce((acc,
-  item) => reduceChildRoutes({
-  acc,
-  depth,
-  item,
-  pathname
-}), []);
+const renderItems = ({ depth = 0, items, pathname }) =>
+  items.reduce(
+    (acc, item) =>
+      reduceChildRoutes({
+        acc,
+        depth,
+        item,
+        pathname,
+      }),
+    []
+  );
 
 const reduceChildRoutes = ({ acc, depth, item, pathname }) => {
   const checkPath = !!(item.path && pathname);
@@ -103,22 +108,22 @@ const reduceChildRoutes = ({ acc, depth, item, pathname }) => {
               key={index}
               spacing={0.5}
               sx={{
-                listStyle: 'none',
+                listStyle: "none",
                 m: 0,
-                p: 0
+                p: 0,
               }}
             >
               {child.subheader && (
                 <Box
                   component="li"
                   sx={{
-                    color: 'text.secondary',
+                    color: "text.secondary",
                     fontSize: 12,
                     fontWeight: 500,
                     lineHeight: 1.66,
                     mb: 1,
-                    pl: '24px',
-                    textTransform: 'uppercase'
+                    pl: "24px",
+                    textTransform: "uppercase",
                   }}
                 >
                   {child.subheader}
@@ -131,61 +136,62 @@ const reduceChildRoutes = ({ acc, depth, item, pathname }) => {
                 let linkProps = undefined;
 
                 if (item.path) {
-                  const isExternal = item.path.startsWith('http');
+                  const isExternal = item.path.startsWith("http");
 
                   linkProps = isExternal
                     ? {
-                      component: 'a',
-                      href: item.path,
-                      target: '_blank'
-                    }
+                        component: "a",
+                        href: item.path,
+                        target: "_blank",
+                      }
                     : {
-                      component: NextLink,
-                      href: item.path
-                    };
+                        component: NextLink,
+                        href: item.path,
+                      };
                 }
 
                 return (
                   <li key={item.title}>
                     <ButtonBase
                       sx={{
-                        alignItems: 'center',
+                        alignItems: "center",
                         borderRadius: 1,
-                        display: 'flex',
-                        justifyContent: 'flex-start',
-                        pl: '24px',
-                        pr: '16px',
-                        py: '8px',
-                        textAlign: 'left',
-                        '&:hover': {
-                          backgroundColor: 'action.hover'
+                        display: "flex",
+                        justifyContent: "flex-start",
+                        pl: "24px",
+                        pr: "16px",
+                        py: "8px",
+                        textAlign: "left",
+                        "&:hover": {
+                          backgroundColor: "action.hover",
                         },
                         ...(active && {
-                          color: 'primary.main'
-                        })
+                          color: "primary.main",
+                        }),
                       }}
-                      {...linkProps}>
+                      {...linkProps}
+                    >
                       <Box
                         component="span"
                         sx={{
                           height: 6,
                           mr: 2,
-                          width: 6
+                          width: 6,
                         }}
                       >
                         <Box
                           sx={{
-                            backgroundColor: 'neutral.400',
-                            borderRadius: '50%',
+                            backgroundColor: "neutral.400",
+                            borderRadius: "50%",
                             height: 4,
                             opacity: 0,
                             width: 4,
                             ...(active && {
-                              backgroundColor: 'primary.main',
+                              backgroundColor: "primary.main",
                               height: 6,
                               opacity: 1,
-                              width: 6
-                            })
+                              width: 6,
+                            }),
                           }}
                         />
                       </Box>
@@ -196,8 +202,8 @@ const reduceChildRoutes = ({ acc, depth, item, pathname }) => {
                           fontFamily: (theme) => theme.typography.fontFamily,
                           fontSize: 13,
                           fontWeight: 500,
-                          lineHeight: '24px',
-                          whiteSpace: 'nowrap'
+                          lineHeight: "24px",
+                          whiteSpace: "nowrap",
                         }}
                       >
                         {item.title}
@@ -238,16 +244,16 @@ export const SideNav = (props) => {
       open={open}
       PaperProps={{
         sx: {
-          maxWidth: '100%',
-          width: 300
-        }
+          maxWidth: "100%",
+          width: 300,
+        },
       }}
       variant="temporary"
     >
       <Box
         sx={{
           pt: 2,
-          px: 2
+          px: 2,
         }}
       >
         <Stack
@@ -257,45 +263,42 @@ export const SideNav = (props) => {
           display="inline-flex"
           href={paths.index}
           spacing={1}
-          sx={{ textDecoration: 'none' }}
+          sx={{ textDecoration: "none" }}
         >
           <Box
             sx={{
-              display: 'inline-flex',
+              display: "inline-flex",
               height: 24,
-              width: 24
+              width: 24,
             }}
           >
             <Logo />
           </Box>
           <Box
             sx={{
-              color: 'text.primary',
-              fontFamily: '\'Plus Jakarta Sans\', sans-serif',
+              color: "text.primary",
+              fontFamily: "'Plus Jakarta Sans', sans-serif",
               fontSize: 14,
               fontWeight: 800,
-              letterSpacing: '0.3px',
+              letterSpacing: "0.3px",
               lineHeight: 2.5,
-              '& span': {
-                color: 'primary.main'
-              }
+              "& span": {
+                color: "primary.main",
+              },
             }}
           >
-            Devias Kit <span>PRO</span>
+            {siteSettings.title} <span>{siteSettings.version}</span>
           </Box>
         </Stack>
       </Box>
-      <Box
-        component="nav"
-        sx={{ p: 2 }}
-      >
+      <Box component="nav" sx={{ p: 2 }}>
         <Stack
           component="ul"
           spacing={1}
           sx={{
-            listStyle: 'none',
+            listStyle: "none",
             m: 0,
-            p: 0
+            p: 0,
           }}
         >
           {renderItems({ items, pathname })}
@@ -307,5 +310,5 @@ export const SideNav = (props) => {
 
 SideNav.propTypes = {
   onClose: PropTypes.func,
-  open: PropTypes.bool
+  open: PropTypes.bool,
 };

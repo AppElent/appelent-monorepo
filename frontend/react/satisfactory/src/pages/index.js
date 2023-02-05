@@ -1,5 +1,6 @@
 import { usePageView } from "../hooks/use-page-view";
 import { Layout as MarketingLayout } from "../layouts/marketing";
+import { SplashScreen } from "components/splash-screen";
 
 const Page = () => {
   usePageView();
@@ -10,6 +11,7 @@ const Page = () => {
         <title>{}</title>
       </Head> */}
       <main>
+        {/* <SplashScreen /> */}
         {/* <HomeHero />
         <HomeFeatures />
         <HomeReviews />
