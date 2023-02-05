@@ -49,7 +49,7 @@ jobs:
     uses: ./.github/workflows/_kubernetes_helm_deploy.yml
     needs: [prepare_deploy]
     with:
-      working_dir: ./frontend/react/devias-kit-pro-v600-custom/deployment
+      working_dir: ./frontend/react/satisfactory/deployment
       values_file: ${{ needs.prepare_deploy.outputs.values_file }}
       release_name: nextjs-satisfactory
       namespace: ${{ needs.prepare_deploy.outputs.k8s_namespace }}

@@ -1,4 +1,4 @@
-nameOverride: nextjs-demo
+nameOverride: nextjs-satisfactory
 
 image:
   repository: acrappelent.azurecr.io/nextjs-satisfactory
