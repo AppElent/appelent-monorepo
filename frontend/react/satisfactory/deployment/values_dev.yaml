@@ -1,0 +1,30 @@
+nameOverride: nextjs-demo
+
+image:
+  repository: acrappelent.azurecr.io/nextjs-satisfactory
+  pullPolicy: Always
+  # Overrides the image tag whose default is the chart appVersion.
+  tag: "latest"
+
+env:
+  normal: 
+    test1: value1
+    test2: value2
+  secret:
+    password1: test
+
+ingress:
+  annotations:
+    {
+      nginx.ingress.kubernetes.io/use-regex: "true",
+      cert-manager.io/cluster-issuer: letsencrypt,
+    }
+  hosts:
+    - host: dev.satisfactory.appelent.com
+      paths:
+        - path: /(.*)
+          pathType: ImplementationSpecific
+  tls:
+    - hosts:
+        - dev.satisfactory.appelent.com
+      secretName: tls-secret-satisfactory
