@@ -83,6 +83,10 @@ jobs:
         run: |
           helm repo add my-repo ${{ inputs.helm_repo }}
 
+      - name: Helm template
+        run: |
+          helm template ${{inputs.release_name}} ${{inputs.helm_name}} -f ${{inputs.values_file}} --namespace ${{inputs.namespace}}
+
       - name: Deploy
         run: |
           helm upgrade --install --atomic --timeout 5m ${{ inputs.release_name }} ${{ inputs.helm_name }} -f ${{ inputs.values_file }} \
