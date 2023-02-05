@@ -1,0 +1,81 @@
+name: NextJS App Satisfactory Build
+
+on:
+  workflow_dispatch:
+    inputs:
+      deploy_dev:
+        type: boolean
+        description: Deploy to development environment
+      deploy_prd:
+        type: boolean
+        description: Deploy to production environment
+  push:
+    branches:
+      - main
+    paths:
+    - frontend/react/satisfactory/** 
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+
+jobs:
+  prepare_build: 
+    runs-on: ubuntu-latest
+    outputs:
+      deploy_dev: ${{ steps.output.outputs.DEPLOY_DEV }}
+    steps:
+      - name: Dummy step
+        run: env
+      # - uses: Azure/login@v1
+      #   with:
+      #     creds: ${{ secrets.AZURE_CREDENTIALS }}
+      # - uses: Azure/get-keyvault-secrets@v1
+      #   with: 
+      #     keyvault: "kv-appelent-shared"
+      #     secrets: 'containerPassword, containerUsername'
+      #   id: myGetSecretAction
+      - name: Create .env.local file
+        run: |
+          touch .env.local
+          echo NEXT_PUBLIC_GITHUB_SHA=${{ github.sha }} >> .env.local
+      - uses: actions/upload-artifact@v3
+        with:
+          name: env-local
+          path: ./.env.local
+      - name: Set output vars
+        id: output
+        run: |
+          if [[ "${{inputs.deploy_dev}}" == "true" || ${{github.event_name}} != 'workflow_dispatch' ]]; then
+              echo "DEPLOY_DEV=true" >> $GITHUB_OUTPUT
+          else
+              echo "DEPLOY_DEV=false" >> $GITHUB_OUTPUT
+          fi
+
+
+  build:
+    uses: ./.github/workflows/_docker_build.yml
+    needs: [prepare_build]
+    with:
+      working_dir: ./frontend/react/devias-kit-pro-v600-custom
+      repository_name: nextjs-satisfactory
+      artifact_name: env-local
+      artifact_path: ./frontend/react/devias-kit-pro-v600-custom
+    secrets: inherit
+
+  deploy_dev:
+    uses: ./.github/workflows/nextjs_satisfactory_deploy.yml
+    if: ${{ needs.prepare_build.outputs.deploy_dev == 'true' }}
+    needs: [build]
+    with:
+      environment: development
+      image_tag: ${{ github.sha }}
+    secrets: inherit
+
+  deploy_prod:
+    uses: ./.github/workflows/nextjs_satisfactory_deploy.yml
+    if: ${{inputs.deploy_prd == true}}
+    needs: [build]
+    with:
+      environment: production
+      image_tag: ${{ github.sha }}
+    secrets: inherit
