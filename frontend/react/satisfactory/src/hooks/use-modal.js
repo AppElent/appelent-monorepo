@@ -1,7 +1,5 @@
 import { useState } from "react";
 
-import useModal from "./useModal";
-
 const useModal = (initialMode = false, initialData) => {
   const [modalOpen, setModalOpen] = useState(initialMode);
   const [data, setData] = useState(initialData);

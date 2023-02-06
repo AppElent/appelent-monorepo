@@ -29,6 +29,7 @@ import { SeverityPill } from "components/severity-pill";
 import { siteSettings } from "config";
 
 import satisfactoryProducts from "data/satisfactory/v700/items.json";
+import productionRecipes from "data/satisfactory/v700/productionRecipes.json";
 import { paginate } from "utils/paginate";
 import { useRouter } from "next/router";
 
@@ -164,11 +165,9 @@ const Page = () => {
     }
 
     return items.find((item) => item.slug === drawer.data);
-  }, [drawer, items]);
+  }, [drawer]);
 
   const itemsPaginated = paginate(items, search.rowsPerPage, search.page + 1);
-
-  console.log(items, currentItem, router.query);
 
   const formik = useFormik({
     initialValues: currentItem,
@@ -177,6 +176,26 @@ const Page = () => {
       console.log(values);
     },
   });
+
+  let productIngredients = [];
+  if (currentItem) {
+    let currentItemUsedFor = undefined;
+    //console.log(Object.entries(productionRecipes));
+    for (const [key, value] of Object.entries(productionRecipes)) {
+      //console.log(key, value, currentItem.className);
+      const ingredients = value.ingredients.filter((ingredient) => {
+        return ingredient.itemClass == currentItem.className;
+      });
+      if (ingredients.length > 0) {
+        ingredients.forEach((recipe) => {
+          console.log(recipe, value);
+        });
+        productIngredients.push(...ingredients);
+      }
+    }
+  }
+
+  console.log(productIngredients);
 
   useEffect(() => {
     // If product query param is present, set currentItem

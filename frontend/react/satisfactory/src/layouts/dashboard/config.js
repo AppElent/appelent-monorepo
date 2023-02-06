@@ -105,6 +105,15 @@ export const getSections = (t) => [
           </SvgIcon>
         ),
       },
+      {
+        title: t(tokens.nav.satisfactory.products),
+        path: paths.app.satisfactory.products,
+        icon: (
+          <SvgIcon fontSize="small">
+            <ShoppingBag03Icon />
+          </SvgIcon>
+        ),
+      },
       //   {
       //     title: t(tokens.nav.customers),
       //     path: paths.dashboard.customers.index,
