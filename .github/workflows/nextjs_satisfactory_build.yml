@@ -56,10 +56,10 @@ jobs:
     uses: ./.github/workflows/_docker_build.yml
     needs: [prepare_build]
     with:
-      working_dir: ./frontend/react/devias-kit-pro-v600-custom
+      working_dir: ./frontend/react/satisfactory
       repository_name: nextjs-satisfactory
       artifact_name: env-local
-      artifact_path: ./frontend/react/devias-kit-pro-v600-custom
+      artifact_path: ./frontend/react/satisfactory
     secrets: inherit
 
   deploy_dev:

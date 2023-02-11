@@ -1,4 +1,3 @@
-import { CropLandscapeOutlined } from "@mui/icons-material";
 import items_v700 from "data/satisfactory/v700/items.json";
 import buildables_v700 from "data/satisfactory/v700/buildables.json";
 import buildableRecipes_v700 from "data/satisfactory/v700/buildableRecipes.json";
