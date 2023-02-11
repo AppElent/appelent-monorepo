@@ -6,13 +6,13 @@ import { Layout as DashboardLayout } from "layouts/dashboard";
 //import { useSearch, useItems } from "components/app/list/utils";
 import { siteSettings, oauthConfigurations } from "config";
 import { useOauthClient } from "hooks/use-oauth-client";
-import { useGlobalData } from "libs/global-data";
+import { useData } from "libs/appelent-framework";
 
 const Page = () => {
   usePageView();
   const oauth = useOauthClient(oauthConfigurations.enelogic);
   const oauth2 = useOauthClient(oauthConfigurations.enelogic2);
-  const data = useGlobalData();
+  const data = useData();
   //console.log(data, data.firestore.collections.tokens.data.enelogic);
   return (
     <>

@@ -6,12 +6,12 @@ import toast from "react-hot-toast";
 import { getAuth } from "firebase/auth";
 import { setDoc, doc } from "firebase/firestore";
 import { db } from "libs/firebase";
-import { useGlobalData } from "libs/global-data";
+import { useData } from "../caching";
 
 export const useOauthClient = (configuration) => {
   const router = useRouter();
   const { pathname, query } = router;
-  const firebaseData = useGlobalData();
+  const firebaseData = useData();
   //const [token, setToken] = useState();
 
   useEffect(() => {
