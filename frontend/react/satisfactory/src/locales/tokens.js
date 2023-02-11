@@ -4,6 +4,7 @@ export const tokens = {
   },
   nav: {
     satisfactory: {
+      title: "nav.satisfactory.title",
       products: "nav.satisfactory.products",
     },
     academy: "nav.academy",

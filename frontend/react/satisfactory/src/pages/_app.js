@@ -30,8 +30,11 @@ import { SettingsButton } from "../components/settings-button";
 import { SettingsDrawer } from "../components/settings-drawer";
 
 import CustomApp from "libs/custom-app";
-import { reducer, getInitialGlobalData } from "libs/global-data";
 import { getAuth } from "firebase/auth";
+import { Refine } from "@pankod/refine-core";
+
+import routerProvider from "@pankod/refine-nextjs-router";
+import dataProvider from "@pankod/refine-simple-rest";
 
 const clientSideEmotionCache = createEmotionCache();
 
@@ -44,8 +47,6 @@ const useAnalytics = () => {
 const App = (props) => {
   const { Component, emotionCache = clientSideEmotionCache, pageProps } = props;
   const auth = getAuth();
-  const [data, dispatch] = useReducer(reducer, getInitialGlobalData(auth));
-  console.log("Globaldata", data, auth);
 
   useAnalytics();
 
@@ -54,12 +55,18 @@ const App = (props) => {
   console.log("Environment variables", process.env.NEXT_PUBLIC_GITHUB_SHA);
 
   return (
+    // <Refine
+    //   catchAll={<CatchAll />}
+    //   routerProvider={routerProvider}
+    //   dataProvider={dataProvider("https://api.fake-rest.refine.dev")}
+    //   options={{ syncWithLocation: true }}
+    //   resources={[{ name: "test01", list: OrderList }]}
+    // >
     <CacheProvider value={emotionCache}>
       <Head>
         <title>{siteSettings.title}</title>
         <meta name="viewport" content="initial-scale=1, width=device-width" />
       </Head>
-
       <ReduxProvider store={store}>
         <LocalizationProvider dateAdapter={AdapterDateFns}>
           <AuthProvider>
@@ -98,10 +105,7 @@ const App = (props) => {
                               content={theme.palette.neutral[900]}
                             />
                           </Head>
-                          <CustomApp
-                            globalData={{ ...data, dispatch }}
-                            httpsRedirect={true}
-                          >
+                          <CustomApp>
                             <RTL direction={settings.direction}>
                               <CssBaseline />
                               {showSlashScreen ? (
@@ -146,6 +150,7 @@ const App = (props) => {
         </LocalizationProvider>
       </ReduxProvider>
     </CacheProvider>
+    // </Refine>
   );
 };
 

@@ -1,38 +1,16 @@
 import Head from "next/head";
-import { addDays, subDays, subHours, subMinutes } from "date-fns";
-import PlusIcon from "@untitled-ui/icons-react/build/esm/Plus";
-import {
-  Box,
-  Button,
-  Container,
-  Stack,
-  SvgIcon,
-  Typography,
-  Unstable_Grid2 as Grid,
-} from "@mui/material";
+import { Box, Button, Container, Unstable_Grid2 as Grid } from "@mui/material";
 import { usePageView } from "../../hooks/use-page-view";
 import { useSettings } from "../../hooks/use-settings";
 import { Layout as DashboardLayout } from "../../layouts/dashboard";
-import { OverviewBanner } from "../../sections/dashboard/overview/overview-banner";
-import { OverviewDoneTasks } from "../../sections/dashboard/overview/overview-done-tasks";
-import { OverviewEvents } from "../../sections/dashboard/overview/overview-events";
-import { OverviewInbox } from "../../sections/dashboard/overview/overview-inbox";
-import { OverviewTransactions } from "../../sections/dashboard/overview/overview-transactions";
-import { OverviewPendingIssues } from "../../sections/dashboard/overview/overview-pending-issues";
-import { OverviewSubscriptionUsage } from "../../sections/dashboard/overview/overview-subscription-usage";
-import { OverviewHelp } from "../../sections/dashboard/overview/overview-help";
-import { OverviewJobs } from "../../sections/dashboard/overview/overview-jobs";
-import { OverviewOpenTickets } from "../../sections/dashboard/overview/overview-open-tickets";
-import { OverviewTips } from "../../sections/dashboard/overview/overview-tips";
 import { siteSettings } from "config";
-import { useGlobalDataFirestoreCollection } from "libs/global-data-firestore";
-import { useGlobalData, useLoadData } from "libs/global-data";
-import { data } from "api/calendar/data";
+import { useData } from "libs/appelent-framework";
 import { getAuth } from "firebase/auth";
 import { collection, doc, setDoc } from "firebase/firestore";
 import { db } from "libs/firebase";
-import { SplashScreen } from "components/splash-screen";
-import { useConfirm } from "libs/confirmation-dialog";
+import { useList } from "@pankod/refine-core";
+
+import { useConfirm } from "libs/appelent-framework/confirmation";
 
 const now = new Date();
 
@@ -41,22 +19,36 @@ const Page = () => {
   usePageView();
   const auth = getAuth();
 
-  const { data } = useLoadData("firestore.collections.dummy");
-  const key = "firestore.collectionObjects.tokens";
+  const test1 = useList({ resource: "products" });
+
+  const data = useData("dummy01");
+  const { data: data3 } = useData("dummy03");
+  // const key = "firestore.collectionObjects.tokens";
 
   const { data: data2 } =
-    useLoadData("firestore.collections.dummy2", {
-      collection: collection(db, "dummy"),
+    useData({
+      name: "dummy100",
+      options: {
+        collection: collection(db, "dummy"),
+        dataProviderName: "firestore",
+      },
     }) || {};
-  const { data: data3 } = useLoadData("firestore.collections.dummy3") || {};
-  const { data: tokens } =
-    useLoadData(key, {
-      collection: collection(db, `users/${auth?.currentUser?.uid}/tokens`),
-    }) || {};
-  const { data: documentData } =
-    useLoadData("firestore.documents.dummy", {
-      document: doc(db, "dummy/dumm01"),
-    }) || {};
+
+  const testdocument = useData("testdocument");
+
+  //   "dummy02", {
+  //   collection: collection(db, "dummy"),
+  //   dataProviderName: "firestore",
+  // }) || {};
+  // const { data: data3 } = useData("firestore.collections.dummy3") || {};
+  // const { data: tokens } =
+  //   useData(key, {
+  //     collection: collection(db, `users/${auth?.currentUser?.uid}/tokens`),
+  //   }) || {};
+  // const { data: documentData } =
+  //   useData("firestore.documents.dummy", {
+  //     document: doc(db, "dummy/dumm01"),
+  //   }) || {};
   const confirm = useConfirm({ title: "Zeker???" });
 
   return (
@@ -89,12 +81,12 @@ const Page = () => {
           Doc test
         </Button>
         <Container maxWidth={settings.stretch ? false : "xl"}>
-          Doc data: {JSON.stringify(documentData)}
+          {/* Doc data: {JSON.stringify(documentData)} */}
           <br />
           <br />
           Dummy data:{" "}
           {JSON.stringify(
-            data?.map((doc) => {
+            data?.data?.map((doc) => {
               const { docRef, ...rest } = doc || {};
               return rest;
             })
@@ -102,24 +94,24 @@ const Page = () => {
           <br />
           <br />
           Dummy data2:{" "}
-          {JSON.stringify(
+          {/* {JSON.stringify(
             data2?.map((doc) => {
               const { docRef, ...rest } = doc || {};
               return rest;
             })
-          )}
+          )} */}
           <br />
           <br />
           Dummy data3:{" "}
-          {JSON.stringify(
+          {/* {JSON.stringify(
             data3?.map((doc) => {
               const { docRef, ...rest } = doc || {};
               return rest;
             })
-          )}
+          )} */}
           <br />
           <br />
-          Tokens data: {JSON.stringify(tokens)}
+          {/* Tokens data: {JSON.stringify(tokens)} */}
           {/* <Grid
             container
             disableEqualOverflow

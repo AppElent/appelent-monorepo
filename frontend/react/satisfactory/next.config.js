@@ -32,5 +32,4 @@ const config = {
 //   '@fullcalendar/timegrid',
 //   '@fullcalendar/timeline'
 // ]);
-
-// module.exports = withTM(config);
+// module.exports = config;
