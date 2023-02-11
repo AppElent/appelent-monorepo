@@ -85,23 +85,32 @@ export const getSections = (t) => [
     ],
   },
   {
-    subheader: t(tokens.nav.concepts),
+    subheader: t(tokens.nav.satisfactory.title),
     items: [
+      // {
+      //   title: t(tokens.nav.list),
+      //   path: paths.app.list,
+      //   icon: (
+      //     <SvgIcon fontSize="small">
+      //       <LayoutAlt02Icon />
+      //     </SvgIcon>
+      //   ),
+      // },
+      // {
+      //   title: t(tokens.nav.auth),
+      //   path: paths.app.oauth,
+      //   icon: (
+      //     <SvgIcon fontSize="small">
+      //       <Lock01Icon />
+      //     </SvgIcon>
+      //   ),
+      // },
       {
-        title: t(tokens.nav.list),
-        path: paths.app.list,
+        title: t(tokens.nav.satisfactory.products),
+        path: paths.app.satisfactory.products.index,
         icon: (
           <SvgIcon fontSize="small">
-            <LayoutAlt02Icon />
-          </SvgIcon>
-        ),
-      },
-      {
-        title: t(tokens.nav.auth),
-        path: paths.app.oauth,
-        icon: (
-          <SvgIcon fontSize="small">
-            <Lock01Icon />
+            <ShoppingBag03Icon />
           </SvgIcon>
         ),
       },

@@ -13,8 +13,6 @@ import { firebaseApp } from "../../libs/firebase";
 import { Issuer } from "../../utils/auth";
 
 import { updateUser } from "utils/user";
-import { useGlobalData } from "libs/global-data";
-import { updateDoc } from "firebase/firestore";
 
 const auth = getAuth(firebaseApp);
 

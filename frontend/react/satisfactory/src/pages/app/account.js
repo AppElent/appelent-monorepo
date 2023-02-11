@@ -19,7 +19,7 @@ import { AccountTeamSettings } from "../../sections/dashboard/account/account-te
 import { AccountSecuritySettings } from "../../sections/dashboard/account/account-security-settings";
 import { useAuth } from "hooks/use-auth";
 import { siteSettings } from "config";
-import { useGlobalData } from "libs/global-data";
+import { useData } from "libs/appelent-framework";
 
 const now = new Date();
 
@@ -34,7 +34,7 @@ const tabs = [
 const Page = () => {
   const { user } = useAuth();
   const [currentTab, setCurrentTab] = useState("general");
-  const { settings, dispatch } = useGlobalData();
+  const { settings, dispatch } = useData();
 
   usePageView();
 

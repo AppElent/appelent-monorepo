@@ -5,10 +5,13 @@ import {
   Box,
   Button,
   Divider,
+  MenuItem,
+  Select,
   Stack,
   SvgIcon,
   TableCell,
   TableRow,
+  TextField,
   Typography,
 } from "@mui/material";
 import { format } from "date-fns";
@@ -29,8 +32,20 @@ import { SeverityPill } from "components/severity-pill";
 import { siteSettings } from "config";
 
 import satisfactoryProducts from "data/satisfactory/v700/items.json";
+import productionRecipes from "data/satisfactory/v700/productionRecipes.json";
 import { paginate } from "utils/paginate";
 import { useRouter } from "next/router";
+import {
+  getSatisfactoryBuildableRecipeByItem,
+  getSatisfactoryItem,
+  getSatisfactoryRecipesByItem,
+  getSatisfactoryResourceByItem,
+  getSatisfactorySchematicByItem,
+  SatisfactoryCurrentVersion,
+  satisfactoryVersions,
+} from "libs/satisfactory";
+import { paths } from "paths";
+import { SatisfactoryProductDetail } from "sections/app/satisfactory/product/satisfactory-product-detail";
 
 let satisfactoryProductsArray = Object.keys(satisfactoryProducts).map((k) => ({
   ...satisfactoryProducts[k],
@@ -76,8 +91,6 @@ const useItems = (search) => {
     try {
       //const response = satisfactoryProducts; // filter items here
       let response = satisfactoryProductsArray;
-
-      console.log(search);
 
       // search result
       if (search.filters?.query) {
@@ -152,6 +165,7 @@ const Page = () => {
   const rootRef = useRef(null);
   const router = useRouter();
   const { search, updateSearch } = useSearch();
+  const [version, setVersion] = useState(SatisfactoryCurrentVersion);
 
   const { items, itemsCount } = useItems(search);
   const [drawer, setDrawer] = useState({
@@ -162,13 +176,11 @@ const Page = () => {
     if (!drawer.data) {
       return undefined;
     }
-
-    return items.find((item) => item.slug === drawer.data);
-  }, [drawer, items]);
+    const item = items.find((item) => item.slug === drawer.data);
+    return getSatisfactoryItem(item.className);
+  }, [drawer]);
 
   const itemsPaginated = paginate(items, search.rowsPerPage, search.page + 1);
-
-  console.log(items, currentItem, router.query);
 
   const formik = useFormik({
     initialValues: currentItem,
@@ -177,6 +189,19 @@ const Page = () => {
       console.log(values);
     },
   });
+
+  if (currentItem) {
+    // let productIngredients = getSatisfactoryRecipesByItem(
+    //   currentItem.className
+    // );
+    // const resource = getSatisfactoryResourceByItem(currentItem.className);
+    // const buildablerecipes = getSatisfactoryBuildableRecipeByItem(
+    //   currentItem.className
+    // );
+    //const item = getSatisfactoryItem(currentItem.className);
+
+    console.log(currentItem);
+  }
 
   useEffect(() => {
     // If product query param is present, set currentItem
@@ -320,7 +345,7 @@ const Page = () => {
                   <Typography variant="h4">Items</Typography>
                 </div>
                 <div>
-                  <Button
+                  {/* <Button
                     startIcon={
                       <SvgIcon>
                         <PlusIcon />
@@ -329,7 +354,25 @@ const Page = () => {
                     variant="contained"
                   >
                     Add
-                  </Button>
+                  </Button> */}
+                  <Select
+                    defaultValue={version}
+                    label="Version"
+                    name="version"
+                    onChange={(event) => {
+                      setVersion(event.target.value);
+                    }}
+                    value={version}
+                  >
+                    {satisfactoryVersions.map((satisfactoryVersion) => (
+                      <MenuItem
+                        key={satisfactoryVersion.key}
+                        value={satisfactoryVersion.key}
+                      >
+                        {satisfactoryVersion.label}
+                      </MenuItem>
+                    ))}
+                  </Select>
                 </div>
               </Stack>
             </Box>
@@ -420,8 +463,35 @@ const Page = () => {
           >
             {!isEditing ? (
               <ItemDetailsContainer>
-                Content details<br></br>
-                {JSON.stringify(currentItem)}
+                {/* Content details
+                <br />
+                <Button
+                  onClick={() =>
+                    router.push(
+                      paths.app.satisfactory.products.detail +
+                        currentItem.className
+                    )
+                  }
+                  variant="contained"
+                >
+                  Open product
+                </Button>
+                {JSON.stringify(currentItem)} */}
+                <Button
+                  onClick={() => {
+                    router.push(
+                      paths.app.satisfactory.products.detail +
+                        currentItem.className
+                    );
+                  }}
+                  size="small"
+                  variant="contained"
+                >
+                  Open in full screen
+                </Button>
+                {currentItem && (
+                  <SatisfactoryProductDetail product={currentItem} />
+                )}
               </ItemDetailsContainer>
             ) : (
               <ItemEditContainer
