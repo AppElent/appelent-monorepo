@@ -24,11 +24,8 @@ import {
 } from "libs/satisfactory";
 import { Stack } from "@mui/system";
 import { SatisfactoryProductDetail } from "sections/app/satisfactory/product/satisfactory-product-detail";
-import { useFormik } from "formik";
-import { ClosedCaptionDisabledOutlined } from "@mui/icons-material";
 import { paths } from "paths";
 import _ from "lodash";
-import { toast } from "react-hot-toast";
 import { SatisfactoryProductRecipeTable } from "sections/app/satisfactory/product/satisfactory-product-recipe-table";
 
 const Page = () => {
