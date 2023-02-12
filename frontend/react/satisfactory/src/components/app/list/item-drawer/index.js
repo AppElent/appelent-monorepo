@@ -1,4 +1,4 @@
-import { useCallback, useState } from "react";
+import { useState } from "react";
 import PropTypes from "prop-types";
 import XIcon from "@untitled-ui/icons-react/build/esm/X";
 import {

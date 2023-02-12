@@ -1,11 +1,8 @@
 import PropTypes from "prop-types";
 import {
-  Stack,
-  Typography,
   useMediaQuery,
   Card,
   CardHeader,
-  Scrollbar,
   Table,
   TableHead,
   TableRow,
@@ -13,8 +10,6 @@ import {
   TableBody,
   CardContent,
 } from "@mui/material";
-import { SeverityPill } from "components/severity-pill";
-import { PropertyListTemplate } from "components/app/property-list-template";
 import React from "react";
 
 export const SatisfactoryProductRecipeTable = ({

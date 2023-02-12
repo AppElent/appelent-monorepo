@@ -25,7 +25,8 @@ export const TenantSwitch = (props) => {
 
   return (
     <>
-      <Stack alignItems="center" direction="row" spacing={2} {...props}>
+      <Stack alignItems="center" direction="row" spacing={2}
+{...props}>
         <Box sx={{ flexGrow: 1 }}>
           <Typography color="inherit" variant="h6">
             AppElent

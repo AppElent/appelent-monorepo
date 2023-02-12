@@ -2,7 +2,6 @@ import { useCallback, useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import PropTypes from "prop-types";
 import { useAuth } from "../hooks/use-auth";
-import { paths } from "../paths";
 import { siteSettings } from "config";
 
 export const GuestGuard = (props) => {

@@ -3,7 +3,6 @@ import {
   Card,
   CardContent,
   CardHeader,
-  Divider,
   Stack,
   useMediaQuery,
 } from "@mui/material";

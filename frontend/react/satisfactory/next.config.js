@@ -32,4 +32,4 @@ const config = {
 //   '@fullcalendar/timegrid',
 //   '@fullcalendar/timeline'
 // ]);
-// module.exports = config;
+module.exports = config;

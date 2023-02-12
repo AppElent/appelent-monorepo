@@ -1,4 +1,3 @@
-import { getAuth } from "firebase/auth";
 import { useEffect, useState } from "react";
 import { useCollection } from "react-firebase-hooks/firestore";
 

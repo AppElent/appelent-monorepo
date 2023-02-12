@@ -1,4 +1,4 @@
-import { useEffect, useReducer } from "react";
+import { useEffect } from "react";
 import Head from "next/head";
 import { Provider as ReduxProvider } from "react-redux";
 import { CacheProvider } from "@emotion/react";
@@ -31,10 +31,7 @@ import { SettingsDrawer } from "../components/settings-drawer";
 
 import CustomApp from "libs/custom-app";
 import { getAuth } from "firebase/auth";
-import { Refine } from "@pankod/refine-core";
 
-import routerProvider from "@pankod/refine-nextjs-router";
-import dataProvider from "@pankod/refine-simple-rest";
 
 const clientSideEmotionCache = createEmotionCache();
 

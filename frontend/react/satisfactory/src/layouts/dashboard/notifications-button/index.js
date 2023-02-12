@@ -1,7 +1,6 @@
 import { useCallback, useMemo, useRef, useState } from "react";
 import Bell01Icon from "@untitled-ui/icons-react/build/esm/Bell01";
 import { Badge, IconButton, SvgIcon, Tooltip } from "@mui/material";
-import { notifications as initialNotifications } from "./notifications";
 import { NotificationsPopover } from "./notifications-popover";
 
 const useNotifications = () => {

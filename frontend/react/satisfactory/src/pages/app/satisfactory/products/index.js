@@ -1,6 +1,5 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import Head from "next/head";
-import PlusIcon from "@untitled-ui/icons-react/build/esm/Plus";
 import {
   Box,
   Button,
@@ -8,16 +7,12 @@ import {
   MenuItem,
   Select,
   Stack,
-  SvgIcon,
   TableCell,
   TableRow,
-  TextField,
   Typography,
 } from "@mui/material";
-import { format } from "date-fns";
 import numeral from "numeral";
 import { useFormik } from "formik";
-import { ordersApi } from "api/orders";
 import { useMounted } from "hooks/use-mounted";
 import { usePageView } from "hooks/use-page-view";
 import { Layout as DashboardLayout } from "layouts/dashboard";
@@ -32,15 +27,10 @@ import { SeverityPill } from "components/severity-pill";
 import { siteSettings } from "config";
 
 import satisfactoryProducts from "data/satisfactory/v700/items.json";
-import productionRecipes from "data/satisfactory/v700/productionRecipes.json";
 import { paginate } from "utils/paginate";
 import { useRouter } from "next/router";
 import {
-  getSatisfactoryBuildableRecipeByItem,
   getSatisfactoryItem,
-  getSatisfactoryRecipesByItem,
-  getSatisfactoryResourceByItem,
-  getSatisfactorySchematicByItem,
   SatisfactoryCurrentVersion,
   satisfactoryVersions,
 } from "libs/satisfactory";

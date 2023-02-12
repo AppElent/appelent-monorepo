@@ -1,12 +1,12 @@
 import Head from "next/head";
-import { Box, Button, Container, Unstable_Grid2 as Grid } from "@mui/material";
+import { Box, Button, Container } from "@mui/material";
 import { usePageView } from "../../hooks/use-page-view";
 import { useSettings } from "../../hooks/use-settings";
 import { Layout as DashboardLayout } from "../../layouts/dashboard";
 import { siteSettings } from "config";
 import { useData } from "libs/appelent-framework";
 import { getAuth } from "firebase/auth";
-import { collection, doc, setDoc } from "firebase/firestore";
+import { collection } from "firebase/firestore";
 import { db } from "libs/firebase";
 import { useList } from "@pankod/refine-core";
 

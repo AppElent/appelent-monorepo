@@ -25,7 +25,6 @@ import { useMounted } from "hooks/use-mounted";
 import { usePageView } from "hooks/use-page-view";
 import { Layout as AuthLayout } from "layouts/auth/classic-layout";
 import { paths } from "paths";
-import { AuthIssuer } from "sections/auth/auth-issuer";
 import { Issuer } from "utils/auth";
 import { siteSettings } from "config";
 
