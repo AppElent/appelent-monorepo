@@ -3,9 +3,7 @@ import NextLink from "next/link";
 import { useRouter } from "next/navigation";
 import PropTypes from "prop-types";
 import toast from "react-hot-toast";
-import CreditCard01Icon from "@untitled-ui/icons-react/build/esm/CreditCard01";
 import Settings04Icon from "@untitled-ui/icons-react/build/esm/Settings04";
-import User03Icon from "@untitled-ui/icons-react/build/esm/User03";
 import {
   Box,
   Button,

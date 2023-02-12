@@ -1,15 +1,13 @@
 import { getAuth } from "firebase/auth";
-import { doc, collection, limit, orderBy } from "firebase/firestore";
-import { useAuth } from "hooks/use-auth";
+import { collection } from "firebase/firestore";
 import { db } from "./firebase";
 import { siteSettings } from "config";
 
 import {
   AppelentFramework,
-  useAppelentFramework,
-  useData,
 } from "libs/appelent-framework";
 import { FirebaseAuth } from "refine-firebase";
+import { useMemo } from "react";
 
 const CustomApp = ({ httpsRedirect, queryClient, children }) => {
   // const getInitialGlobalData = () => {
@@ -109,6 +107,21 @@ const CustomApp = ({ httpsRedirect, queryClient, children }) => {
     default: "",
   };
 
+  const httpRedirect = useMemo(() => {
+    if (typeof window !== "undefined") {
+      if (
+        !(
+          window.location.hostname === "localhost" ||
+          window.location.hostname === "127.0.0.1"
+        ) &&
+        process.env.NODE_ENV !== "development"
+      ) {
+        return true;
+      }
+    }
+    return false;
+  }, []);
+
   return (
     // <GlobalDataContext.Provider value={{ ...data, dispatch }}>
     <AppelentFramework
@@ -117,12 +130,7 @@ const CustomApp = ({ httpsRedirect, queryClient, children }) => {
         cancellationButtonProps: { variant: "contained" },
       }}
       dataProvider={dataProvider}
-      httpsRedirect={
-        process.env.NODE_ENV !== "development" &&
-        !(
-          location.hostname === "localhost" || location.hostname === "127.0.0.1"
-        )
-      }
+      httpsRedirect={httpRedirect}
       initialData={initialGlobalData}
       refineProps={{
         authProvider: new FirebaseAuth(
@@ -142,13 +150,6 @@ const CustomApp = ({ httpsRedirect, queryClient, children }) => {
 const CustomAppChild = ({ children }) => {
   const auth = getAuth();
   // useAuth();
-
-  // const userDataLoadKey = auth.currentUser
-  //   ? "firestore.documents.userSettings"
-  //   : undefined;
-  // const userdata = useData(userDataLoadKey, {
-  //   document: doc(db, `users/${auth?.currentUser?.uid}`),
-  // });
 
   let returnComponent = <>{children}</>;
 

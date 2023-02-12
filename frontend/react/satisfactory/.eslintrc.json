@@ -1,5 +1,8 @@
 {
   "extends": "next/core-web-vitals",
+  "plugins": [
+    "unused-imports"
+  ],
   "rules": {
     "@next/next/no-img-element": "off",
     "@next/next/no-page-custom-font": "off",
@@ -7,6 +10,7 @@
     "react/display-name": "off",
     "react/no-children-prop": "off",
     "react/no-unescaped-entities": 0,
+    "unused-imports/no-unused-imports": "warn",
     "react/jsx-max-props-per-line": [
       1,
       {

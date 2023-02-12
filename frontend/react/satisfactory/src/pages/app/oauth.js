@@ -1,4 +1,3 @@
-import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import Head from "next/head";
 import { Box, Stack, Typography } from "@mui/material";
 import { usePageView } from "hooks/use-page-view";

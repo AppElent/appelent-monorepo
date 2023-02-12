@@ -2,9 +2,7 @@ import { createContext, useContext, useEffect } from "react";
 import { siteSettings } from "config";
 import { collection, limit, orderBy } from "firebase/firestore";
 import { db } from "./firebase";
-import { getAuth } from "firebase/auth";
 import _ from "lodash";
-import { current } from "@reduxjs/toolkit";
 
 export const getInitialGlobalData = () => {
   return {

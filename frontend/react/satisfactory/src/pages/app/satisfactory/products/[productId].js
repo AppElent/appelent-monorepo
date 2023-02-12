@@ -2,19 +2,16 @@ import Head from "next/head";
 import {
   Autocomplete,
   Box,
-  Button,
   Container,
-  Divider,
   TextField,
   Typography,
-  Unstable_Grid2 as Grid,
 } from "@mui/material";
 import { usePageView } from "hooks/use-page-view";
 import { useSettings } from "hooks/use-settings";
 import { Layout as DashboardLayout } from "layouts/dashboard";
 import { siteSettings } from "config";
 import { useRouter } from "next/router";
-import { useMemo, useState, useEffect } from "react";
+import { useMemo, useEffect } from "react";
 import {
   getSatisfactoryDataArray,
   getSatisfactoryItem,

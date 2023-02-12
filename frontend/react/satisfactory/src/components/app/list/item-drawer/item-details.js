@@ -1,23 +1,12 @@
 import PropTypes from "prop-types";
-import { format } from "date-fns";
-import numeral from "numeral";
 import Edit02Icon from "@untitled-ui/icons-react/build/esm/Edit02";
 import {
   Button,
   Stack,
   SvgIcon,
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableRow,
   Typography,
   useMediaQuery,
 } from "@mui/material";
-import { PropertyList } from "../../../../components/property-list";
-import { PropertyListItem } from "../../../../components/property-list-item";
-import { SeverityPill } from "../../../../components/severity-pill";
-import { Scrollbar } from "../../../../components/scrollbar";
 
 const statusMap = {
   canceled: "warning",

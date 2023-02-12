@@ -1,6 +1,6 @@
 import { useCallback, useState } from "react";
 import Head from "next/head";
-import { subDays, subHours, subMinutes, subMonths } from "date-fns";
+import { subDays, subHours, subMinutes } from "date-fns";
 import {
   Box,
   Container,
@@ -12,10 +12,7 @@ import {
 } from "@mui/material";
 import { usePageView } from "../../hooks/use-page-view";
 import { Layout as DashboardLayout } from "../../layouts/dashboard";
-import { AccountBillingSettings } from "../../sections/dashboard/account/account-billing-settings";
 import { AccountGeneralSettings } from "../../sections/app/account/account-general-settings";
-import { AccountNotificationsSettings } from "../../sections/dashboard/account/account-notifications-settings";
-import { AccountTeamSettings } from "../../sections/dashboard/account/account-team-settings";
 import { AccountSecuritySettings } from "../../sections/dashboard/account/account-security-settings";
 import { useAuth } from "hooks/use-auth";
 import { siteSettings } from "config";

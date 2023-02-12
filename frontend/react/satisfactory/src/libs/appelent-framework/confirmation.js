@@ -123,7 +123,8 @@ export const ConfirmationDialog = ({
   } = options || {};
 
   return (
-    <Dialog fullWidth {...dialogProps} open={open} onClose={onClose}>
+    <Dialog fullWidth {...dialogProps} open={open}
+onClose={onClose}>
       {title && <DialogTitle>{title}</DialogTitle>}
       {content ? (
         <DialogContent>{content}</DialogContent>

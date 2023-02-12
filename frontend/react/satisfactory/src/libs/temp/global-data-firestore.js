@@ -2,9 +2,7 @@ import React, { useEffect } from "react";
 import { useFirestoreCollectionData } from "hooks/use-firestore-collection-data";
 import { useFirestoreCollectionDataObject } from "hooks/use-firestore-collection-data-object";
 import { ActionType, useGlobalData } from "./global-data";
-import { orderBy, query, limit, doc } from "firebase/firestore";
-import { db } from "./firebase";
-import { getAuth } from "firebase/auth";
+import { query } from "firebase/firestore";
 import _ from "lodash";
 import { useFirestoreDocument } from "hooks/use-firestore-document";
 

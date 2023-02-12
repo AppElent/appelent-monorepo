@@ -2,8 +2,7 @@ import { useMemo } from "react";
 import { usePathname } from "next/navigation";
 import NextLink from "next/link";
 import PropTypes from "prop-types";
-import File04Icon from "@untitled-ui/icons-react/build/esm/File04";
-import { Box, Button, Drawer, Stack, SvgIcon, Typography } from "@mui/material";
+import { Box, Drawer, Stack } from "@mui/material";
 import { useTheme } from "@mui/material/styles";
 import { Logo } from "../../../components/logo";
 import { Scrollbar } from "../../../components/scrollbar";
@@ -133,7 +132,8 @@ export const MobileNav = (props) => {
         }}
       >
         <Stack sx={{ height: "100%" }}>
-          <Stack alignItems="center" direction="row" spacing={2} sx={{ p: 3 }}>
+          <Stack alignItems="center" direction="row" spacing={2}
+sx={{ p: 3 }}>
             <Box
               component={NextLink}
               href={paths.index}

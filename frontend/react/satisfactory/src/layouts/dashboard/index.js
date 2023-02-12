@@ -1,4 +1,4 @@
-import { useEffect, useMemo } from "react";
+import { useMemo } from "react";
 import { useTranslation } from "react-i18next";
 import PropTypes from "prop-types";
 import { useSettings } from "../../hooks/use-settings";

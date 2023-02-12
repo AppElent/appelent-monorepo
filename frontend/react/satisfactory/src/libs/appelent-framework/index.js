@@ -8,7 +8,7 @@ import { Refine } from "@pankod/refine-core";
 import routerProvider from "@pankod/refine-nextjs-router";
 import dataProvider from "@pankod/refine-simple-rest";
 import { MuiInferencer } from "@pankod/refine-inferencer/mui";
-import { AuthPage, Layout } from "@pankod/refine-mui";
+import { AuthPage } from "@pankod/refine-mui";
 import { FirebaseAuth } from "refine-firebase";
 import { getAuth } from "firebase/auth";
 
@@ -48,10 +48,12 @@ export const AppelentFramework = ({
     /**
      * HTTPS redirect
      */
-    if (httpsRedirect && window.location.protocol !== "https:") {
-      window.location.href = `https:${window.location.href.substring(
-        window.location.protocol.length
-      )}`;
+    if (typeof window !== "undefined") {
+      if (httpsRedirect && window.location.protocol !== "https:") {
+        window.location.href = `https:${window.location.href.substring(
+          window.location.protocol.length
+        )}`;
+      }
     }
   }, []);
 
