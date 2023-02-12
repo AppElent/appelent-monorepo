@@ -9,8 +9,11 @@ import {
   TableCell,
   TableBody,
   CardContent,
+  Tooltip,
 } from "@mui/material";
 import React from "react";
+
+import { SeverityPill } from "components/severity-pill";
 
 export const SatisfactoryProductRecipeTable = ({
   recipes,
@@ -51,13 +54,42 @@ export const SatisfactoryProductRecipeTable = ({
           <TableBody>
             {recipes.map((recipe) => {
               const perMinute = 60 / recipe.craftTime;
+
               if (conditionFunction && !conditionFunction(recipe, products)) {
                 return <React.Fragment key={recipe.className}></React.Fragment>;
               }
 
+              const tierColor = ["A", "S"].includes(recipe.tier?.rating)
+                ? "success"
+                : ["B", "C"].includes(recipe.tier?.rating)
+                ? "warning"
+                : "error";
+              const TierToolTip = () => {
+                return (
+                  <Tooltip title={recipe.tier?.notes}>
+                    <div>
+                      <SeverityPill color={tierColor}>
+                        Tier: {recipe.tier.rating}
+                      </SeverityPill>
+                    </div>
+                  </Tooltip>
+                );
+              };
+
               return (
                 <TableRow key={recipe.className}>
-                  <TableCell>{recipe.name}</TableCell>
+                  <TableCell>
+                    {recipe.name}{" "}
+                    {recipe.tier && (
+                      <>
+                        <br />
+                        <TierToolTip />
+                        {/* <SeverityPill color={tierColor}>
+                          Tier: {recipe.tier.rating}
+                        </SeverityPill> */}
+                      </>
+                    )}
+                  </TableCell>
                   <TableCell>
                     {recipe.ingredients.map((ingredient) => {
                       return (
