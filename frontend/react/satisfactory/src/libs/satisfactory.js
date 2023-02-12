@@ -4,6 +4,7 @@ import buildableRecipes_v700 from "data/satisfactory/v700/buildableRecipes.json"
 import productionRecipes_v700 from "data/satisfactory/v700/productionRecipes.json";
 import resources_v700 from "data/satisfactory/v700/resources.json";
 import schematics_v700 from "data/satisfactory/v700/schematics.json";
+import tierList_v700 from "data/satisfactory/v700/tierList.json";
 
 const satisfactory_data = {
   v700: {
@@ -13,6 +14,7 @@ const satisfactory_data = {
     recipes: productionRecipes_v700,
     resources: resources_v700,
     schematics: schematics_v700,
+    tierList: tierList_v700,
   },
 };
 
@@ -89,18 +91,22 @@ export const getSatisfactoryRecipesByItem = (itemClassName, version) => {
   };
   for (const [key, value] of Object.entries(recipes)) {
     // console.log(key, value);
+    const tier = getSatisfactoryData("tierList", version).find(
+      (tierItem) =>
+        tierItem.name === value.name || value.name.includes(tierItem.name)
+    );
     const schematic = getSatisfactorySchematicByRecipe(key, version);
     const ingredient_found = value.ingredients.find((ingredient) => {
       return ingredient.itemClass == itemClassName;
     });
     if (ingredient_found) {
-      returnObject.used_for.push({ ...value, className: key, schematic });
+      returnObject.used_for.push({ ...value, className: key, schematic, tier });
     }
     const product_found = value.products.find((ingredient) => {
       return ingredient.itemClass == itemClassName;
     });
     if (product_found) {
-      returnObject.made_by.push({ ...value, className: key, schematic });
+      returnObject.made_by.push({ ...value, className: key, schematic, tier });
     }
   }
   return returnObject;

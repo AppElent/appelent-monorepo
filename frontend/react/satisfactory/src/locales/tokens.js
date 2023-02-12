@@ -6,6 +6,7 @@ export const tokens = {
     satisfactory: {
       title: "nav.satisfactory.title",
       products: "nav.satisfactory.products",
+      product_details: "nav.satisfactory.product_details",
     },
     academy: "nav.academy",
     account: "nav.account",

@@ -36,6 +36,16 @@ const Page = () => {
       ? true
       : false;
 
+  const products =
+    useMemo(() => {
+      if (version_correct) {
+        let productsArray = getSatisfactoryDataArray("items", version);
+        return _.sortBy(productsArray, "name");
+      }
+    }, [version_correct]) || [];
+
+  productId = productId === "dummy" ? products[0].className : productId;
+
   useEffect(() => {
     if (!version_correct) {
       router.replace(
@@ -54,14 +64,6 @@ const Page = () => {
         return getSatisfactoryItem(productId, version);
       }
     }, [productId, version_correct]) || {};
-
-  const products =
-    useMemo(() => {
-      if (version_correct) {
-        let productsArray = getSatisfactoryDataArray("items", version);
-        return _.sortBy(productsArray, "name");
-      }
-    }, [version_correct]) || [];
 
   if (!version_correct) return <></>;
 
