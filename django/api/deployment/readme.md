@@ -1,6 +1,6 @@
 ```
 # Build container
-docker build -t acrappelent.azurecr.io/django-api:v0.3 .
+docker build -t acrappelent.azurecr.io/django-api:dockertest01 .
 docker push acrappelent.azurecr.io/django-api:v0.3
 
 az acr build --registry acrappelent --image django-api:v1 .

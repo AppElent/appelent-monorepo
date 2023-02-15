@@ -17,6 +17,7 @@ azure-cosmos = "*"
 django-cors-headers = "*"
 django-allow-cidr = "*"
 gunicorn = "*"
+whitenoise = "*"
 
 [dev-packages]
 
