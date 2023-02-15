@@ -15,6 +15,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include, re_path
+from . import views
 
 urlpatterns = [
     path("admin/", admin.site.urls),
@@ -23,5 +24,7 @@ urlpatterns = [
     path('oauth/', include('oauth.urls')),
     path('crud/', include('crud.urls')),
     path('oauth/', include('oauth.urls')),
+    path('users/', include('users.urls')),
+    path('', views.dummy, name='dummy'),
     re_path(r'^health/', include('health_check.urls')),
 ]
