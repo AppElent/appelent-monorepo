@@ -29,7 +29,7 @@ class _AzureAppConfiguration(metaclass=SingletonMetaclass):
         print("AzureAppConfiguration instantiated")
 
     def load(self, endpoint, app, label):
-        if not self._config and endpoint is not None and not app is not None and not label is not None:
+        if not self._config and endpoint is not None and app is not None and label is not None:
             try: 
                 self._endpoint = endpoint
                 self._app = app

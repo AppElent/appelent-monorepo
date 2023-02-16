@@ -44,6 +44,7 @@ urlpatterns = [
     path('oauth/', include('oauth.urls')),
     path('users/', include('users.urls')),
     path('dummy/', views.dummy, name='dummy'),
+    path('environment/', views.environment, name='environment'),
     path('', RedirectView.as_view(url='/swagger', permanent=False)),
     re_path(r'^specs(?P<format>\.json|\.yaml)$',
             schema_view.without_ui(cache_timeout=0), name='schema-json'),  #<-- Here
