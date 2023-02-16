@@ -1,16 +1,48 @@
-import json
-import os
-from firebase_admin import credentials, auth
-import firebase_admin
+
+
+# 
 from rest_framework import authentication, exceptions, HTTP_HEADER_ENCODING
 from django.contrib.auth import get_user_model
+#from django.conf import settings
 User = get_user_model()
+from firebase_admin import auth
 
-cred = credentials.Certificate(json.loads(os.getenv("FIREBASE_CREDS")))
-firebase_admin.initialize_app(cred)
-user = auth.get_user("KqVejHU9lzXX8xbpdKtXTLhm3yg1")
-print('user', user.uid, user.custom_claims)
-print('--- Firebase loaded successfully ---')
+
+# stdartup firebase
+# import json
+# import os
+# import firebase_admin
+# from firebase_admin import credentials, auth
+# if not firebase_admin._apps:
+#     # cred = credentials.Certificate('path/to/serviceAccountKey.json') 
+#     # default_app = firebase_admin.initialize_app(cred)
+#     cred = credentials.Certificate(json.loads(os.getenv("FIREBASE_CREDS")))
+#     firebase_admin.initialize_app(cred)
+# user = auth.get_user("KqVejHU9lzXX8xbpdKtXTLhm3yg1")
+# print('user', user.uid, user.custom_claims)
+# print('--- Firebase loaded successfully ---')
+
+#print(settings.environment)
+from django.conf import settings
+#print(settings.environment)
+
+class DevelopmentAuthentication(authentication.TokenAuthentication):
+    """
+    Extend the TokenAuthentication class to support development authentication
+    in the form of "http://www.example.com/?development=<token_key>"
+    """
+
+    
+
+    def authenticate(self, request):
+        # Check if 'token_auth' is in the request query params.
+        # Give precedence to 'Authorization' header.
+        if 'development' in request.query_params and \
+                'HTTP_AUTHORIZATION' not in request.META and \
+                    settings.ENVIRONMENT == 'LOCAL':
+            user=user = User.objects.get(email="ericjansen@live.nl")
+            return (user, None)
+
 
 
 def get_authorization_header(request):

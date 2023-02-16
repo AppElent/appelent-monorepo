@@ -19,14 +19,17 @@ imagePullSecrets: []
 nameOverride: ""
 fullnameOverride: ""
 
+labels: {azure.workload.identity/use: "true"}
+
 serviceAccount:
   # Specifies whether a service account should be created
   create: true
   # Annotations to add to the service account
-  annotations: {}
+  annotations: {azure.workload.identity/client-id: "559588f6-d476-45cd-9af9-fe17a2c9b1dd" }
+  labels: {azure.workload.identity/use: "true"}
   # The name of the service account to use.
   # If not set and create is true, a name is generated using the fullname template
-  name: "svc-test"
+  name: "sa-aks-appelent-workload-identity"
 
 podAnnotations: {}
 

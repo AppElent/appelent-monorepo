@@ -16,6 +16,24 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include, re_path
 from . import views
+from rest_framework import permissions
+from drf_yasg.views import get_schema_view
+from drf_yasg import openapi
+from django.views.generic import RedirectView
+
+
+schema_view = get_schema_view(
+    openapi.Info(
+        title="AppElent API",
+        default_version='v1.0.0',
+        description="Welcome to the AppElent API",
+        terms_of_service="https://www.appelent.com",
+        contact=openapi.Contact(email="info@appelent.com"),
+        license=openapi.License(name="MIT"),
+    ),
+    public=True,
+    permission_classes=(permissions.AllowAny,),
+)
 
 urlpatterns = [
     path("admin/", admin.site.urls),
@@ -25,6 +43,13 @@ urlpatterns = [
     path('crud/', include('crud.urls')),
     path('oauth/', include('oauth.urls')),
     path('users/', include('users.urls')),
-    path('', views.dummy, name='dummy'),
+    path('dummy/', views.dummy, name='dummy'),
+    path('', RedirectView.as_view(url='/swagger', permanent=False)),
+    re_path(r'^specs(?P<format>\.json|\.yaml)$',
+            schema_view.without_ui(cache_timeout=0), name='schema-json'),  #<-- Here
+    path('swagger/', schema_view.with_ui('swagger', cache_timeout=0),
+         name='schema-swagger-ui'),  #<-- Here
+    path('redoc/', schema_view.with_ui('redoc', cache_timeout=0),
+         name='schema-redoc'),  #<-- Here
     re_path(r'^health/', include('health_check.urls')),
 ]

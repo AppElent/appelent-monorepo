@@ -27,6 +27,19 @@ resource "azurerm_role_assignment" "akv_admin_rolessignment" {
   principal_id         = data.azuread_user.me.object_id
 }
 
+resource "azurerm_key_vault" "keyvault_local" {
+  name                        = "kv-appelent-local"
+  location                    = azurerm_resource_group.rg_dev.location
+  resource_group_name         = azurerm_resource_group.rg_dev.name
+  enabled_for_disk_encryption = true
+  tenant_id                   = data.azurerm_client_config.current.tenant_id
+  soft_delete_retention_days  = 7
+  purge_protection_enabled    = true
+
+  sku_name                  = "standard"
+  enable_rbac_authorization = true
+}
+
 resource "azurerm_key_vault" "keyvault_dev" {
   name                        = "kv-appelent-dev"
   location                    = azurerm_resource_group.rg_dev.location

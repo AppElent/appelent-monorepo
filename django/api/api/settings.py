@@ -22,11 +22,34 @@ dotenv_file = os.path.join(BASE_DIR, ".env")
 if os.path.isfile(dotenv_file):
     dotenv.load_dotenv(dotenv_file)
 
-environment = ("LOCAL" if os.getenv("ENVIRONMENT")
+ENVIRONMENT = ("LOCAL" if os.getenv("ENVIRONMENT")
                is None else os.getenv("ENVIRONMENT")).upper()
 
 # Setting custom user model
 AUTH_USER_MODEL = 'users.User'
+
+
+#
+#
+#
+#
+# from azure.identity import DefaultAzureCredential
+# from azure.appconfiguration import AzureAppConfigurationClient
+
+# credential = DefaultAzureCredential()
+# key_vault_options = AzureAppConfigurationKeyVaultOptions(
+#     secret_clients={SecretClient(
+#         vault_url=key_vault_uri, credential=credential)})
+
+# client = AzureAppConfigurationClient(base_url=os.getenv("AZURE_APP_CONFIGURATION_ENDPOINT"), credential=credential)
+# fetched_config_setting = client.get_configuration_setting(
+#     key="testkey", label="testlabel"
+# )
+# fetched_secret_setting = client.get_configuration_setting(
+#     key="testsecret", label="testlabel"
+# )
+# print(fetched_config_setting)
+# print(fetched_secret_setting.value)
 
 
 # Quick-start development settings - unsuitable for production
@@ -36,7 +59,7 @@ AUTH_USER_MODEL = 'users.User'
 SECRET_KEY = os.getenv("SECRET_KEY", default=get_random_secret_key())
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False if environment == "PRD" else True
+DEBUG = False if ENVIRONMENT == "PRD" else True
 
 CSRF_TRUSTED_ORIGINS = ['https://*.preview.app.github.dev']
 #ALLOWED_HOSTS = ['preview.app.github.dev', 'localhost', '127.0.0.1', '.appelent.com']
@@ -58,6 +81,10 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     'rest_framework',
+    'rest_framework_swagger',
+    'rest_framework.authtoken',
+    'api.apps.ApiConfig',
+    'drf_yasg',
     'crud',
     'users',
     'oauth',
@@ -91,7 +118,14 @@ STORAGES = {
 REST_FRAMEWORK = {
     # other settings...
 
-    # 'DEFAULT_AUTHENTICATION_CLASSES': [],
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'api.authentication.FirebaseAuthentication',
+        'api.authentication.TokenAuthSupportQueryString',
+        'rest_framework.authentication.BasicAuthentication',
+        'api.authentication.DevelopmentAuthentication',
+        'rest_framework.authentication.SessionAuthentication',
+        #'rest_framework.authentication.TokenAuthentication', replaced by tokenauthsupportquerystring
+    ]
     # 'DEFAULT_PERMISSION_CLASSES': [],
 }
 
