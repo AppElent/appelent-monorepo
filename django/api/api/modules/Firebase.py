@@ -16,15 +16,19 @@ class _Firebase(metaclass=SingletonMetaclass):
         print("Firebase instantiated")
 
     def load(self):
+        try:
 
-        if not firebase_admin._apps:
-            # cred = credentials.Certificate('path/to/serviceAccountKey.json') 
-            # default_app = firebase_admin.initialize_app(cred)
-            cred = credentials.Certificate(json.loads(os.getenv("FIREBASE_CREDS")))
-            firebase_admin.initialize_app(cred)
-        user = auth.get_user("KqVejHU9lzXX8xbpdKtXTLhm3yg1")
-        print('user', user.uid, user.custom_claims)
-        print('--- Firebase loaded successfully ---')
+            if not firebase_admin._apps:
+                # cred = credentials.Certificate('path/to/serviceAccountKey.json') 
+                # default_app = firebase_admin.initialize_app(cred)
+                cred = credentials.Certificate(json.loads(os.getenv("FIREBASE_CREDS")))
+                firebase_admin.initialize_app(cred)
+            user = auth.get_user("KqVejHU9lzXX8xbpdKtXTLhm3yg1")
+            print('user', user.uid, user.custom_claims)
+            print('--- Firebase loaded successfully ---')
+        except Exception as e:
+            print('!!!!! Firebase could not be loaded')
+            print(e)
 
     def get_auth(self):
         return self._config
