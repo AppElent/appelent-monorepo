@@ -9,3 +9,8 @@ from .modules.TestClass import TestClass
 @api_view(['GET'])
 def dummy(request):
     return Response([], status=status.HTTP_200_OK)
+
+
+@api_view(['GET'])
+def environment(request):
+    return Response(os.environ, status=status.HTTP_200_OK)
