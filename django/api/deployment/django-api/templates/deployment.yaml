@@ -3,6 +3,7 @@ kind: Deployment
 metadata:
   name: {{ include "django-api.fullname" . }}
   labels:
+    azure.workload.identity/use: "true"
     {{- include "django-api.labels" . | nindent 4 }}
 spec:
   {{- if not .Values.autoscaling.enabled }}
