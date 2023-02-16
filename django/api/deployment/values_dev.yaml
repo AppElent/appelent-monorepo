@@ -1,3 +1,4 @@
 environment:
   value: dev
   keyvaultname: kv-appelent-dev
+  AZURE_APP_CONFIGURATION_ENDPOINT: https://appcnf-appelent.azconfig.io
