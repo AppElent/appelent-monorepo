@@ -5,6 +5,13 @@ resource "azurerm_kubernetes_cluster" "aks" {
   dns_prefix          = "aks-appelent"
   node_resource_group = "rg-appelent-aks-resources"
 
+  # for this setting the preview feature from workload identity should be registered
+  # az feature register --namespace "Microsoft.ContainerService" --name "EnableWorkloadIdentityPreview"
+  # wait till status is registerd: az feature show --namespace "Microsoft.ContainerService" --name "EnableWorkloadIdentityPreview"
+  # reregister: az provider register --namespace Microsoft.ContainerService
+  oidc_issuer_enabled       = true
+  workload_identity_enabled = true
+
   default_node_pool {
     name       = "default"
     node_count = "3"

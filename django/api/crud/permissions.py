@@ -1,6 +1,6 @@
 from rest_framework import permissions
-from api.authentication import *
-from firebase_admin import auth
+# from api.authentication import *
+# from firebase_admin import auth
 import json
 
 
