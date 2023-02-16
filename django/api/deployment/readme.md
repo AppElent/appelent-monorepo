@@ -64,4 +64,3 @@ az identity show --resource-group "rg-appelent-shared" --name "mi-aks-workload-i
 ### trust:
 
 az identity federated-credential create --name fed-id-django-api-dev --identity-name "mi-aks-workload-identity" --resource-group "rg-appelent-shared" --issuer https://westeurope.oic.prod-aks.azure.com/c2afb8f4-c242-45e0-8513-2cdfcb2c8cdd/ed998d52-f2a5-4c6d-96f2-34ebf3824901/ --subject system:serviceaccount:django-api-dev:sa-aks-appelent-workload-identity
-az identity federated-credential create --name fed-id-django-api-prd --identity-name "mi-aks-workload-identity" --resource-group "rg-appelent-shared" --issuer https://westeurope.oic.prod-aks.azure.com/c2afb8f4-c242-45e0-8513-2cdfcb2c8cdd/ed998d52-f2a5-4c6d-96f2-34ebf3824901/ --subject system:serviceaccount:django-api-dev:sa-aks-appelent-workload-identity
