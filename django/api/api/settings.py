@@ -61,7 +61,7 @@ SECRET_KEY = os.getenv("SECRET_KEY", default=get_random_secret_key())
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False if ENVIRONMENT == "PRODUCTION" else True
 
-CSRF_TRUSTED_ORIGINS = ['https://*.preview.app.github.dev']
+CSRF_TRUSTED_ORIGINS = ['https://*.preview.app.github.dev', 'https://*.appelent.com']
 #ALLOWED_HOSTS = ['preview.app.github.dev', 'localhost', '127.0.0.1', '.appelent.com']
 ALLOWED_HOSTS = ['*']
 
@@ -136,7 +136,7 @@ ROOT_URLCONF = "api.urls"
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
-        "DIRS": [],
+        "DIRS": [BASE_DIR / 'users/templates'],
         "APP_DIRS": True,
         "OPTIONS": {
             "context_processors": [
@@ -227,3 +227,6 @@ STATIC_URL = "static/"
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+LOGIN_REDIRECT_URL = "/"
+LOGOUT_REDIRECT_URL = "/"

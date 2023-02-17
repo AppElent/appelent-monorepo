@@ -20,6 +20,7 @@ from rest_framework import permissions
 from drf_yasg.views import get_schema_view
 from drf_yasg import openapi
 from django.views.generic import RedirectView
+from django.views.generic.base import TemplateView # new
 
 
 schema_view = get_schema_view(
@@ -54,4 +55,6 @@ urlpatterns = [
     path('redoc/', schema_view.with_ui('redoc', cache_timeout=0),
          name='schema-redoc'),  #<-- Here
     re_path(r'^health/', include('health_check.urls')),
+    path("accounts/", include("django.contrib.auth.urls")),
+    path("home", TemplateView.as_view(template_name="home.html"), name="home"),
 ]
