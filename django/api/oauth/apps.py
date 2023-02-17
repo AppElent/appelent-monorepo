@@ -8,4 +8,5 @@ class OauthConfig(AppConfig):
     name = "oauth"
 
     def ready(self):
-        AzureCosmosDb.load(settings.ENVIRONMENT_CONFIG['cosmos-access-key'])
+        if settings.ENVIRONMENT_CONFIG:
+            AzureCosmosDb.load(settings.ENVIRONMENT_CONFIG.get('cosmos-access-key'))
