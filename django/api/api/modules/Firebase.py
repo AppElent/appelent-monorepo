@@ -16,13 +16,14 @@ class _Firebase(metaclass=SingletonMetaclass):
     def __init__(self):
         print("Firebase instantiated")
 
-    def load(self):
+    def load(self, cert):
         try:
 
             if not self._loaded:
                 # cred = credentials.Certificate('path/to/serviceAccountKey.json') 
                 # default_app = firebase_admin.initialize_app(cred)
-                cred = credentials.Certificate(json.loads(os.getenv("firebase-creds")))
+                firebase_cert = cert if cert else os.getenv("firebase-creds")
+                cred = credentials.Certificate(json.loads(firebase_cert))
                 firebase_admin.initialize_app(cred)
             user = auth.get_user("KqVejHU9lzXX8xbpdKtXTLhm3yg1")
             print('user', user.uid, user.custom_claims)

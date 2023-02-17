@@ -28,6 +28,16 @@ ENVIRONMENT = ("LOCAL" if os.getenv("ENVIRONMENT")
 # Setting custom user model
 AUTH_USER_MODEL = 'users.User'
 
+#
+#  LOAD MODULES
+#
+from .modules.AzureAppConfiguration import AzureAppConfiguration
+from .modules.AzureCosmosDb import AzureCosmosDb
+from .modules.Firebase import Firebase
+ENVIRONMENT_CONFIG = AzureAppConfiguration.load(os.getenv("AZURE_APP_CONFIGURATION_ENDPOINT"), "django-api", os.getenv("ENVIRONMENT") or "LOCAL")
+AzureCosmosDb.load(ENVIRONMENT_CONFIG['cosmos-access-key'])
+Firebase.load(ENVIRONMENT_CONFIG['firebase-creds'])
+
 
 #
 #
@@ -155,11 +165,18 @@ WSGI_APPLICATION = "api.wsgi.application"
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
-if os.getenv("DATABASE_URL"):
+if os.getenv("DATABASE_URL") or ENVIRONMENT_CONFIG.get('database-url'):
     # DATABASE_URL = os.getenv('postgresql-database-url') + '/django-api'
     # os.environ['DATABASE_URL'] = DATABASE_URL
-    DATABASES = {}
-    DATABASES['default'] = dj_database_url.config(conn_max_age=600)
+    # DATABASES = {}
+    # DATABASES['default'] = dj_database_url.config(conn_max_age=600)
+    DATABASES = {
+        'default': dj_database_url.config(
+            default=ENVIRONMENT_CONFIG.get('database-url'),
+            conn_max_age=600,
+            conn_health_checks=True,
+        )
+    }
 else:
     # default database is sqlite locally. Watch out: This database is not persistent across container restarts
     DATABASES = {
