@@ -63,6 +63,8 @@ spec:
                   key: FIREBASE-CREDS
             - name: ENVIRONMENT
               value: {{ .Values.environment.value }}
+            - name: AZURE_APP_CONFIGURATION_ENDPOINT
+              value: {{ .Values.environment.AZURE_APP_CONFIGURATION_ENDPOINT }}
           volumeMounts:
           - name: secrets
             mountPath: "/mnt/secrets-store"

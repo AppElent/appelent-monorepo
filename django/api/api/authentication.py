@@ -37,10 +37,12 @@ class DevelopmentAuthentication(authentication.TokenAuthentication):
     def authenticate(self, request):
         # Check if 'token_auth' is in the request query params.
         # Give precedence to 'Authorization' header.
+        print('development authentication', request)
         if 'development' in request.query_params and \
                 'HTTP_AUTHORIZATION' not in request.META and \
                     settings.ENVIRONMENT == 'LOCAL':
             user=user = User.objects.get(email="ericjansen@live.nl")
+            user.authentication_class = "DevelopmentAuthentication"
             return (user, None)
 
 
@@ -116,5 +118,6 @@ class FirebaseAuthentication(authentication.BaseAuthentication):
             except:
                 raise exceptions.AuthenticationFailed(
                     'User does not exist and cannot be created')
+        user.authentication_class = "FirebaseAuthentication"
 
         return (user, decoded)
