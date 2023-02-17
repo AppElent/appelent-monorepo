@@ -5,12 +5,13 @@ from django.contrib.auth import get_user_model
 User = get_user_model()
 
 class AuditLog(models.Model):
-    datetime = models.DateTimeField(auto_now_add=True)
     user = models.ForeignKey(User, on_delete=models.CASCADE, default=get_current_user)
-    application = models.CharField(max_length=200, blank=True, null=True)
-    category = models.CharField(max_length=200, blank=True, null=True)
-    severity = models.IntegerField(blank=True, null=True)
-    value = models.TextField()
+    resource = models.CharField(max_length=200)
+    action = models.CharField(max_length=200)
+    author = models.TextField(null=True, blank=True)
+    data = models.TextField(null=True, blank=True)
+    previous_data = models.TextField(null=True, blank=True)
+    meta = models.TextField(null=True, blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
