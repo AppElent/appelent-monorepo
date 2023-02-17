@@ -35,8 +35,9 @@ from .modules.AzureAppConfiguration import AzureAppConfiguration
 from .modules.AzureCosmosDb import AzureCosmosDb
 from .modules.Firebase import Firebase
 ENVIRONMENT_CONFIG = AzureAppConfiguration.load(os.getenv("AZURE_APP_CONFIGURATION_ENDPOINT"), "django-api", os.getenv("ENVIRONMENT") or "LOCAL")
-AzureCosmosDb.load(ENVIRONMENT_CONFIG['cosmos-access-key'])
-Firebase.load(ENVIRONMENT_CONFIG['firebase-creds'])
+if ENVIRONMENT_CONFIG:
+    AzureCosmosDb.load(ENVIRONMENT_CONFIG.get('cosmos-access-key'))
+    Firebase.load(ENVIRONMENT_CONFIG.get('firebase-creds'))
 
 
 #
@@ -66,7 +67,8 @@ Firebase.load(ENVIRONMENT_CONFIG['firebase-creds'])
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.getenv("SECRET_KEY", default=get_random_secret_key())
+SECRET_KEY = get_random_secret_key() if not ENVIRONMENT_CONFIG else ENVIRONMENT_CONFIG.get('django-secret')
+#os.getenv("SECRET_KEY", default=get_random_secret_key())
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False if ENVIRONMENT == "PRODUCTION" else True
@@ -165,14 +167,15 @@ WSGI_APPLICATION = "api.wsgi.application"
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
-if os.getenv("DATABASE_URL") or ENVIRONMENT_CONFIG.get('database-url'):
+if os.getenv("DATABASE_URL") or ENVIRONMENT_CONFIG.get('database-server-url'):
     # DATABASE_URL = os.getenv('postgresql-database-url') + '/django-api'
     # os.environ['DATABASE_URL'] = DATABASE_URL
     # DATABASES = {}
     # DATABASES['default'] = dj_database_url.config(conn_max_age=600)
+    DATABASE_URL = ENVIRONMENT_CONFIG.get('database-server-url') + ENVIRONMENT_CONFIG.get('database-name')
     DATABASES = {
         'default': dj_database_url.config(
-            default=ENVIRONMENT_CONFIG.get('database-url'),
+            default=DATABASE_URL,
             conn_max_age=600,
             conn_health_checks=True,
         )

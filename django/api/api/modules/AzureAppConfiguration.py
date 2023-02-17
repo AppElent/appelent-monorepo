@@ -51,14 +51,19 @@ class _AzureAppConfiguration(metaclass=SingletonMetaclass):
             key_vault_options = AzureAppConfigurationKeyVaultOptions(credential=credential)
             self._config = load_provider(endpoint=endpoint, credential=credential, key_vault_options=key_vault_options, selects=selects, trimmed_key_prefixes=trimmed_key_prefixes)
             keys = self._config.keys()
+            f = open("variables.txt", "w")
             for key in keys:
                 print('Setting environment variable ' + key)
                 os.environ[key] = self._config[key]
+                f.write(key + '=' + self._config[key] + '\r\n')
+            f.close()
             print('--- AzureAppConfiguration loaded successfully ---')
             return self._config
             # except Exception as e:
             #     print('!!!!! Azure App Configuration could not be loaded')
             #     print(e)
+        else:
+            return None
 
     def get_config(self):
         return self._config
