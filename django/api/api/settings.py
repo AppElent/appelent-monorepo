@@ -167,7 +167,7 @@ WSGI_APPLICATION = "api.wsgi.application"
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
-if os.getenv("DATABASE_URL") or ENVIRONMENT_CONFIG.get('database-server-url'):
+if os.getenv("DATABASE_URL") or (ENVIRONMENT_CONFIG and ENVIRONMENT_CONFIG.get('database-server-url')):
     # DATABASE_URL = os.getenv('postgresql-database-url') + '/django-api'
     # os.environ['DATABASE_URL'] = DATABASE_URL
     # DATABASES = {}
