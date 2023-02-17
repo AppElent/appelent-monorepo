@@ -49,7 +49,15 @@ from .modules.AzureCosmosDb import AzureCosmosDb
 
 try:
     environment = str(os.getenv("ENVIRONMENT") or "LOCAL").lower()
-    container_name = "providers_" + environment
+    if environment == 'local':
+        shortcontainername = "local"
+    elif environment == 'development':
+        shortcontainername = "dev"
+    elif environment == 'production':
+        shortcontainername = "prd"
+    else:
+        raise Exception("Environment " + environment + " could not be matched")
+    container_name = "providers_" + shortcontainername
     query = "select * from " + container_name + " p"
     container = AzureCosmosDb.get_database_client().get_container_client(container_name)
     providers = []
