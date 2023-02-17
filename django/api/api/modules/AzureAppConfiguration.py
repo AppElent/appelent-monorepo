@@ -55,6 +55,7 @@ class _AzureAppConfiguration(metaclass=SingletonMetaclass):
                 print('Setting environment variable ' + key)
                 os.environ[key] = self._config[key]
             print('--- AzureAppConfiguration loaded successfully ---')
+            return self._config
             # except Exception as e:
             #     print('!!!!! Azure App Configuration could not be loaded')
             #     print(e)

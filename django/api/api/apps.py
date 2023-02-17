@@ -9,7 +9,8 @@ class ApiConfig(AppConfig):
     name = 'api'
 
     def ready(self):
-        AzureAppConfiguration.load(os.getenv("AZURE_APP_CONFIGURATION_ENDPOINT"), "django-api", os.getenv("ENVIRONMENT") or "LOCAL")
-        AzureCosmosDb.load()
-        Firebase.load()
+        pass
+        # AzureAppConfiguration.load(os.getenv("AZURE_APP_CONFIGURATION_ENDPOINT"), "django-api", os.getenv("ENVIRONMENT") or "LOCAL")
+        # AzureCosmosDb.load()
+        # Firebase.load()
 

@@ -12,12 +12,12 @@ class _AzureCosmosDb(metaclass=SingletonMetaclass):
     def __init__(self):
         print("AzureCosmosDb instantiated")
 
-    def load(self):
+    def load(self, access_key):
         # Get providers from azure cosmos db
         if self._database_client is None:
             try:
                 environment = str(os.getenv("ENVIRONMENT") or "LOCAL").lower()
-                access_key = os.getenv('cosmos-access-key') or ''
+                cosmos_access_key = access_key if access_key else os.getenv('cosmos-access-key') or ''
                 container_name = "providers_" + environment
                 query = "select * from " + container_name + " p"
                 print(environment, query)

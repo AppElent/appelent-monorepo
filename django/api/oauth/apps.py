@@ -1,5 +1,6 @@
 from django.apps import AppConfig
 from .modules.AzureCosmosDb import AzureCosmosDb
+from django.conf import settings
 
 
 class OauthConfig(AppConfig):
@@ -7,4 +8,4 @@ class OauthConfig(AppConfig):
     name = "oauth"
 
     def ready(self):
-        AzureCosmosDb.load()
+        AzureCosmosDb.load(settings.ENVIRONMENT_CONFIG['cosmos-access-key'])
