@@ -7,10 +7,14 @@ service cloud.firestore {
       allow read, write: if true
     }
 
-    // Dummy collection allow everyone
+    // Allow users own data
     match /users/{userId}/{document=**} {
       allow read, write: if request.auth.uid == userId
-
+    }
+    
+    // Dummy user allow allow
+    match /users/dummy_user/{document=**} {
+    	allow read, write: if true
     }
 
     // Satisfactory
@@ -19,19 +23,20 @@ service cloud.firestore {
       allow update, delete: if request.auth != null && request.auth.uid == resource.data.owner;
 
       // Allow read, update to all players
-      allow read, update: if request.auth.uid in resource.data.players;
+      allow read, update: if request.auth.uid in resource.data.playerIds;
+      allow read, update: if request.auth.uid == resource.data.owner;
 
       // Allow everyone to create new games
       allow create: if request.auth != null;
 
-      function gameData() {
-          return get(/databases/$(database)/documents/games/$(gameId)).data
-      }
+//       function gameData() {
+//           return get(/databases/$(database)/documents/games/$(gameId)).data
+//       }
 
-       match /factories/{factory} {
-        allow read, write, create: if request.auth.uid in gameData().players;
-        //allow read, write: if true;
-      }
+//        match /factories/{factory} {
+//         allow read, write, create: if request.auth.uid in gameData().players;
+//         //allow read, write: if true;
+//       }
     }
 
     // allow creation of issues

@@ -10,8 +10,8 @@ on:
         type: boolean
         description: Deploy to production environment
   push:
-    branches:
-      - main
+    # branches:
+    #   - main
     paths:
     - django/api/** 
 
@@ -26,6 +26,7 @@ jobs:
     steps:
       - name: Set output vars
         id: output
+        if: github.ref == 'refs/heads/main'
         run: |
           if [[ "${{inputs.deploy_dev}}" == "true" || ${{github.event_name}} != 'workflow_dispatch' ]]; then
               echo "DEPLOY_DEV=true" >> $GITHUB_OUTPUT
