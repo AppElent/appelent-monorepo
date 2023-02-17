@@ -47,14 +47,17 @@ from .modules.AzureCosmosDb import AzureCosmosDb
 #     print('!!!!! Data from Cosmos DB could not be retrieved. Is Environment Variable COSMOS_ACCESS_KEY set?')
 #     print(e)
 
-
-environment = str(os.getenv("ENVIRONMENT") or "LOCAL").lower()
-container_name = "providers_" + environment
-query = "select * from " + container_name + " p"
-container = AzureCosmosDb.get_database_client().get_container_client(container_name)
-providers = []
-for item in container.query_items(query=query, enable_cross_partition_query=True):
-    providers.append(item)
+try:
+    environment = str(os.getenv("ENVIRONMENT") or "LOCAL").lower()
+    container_name = "providers_" + environment
+    query = "select * from " + container_name + " p"
+    container = AzureCosmosDb.get_database_client().get_container_client(container_name)
+    providers = []
+    for item in container.query_items(query=query, enable_cross_partition_query=True):
+        providers.append(item)
+except Exception as e:
+    print('!!!!! Data from Cosmos DB could not be retrieved. Is Environment Variable COSMOS_ACCESS_KEY set?')
+    print(e)
 
 
 def get_provider(name):

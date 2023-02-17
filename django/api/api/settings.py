@@ -154,7 +154,10 @@ WSGI_APPLICATION = "api.wsgi.application"
 
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
+
 if os.getenv("DATABASE_URL"):
+    # DATABASE_URL = os.getenv('postgresql-database-url') + '/django-api'
+    # os.environ['DATABASE_URL'] = DATABASE_URL
     DATABASES = {}
     DATABASES['default'] = dj_database_url.config(conn_max_age=600)
 else:
