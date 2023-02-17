@@ -14,6 +14,8 @@ environment:
   value: dev
   keyvaultname: kv-appelent-dev
   AZURE_APP_CONFIGURATION_ENDPOINT: https://appcnf-appelent.azconfig.io
+  AZURE_CLIENT_ID: 19592a79-7c98-47f2-9ccc-068e1b5bb09f
+  AZURE_TENANT_ID: c2afb8f4-c242-45e0-8513-2cdfcb2c8cdd
   # hostname in ingress
 
 imagePullSecrets: []

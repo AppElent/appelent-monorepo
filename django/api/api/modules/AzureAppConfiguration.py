@@ -30,6 +30,7 @@ class _AzureAppConfiguration(metaclass=SingletonMetaclass):
         print("AzureAppConfiguration instantiated")
 
     def load(self, endpoint, app, label):
+        print('Loading AppConfiguration with values', endpoint, app, label)
         if not self._config and endpoint is not None and app is not None and label is not None:
             # try: 
             self._endpoint = endpoint
@@ -51,6 +52,7 @@ class _AzureAppConfiguration(metaclass=SingletonMetaclass):
             self._config = load_provider(endpoint=endpoint, credential=credential, key_vault_options=key_vault_options, selects=selects, trimmed_key_prefixes=trimmed_key_prefixes)
             keys = self._config.keys()
             for key in keys:
+                print('Setting environment variable ' + key)
                 os.environ[key] = self._config[key]
             print('--- AzureAppConfiguration loaded successfully ---')
             # except Exception as e:
