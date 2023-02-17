@@ -18,7 +18,12 @@ class _AzureCosmosDb(metaclass=SingletonMetaclass):
             try:
                 environment = str(os.getenv("ENVIRONMENT") or "LOCAL").lower()
                 cosmos_access_key = access_key if access_key else os.getenv('cosmos-access-key') or ''
-                container_name = "providers_" + environment
+                environment_shortname = environment
+                if environment == 'development':
+                    environment_shortname = 'dev'
+                elif environment == 'production':
+                    environment_shortname = 'prd'
+                container_name = "providers_" + environment_shortname
                 query = "select * from " + container_name + " p"
                 print(environment, query)
                 client = CosmosClient(
