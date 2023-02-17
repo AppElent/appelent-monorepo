@@ -23,9 +23,12 @@ drf-yasg = "*"
 azure-identity = "*"
 azure-keyvault-secrets = "*"
 azure-appconfiguration = "*"
-azure-appconfiguration-provider = "*"
+azure-appconfiguration-provider = "==1.0.0b2"
 
 [dev-packages]
 
 [requires]
 python_version = "3.11"
+
+[pipenv]
+allow_prereleases = true

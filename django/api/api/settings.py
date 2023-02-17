@@ -59,7 +59,7 @@ AUTH_USER_MODEL = 'users.User'
 SECRET_KEY = os.getenv("SECRET_KEY", default=get_random_secret_key())
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False if ENVIRONMENT == "PRD" else True
+DEBUG = False if ENVIRONMENT == "PRODUCTION" else True
 
 CSRF_TRUSTED_ORIGINS = ['https://*.preview.app.github.dev']
 #ALLOWED_HOSTS = ['preview.app.github.dev', 'localhost', '127.0.0.1', '.appelent.com']
@@ -125,8 +125,10 @@ REST_FRAMEWORK = {
         'api.authentication.DevelopmentAuthentication',
         'rest_framework.authentication.SessionAuthentication',
         #'rest_framework.authentication.TokenAuthentication', replaced by tokenauthsupportquerystring
-    ]
-    # 'DEFAULT_PERMISSION_CLASSES': [],
+    ],
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.IsAuthenticated',
+    ],
 }
 
 ROOT_URLCONF = "api.urls"

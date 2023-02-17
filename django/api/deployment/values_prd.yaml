@@ -1,5 +1,5 @@
 environment:
-  value: prd
+  value: PRODUCTION
   keyvaultname: kv-appelent-prd
   AZURE_APP_CONFIGURATION_ENDPOINT: https://appcnf-appelent.azconfig.io
 
