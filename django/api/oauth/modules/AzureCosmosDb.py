@@ -16,7 +16,7 @@ class _AzureCosmosDb(metaclass=SingletonMetaclass):
         # Get providers from azure cosmos db
         try:
             environment = str(os.getenv("ENVIRONMENT") or "LOCAL").lower()
-            access_key = os.getenv('COSMOS_ACCESS_KEY') or ''
+            access_key = os.getenv('cosmos-access-key') or ''
             container_name = "providers_" + environment
             query = "select * from " + container_name + " p"
             print(environment, query)
@@ -29,7 +29,7 @@ class _AzureCosmosDb(metaclass=SingletonMetaclass):
                 providers.append(item)
             print('--- Cosmos DB Adapter loaded successfully. ---')
         except Exception as e:
-            print('!!!!! Data from Cosmos DB could not be retrieved. Is Environment Variable COSMOS_ACCESS_KEY set?')
+            print('!!!!! Data from Cosmos DB could not be retrieved. Is Environment Variable cosmos-access-key set?')
             print(e)
 
     def get_database_client(self):
