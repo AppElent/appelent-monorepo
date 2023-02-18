@@ -20,6 +20,7 @@ import { alpha } from "@mui/material/styles";
 import { useFormik } from "formik";
 
 import { CardDefault } from "components/app/card-default";
+import { getAuth } from "firebase/auth";
 
 export const AccountGeneralSettings = (props) => {
   const { updatesettings, ...rest } = props;
@@ -52,7 +53,6 @@ export const AccountGeneralSettings = (props) => {
     //validationSchema,
     onSubmit: async (values, helpers) => {
       try {
-        console.log(values, formikSettings.touched, formikSettings.dirty);
         await updatesettings(values.backend);
       } catch (err) {
         console.error(err);
@@ -150,6 +150,22 @@ export const AccountGeneralSettings = (props) => {
                   <Button color="inherit" size="small">
                     Change
                   </Button>
+                </Stack>
+                <Stack alignItems="center" direction="row" spacing={2}>
+                  <TextField
+                    defaultValue={getAuth().currentUser?.uid}
+                    disabled={true}
+                    label="User ID"
+                    sx={{
+                      flexGrow: 1,
+                      "& .MuiOutlinedInput-notchedOutline": {
+                        borderStyle: "dashed",
+                      },
+                    }}
+                  />
+                  {/* <Button onClick={handleEdit}>
+                    {isEditing ? "Save" : "Edit"}
+                  </Button> */}
                 </Stack>
                 <Stack alignItems="center" direction="row" spacing={2}>
                   <TextField

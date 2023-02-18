@@ -6,16 +6,30 @@ import { HorizontalLayout } from "./horizontal-layout";
 import { VerticalLayout } from "./vertical-layout";
 import { getSections } from "./config";
 import { withAuthGuard } from "../../hocs/with-auth-guard";
+import { useData } from "libs/appelent-framework";
+import { useMenu } from "@pankod/refine-mui";
+import { usePermissions } from "@pankod/refine-core";
 
-const useTranslatedSections = () => {
+const useTranslatedSections = (sections, refineMenuItems, permissionData) => {
   const { t } = useTranslation();
 
-  return useMemo(() => getSections(t), [t]);
+  return useMemo(
+    () => getSections(t, sections, refineMenuItems, permissionData),
+    [t, permissionData]
+  );
 };
 
 export const Layout = withAuthGuard((props) => {
   const settings = useSettings();
-  const sections = useTranslatedSections();
+  const appSettings = useData("settings");
+  const { menuItems: refineMenuItems } = useMenu();
+  const { data: permissionData } = usePermissions();
+  console.log(permissionData);
+  const sections = useTranslatedSections(
+    appSettings.sections,
+    refineMenuItems,
+    permissionData
+  );
 
   if (settings.layout === "horizontal") {
     return (

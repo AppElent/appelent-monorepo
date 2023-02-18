@@ -1,4 +1,10 @@
-import { createContext, useContext, useEffect, useReducer } from "react";
+import {
+  createContext,
+  useContext,
+  useEffect,
+  useMemo,
+  useReducer,
+} from "react";
 import { ConfirmProvider } from "./confirmation";
 import { reducer, useData } from "./caching";
 export { useData } from "./caching";
@@ -15,10 +21,16 @@ import { getAuth } from "firebase/auth";
 export { useModal } from "./hooks/use-modal";
 import { Layout as DashboardLayout } from "layouts/dashboard";
 import { QueryClientProvider } from "react-query";
+import { useTranslation } from "react-i18next";
+import useLocalStorage from "./hooks/use-local-storage";
+import axios from "axios";
+import _ from "lodash";
 
 export const GlobalDataContext = createContext();
 
 export const useAppelentFramework = () => useContext(GlobalDataContext);
+
+const userDataLocalStorageKey = "user_data";
 
 export const AppelentFramework = ({
   confirmDefaultOptions,
@@ -29,13 +41,23 @@ export const AppelentFramework = ({
   resources,
   children,
 }) => {
+  const usersettings = useMemo(() => {
+    if (typeof window !== "undefined") {
+      const item = window.localStorage.getItem(userDataLocalStorageKey);
+      return item ? JSON.parse(item) : initialValue;
+    }
+    return {};
+  }, []);
+
+  _.set(initialData, "data.settings.usersettings", usersettings);
+
   const [data, dispatch] = useReducer(reducer, {
     ...initialData,
     resources: resources || [],
   });
   console.log("Globaldata", data);
 
-  const {
+  let {
     routerProvider: givenRouterProvider,
     resources: givenResources,
     authProvider: givenAuthProvider,
@@ -64,6 +86,18 @@ export const AppelentFramework = ({
       </QueryClientProvider>
     );
   }
+
+  /**?
+   *   Create i18nProvider from Refine
+   *
+   */
+  const { t, i18n } = useTranslation();
+
+  const i18nProvider = {
+    translate: (key, options) => t(key, options),
+    changeLocale: (lang) => i18n.changeLanguage(lang),
+    getLocale: () => i18n.language,
+  };
 
   //Configure authprovider
   const refineAuthProvider =
@@ -96,37 +130,71 @@ export const AppelentFramework = ({
     ],
   };
 
+  givenResources = givenResources || [];
+
+  useEffect(() => {
+    givenResources.push({
+      name: "posts",
+      list: MuiInferencer,
+      show: MuiInferencer,
+      create: MuiInferencer,
+      edit: MuiInferencer,
+      options: {
+        route: "refine/posts",
+        dataProviderName: "dummy",
+      },
+    });
+    givenResources.push({
+      name: "products",
+      list: MuiInferencer,
+      show: MuiInferencer,
+      create: MuiInferencer,
+      edit: MuiInferencer,
+      options: {
+        route: "refine/products",
+        label: "Products",
+        dataProviderName: "dummy",
+      },
+    });
+  }, []);
+
+  const BackendClient = useMemo(() => {
+    const client = axios.create({ baseURL: "http://localhost:8000" });
+    client.interceptors.request.use(
+      async function (config) {
+        const token = await getAuth().currentUser?.getIdToken();
+        if (token) {
+          config.headers["Authorization"] = "Firebase " + token;
+        }
+        return config;
+      },
+      function (error) {
+        return Promise.reject(error);
+      }
+    );
+    // client.interceptors.request.use((request) => {
+    //   console.log("Starting Request", JSON.stringify(request, null, 2));
+    //   return request;
+    // });
+    return client;
+  }, []);
+  const API_URL =
+    (data.data?.settings?.usersettings?.backend ||
+      data.data?.settings?.backend) + "/crud";
+
   return (
     <GlobalDataContext.Provider value={{ ...data, dispatch }}>
       <Refine
         authProvider={refineAuthProvider}
-        dataProvider={dataProvider("https://api.fake-rest.refine.dev")}
+        dataProvider={{
+          dummy: dataProvider("https://api.fake-rest.refine.dev"),
+          default: dataProvider(API_URL, BackendClient),
+        }}
+        i18nProvider={i18nProvider}
         Layout={DashboardLayout}
         LoginPage={AuthPage}
         routerProvider={routerProvider}
-        resources={
-          givenResources || [
-            {
-              name: "orders",
-              list: MuiInferencer,
-              show: MuiInferencer,
-              create: MuiInferencer,
-              edit: MuiInferencer,
-            },
-            { name: "posts" },
-            {
-              name: "products",
-              list: MuiInferencer,
-              show: MuiInferencer,
-              create: MuiInferencer,
-              edit: MuiInferencer,
-              options: {
-                route: "refine/products",
-                label: "products",
-              },
-            },
-          ]
-        }
+        resources={givenResources}
       >
         <ConfirmProvider defaultOptions={confirmDefaultOptions}>
           <AppelentFrameworkChild>{returnComponent}</AppelentFrameworkChild>
@@ -139,6 +207,23 @@ export const AppelentFramework = ({
 const AppelentFrameworkChild = ({ children }) => {
   const state = useData();
   const firestoreComponents = useFirestoreMount(state);
+
+  const [localStorageValue, setLocalStorageValue, deleteLocalStorageValue] =
+    useLocalStorage(userDataLocalStorageKey);
+
+  useEffect(() => {
+    if (setLocalStorageValue && state.data?.settings?.usersettings) {
+      if (
+        !_.isEqual(
+          JSON.stringify(state.data.settings?.usersettings),
+          JSON.stringify(localStorageValue)
+        )
+      ) {
+        setLocalStorageValue(state.data.settings?.usersettings);
+      }
+    }
+  }, [state]);
+
   return (
     <>
       {firestoreComponents}

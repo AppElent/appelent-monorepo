@@ -14,7 +14,7 @@ export const CardDefault = (props) => {
         <CardContent>
           <Grid container spacing={3}>
             <Grid xs={12} md={4}>
-              <Typography variant="h6">Basic {props.title}</Typography>
+              <Typography variant="h6">{props.title}</Typography>
             </Grid>
             <Grid xs={12} md={8}>
               <Stack spacing={3}>

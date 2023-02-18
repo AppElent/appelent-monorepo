@@ -13,12 +13,12 @@ resource "azurerm_api_management" "apim" {
 }
 
 data "azurerm_key_vault_certificate" "apim_custom_domain_cert" {
-  name         = "portal-appelent-com"
+  name         = "apim-appelent-com"
   key_vault_id = azurerm_key_vault.acmebot_keyvault.id
 }
 
 data "azurerm_key_vault_certificate" "apim_custom_domain_mngt_cert" {
-  name         = "api-management-appelent-com"
+  name         = "portal-api-appelent-com"
   key_vault_id = azurerm_key_vault.acmebot_keyvault.id
 }
 
@@ -27,6 +27,7 @@ data "azurerm_key_vault_certificate" "apim_custom_domain_developer_cert" {
   key_vault_id = azurerm_key_vault.acmebot_keyvault.id
 }
 
+
 # Op 1 of andere gekke manier moet het managed identity secrets user rechten krijgen. Zie: https://learn.microsoft.com/en-us/azure/key-vault/general/rbac-guide?tabs=azure-cli
 resource "azurerm_role_assignment" "akv_acmebot_apim_roleassignment" {
   scope                = azurerm_key_vault.acmebot_keyvault.id
@@ -34,23 +35,26 @@ resource "azurerm_role_assignment" "akv_acmebot_apim_roleassignment" {
   principal_id         = azurerm_api_management.apim.identity[0].principal_id
 }
 
+
+# for this to work there needs to be a certificate in the keyvault
+# acmebot can create this https://YOUR-FUNCTIONS.azurewebsites.net/dashboard
 # resource "azurerm_api_management_custom_domain" "apim_custom_domain" {
 #   api_management_id = azurerm_api_management.apim.id
 
 #   gateway {
-#     host_name    = "api.appelent.com"
+#     host_name    = azurerm_dns_cname_record.api.fqdn
 #     key_vault_id = data.azurerm_key_vault_certificate.apim_custom_domain_cert.secret_id
 #   }
 
-#   developer_portal {
-#     host_name    = "developer.appelent.com"
-#     key_vault_id = data.azurerm_key_vault_certificate.apim_custom_domain_developer_cert.secret_id
-#   }
-
-#   # portal {
-#   #   host_name    = azurerm_dns_cname_record.management.fqdn
-#   #   key_vault_id = data.azurerm_key_vault_certificate.apim_custom_domain_mngt_cert.secret_id
+#   # developer_portal {
+#   #   host_name    = "developer.appelent.com"
+#   #   key_vault_id = data.azurerm_key_vault_certificate.apim_custom_domain_developer_cert.secret_id
 #   # }
+
+#   portal {
+#     host_name    = azurerm_dns_cname_record.management.fqdn
+#     key_vault_id = data.azurerm_key_vault_certificate.apim_custom_domain_mngt_cert.secret_id
+#   }
 
 #   # scm {
 #   #   host_name    = azurerm_dns_cname_record.scm.fqdn

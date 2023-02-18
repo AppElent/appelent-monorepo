@@ -1,0 +1,7 @@
+{
+    "title": "Satisfactory",
+    "nested_test": {"nested_key": "nested value"},
+    "products": "Products",
+    "product_details": "Product details",
+    "games": "Games"
+}

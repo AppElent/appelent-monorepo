@@ -27,20 +27,20 @@ resource "azurerm_dns_cname_record" "proxy" {
   record              = "home.appelent.com."
 }
 
-# resource "azurerm_dns_cname_record" "api" {
-#   name                = "api"
-#   zone_name           = azurerm_dns_zone.appelent.name
-#   resource_group_name = azurerm_resource_group.rg_networking.name
-#   ttl                 = 300
-#   record              = replace(azurerm_api_management.apim.gateway_url, "/(https://)|(/)/", "")
-# }
+resource "azurerm_dns_cname_record" "api" {
+  name                = "apim"
+  zone_name           = azurerm_dns_zone.appelent.name
+  resource_group_name = azurerm_resource_group.rg_networking.name
+  ttl                 = 300
+  record              = replace(azurerm_api_management.apim.gateway_url, "/(https://)|(/)/", "")
+}
 
-# resource "azurerm_dns_cname_record" "portal" {
-#   name                = "developer"
+# resource "azurerm_dns_cname_record" "management" {
+#   name                = "portal.api"
 #   zone_name           = azurerm_dns_zone.appelent.name
 #   resource_group_name = azurerm_resource_group.rg_networking.name
 #   ttl                 = 300
-#   record              = replace(azurerm_api_management.apim.developer_portal_url, "/(https://)|(/)/", "")
+#   record              = replace(azurerm_api_management.apim.portal_url, "/(https://)|(/)/", "")
 # }
 
 # resource "azurerm_dns_cname_record" "management" {

@@ -41,6 +41,10 @@ export const paths = {
         index: "/app/satisfactory/products",
         detail: "/app/satisfactory/products/",
       },
+      games: "/app/satisfactory/games",
+    },
+    admin: {
+      index: "/app/admin",
     },
   },
   authDemo: {

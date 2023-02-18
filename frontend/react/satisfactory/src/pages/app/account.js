@@ -31,7 +31,7 @@ const tabs = [
 const Page = () => {
   const { user } = useAuth();
   const [currentTab, setCurrentTab] = useState("general");
-  const { settings, dispatch } = useData();
+  const { data, dispatch } = useData();
 
   usePageView();
 
@@ -76,11 +76,11 @@ const Page = () => {
               email={user.email || ""}
               name={user.name || ""}
               user={user || {}}
-              settings={settings}
+              settings={data.settings}
               updatesettings={(value) =>
                 dispatch({
                   type: "SET_DATA",
-                  payload: { key: "settings.backend", value },
+                  payload: { key: "data.settings.usersettings.backend", value },
                 })
               }
             />

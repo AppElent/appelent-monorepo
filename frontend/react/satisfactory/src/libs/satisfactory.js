@@ -5,9 +5,20 @@ import productionRecipes_v700 from "data/satisfactory/v700/productionRecipes.jso
 import resources_v700 from "data/satisfactory/v700/resources.json";
 import schematics_v700 from "data/satisfactory/v700/schematics.json";
 import tierList_v700 from "data/satisfactory/v700/tierList.json";
+import { db } from "./firebase";
+import { addDoc, setDoc, collection, deleteDoc, doc } from "firebase/firestore";
 
 const satisfactory_data = {
   v700: {
+    items: items_v700,
+    buildables: buildables_v700,
+    buildableRecipes: buildableRecipes_v700,
+    recipes: productionRecipes_v700,
+    resources: resources_v700,
+    schematics: schematics_v700,
+    tierList: tierList_v700,
+  },
+  v600: {
     items: items_v700,
     buildables: buildables_v700,
     buildableRecipes: buildableRecipes_v700,
@@ -22,6 +33,10 @@ export const satisfactoryVersions = [
   {
     label: "Update 7",
     key: "v700",
+  },
+  {
+    label: "Update 6",
+    key: "v600",
   },
 ];
 
@@ -149,3 +164,21 @@ export const getSatisfactoryBuildableRecipeByItem = (
   }
   return returnObject;
 };
+
+export const createSatisfactoryGame = async (path, payload) => {
+  const collectionRef = collection(db, path);
+  const result = await addDoc(collectionRef, payload || { name: "<new game>" });
+  return result;
+};
+
+export const saveSatisfactoryGame = async (path, id, payload) => {
+  const collectionRef = collection(db, path);
+  const result = await setDoc(doc(collectionRef, id), payload);
+  return result;
+};
+
+export const deleteSatisfactoryGame = async (path, id) => {
+  const deleted = await deleteDoc(doc(db, path, id));
+};
+
+export const addSatisfactoryPlayer = async () => {};

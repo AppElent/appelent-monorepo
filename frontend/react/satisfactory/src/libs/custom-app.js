@@ -1,69 +1,51 @@
 import { getAuth } from "firebase/auth";
-import { collection } from "firebase/firestore";
+import { collection, where } from "firebase/firestore";
 import { db } from "./firebase";
 import { siteSettings } from "config";
 
-import {
-  AppelentFramework,
-} from "libs/appelent-framework";
+import { AppelentFramework, useData } from "libs/appelent-framework";
 import { FirebaseAuth } from "refine-firebase";
-import { useMemo } from "react";
+import { useEffect, useMemo } from "react";
+import { ActionType } from "./appelent-framework/caching";
+import dataProvider from "@pankod/refine-simple-rest";
+import { MuiInferencer } from "@pankod/refine-inferencer/mui";
 
-const CustomApp = ({ httpsRedirect, queryClient, children }) => {
-  // const getInitialGlobalData = () => {
-  //   return {
-  //     firestore: {
-  //       collections: {
-  //         dummy: {
-  //           options: { collection: collection(db, "dummy") },
-  //         },
-  //         dummy3: {
-  //           options: {
-  //             collection: collection(db, "dummy"),
-  //             query: [limit(3), orderBy("testfield01")],
-  //           },
-  //         },
-  //       },
-  //       collectionObjects: {
-  //         tokens: {},
-  //       },
-  //       documents: {},
-  //       isInitialized: false,
-  //     },
-  //     isInitialized: false,
-  //     settings: {
-  //       ...siteSettings,
-  //     },
-  //   };
-  // };
+const CustomApp = ({ queryClient, children }) => {
+  const auth = getAuth();
+  console.log(auth.currentUser);
 
-  const initialGlobalData = {
-    settings: {
-      ...siteSettings,
-    },
-  };
+  const website = useMemo(() => {
+    if (typeof window !== "undefined") {
+      let returnLastSegment = (str) => str.split(".").pop();
+      const hostname = window.location.hostname
+        .toLowerCase()
+        .replace(".appelent.com", "");
+      return returnLastSegment(hostname);
+    }
+    return "";
+  }, []);
 
-  //const [data, dispatch] = useReducer(reducer, getInitialGlobalData(getAuth()));
-  // console.log("Globaldata", data);
+  useEffect(() => {
+    if (website && siteSettings[website]) {
+      const newSiteSettings = { ...siteSettings };
+      Object.keys(siteSettings[website]).forEach((key) => {
+        siteSettings[key] = siteSettings[website][key];
+        newSiteSettings[key] = siteSettings[website][key];
+      });
+    }
+  }, [website]);
 
-  // useEffect(() => {
-  //   // Client-side-only code
-  //   /**
-  //    * HTTPS redirect
-  //    */
-  //   const isLocalhost =
-  //     location.hostname === "localhost" || location.hostname === "127.0.0.1";
-  //   if (
-  //     httpsRedirect &&
-  //     window.location.protocol !== "https:" &&
-  //     process.env.NODE_ENV !== "development" &&
-  //     !isLocalhost
-  //   ) {
-  //     window.location.href = `https:${window.location.href.substring(
-  //       window.location.protocol.length
-  //     )}`;
-  //   }
-  // }, []);
+  const initialGlobalData = useMemo(() => {
+    return {
+      data: {
+        settings: {
+          ...siteSettings,
+          website,
+          sections: siteSettings[website]?.sections,
+        },
+      },
+    };
+  }, []);
 
   const resources = [
     {
@@ -103,9 +85,41 @@ const CustomApp = ({ httpsRedirect, queryClient, children }) => {
     },
   ];
 
-  const dataProvider = {
-    default: "",
-  };
+  const refineResources = [
+    {
+      name: "events",
+      list: MuiInferencer,
+      show: MuiInferencer,
+      edit: MuiInferencer,
+      options: {
+        route: "refine/events",
+        label: "Events",
+      },
+    },
+    {
+      name: "products",
+      list: MuiInferencer,
+      show: MuiInferencer,
+      create: MuiInferencer,
+      edit: MuiInferencer,
+      options: {
+        route: "refine/products",
+        label: "Products",
+        dataProviderName: "dummy",
+      },
+    },
+    {
+      name: "posts",
+      list: MuiInferencer,
+      show: MuiInferencer,
+      create: MuiInferencer,
+      edit: MuiInferencer,
+      options: {
+        route: "refine/posts",
+        dataProviderName: "dummy",
+      },
+    },
+  ];
 
   const httpRedirect = useMemo(() => {
     if (typeof window !== "undefined") {
@@ -138,6 +152,8 @@ const CustomApp = ({ httpsRedirect, queryClient, children }) => {
           undefined,
           getAuth()
         ).getAuthProvider(),
+        // dataProvider: dataProvider(API_URL, BackendClient),
+        resources: refineResources,
       }}
       resources={resources}
     >
@@ -149,9 +165,34 @@ const CustomApp = ({ httpsRedirect, queryClient, children }) => {
 
 const CustomAppChild = ({ children }) => {
   const auth = getAuth();
+  const globalData = useData();
   // useAuth();
 
   let returnComponent = <>{children}</>;
+
+  useEffect(() => {
+    if (auth.currentUser?.uid && globalData.dispatch) {
+      console.log("Adding resource satisfactory_games");
+      globalData.dispatch({
+        type: ActionType.ADD_RESOURCE,
+        payload: {
+          resource: {
+            name: "satisfactory_games",
+            options: {
+              dataProviderName: "firestore",
+              collection: collection(db, "satisfactory_games"),
+              query: [
+                where("playerIds", "array-contains", auth.currentUser.uid),
+                //where("owner", "==", auth.currentUser.uid),
+              ],
+            },
+            loadData: false,
+          },
+        },
+      });
+    } else if (!auth.currentUser?.uid && globalData.dispatch) {
+    }
+  }, [auth.currentUser, globalData.dispatch]);
 
   // const firestoreComponents = useLoadFirestore(globalData);
 
