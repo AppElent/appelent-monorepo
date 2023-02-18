@@ -67,7 +67,9 @@ if ENVIRONMENT_CONFIG:
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = get_random_secret_key() if not ENVIRONMENT_CONFIG else ENVIRONMENT_CONFIG.get('django-secret')
+SECRET_KEY = get_random_secret_key() 
+if ENVIRONMENT_CONFIG and ENVIRONMENT_CONFIG.get('djang-secret'):
+    SECRET_KEY = ENVIRONMENT_CONFIG.get('django-secret')
 #os.getenv("SECRET_KEY", default=get_random_secret_key())
 
 # SECURITY WARNING: don't run with debug turned on in production!
@@ -148,7 +150,7 @@ ROOT_URLCONF = "api.urls"
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
-        "DIRS": [BASE_DIR / 'users/templates'],
+        "DIRS": [],
         "APP_DIRS": True,
         "OPTIONS": {
             "context_processors": [
