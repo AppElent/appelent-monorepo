@@ -40,40 +40,17 @@ if ENVIRONMENT_CONFIG:
     Firebase.load(ENVIRONMENT_CONFIG.get('firebase-creds'))
 
 
-#
-#
-#
-#
-# from azure.identity import DefaultAzureCredential
-# from azure.appconfiguration import AzureAppConfigurationClient
-
-# credential = DefaultAzureCredential()
-# key_vault_options = AzureAppConfigurationKeyVaultOptions(
-#     secret_clients={SecretClient(
-#         vault_url=key_vault_uri, credential=credential)})
-
-# client = AzureAppConfigurationClient(base_url=os.getenv("AZURE_APP_CONFIGURATION_ENDPOINT"), credential=credential)
-# fetched_config_setting = client.get_configuration_setting(
-#     key="testkey", label="testlabel"
-# )
-# fetched_secret_setting = client.get_configuration_setting(
-#     key="testsecret", label="testlabel"
-# )
-# print(fetched_config_setting)
-# print(fetched_secret_setting.value)
-
-
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = get_random_secret_key() 
-if ENVIRONMENT_CONFIG and ENVIRONMENT_CONFIG.get('djang-secret'):
+if ENVIRONMENT_CONFIG and ENVIRONMENT_CONFIG.get('django-secret'):
     SECRET_KEY = ENVIRONMENT_CONFIG.get('django-secret')
 #os.getenv("SECRET_KEY", default=get_random_secret_key())
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False if ENVIRONMENT == "PRODUCTION" else True
+DEBUG = False if ENVIRONMENT != "LOCAL" else True
 
 CSRF_TRUSTED_ORIGINS = ['https://*.preview.app.github.dev', 'https://*.appelent.com']
 #ALLOWED_HOSTS = ['preview.app.github.dev', 'localhost', '127.0.0.1', '.appelent.com']
@@ -250,5 +227,7 @@ STATIC_URL = "static/"
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
+LOGIN_URL = 'login'
+LOGOUT_URL = 'logout'
 LOGIN_REDIRECT_URL = "/"
 LOGOUT_REDIRECT_URL = "/"
