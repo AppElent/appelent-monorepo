@@ -4,7 +4,7 @@ FROM gitpod/workspace-full:latest
 # Install custom tools, runtime, etc.
 # base image only got `apt` as the package manager
 # install-packages is a wrapper for `apt` that helps skip a few commands in the docker env.
-RUN sudo install-packages shellcheck tree llvm
+#RUN sudo install-packages shellcheck tree llvm
 
 
 # Install tools as the gitpod user
@@ -12,16 +12,17 @@ USER gitpod
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 
 # Install helper tools
-RUN brew update && brew upgrade && brew install \
-    gawk coreutils pre-commit tfenv terraform-docs \
-    tflint tfsec instrumenta/instrumenta/conftest \
-    && brew install --ignore-dependencies cdktf \
-    && brew cleanup
-RUN tfenv install latest && tfenv use latest
+RUN brew uninstall --force --ignore-dependencies cmake
+RUN brew cleanup -s cmake
+RUN brew cleanup --prune-prefix
+RUN brew install cmake
+RUN brew update && brew upgrade
+RUN brew install terraform azure-cli kubectl minikube helm awscli
 
-RUN curl -sL https://aka.ms/InstallAzureCLIDeb | sudo bash
+RUN npm install -g firebase-tools
 
-COPY .gitpod.bashrc /home/gitpod/.bashrc.d/custom
+
+#COPY .gitpod.bashrc /home/gitpod/.bashrc.d/custom
 
 # Give back control
 USER root
