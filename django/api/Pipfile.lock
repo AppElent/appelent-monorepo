@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "4bfb308a3eac05f523bed9db06e5580f0358f49d9b8a717589ec94e89a5bbda0"
+            "sha256": "be0b33bdfb74cd2e87dfa8a9f1e1916da7e91c904e482ae575f573227633665c"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -365,6 +365,14 @@
             "index": "pypi",
             "version": "==3.17.0"
         },
+        "django-prometheus": {
+            "hashes": [
+                "sha256:240378a1307c408bd5fc85614a3a57f1ce633d4a222c9e291e2bbf325173b801",
+                "sha256:e6616770d8820b8834762764bf1b76ec08e1b98e72a6f359d488a2e15fe3537c"
+            ],
+            "index": "pypi",
+            "version": "==2.2.0"
+        },
         "django-rest-swagger": {
             "hashes": [
                 "sha256:48f6aded9937e90ae7cbe9e6c932b9744b8af80cc4e010088b3278c700e0685b",
@@ -418,11 +426,11 @@
         },
         "google-auth": {
             "hashes": [
-                "sha256:5045648c821fb72384cdc0e82cc326df195f113a33049d9b62b74589243d2acc",
-                "sha256:ed7057a101af1146f0554a769930ac9de506aeca4fd5af6543ebe791851a9fbd"
+                "sha256:5fd170986bce6bfd7bb5c845c4b8362edb1e0cba901e062196e83f8bb5d5d32c",
+                "sha256:75d76ea857df65938e1f71dcbcd7d0cd48e3f80b34b8870ba229c9292081f7ef"
             ],
             "markers": "python_version >= '2.7' and python_version not in '3.0, 3.1, 3.2, 3.3, 3.4, 3.5'",
-            "version": "==2.16.0"
+            "version": "==2.16.1"
         },
         "google-auth-httplib2": {
             "hashes": [
@@ -830,6 +838,14 @@
             ],
             "markers": "python_version >= '3.5' and platform_system == 'Windows'",
             "version": "==2.7.0"
+        },
+        "prometheus-client": {
+            "hashes": [
+                "sha256:0836af6eb2c8f4fed712b2f279f6c0a8bbab29f9f4aa15276b91c7cb0d1616ab",
+                "sha256:a03e35b359f14dd1630898543e2120addfdeacd1a6069c1367ae90fd93ad3f48"
+            ],
+            "markers": "python_version >= '3.6'",
+            "version": "==0.16.0"
         },
         "proto-plus": {
             "hashes": [

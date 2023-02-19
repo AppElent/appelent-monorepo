@@ -5640,25 +5640,25 @@
     "@react-pdf/png-js" "^2.2.0"
     "cross-fetch" "^3.1.5"
 
-"@react-pdf/layout@^3.2.1":
-  "integrity" "sha512-IgWaI89jFyGCTYcQwq2wAk7mOfaewqgpHmUTgb0StMM1ihK8+ESAWjEz+kjOxflMfxb7bx7qUZdn9mPxnN1SjQ=="
-  "resolved" "https://registry.npmjs.org/@react-pdf/layout/-/layout-3.2.1.tgz"
-  "version" "3.2.1"
+"@react-pdf/layout@^3.4.0":
+  "integrity" "sha512-hapj5iecClkXsAu4al4/A/P8kFs0xrspgxW0hA6/nCFe3xwh3cIIl7ChwWMmaSDDYn5fBxzJbm3AnW92W8rquw=="
+  "resolved" "https://registry.npmjs.org/@react-pdf/layout/-/layout-3.4.0.tgz"
+  "version" "3.4.0"
   dependencies:
     "@babel/runtime" "^7.16.4"
     "@react-pdf/fns" "2.0.0"
     "@react-pdf/image" "^2.2.0"
     "@react-pdf/pdfkit" "^3.0.0"
     "@react-pdf/primitives" "^3.0.0"
-    "@react-pdf/stylesheet" "^4.0.0"
+    "@react-pdf/stylesheet" "^4.1.1"
     "@react-pdf/textkit" "^4.1.0"
-    "@react-pdf/types" "^2.1.0"
-    "@react-pdf/yoga" "^3.0.0"
+    "@react-pdf/types" "^2.2.0"
+    "@react-pdf/yoga" "^4.1.0"
     "cross-fetch" "^3.1.5"
     "emoji-regex" "^8.0.0"
     "queue" "^6.0.1"
 
-"@react-pdf/pdfkit@^3.0.0":
+"@react-pdf/pdfkit@^3.0.0", "@react-pdf/pdfkit@^3.0.1":
   "integrity" "sha512-KzHZjkzLCVsZEWErvnh7NtuJfHNThDHgOrhdP7js7z9u5BLI0hwdGhy9N99FTYzpFjhkGLlGeyF0jBLooBevuQ=="
   "resolved" "https://registry.npmjs.org/@react-pdf/pdfkit/-/pdfkit-3.0.1.tgz"
   "version" "3.0.1"
@@ -5698,30 +5698,32 @@
     "parse-svg-path" "^0.1.2"
     "svg-arc-to-cubic-bezier" "^3.2.0"
 
-"@react-pdf/renderer@3.0.1":
-  "integrity" "sha512-NuyXB8dsKVO1r+MBXl/SHZ8rAV979TgnRg8/5L9oiPYwG+WsV4gu2xm2bqoRdU8ltasKkVALK7hdgwh9XX+ZCA=="
-  "resolved" "https://registry.npmjs.org/@react-pdf/renderer/-/renderer-3.0.1.tgz"
-  "version" "3.0.1"
+"@react-pdf/renderer@3.1.4":
+  "integrity" "sha512-r46BKW4Y2bhan6ykXNUunjWqBcID6Bbda2WoQnk+hSlUoru5vMyZYPI/PtvWRXacuiqUvMzTEUQLm+mRRHEJGg=="
+  "resolved" "https://registry.npmjs.org/@react-pdf/renderer/-/renderer-3.1.4.tgz"
+  "version" "3.1.4"
   dependencies:
     "@babel/runtime" "^7.16.4"
     "@react-pdf/font" "^2.3.1"
-    "@react-pdf/layout" "^3.2.1"
-    "@react-pdf/pdfkit" "^3.0.0"
+    "@react-pdf/layout" "^3.4.0"
+    "@react-pdf/pdfkit" "^3.0.1"
     "@react-pdf/primitives" "^3.0.0"
     "@react-pdf/render" "^3.2.1"
-    "@react-pdf/types" "^2.1.0"
+    "@react-pdf/types" "^2.2.0"
+    "loose-envify" "^1.1.0"
+    "object-assign" "^4.1.1"
+    "prop-types" "^15.6.2"
     "queue" "^6.0.1"
-    "react-reconciler" "^0.23.0"
     "scheduler" "^0.17.0"
 
-"@react-pdf/stylesheet@^4.0.0":
-  "integrity" "sha512-R+17y/HpSmOBeFPaqH7P8R0Y7AbjM3izVZWYgM5BhQ52PdyTroIkVRMPEPTDSGXPGmsCS3lvyXFnjKOi+LdSgw=="
-  "resolved" "https://registry.npmjs.org/@react-pdf/stylesheet/-/stylesheet-4.0.0.tgz"
-  "version" "4.0.0"
+"@react-pdf/stylesheet@^4.1.1":
+  "integrity" "sha512-M+4mDodSPl0l/fVqJSbY67n8gueh2gko7JqlwTl0OGXPdBZurx3YNGVODl6WaIWJz2RF0BB6x7ph3MF7PiOOkw=="
+  "resolved" "https://registry.npmjs.org/@react-pdf/stylesheet/-/stylesheet-4.1.2.tgz"
+  "version" "4.1.2"
   dependencies:
     "@babel/runtime" "^7.16.4"
     "@react-pdf/fns" "2.0.0"
-    "@react-pdf/types" "^2.1.0"
+    "@react-pdf/types" "^2.2.0"
     "color-string" "^1.5.3"
     "hsl-to-hex" "^1.0.0"
     "media-engine" "^1.0.3"
@@ -5737,17 +5739,17 @@
     "hyphen" "^1.6.4"
     "unicode-properties" "^1.4.1"
 
-"@react-pdf/types@^2.0.9", "@react-pdf/types@^2.1.0":
-  "integrity" "sha512-wMv2FCSyQHMCWeQa/Bwnd3eZc/4HtRrB10HMObPzT6E5fIsmv25tPdqfpuQ1bU9u306q/POKAGEvjCnDLX9B6g=="
-  "resolved" "https://registry.npmjs.org/@react-pdf/types/-/types-2.1.1.tgz"
-  "version" "2.1.1"
+"@react-pdf/types@^2.0.9", "@react-pdf/types@^2.1.0", "@react-pdf/types@^2.2.0":
+  "integrity" "sha512-sJDzaeTVcwmZId1uaTHxW0CT5BKUHP5yzvjAAsEqur+kFD/qGZB02ahi5RQuvscnqDofcks3QR0sB78dR0Pp0g=="
+  "resolved" "https://registry.npmjs.org/@react-pdf/types/-/types-2.2.0.tgz"
+  "version" "2.2.0"
 
-"@react-pdf/yoga@^3.0.0":
-  "integrity" "sha512-vGgvriAIH1Tk1RO6xtQeHc3iPM1pAz+Vz1WZ9wRlsXsuBAk7ZhtbHxrf9F7O3sFPORcMryihdtqpBeq2ZzMtNQ=="
-  "resolved" "https://registry.npmjs.org/@react-pdf/yoga/-/yoga-3.0.0.tgz"
-  "version" "3.0.0"
+"@react-pdf/yoga@^4.1.0":
+  "integrity" "sha512-eOJOhsP3mZ/RiqHqQ4CFdEPN8+I9q4BBq/3TpNSPOCukPOG/7AuxtESFWeROEiAsnv+yXuyLVgZi+oLhq0QdWQ=="
+  "resolved" "https://registry.npmjs.org/@react-pdf/yoga/-/yoga-4.1.0.tgz"
+  "version" "4.1.0"
   dependencies:
-    "@types/yoga-layout" "^1.9.3"
+    "@babel/runtime" "^7.16.4"
 
 "@reduxjs/toolkit@1.8.5":
   "integrity" "sha512-f4D5EXO7A7Xq35T0zRbWq5kJQyXzzscnHKmjnu2+37B3rwHU6mX9PYlbfXdnxcY6P/7zfmjhgan0Z+yuOfeBmA=="
@@ -6169,11 +6171,6 @@
   "version" "17.0.20"
   dependencies:
     "@types/yargs-parser" "*"
-
-"@types/yoga-layout@^1.9.3":
-  "integrity" "sha512-RRHc1+8Hc5mf/2lZKnom6kCnqcNS07s8keahniWTOva0KELF6RgDJmaEcvGEKUUJgN4UgessmEsWuidaOycIOw=="
-  "resolved" "https://registry.npmjs.org/@types/yoga-layout/-/yoga-layout-1.9.4.tgz"
-  "version" "1.9.4"
 
 "@typescript-eslint/parser@^5.42.0":
   "integrity" "sha512-4yg+FJR/V1M9Xoq56SF9Iygqm+r5LMXvheo6DQ7/yUWynQ4YfCRnsKuRgqH4EQ5Ya76rVwlEpw4Xu+TgWQUcdA=="
@@ -12197,16 +12194,6 @@
     "lodash" "^4.17.4"
     "quill" "^1.3.7"
 
-"react-reconciler@^0.23.0":
-  "integrity" "sha512-vV0KlLimP9a/NuRcM6GRVakkmT6MKSzhfo8K72fjHMnlXMOhz9GlPe+/tCp5CWBkg+lsMUt/CR1nypJBTPfwuw=="
-  "resolved" "https://registry.npmjs.org/react-reconciler/-/react-reconciler-0.23.0.tgz"
-  "version" "0.23.0"
-  dependencies:
-    "loose-envify" "^1.1.0"
-    "object-assign" "^4.1.1"
-    "prop-types" "^15.6.2"
-    "scheduler" "^0.17.0"
-
 "react-redux@^7.2.0":
   "integrity" "sha512-Gx4L3uM182jEEayZfRbI/G11ZpYdNAnBs70lFVMNdHJI76XYtR+7m0MN+eAs7UHBPhWXcnFPaS+9owSCJQHNpQ=="
   "resolved" "https://registry.npmjs.org/react-redux/-/react-redux-7.2.9.tgz"
@@ -12276,7 +12263,7 @@
     "loose-envify" "^1.4.0"
     "prop-types" "^15.6.2"
 
-"react@^0.14.0 || ^15.0.1 || ^16.0.0 || ^17.0.0 || ^18.0.0", "react@^0.14.9 || ^15.3.0 || ^16.0.0-rc || ^16.0 || ^17.0 || ^18.0.0", "react@^16 || ^17 || ^18", "react@^16.0.0", "react@^16.0.0 || ^17.0.0 || ^18.0.0", "react@^16.8 || ^17.0 || ^18.0", "react@^16.8.0 || ^17 || ^18", "react@^16.8.0 || ^17.0.0 || ^18.0.0", "react@^16.8.3 || ^17 || ^18", "react@^16.8.5 || ^17.0.0 || ^18.0.0", "react@^16.8.6 || ^17.0.0", "react@^16.9.0 || ^17.0.0 || ^18", "react@^16.x || 17.x || 18.x", "react@^17.0.0 || ^18.0.0", "react@^17.0.2 || ^18.0.0", "react@^18.2.0", "react@>= 0.14.0", "react@>= 16.8 || 18.0.0", "react@>= 16.8.0", "react@>= 16.8.0 || 17.x.x || ^18.0.0-0", "react@>=0.13", "react@>=0.14.0", "react@>=0.14.9", "react@>=16", "react@>=16.3.0", "react@>=16.6.0", "react@>=16.8", "react@>=16.8.0", "react@0.13.x || 0.14.x || ^15.0.0-0 || 15.x.x || ^16.0.0-0 || ^16.x.x || ^17.x.x || ^18.x.x", "react@18.2.0":
+"react@^0.14.0 || ^15.0.1 || ^16.0.0 || ^17.0.0 || ^18.0.0", "react@^0.14.9 || ^15.3.0 || ^16.0.0-rc || ^16.0 || ^17.0 || ^18.0.0", "react@^16 || ^17 || ^18", "react@^16.0.0 || ^17.0.0 || ^18.0.0", "react@^16.8 || ^17.0 || ^18.0", "react@^16.8.0 || ^17 || ^18", "react@^16.8.0 || ^17.0.0 || ^18.0.0", "react@^16.8.3 || ^17 || ^18", "react@^16.8.5 || ^17.0.0 || ^18.0.0", "react@^16.8.6 || ^17.0.0 || ^18.0.0", "react@^16.9.0 || ^17.0.0 || ^18", "react@^16.x || 17.x || 18.x", "react@^17.0.0 || ^18.0.0", "react@^17.0.2 || ^18.0.0", "react@^18.2.0", "react@>= 0.14.0", "react@>= 16.8 || 18.0.0", "react@>= 16.8.0", "react@>= 16.8.0 || 17.x.x || ^18.0.0-0", "react@>=0.13", "react@>=0.14.0", "react@>=0.14.9", "react@>=16", "react@>=16.3.0", "react@>=16.6.0", "react@>=16.8", "react@>=16.8.0", "react@0.13.x || 0.14.x || ^15.0.0-0 || 15.x.x || ^16.0.0-0 || ^16.x.x || ^17.x.x || ^18.x.x", "react@18.2.0":
   "integrity" "sha512-/3IjMdb2L9QbBdWiW5e3P2/npwMBaU9mHCSCUzNln0ZCYbcfTsGbTJrU/kGemdH2IWmB2ioZ+zkxtmq6g09fGQ=="
   "resolved" "https://registry.npmjs.org/react/-/react-18.2.0.tgz"
   "version" "18.2.0"

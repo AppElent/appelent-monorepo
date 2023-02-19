@@ -57,5 +57,6 @@ urlpatterns = [
     re_path(r'^health/', include('health_check.urls')),
     path("accounts/", include("django.contrib.auth.urls")),
     path("home", TemplateView.as_view(template_name="home.html"), name="home"),
-    path("api-auth/", include('rest_framework.urls', namespace='rest_framework'))
+    path("api-auth/", include('rest_framework.urls', namespace='rest_framework')),
+    path('', include('django_prometheus.urls')),
 ]

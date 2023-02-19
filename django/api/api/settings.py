@@ -36,7 +36,7 @@ from .modules.AzureCosmosDb import AzureCosmosDb
 from .modules.Firebase import Firebase
 ENVIRONMENT_CONFIG = AzureAppConfiguration.load(os.getenv("AZURE_APP_CONFIGURATION_ENDPOINT"), "django-api", os.getenv("ENVIRONMENT") or "LOCAL")
 if ENVIRONMENT_CONFIG:
-    AzureCosmosDb.load(ENVIRONMENT_CONFIG.get('cosmos-access-key'))
+    COSMOS_DATABASE_CLIENT = AzureCosmosDb.load(ENVIRONMENT_CONFIG.get('cosmos-access-key'))
     Firebase.load(ENVIRONMENT_CONFIG.get('firebase-creds'))
 
 
@@ -74,6 +74,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'rest_framework_swagger',
     'rest_framework.authtoken',
+    'django_prometheus',
     'api.apps.ApiConfig',
     'drf_yasg',
     'crud',
@@ -88,6 +89,7 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
+    'django_prometheus.middleware.PrometheusBeforeMiddleware',
     'allow_cidr.middleware.AllowCIDRMiddleware',
     "corsheaders.middleware.CorsMiddleware",
     "django.middleware.security.SecurityMiddleware",
@@ -98,6 +100,7 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
+    'django_prometheus.middleware.PrometheusAfterMiddleware',
 ]
 
 STORAGES = {
@@ -172,7 +175,7 @@ else:
 if os.getenv("REDIS_URL"):
     CACHES = {
         "default": {
-            'BACKEND': 'django.core.cache.backends.redis.RedisCache',
+            'BACKEND': 'django_prometheus.cache.backends.redis.RedisCache',
             'LOCATION': os.getenv("REDIS_URL"),
         }
     }
@@ -180,7 +183,7 @@ else:
     # default cache is local memory cache
     CACHES = {
         'default': {
-            'BACKEND': 'django.core.cache.backends.locmem.LocMemCache',
+            'BACKEND': 'django_prometheus.cache.backends.locmem.LocMemCache',
             'LOCATION': 'unique-string',
         },
     }

@@ -14,9 +14,7 @@ helm repo update
 
 ### Use Helm to deploy an NGINX ingress controller
 
-helm install ingress-nginx ingress-nginx/ingress-nginx \
- --namespace ingress-basic \
- --set controller.replicaCount=2
+helm upgrade --install ingress-nginx ingress-nginx/ingress-nginx --namespace ingress-basic --set controller.replicaCount=2 --create-namespace --set controller.service.externalTrafficPolicy=Local
 
 # Certbot
 
