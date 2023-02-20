@@ -44,7 +44,7 @@ export const AppelentFramework = ({
   const usersettings = useMemo(() => {
     if (typeof window !== "undefined") {
       const item = window.localStorage.getItem(userDataLocalStorageKey);
-      return item ? JSON.parse(item) : initialValue;
+      return item ? JSON.parse(item) : {};
     }
     return {};
   }, []);
