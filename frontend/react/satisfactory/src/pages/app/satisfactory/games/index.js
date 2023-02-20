@@ -15,12 +15,14 @@ import { useSettings } from "hooks/use-settings";
 import { Layout as DashboardLayout } from "layouts/dashboard";
 import { siteSettings } from "config";
 import { useRouter } from "next/router";
-import React, { useMemo, useEffect, useState, useCallback } from "react";
+import React, { useMemo, useEffect, useCallback } from "react";
 import {
   SatisfactoryCurrentVersion,
   createSatisfactoryGame,
   deleteSatisfactoryGame,
   saveSatisfactoryGame,
+  getSatisfactoryDataArray,
+  getSatisfactoryData,
 } from "libs/satisfactory";
 import { Stack } from "@mui/system";
 import _ from "lodash";
@@ -34,21 +36,52 @@ import { useConfirm } from "libs/appelent-framework/confirmation";
 import { toast } from "react-hot-toast";
 import { SatisfactoryGamesScribble } from "sections/app/satisfactory/games/satisfactory-games-scribble";
 import { SatisfactoryGamesFactories } from "sections/app/satisfactory/games/satisfactory-games-factories";
+import { useQueryParam } from "libs/appelent-framework/hooks/use-query-param";
+import { generateName } from "libs/random-name-generator";
+import { useKey } from "libs/appelent-framework/hooks/use-key";
 
 const Page = () => {
   const auth = getAuth();
   const settings = useSettings();
   usePageView();
+
   const router = useRouter();
-  //let { gameId, version } = router.query;
-  const tabs = useTabs("general");
+
+  const tabs = useTabs("general", "tab");
+
   const gamesData = useData("satisfactory_games");
-  const [selectedGame, setSelectedGame] = useState();
+
   const [selectedGameId, setSelectedGameId, deleteSelectedGameId] =
     useLocalStorage("satisfactory_game_id");
+
   const confirm = useConfirm({
     title: "Are you sure you want to delete this game?",
   });
+
+  const { value: gameId, setQueryParam: setGameId } = useQueryParam(
+    "game",
+    selectedGameId
+  );
+
+  const selectedGame = useMemo(() => {
+    if (gamesData.data) {
+      const found = gamesData.data?.find((oneGame) => oneGame.id === gameId);
+      if (!found) {
+        return gamesData.data[0];
+      }
+      return found;
+    }
+  }, [gamesData.data, gameId]);
+
+  // useEffect(() => {
+  //   formik.setValues(selectedGame);
+  //   setFormDirty(false);
+  // }, [selectedGame]);
+
+  const onGameChange = useCallback((newId) => {
+    setGameId(newId);
+    setSelectedGameId(newId);
+  }, []);
 
   const initialValues = {
     ...selectedGame,
@@ -57,10 +90,10 @@ const Page = () => {
 
   const formik = useFormik({
     initialValues,
+    enableReinitialize: true,
     //validationSchema,
     onSubmit: async (values, helpers) => {
       try {
-        console.log(values);
         let { meta, ...rest } = values;
         if (!rest.players.find((player) => player.uid === values.owner)) {
           rest.players.push({
@@ -88,51 +121,58 @@ const Page = () => {
     },
   });
 
-  // const defaultGame = useMemo(() => {
-  //   return (
+  useKey("ctrls", () => formik.handleSubmit());
 
-  //   );
+  const satisfactoryRecipes = _.sortBy(
+    getSatisfactoryDataArray("recipes", formik.values.version),
+    "name"
+  );
+  const satisfactoryProducts = getSatisfactoryData(
+    "items",
+    formik.values.version
+  );
+
+  // useEffect(() => {
+  //   console.log("jaaaaa formik is dirty", formik.dirty, formDirty);
+  //   if (formik.dirty) {
+  //   }
+  // }, [formik.dirty]);
+
+  // useEffect(() => {
+  //   if (gamesData.data) {
+  //     const defaultGame =
+  //       gamesData.data?.find((oneGame) => oneGame.id === selectedGameId) ||
+  //       (gamesData.data ? gamesData.data[0] : undefined);
+  //     if (
+  //       !selectedGameId ||
+  //       (selectedGameId !== defaultGame?.id && defaultGame)
+  //     ) {
+  //       setSelectedGameId(defaultGame?.id);
+  //     }
+  //   }
   // }, [gamesData.data, selectedGameId]);
 
-  useEffect(() => {
-    if (gamesData.data) {
-      const defaultGame =
-        gamesData.data?.find((oneGame) => oneGame.id === selectedGameId) ||
-        (gamesData.data ? gamesData.data[0] : undefined);
-      if (
-        !selectedGameId ||
-        (selectedGameId !== defaultGame?.id && defaultGame)
-      ) {
-        setSelectedGameId(defaultGame?.id);
-      }
-    }
-  }, [gamesData.data, selectedGameId]);
-
-  useEffect(() => {
-    if (selectedGameId && gamesData.data) {
-      const foundGame = gamesData.data?.find(
-        (oneGame) => oneGame.id === selectedGameId
-      );
-      if (foundGame) {
-        formik.setValues(foundGame);
-        setSelectedGame(foundGame);
-        router.replace(
-          {
-            query: { ...router.query, game: selectedGameId },
-          },
-          undefined,
-          { shallow: true }
-        );
-      }
-    }
-  }, [selectedGameId, gamesData.data]);
+  // useEffect(() => {
+  //   if (selectedGameId && gamesData.data) {
+  //     const foundGame = gamesData.data?.find(
+  //       (oneGame) => oneGame.id === selectedGameId
+  //     );
+  //     if (foundGame) {
+  //       formik.setValues(foundGame);
+  //       setSelectedGame(foundGame);
+  //       router.replace(
+  //         {
+  //           query: { ...router.query, game: selectedGameId },
+  //         },
+  //         undefined,
+  //         { shallow: true }
+  //       );
+  //     }
+  //   }
+  // }, [selectedGameId, gamesData.data]);
 
   const tabsData = [
     { label: "General", value: "general" },
-    // { label: "Billing", value: "billing" },
-    // { label: "Team", value: "team" },
-    // { label: "Notifications", value: "notifications" },
-    // { label: "Agreements", value: "agreements" },
     { label: "Factories", value: "factories", disabled: !selectedGame },
     {
       label: "Train stations",
@@ -156,22 +196,9 @@ const Page = () => {
   }, [tabs.tab]);
 
   const createNewGame = async () => {
-    let newName = "My New Game ";
-    let isUnique = false;
-    let number = gamesData.data?.length + 1 || 1;
-    while (!isUnique) {
-      number++;
-      const foundGame = gamesData.data?.find((game) => {
-        game.name === newName + number;
-      });
-      if (!foundGame) {
-        isUnique = true;
-      }
-    }
+    let newName = generateName();
 
-    newName = newName + number;
-
-    const payload = {
+    const GAME_TEMPLATE = {
       name: newName,
       owner: auth.currentUser?.uid,
       players: [
@@ -179,12 +206,14 @@ const Page = () => {
       ],
       playerIds: [auth.currentUser?.uid],
       version: SatisfactoryCurrentVersion,
+      factories: [],
     };
     const createdGame = await createSatisfactoryGame(
       gamesData.meta.path,
-      payload
+      GAME_TEMPLATE
     );
     setSelectedGameId(createdGame.id);
+    setGameId(createdGame.id);
   };
 
   const deleteGame = useCallback(async () => {
@@ -193,19 +222,19 @@ const Page = () => {
     const deleted = await deleteSatisfactoryGame(gamesData.meta.path, id);
   }, [gamesData, selectedGame]);
 
-  const gameValue = useMemo(() => {
-    if (gamesData.data) {
-      let value = gamesData.data?.find(
-        (oneGame) => oneGame.id === selectedGameId
-      );
-      if (!value) {
-        value = gamesData.data[0];
-      }
-      return value;
-    } else {
-      return undefined;
-    }
-  }, [gamesData.data, selectedGameId]);
+  // const gameValue = useMemo(() => {
+  //   // if (gamesData.data) {
+  //   //   let value = gamesData.data?.find(
+  //   //     (oneGame) => oneGame.id === selectedGameId
+  //   //   );
+  //   //   if (!value) {
+  //   //     value = gamesData.data[0];
+  //   //   }
+  //   //   return value;
+  //   // } else {
+  //   //   return undefined;
+  //   // }
+  // }, [gamesData.data, selectedGameId]);
 
   if (!selectedGame) {
     return (
@@ -251,6 +280,7 @@ const Page = () => {
                 spacing={3}
               >
                 <Typography variant="h4">Game: {selectedGame.name}</Typography>
+
                 <Stack direction="row" spacing={2}>
                   <Autocomplete
                     getOptionLabel={(option) => option.name}
@@ -275,14 +305,14 @@ const Page = () => {
                     // }
                     onChange={(e, value) => {
                       if (value) {
-                        setSelectedGameId(value.id);
+                        onGameChange(value.id);
                       }
                     }}
                     // onInputChange={(event, newInputValue) => {
                     //   setInputValue(newInputValue);
                     // }}
                     sx={{ width: 300 }}
-                    value={gameValue}
+                    value={selectedGame}
                   />
                   <Button
                     onClick={() => {
@@ -290,28 +320,44 @@ const Page = () => {
                     }}
                     variant="contained"
                   >
-                    Add
+                    Create new
                   </Button>
                 </Stack>
               </Stack>
               <div>
-                <Tabs
-                  indicatorColor="primary"
-                  onChange={tabs.handleTabChange}
-                  scrollButtons="auto"
-                  textColor="primary"
-                  value={tabs.tab}
-                  variant="scrollable"
+                <Stack
+                  alignItems="center"
+                  direction="row"
+                  justifyContent="space-between"
+                  spacing={3}
                 >
-                  {tabsData.map((tab) => (
-                    <Tab
-                      key={tab.value}
-                      label={tab.label}
-                      value={tab.value}
-                      disabled={tab.disabled}
-                    />
-                  ))}
-                </Tabs>
+                  <Tabs
+                    indicatorColor="primary"
+                    onChange={tabs.handleTabChange}
+                    scrollButtons="auto"
+                    textColor="primary"
+                    value={tabs.tab}
+                    variant="scrollable"
+                  >
+                    {tabsData.map((tab) => (
+                      <Tab
+                        key={tab.value}
+                        label={tab.label}
+                        value={tab.value}
+                        disabled={tab.disabled}
+                      />
+                    ))}
+                  </Tabs>
+                  <Button
+                    //color="inherit"
+                    disabled={!formik.dirty}
+                    size="small"
+                    onClick={formik.handleSubmit}
+                    variant="contained"
+                  >
+                    Save
+                  </Button>
+                </Stack>
                 <Divider />
               </div>
             </Stack>
@@ -335,9 +381,11 @@ const Page = () => {
                 <SatisfactoryGamesFactories
                   formik={formik}
                   game={selectedGame}
+                  recipes={satisfactoryRecipes}
+                  products={satisfactoryProducts}
                 />
               )}
-              {JSON.stringify(selectedGame)}
+              {/* {JSON.stringify(selectedGame)} */}
               {/* <SatisfactoryProductDetail product={product} />
               <SatisfactoryProductRecipeTable
                 title="Recipes"

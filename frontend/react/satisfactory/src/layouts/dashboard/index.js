@@ -24,7 +24,6 @@ export const Layout = withAuthGuard((props) => {
   const appSettings = useData("settings");
   const { menuItems: refineMenuItems } = useMenu();
   const { data: permissionData } = usePermissions();
-  console.log(permissionData);
   const sections = useTranslatedSections(
     appSettings.sections,
     refineMenuItems,

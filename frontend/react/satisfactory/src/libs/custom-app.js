@@ -12,7 +12,6 @@ import { MuiInferencer } from "@pankod/refine-inferencer/mui";
 
 const CustomApp = ({ queryClient, children }) => {
   const auth = getAuth();
-  console.log(auth.currentUser);
 
   const website = useMemo(() => {
     if (typeof window !== "undefined") {

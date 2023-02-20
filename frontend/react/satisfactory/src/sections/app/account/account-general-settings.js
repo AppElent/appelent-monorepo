@@ -8,10 +8,8 @@ import {
   Button,
   Card,
   CardContent,
-  Divider,
   Stack,
   SvgIcon,
-  Switch,
   TextField,
   Typography,
   Unstable_Grid2 as Grid,
@@ -21,6 +19,7 @@ import { useFormik } from "formik";
 
 import { CardDefault } from "components/app/card-default";
 import { getAuth } from "firebase/auth";
+import { generateName } from "libs/random-name-generator";
 
 export const AccountGeneralSettings = (props) => {
   const { updatesettings, ...rest } = props;
@@ -70,6 +69,11 @@ export const AccountGeneralSettings = (props) => {
   const handleEdit = useCallback(() => {
     setIsEditing((prevState) => !prevState);
   }, []);
+
+  const generateRandomName = () => {
+    const generatedName = generateName();
+    formik.setFieldValue("name", generatedName);
+  };
 
   return (
     <Stack spacing={4} {...rest}>
@@ -169,12 +173,19 @@ export const AccountGeneralSettings = (props) => {
                 </Stack>
                 <Stack alignItems="center" direction="row" spacing={2}>
                   <TextField
-                    label="Full Name"
+                    label="Displayname"
                     sx={{ flexGrow: 1 }}
                     name="name"
                     onChange={formik.handleChange}
                     value={formik.values.name}
                   />
+                  <Button
+                    color="inherit"
+                    size="small"
+                    onClick={generateRandomName}
+                  >
+                    Generate
+                  </Button>
                   <Button
                     color="inherit"
                     size="small"
@@ -196,9 +207,9 @@ export const AccountGeneralSettings = (props) => {
                       },
                     }}
                   />
-                  <Button onClick={handleEdit}>
+                  {/* <Button onClick={handleEdit}>
                     {isEditing ? "Save" : "Edit"}
-                  </Button>
+                  </Button> */}
                 </Stack>
               </Stack>
             </Grid>
@@ -224,7 +235,7 @@ export const AccountGeneralSettings = (props) => {
           </Button>
         </Stack>
       </CardDefault>
-      <Card>
+      {/* <Card>
         <CardContent>
           <Grid container spacing={3}>
             <Grid xs={12} md={4}>
@@ -270,7 +281,7 @@ export const AccountGeneralSettings = (props) => {
             </Grid>
           </Grid>
         </CardContent>
-      </Card>
+      </Card> */}
       <Card>
         <CardContent>
           <Grid container spacing={3}>

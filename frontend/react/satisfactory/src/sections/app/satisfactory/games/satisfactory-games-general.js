@@ -19,9 +19,7 @@ import {
 import { FormikProvider, FieldArray } from "formik";
 
 import { CardDefault } from "components/app/card-default";
-import {
-  satisfactoryVersions,
-} from "libs/satisfactory";
+import { satisfactoryVersions } from "libs/satisfactory";
 import { getAuth } from "firebase/auth";
 
 const addPlayer = () => {};
@@ -33,23 +31,14 @@ export const SatisfactoryGamesGeneral = (props) => {
   return (
     <FormikProvider value={formik}>
       <Stack spacing={4}>
-        <Button
-          //color="inherit"
-          disabled={!formik.dirty}
-          size="small"
-          onClick={formik.handleSubmit}
-          variant="contained"
-        >
-          Save
-        </Button>
-        <CardDefault title="Settings">
+        <CardDefault title="General information">
           <Stack alignItems="center" direction="row" spacing={2}>
             <TextField
               label="Name"
               sx={{ flexGrow: 1 }}
               name="name"
               onChange={formik.handleChange}
-              value={formik.values.name || ""}
+              value={formik.values?.name || ""}
             />
           </Stack>
           <Stack alignItems="center" direction="row" spacing={2}>
@@ -58,12 +47,12 @@ export const SatisfactoryGamesGeneral = (props) => {
               sx={{ flexGrow: 1 }}
               name="description"
               onChange={formik.handleChange}
-              value={formik.values.description || ""}
+              value={formik.values?.description || ""}
             />
           </Stack>
           <Stack alignItems="center" direction="row" spacing={2}>
             <TextField
-              value={formik.values.version || ""}
+              value={formik.values?.version || ""}
               name="version"
               label="Version"
               select
@@ -100,13 +89,7 @@ export const SatisfactoryGamesGeneral = (props) => {
             render={(arrayHelpers) => (
               <div>
                 <List dense={true}>
-                  <ListItem
-                  // secondaryAction={
-                  //   <IconButton edge="end" aria-label="delete">
-                  //     <DeleteIcon />
-                  //   </IconButton>
-                  // }
-                  >
+                  {/* <ListItem>
                     <ListItemAvatar>
                       <Avatar>
                         <PersonIcon />
@@ -119,14 +102,14 @@ export const SatisfactoryGamesGeneral = (props) => {
                       })`}
                       secondary="This is the owner of the game. The owner cannot be deleted."
                     />
-                  </ListItem>
-                  {formik.values.players
-                    ?.filter((player) => player.uid !== game.owner)
-                    .map((player, index) => {
-                      return (
-                        <ListItem
-                          key={player.uid}
-                          secondaryAction={
+                  </ListItem> */}
+                  {formik.values?.players?.map((player, index) => {
+                    const isOwner = player.uid === game.owner;
+                    return (
+                      <ListItem
+                        key={player.uid}
+                        secondaryAction={
+                          !isOwner && (
                             <IconButton
                               onClick={() => arrayHelpers.remove(index)}
                               disabled={
@@ -137,16 +120,24 @@ export const SatisfactoryGamesGeneral = (props) => {
                             >
                               <DeleteIcon />
                             </IconButton>
-                          }
-                        >
-                          <ListItemAvatar>
-                            <Avatar>
-                              <PersonIcon />
-                            </Avatar>
-                          </ListItemAvatar>
+                          )
+                        }
+                      >
+                        <ListItemAvatar>
+                          <Avatar>
+                            <PersonIcon />
+                          </Avatar>
+                        </ListItemAvatar>
+                        {isOwner ? (
+                          <ListItemText
+                            primary={`${game.owner}`}
+                            secondary="This is the owner of the game. The owner cannot be deleted."
+                          />
+                        ) : (
                           <TextField
                             disabled={
-                              !(game.owner === getAuth().currentUser.uid)
+                              !(game.owner === getAuth().currentUser.uid) ||
+                              isOwner
                             }
                             label="User id"
                             sx={{ flexGrow: 1 }}
@@ -154,13 +145,15 @@ export const SatisfactoryGamesGeneral = (props) => {
                             onChange={formik.handleChange}
                             value={formik.values.players[index].uid}
                           />
-                          {/* <ListItemText
+                        )}
+
+                        {/* <ListItemText
                           primary={player.name}
                           secondary={secondary ? "Secondary text" : null}
                         /> */}
-                        </ListItem>
-                      );
-                    })}
+                      </ListItem>
+                    );
+                  })}
                 </List>
                 <Button
                   //color="inherit"

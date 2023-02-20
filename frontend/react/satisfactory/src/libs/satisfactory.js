@@ -45,7 +45,7 @@ export const SatisfactoryCurrentVersion = "v700";
 export const getSatisfactoryData = (type, version) => {
   const localVersion = version ? version : SatisfactoryCurrentVersion;
   const items = satisfactory_data[localVersion][type];
-  if (!items) return satisfactory_data[app_version][type];
+  if (!items) return satisfactory_data[SatisfactoryCurrentVersion][type];
   return items;
 };
 
@@ -182,3 +182,82 @@ export const deleteSatisfactoryGame = async (path, id) => {
 };
 
 export const addSatisfactoryPlayer = async () => {};
+
+export const getSatisfactoryRecipeStatistics = (
+  recipeArray,
+  recipes,
+  products
+) => {
+  let productUsage = {};
+  let recipeData = {};
+  let inputsAndOutputs = { inputs: {}, outputs: {} };
+  if (!recipeArray) return undefined;
+  recipeArray.forEach((recipe) => {
+    const foundRecipe = recipes.find((r) => r.className === recipe.recipe);
+    if (foundRecipe) {
+      const itemsPerMinute = 60 / foundRecipe?.craftTime || 0;
+      const inputs = foundRecipe.ingredients.map((ingredient) => {
+        let currentUsage = productUsage[ingredient.itemClass] || {
+          needed: 0,
+          produced: 0,
+        };
+        currentUsage = {
+          needed:
+            currentUsage.needed +
+            itemsPerMinute * ingredient.quantity * parseFloat(recipe.amount),
+          produced: currentUsage.produced,
+        };
+        productUsage[ingredient.itemClass] = currentUsage;
+
+        return {
+          name: products[ingredient.itemClass],
+          quantity: ingredient.quantity,
+          quantityMin: itemsPerMinute * ingredient.quantity,
+          quantityMinTotal:
+            itemsPerMinute * ingredient.quantity * parseFloat(recipe.amount),
+        };
+      });
+      const outputs = foundRecipe.products.map((ingredient) => {
+        let currentUsage = productUsage[ingredient.itemClass] || {
+          needed: 0,
+          produced: 0,
+        };
+        currentUsage = {
+          needed: currentUsage.needed,
+          produced:
+            currentUsage.produced +
+            itemsPerMinute * ingredient.quantity * parseFloat(recipe.amount),
+        };
+        productUsage[ingredient.itemClass] = currentUsage;
+
+        return {
+          name: products[ingredient.itemClass],
+          quantity: ingredient.quantity,
+          quantityMin: itemsPerMinute * ingredient.quantity,
+          quantityMinTotal:
+            itemsPerMinute * ingredient.quantity * parseFloat(recipe.amount),
+        };
+        // return {
+        //   name: products[ingredient.itemClass],
+        //   quantity: ingredient.quantity,
+        //   quantityMin: itemsPerMinute * ingredient.quantity,
+        //   quantityMinTotal:
+        //     itemsPerMinute * ingredient.quantity * parseFloat(recipe.amount),
+        // };
+      });
+      recipeData[recipe.recipe] = { inputs, outputs };
+    }
+
+    for (const [key, value] of Object.entries(productUsage)) {
+      const net = parseFloat((value.produced - value.needed).toPrecision(12));
+      if (net < 0) {
+        _.set(inputsAndOutputs, `inputs.${key}`, net * -1);
+      } else if (net > 0) {
+        inputsAndOutputs.outputs[key] = net;
+      }
+      productUsage[key].net = net;
+    }
+    //setRecipeState({ recipeData, productUsage, inputsAndOutputs });
+  });
+  return { recipeData, productUsage, inputsAndOutputs };
+};
