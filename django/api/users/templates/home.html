@@ -1,5 +1,19 @@
 <!-- templates/home.html-->
-{% extends 'base.html' %}
+{% extends "rest_framework/base.html" %}
+
+{% block branding %}
+<a class="navbar-brand" rel="nofollow" href="/home">
+  AppElent API
+</a>
+{% endblock %}
+
+{% block userlinks %}
+{% if user.is_authenticated %}
+<p><a href="{% url 'logout' %}">Log Out</a></p>
+{% else %}
+<p><a href="{% url 'login' %}">Log In</a></p>
+{% endif %}
+{% endblock %}
 
 {% block title %}Home{% endblock %}
 

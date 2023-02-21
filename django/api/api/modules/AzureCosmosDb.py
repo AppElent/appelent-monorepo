@@ -34,6 +34,7 @@ class _AzureCosmosDb(metaclass=SingletonMetaclass):
                 for item in container.query_items(query=query, enable_cross_partition_query=True):
                     providers.append(item)
                 print('--- Cosmos DB Adapter loaded successfully. ---')
+                return self._database_client
             except Exception as e:
                 print('!!!!! Data from Cosmos DB could not be retrieved. Is Environment Variable cosmos-access-key set?')
                 print(e)

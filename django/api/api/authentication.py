@@ -93,12 +93,12 @@ class FirebaseAuthentication(authentication.BaseAuthentication):
             return None
 
         if len(authheader) == 1:
-            msg = _('Invalid token header. No credentials provided.')
+            msg = ('Invalid token header. No credentials provided.')
             raise exceptions.AuthenticationFailed(msg)
         elif len(authheader) > 2:
-            msg = _('Invalid token header. Token string should not contain spaces.')
+            msg = ('Invalid token header. Token string should not contain spaces.')
             raise exceptions.AuthenticationFailed(msg)
-
+        print('firebase auth hier komt ie')
         token = authheader[1]
 
         try:

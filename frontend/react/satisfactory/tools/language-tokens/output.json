@@ -1,0 +1,9 @@
+{
+    "title": "title",
+    "nested_test": {
+        "nested_key": "nested_test.nested_key"
+    },
+    "products": "products",
+    "product_details": "product_details",
+    "games": "games"
+}

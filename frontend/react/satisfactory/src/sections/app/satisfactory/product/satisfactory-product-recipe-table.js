@@ -19,6 +19,7 @@ export const SatisfactoryProductRecipeTable = ({
   recipes,
   title,
   products,
+  machineTypes,
   conditionFunction,
 }) => {
   const lgUp = useMediaQuery((theme) => theme.breakpoints.up("lg"));
@@ -32,6 +33,16 @@ export const SatisfactoryProductRecipeTable = ({
   ];
 
   //   return <Stack></Stack>;
+
+  const schematicTypes = {
+    EST_MAM: "MAM",
+    EST_Custom: "Custom",
+    EST_Alternate: "Alternate recipe",
+    EST_Tutorial: "Tutorial",
+    EST_HardDrive: "HardDrive",
+    EST_Milestone: "Milestone",
+    EST_ResourceSink: "ResourceSink",
+  };
 
   return (
     // <Stack>
@@ -103,8 +114,14 @@ export const SatisfactoryProductRecipeTable = ({
                     })}
                   </TableCell>
                   <TableCell>
-                    {recipe.producedIn}
-                    <br />({recipe.craftTime} seconds)
+                    {recipe.machineCraftable
+                      ? machineTypes[recipe.producedIn]?.name
+                      : "Workshop"}
+                    {recipe.machineCraftable && (
+                      <>
+                        <br />({recipe.craftTime} seconds)
+                      </>
+                    )}
                   </TableCell>
                   <TableCell>
                     {" "}
@@ -120,7 +137,10 @@ export const SatisfactoryProductRecipeTable = ({
                     })}
                   </TableCell>
                   <TableCell>
-                    {recipe.schematic.name} ({recipe.schematic.type})
+                    {recipe.schematic.name} (
+                    {schematicTypes[recipe.schematic.type] ||
+                      recipe.schematic.type}
+                    )
                   </TableCell>
                 </TableRow>
               );

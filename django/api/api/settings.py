@@ -36,49 +36,29 @@ from .modules.AzureCosmosDb import AzureCosmosDb
 from .modules.Firebase import Firebase
 ENVIRONMENT_CONFIG = AzureAppConfiguration.load(os.getenv("AZURE_APP_CONFIGURATION_ENDPOINT"), "django-api", os.getenv("ENVIRONMENT") or "LOCAL")
 if ENVIRONMENT_CONFIG:
-    AzureCosmosDb.load(ENVIRONMENT_CONFIG.get('cosmos-access-key'))
+    COSMOS_DATABASE_CLIENT = AzureCosmosDb.load(ENVIRONMENT_CONFIG.get('cosmos-access-key'))
     Firebase.load(ENVIRONMENT_CONFIG.get('firebase-creds'))
-
-
-#
-#
-#
-#
-# from azure.identity import DefaultAzureCredential
-# from azure.appconfiguration import AzureAppConfigurationClient
-
-# credential = DefaultAzureCredential()
-# key_vault_options = AzureAppConfigurationKeyVaultOptions(
-#     secret_clients={SecretClient(
-#         vault_url=key_vault_uri, credential=credential)})
-
-# client = AzureAppConfigurationClient(base_url=os.getenv("AZURE_APP_CONFIGURATION_ENDPOINT"), credential=credential)
-# fetched_config_setting = client.get_configuration_setting(
-#     key="testkey", label="testlabel"
-# )
-# fetched_secret_setting = client.get_configuration_setting(
-#     key="testsecret", label="testlabel"
-# )
-# print(fetched_config_setting)
-# print(fetched_secret_setting.value)
 
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = get_random_secret_key() if not ENVIRONMENT_CONFIG else ENVIRONMENT_CONFIG.get('django-secret')
+SECRET_KEY = 'abc'#get_random_secret_key() 
+if ENVIRONMENT_CONFIG and ENVIRONMENT_CONFIG.get('django-secret'):
+    SECRET_KEY = ENVIRONMENT_CONFIG.get('django-secret')
 #os.getenv("SECRET_KEY", default=get_random_secret_key())
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False if ENVIRONMENT == "PRODUCTION" else True
+DEBUG = False if ENVIRONMENT != "LOCAL" else True
 
 CSRF_TRUSTED_ORIGINS = ['https://*.preview.app.github.dev', 'https://*.appelent.com']
 #ALLOWED_HOSTS = ['preview.app.github.dev', 'localhost', '127.0.0.1', '.appelent.com']
 ALLOWED_HOSTS = ['*']
 
 CORS_ALLOWED_ORIGINS = [
-    'http://localhost:3000'
+    'http://localhost:3000',
+    'https://appelent.com'
 ]
 
 ALLOWED_CIDR_NETS = ['10.244.0.0/16']
@@ -95,6 +75,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'rest_framework_swagger',
     'rest_framework.authtoken',
+    'django_prometheus',
     'api.apps.ApiConfig',
     'drf_yasg',
     'crud',
@@ -109,6 +90,7 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
+    'django_prometheus.middleware.PrometheusBeforeMiddleware',
     'allow_cidr.middleware.AllowCIDRMiddleware',
     "corsheaders.middleware.CorsMiddleware",
     "django.middleware.security.SecurityMiddleware",
@@ -119,6 +101,7 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
+    'django_prometheus.middleware.PrometheusAfterMiddleware',
 ]
 
 STORAGES = {
@@ -148,7 +131,7 @@ ROOT_URLCONF = "api.urls"
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
-        "DIRS": [BASE_DIR / 'users/templates'],
+        "DIRS": [],
         "APP_DIRS": True,
         "OPTIONS": {
             "context_processors": [
@@ -190,18 +173,28 @@ else:
     }
 
 
-if os.getenv("REDIS_URL"):
-    CACHES = {
-        "default": {
-            'BACKEND': 'django.core.cache.backends.redis.RedisCache',
-            'LOCATION': os.getenv("REDIS_URL"),
+if ENVIRONMENT_CONFIG and ENVIRONMENT_CONFIG.get('redis-url'):
+    if ENVIRONMENT_CONFIG.get('redis-prefix'):
+        CACHES = {
+            "default": {
+                'BACKEND': 'django_prometheus.cache.backends.redis.RedisCache',
+                'LOCATION': ENVIRONMENT_CONFIG.get('redis-url'),
+                'KEY_PREFIX': ENVIRONMENT_CONFIG.get('redis-prefix')
+            }
         }
-    }
+    else:
+        CACHES = {
+            "default": {
+                'BACKEND': 'django_prometheus.cache.backends.redis.RedisCache',
+                'LOCATION': ENVIRONMENT_CONFIG.get('redis-url'),
+                
+            }
+        }
 else:
     # default cache is local memory cache
     CACHES = {
         'default': {
-            'BACKEND': 'django.core.cache.backends.locmem.LocMemCache',
+            'BACKEND': 'django_prometheus.cache.backends.locmem.LocMemCache',
             'LOCATION': 'unique-string',
         },
     }
@@ -237,6 +230,98 @@ USE_I18N = True
 
 USE_TZ = True
 
+# Loggin setup
+# https://docs.djangoproject.com/en/4.1/topics/logging/
+# from logtail import LogtailHandler
+# import logging
+
+# LOGGING = {
+#     'version': 1,
+#     'disable_existing_loggers': False,
+#     'formatters': {
+#         'verbose': {
+#             'format': '{levelname} {asctime} {module} {process:d} {thread:d} {message}',
+#             'style': '{',
+#         },
+#         'simple': {
+#             'format': '{levelname} {message}',
+#             'style': '{',
+#         },
+#     },
+#     'handlers': {
+#         'file': {
+#             'level': 'INFO',
+#             'class': 'logging.FileHandler',
+#             'filename': './logs/logging.log',
+#         },
+#         'logtail': {
+#             'class': 'logtail.LogtailHandler',
+#             'formatter': 'simple',
+#             'source_token': os.getenv('LOGTAIL_KEY')
+#         },
+#     },
+#     'loggers': {
+#         'django': {
+#             'handlers': ['file', 'logtail'],
+#             'level': 'DEBUG',
+#             'propagate': True,
+#         },
+#     },
+# }
+
+# LOGGING = {
+#     'version': 1,
+#     'disable_existing_loggers': False,
+#     'formatters': {
+#         'verbose': {
+#             'format': '{levelname} {asctime} {module} {process:d} {thread:d} {message}',
+#             'style': '{',
+#         },
+#         'simple': {
+#             'format': '{levelname} {message}',
+#             'style': '{',
+#         },
+#     },
+#     'filters': {
+#         'special': {
+#             '()': 'project.logging.SpecialFilter',
+#             'foo': 'bar',
+#         },
+#         'require_debug_true': {
+#             '()': 'django.utils.log.RequireDebugTrue',
+#         },
+#     },
+#     'handlers': {
+#         'console': {
+#             'level': 'INFO',
+#             'filters': ['require_debug_true'],
+#             'class': 'logging.StreamHandler',
+#             'formatter': 'simple'
+#         },
+#         'mail_admins': {
+#             'level': 'ERROR',
+#             'class': 'django.utils.log.AdminEmailHandler',
+#             'filters': ['special']
+#         }
+#     },
+#     'loggers': {
+#         'django': {
+#             'handlers': ['console'],
+#             'propagate': True,
+#         },
+#         'django.request': {
+#             'handlers': ['mail_admins'],
+#             'level': 'ERROR',
+#             'propagate': False,
+#         },
+#         'myproject.custom': {
+#             'handlers': ['console', 'mail_admins'],
+#             'level': 'INFO',
+#             'filters': ['special']
+#         }
+#     }
+# }
+
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
@@ -248,5 +333,7 @@ STATIC_URL = "static/"
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
+LOGIN_URL = 'login'
+LOGOUT_URL = 'logout'
 LOGIN_REDIRECT_URL = "/"
 LOGOUT_REDIRECT_URL = "/"

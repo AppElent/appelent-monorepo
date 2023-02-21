@@ -1,10 +1,11 @@
 from crum import get_current_user
 from django.db import models
 from django.contrib.auth import get_user_model
+from django_prometheus.models import ExportModelOperationsMixin
 
 User = get_user_model()
 
-class AuditLog(models.Model):
+class AuditLog(ExportModelOperationsMixin('auditlog'), models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, default=get_current_user)
     resource = models.CharField(max_length=200)
     action = models.CharField(max_length=200)

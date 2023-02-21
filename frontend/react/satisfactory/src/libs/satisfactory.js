@@ -5,9 +5,20 @@ import productionRecipes_v700 from "data/satisfactory/v700/productionRecipes.jso
 import resources_v700 from "data/satisfactory/v700/resources.json";
 import schematics_v700 from "data/satisfactory/v700/schematics.json";
 import tierList_v700 from "data/satisfactory/v700/tierList.json";
+import { db } from "./firebase";
+import { addDoc, setDoc, collection, deleteDoc, doc } from "firebase/firestore";
 
 const satisfactory_data = {
   v700: {
+    items: items_v700,
+    buildables: buildables_v700,
+    buildableRecipes: buildableRecipes_v700,
+    recipes: productionRecipes_v700,
+    resources: resources_v700,
+    schematics: schematics_v700,
+    tierList: tierList_v700,
+  },
+  v600: {
     items: items_v700,
     buildables: buildables_v700,
     buildableRecipes: buildableRecipes_v700,
@@ -23,6 +34,10 @@ export const satisfactoryVersions = [
     label: "Update 7",
     key: "v700",
   },
+  {
+    label: "Update 6",
+    key: "v600",
+  },
 ];
 
 export const SatisfactoryCurrentVersion = "v700";
@@ -30,7 +45,7 @@ export const SatisfactoryCurrentVersion = "v700";
 export const getSatisfactoryData = (type, version) => {
   const localVersion = version ? version : SatisfactoryCurrentVersion;
   const items = satisfactory_data[localVersion][type];
-  if (!items) return satisfactory_data[app_version][type];
+  if (!items) return satisfactory_data[SatisfactoryCurrentVersion][type];
   return items;
 };
 
@@ -148,4 +163,101 @@ export const getSatisfactoryBuildableRecipeByItem = (
     }
   }
   return returnObject;
+};
+
+export const createSatisfactoryGame = async (path, payload) => {
+  const collectionRef = collection(db, path);
+  const result = await addDoc(collectionRef, payload || { name: "<new game>" });
+  return result;
+};
+
+export const saveSatisfactoryGame = async (path, id, payload) => {
+  const collectionRef = collection(db, path);
+  const result = await setDoc(doc(collectionRef, id), payload);
+  return result;
+};
+
+export const deleteSatisfactoryGame = async (path, id) => {
+  const deleted = await deleteDoc(doc(db, path, id));
+};
+
+export const addSatisfactoryPlayer = async () => {};
+
+export const getSatisfactoryRecipeStatistics = (
+  recipeArray,
+  recipes,
+  products
+) => {
+  let productUsage = {};
+  let recipeData = {};
+  let inputsAndOutputs = { inputs: {}, outputs: {} };
+  if (!recipeArray) return undefined;
+  recipeArray.forEach((recipe) => {
+    const foundRecipe = recipes.find((r) => r.className === recipe.recipe);
+    if (foundRecipe) {
+      const itemsPerMinute = 60 / foundRecipe?.craftTime || 0;
+      const inputs = foundRecipe.ingredients.map((ingredient) => {
+        let currentUsage = productUsage[ingredient.itemClass] || {
+          needed: 0,
+          produced: 0,
+        };
+        currentUsage = {
+          needed:
+            currentUsage.needed +
+            itemsPerMinute * ingredient.quantity * parseFloat(recipe.amount),
+          produced: currentUsage.produced,
+        };
+        productUsage[ingredient.itemClass] = currentUsage;
+
+        return {
+          name: products[ingredient.itemClass],
+          quantity: ingredient.quantity,
+          quantityMin: itemsPerMinute * ingredient.quantity,
+          quantityMinTotal:
+            itemsPerMinute * ingredient.quantity * parseFloat(recipe.amount),
+        };
+      });
+      const outputs = foundRecipe.products.map((ingredient) => {
+        let currentUsage = productUsage[ingredient.itemClass] || {
+          needed: 0,
+          produced: 0,
+        };
+        currentUsage = {
+          needed: currentUsage.needed,
+          produced:
+            currentUsage.produced +
+            itemsPerMinute * ingredient.quantity * parseFloat(recipe.amount),
+        };
+        productUsage[ingredient.itemClass] = currentUsage;
+
+        return {
+          name: products[ingredient.itemClass],
+          quantity: ingredient.quantity,
+          quantityMin: itemsPerMinute * ingredient.quantity,
+          quantityMinTotal:
+            itemsPerMinute * ingredient.quantity * parseFloat(recipe.amount),
+        };
+        // return {
+        //   name: products[ingredient.itemClass],
+        //   quantity: ingredient.quantity,
+        //   quantityMin: itemsPerMinute * ingredient.quantity,
+        //   quantityMinTotal:
+        //     itemsPerMinute * ingredient.quantity * parseFloat(recipe.amount),
+        // };
+      });
+      recipeData[recipe.recipe] = { inputs, outputs };
+    }
+
+    for (const [key, value] of Object.entries(productUsage)) {
+      const net = parseFloat((value.produced - value.needed).toPrecision(12));
+      if (net < 0) {
+        _.set(inputsAndOutputs, `inputs.${key}`, net * -1);
+      } else if (net > 0) {
+        inputsAndOutputs.outputs[key] = net;
+      }
+      productUsage[key].net = net;
+    }
+    //setRecipeState({ recipeData, productUsage, inputsAndOutputs });
+  });
+  return { recipeData, productUsage, inputsAndOutputs };
 };

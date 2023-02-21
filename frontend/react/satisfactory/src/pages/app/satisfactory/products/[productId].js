@@ -36,13 +36,19 @@ const Page = () => {
       ? true
       : false;
 
+  const machineTypes = useMemo(() => {
+    if (version_correct) {
+      return getSatisfactoryData("buildables", version);
+    }
+  }, [version_correct, version]);
+
   const products =
     useMemo(() => {
       if (version_correct) {
         let productsArray = getSatisfactoryDataArray("items", version);
         return _.sortBy(productsArray, "name");
       }
-    }, [version_correct]) || [];
+    }, [version_correct, version]) || [];
 
   productId = productId === "dummy" ? products[0].className : productId;
 
@@ -134,18 +140,21 @@ const Page = () => {
               <SatisfactoryProductRecipeTable
                 title="Recipes"
                 recipes={product.recipes_by}
+                machineTypes={machineTypes}
                 products={getSatisfactoryData("items", version)}
               />
               <SatisfactoryProductRecipeTable
                 title="Used for"
                 recipes={product.recipes_for}
                 products={getSatisfactoryData("items", version)}
+                machineTypes={machineTypes}
                 conditionFunction={isEquipment(true)}
               />
               <SatisfactoryProductRecipeTable
                 title="Equipment"
                 recipes={product.recipes_for}
                 products={getSatisfactoryData("items", version)}
+                machineTypes={machineTypes}
                 conditionFunction={isEquipment(false)}
               />
             </Stack>

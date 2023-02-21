@@ -9,43 +9,7 @@ from requests.models import PreparedRequest
 import os
 import json
 import datetime
-from .modules.AzureCosmosDb import AzureCosmosDb
-
-#from ..serializers import OAuth2TokenSerializer
-#from ..models import OAuth2Token, Oauth2State
-# rom ..singletons import oauth, check_registered
-#from ..modules.oauth import get_provider, save_token, get_session, update_token
-
-# from azure.cosmos import CosmosClient
-# from azure.keyvault.secrets import SecretClient
-# from azure.identity import DefaultAzureCredential
-
-# Get providers from azure cosmos db
-# try:
-#     environment = str(os.getenv("ENVIRONMENT") or "LOCAL").lower()
-#     access_key = os.getenv('COSMOS_ACCESS_KEY') or ''
-#     container_name = "providers_" + environment
-#     query = "select * from " + container_name + " p"
-#     print(environment, query)
-#     client = CosmosClient(
-#         "https://cdb-appelent.documents.azure.com:443/", access_key)
-#     database = client.get_database_client("oauth_providers")
-#     container = database.get_container_client(container_name)
-#     providers = []
-#     for item in container.query_items(query=query, enable_cross_partition_query=True):
-#         providers.append(item)
-#     print('--- Cosmos DB Adapter loaded successfully. ---')
-
-
-#     #get secret from keyvault
-#     KVUri = f"https://kv-appelent-dev.vault.azure.net"
-#     credential = DefaultAzureCredential()
-#     client = SecretClient(vault_url=KVUri, credential=credential)
-#     retrieved_secret = client.get_secret("test")
-#     print(retrieved_secret.value)
-# except Exception as e:
-#     print('!!!!! Data from Cosmos DB could not be retrieved. Is Environment Variable COSMOS_ACCESS_KEY set?')
-#     print(e)
+from django.conf import settings
 
 try:
     environment = str(os.getenv("ENVIRONMENT") or "LOCAL").lower()
@@ -59,7 +23,8 @@ try:
         raise Exception("Environment " + environment + " could not be matched")
     container_name = "providers_" + shortcontainername
     query = "select * from " + container_name + " p"
-    container = AzureCosmosDb.get_database_client().get_container_client(container_name)
+    database_client = settings.COSMOS_DATABASE_CLIENT
+    container = database_client.get_container_client(container_name)
     providers = []
     for item in container.query_items(query=query, enable_cross_partition_query=True):
         providers.append(item)

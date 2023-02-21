@@ -25,7 +25,6 @@ def update_claims(sender, instance, update_fields, *args, **kwargs):
         pass
 
     if instance.pk is None:
-        print('No primary key, skipping')
         return
 
     # Get firebase user
@@ -55,6 +54,7 @@ def update_claims(sender, instance, update_fields, *args, **kwargs):
         claims = get_claims(instance)
         print('claims', claims)
         auth.set_custom_user_claims(firebase_user.uid, json.dumps(claims))
+        auth.get
 
 @receiver(signal=m2m_changed, sender=User.groups.through)
 def my_receiver(instance, action, reverse, model, pk_set, using, *args, **kwargs):
