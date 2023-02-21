@@ -58,7 +58,10 @@ ALLOWED_HOSTS = ['*']
 
 CORS_ALLOWED_ORIGINS = [
     'http://localhost:3000',
-    'https://appelent.com'
+]
+
+CORS_ALLOWED_ORIGIN_REGEXES = [
+    r"[^.\s]+\.appelent\.com",
 ]
 
 ALLOWED_CIDR_NETS = ['10.244.0.0/16']
@@ -235,6 +238,7 @@ USE_TZ = True
 # from logtail import LogtailHandler
 # import logging
 
+
 # LOGGING = {
 #     'version': 1,
 #     'disable_existing_loggers': False,
@@ -268,6 +272,11 @@ USE_TZ = True
 #         },
 #     },
 # }
+
+# logger = logging.getLogger('django')
+# lh = LogtailHandler(source_token=os.getenv('LOGTAIL_KEY'))
+# # lh.setFormatter(formatter)
+# logger.addHandler(lh)
 
 # LOGGING = {
 #     'version': 1,
