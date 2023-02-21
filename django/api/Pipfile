@@ -25,6 +25,8 @@ azure-keyvault-secrets = "*"
 azure-appconfiguration = "*"
 azure-appconfiguration-provider = "==1.0.0b2"
 django-prometheus = "*"
+django-redis = "*"
+logtail-python = "*"
 
 [dev-packages]
 

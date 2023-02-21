@@ -44,7 +44,7 @@ if ENVIRONMENT_CONFIG:
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = get_random_secret_key() 
+SECRET_KEY = 'abc'#get_random_secret_key() 
 if ENVIRONMENT_CONFIG and ENVIRONMENT_CONFIG.get('django-secret'):
     SECRET_KEY = ENVIRONMENT_CONFIG.get('django-secret')
 #os.getenv("SECRET_KEY", default=get_random_secret_key())
@@ -57,7 +57,8 @@ CSRF_TRUSTED_ORIGINS = ['https://*.preview.app.github.dev', 'https://*.appelent.
 ALLOWED_HOSTS = ['*']
 
 CORS_ALLOWED_ORIGINS = [
-    'http://localhost:3000'
+    'http://localhost:3000',
+    'https://appelent.com'
 ]
 
 ALLOWED_CIDR_NETS = ['10.244.0.0/16']
@@ -172,13 +173,23 @@ else:
     }
 
 
-if os.getenv("REDIS_URL"):
-    CACHES = {
-        "default": {
-            'BACKEND': 'django_prometheus.cache.backends.redis.RedisCache',
-            'LOCATION': os.getenv("REDIS_URL"),
+if ENVIRONMENT_CONFIG and ENVIRONMENT_CONFIG.get('redis-url'):
+    if ENVIRONMENT_CONFIG.get('redis-prefix'):
+        CACHES = {
+            "default": {
+                'BACKEND': 'django_prometheus.cache.backends.redis.RedisCache',
+                'LOCATION': ENVIRONMENT_CONFIG.get('redis-url'),
+                'KEY_PREFIX': ENVIRONMENT_CONFIG.get('redis-prefix')
+            }
         }
-    }
+    else:
+        CACHES = {
+            "default": {
+                'BACKEND': 'django_prometheus.cache.backends.redis.RedisCache',
+                'LOCATION': ENVIRONMENT_CONFIG.get('redis-url'),
+                
+            }
+        }
 else:
     # default cache is local memory cache
     CACHES = {
@@ -218,6 +229,98 @@ TIME_ZONE = "UTC"
 USE_I18N = True
 
 USE_TZ = True
+
+# Loggin setup
+# https://docs.djangoproject.com/en/4.1/topics/logging/
+# from logtail import LogtailHandler
+# import logging
+
+# LOGGING = {
+#     'version': 1,
+#     'disable_existing_loggers': False,
+#     'formatters': {
+#         'verbose': {
+#             'format': '{levelname} {asctime} {module} {process:d} {thread:d} {message}',
+#             'style': '{',
+#         },
+#         'simple': {
+#             'format': '{levelname} {message}',
+#             'style': '{',
+#         },
+#     },
+#     'handlers': {
+#         'file': {
+#             'level': 'INFO',
+#             'class': 'logging.FileHandler',
+#             'filename': './logs/logging.log',
+#         },
+#         'logtail': {
+#             'class': 'logtail.LogtailHandler',
+#             'formatter': 'simple',
+#             'source_token': os.getenv('LOGTAIL_KEY')
+#         },
+#     },
+#     'loggers': {
+#         'django': {
+#             'handlers': ['file', 'logtail'],
+#             'level': 'DEBUG',
+#             'propagate': True,
+#         },
+#     },
+# }
+
+# LOGGING = {
+#     'version': 1,
+#     'disable_existing_loggers': False,
+#     'formatters': {
+#         'verbose': {
+#             'format': '{levelname} {asctime} {module} {process:d} {thread:d} {message}',
+#             'style': '{',
+#         },
+#         'simple': {
+#             'format': '{levelname} {message}',
+#             'style': '{',
+#         },
+#     },
+#     'filters': {
+#         'special': {
+#             '()': 'project.logging.SpecialFilter',
+#             'foo': 'bar',
+#         },
+#         'require_debug_true': {
+#             '()': 'django.utils.log.RequireDebugTrue',
+#         },
+#     },
+#     'handlers': {
+#         'console': {
+#             'level': 'INFO',
+#             'filters': ['require_debug_true'],
+#             'class': 'logging.StreamHandler',
+#             'formatter': 'simple'
+#         },
+#         'mail_admins': {
+#             'level': 'ERROR',
+#             'class': 'django.utils.log.AdminEmailHandler',
+#             'filters': ['special']
+#         }
+#     },
+#     'loggers': {
+#         'django': {
+#             'handlers': ['console'],
+#             'propagate': True,
+#         },
+#         'django.request': {
+#             'handlers': ['mail_admins'],
+#             'level': 'ERROR',
+#             'propagate': False,
+#         },
+#         'myproject.custom': {
+#             'handlers': ['console', 'mail_admins'],
+#             'level': 'INFO',
+#             'filters': ['special']
+#         }
+#     }
+# }
 
 
 # Static files (CSS, JavaScript, Images)
