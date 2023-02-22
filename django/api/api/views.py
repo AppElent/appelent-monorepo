@@ -8,10 +8,13 @@ from django.core.cache import cache
 from api.permission import IsStaff
 
 from .modules.TestClass import TestClass
+import logging
+logger = logging.getLogger(__name__)
 
 @api_view(['GET'])
 def dummy(request):
     cache.set('test', 'dit is een test')
+    logger.info("Dummy endpoint is called")
     return Response([], status=status.HTTP_200_OK)
 
 

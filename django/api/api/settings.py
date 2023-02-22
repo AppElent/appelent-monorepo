@@ -239,6 +239,7 @@ USE_TZ = True
 import logging
 
 from pythonjsonlogger import jsonlogger
+from datetime import datetime
 
 # class CustomJsonFormatter(jsonlogger.JsonFormatter):
 #     def add_fields(self, log_record, record, message_dict):
@@ -276,53 +277,87 @@ def skip_endpoints(record):
         return True
     return True
 
+LOG_LEVEL = 'INFO'
+if ENVIRONMENT_CONFIG and ENVIRONMENT_CONFIG.get('django-log-level'):
+    LOG_LEVEL = ENVIRONMENT_CONFIG.get('django-log-level')
 
-LOGGING = {
-    'version': 1,
-    'disable_existing_loggers': False,
-    'formatters': {
-        'verbose': {
-            'format': '{levelname} {asctime} {module} {process:d} {thread:d} {message}',
-            'style': '{',
+class CustomJsonFormatter(jsonlogger.JsonFormatter):
+    def add_fields(self, log_record, record, message_dict):
+        super(CustomJsonFormatter, self).add_fields(log_record, record, message_dict)
+        if not log_record.get('timestamp'):
+            # this doesn't use record.created, so it is slightly off
+            now = datetime.utcnow().strftime('%Y-%m-%dT%H:%M:%S.%fZ')
+            log_record['timestamp'] = now
+        if log_record.get('level'):
+            log_record['level'] = log_record['level'].upper()
+        else:
+            log_record['level'] = record.levelname
+
+formatter = CustomJsonFormatter('%(timestamp)s %(level)s %(name)s %(message)s')
+
+try:
+    LOGGING = {
+        'version': 1,
+        'disable_existing_loggers': False,
+        'formatters': {
+            'verbose': {
+                'format': '{levelname} {asctime} {module} {process:d} {thread:d} {message}',
+                'style': '{',
+            },
+            'simple': {
+                'format': '{levelname} {message}',
+                'style': '{',
+            },
+            "json": {"()": "pythonjsonlogger.jsonlogger.JsonFormatter"},
+            "custom_json": {"()": CustomJsonFormatter}
         },
-        'simple': {
-            'format': '{levelname} {message}',
-            'style': '{',
+        'filters': {
+            # 'skip_endpoints': {
+            #     '()': 'SkipEndpointsFilter',
+            #     #'callback': 'api.logging.SkipEndpointsFilter'
+            # },
+            'skip_endpoints': {
+                '()': 'django.utils.log.CallbackFilter',
+                'callback': skip_endpoints
+            }
         },
-        "json": {"()": "pythonjsonlogger.jsonlogger.JsonFormatter"}
-    },
-    'filters': {
-        # 'skip_endpoints': {
-        #     '()': 'SkipEndpointsFilter',
-        #     #'callback': 'api.logging.SkipEndpointsFilter'
-        # },
-         'skip_endpoints': {
-            '()': 'django.utils.log.CallbackFilter',
-            'callback': skip_endpoints
-        }
-    },
-    'handlers': {
-        'file': {
-            'level': 'INFO',
-            'class': 'logging.FileHandler',
-            'filename': './logs/logging.log',
-            'formatter': 'json',
-            'filters': ['skip_endpoints'],
+        'handlers': {
+            'file': {
+                'level': LOG_LEVEL,
+                'class': 'logging.FileHandler',
+                'filename': './logs/logging.log',
+                'formatter': 'verbose',
+                'filters': ['skip_endpoints'],
+            },
+            'console': {
+                'level': LOG_LEVEL,
+                'filters': ['skip_endpoints'],
+                'class': 'logging.StreamHandler',
+                'formatter': 'custom_json'
+            },
+            # 'logtail': {
+            #     'class': 'logtail.LogtailHandler',
+            #     'formatter': 'simple',
+            #     'source_token': os.getenv('LOGTAIL_KEY')
+            # },
         },
-        # 'logtail': {
-        #     'class': 'logtail.LogtailHandler',
-        #     'formatter': 'simple',
-        #     'source_token': os.getenv('LOGTAIL_KEY')
-        # },
-    },
-    'loggers': {
-        'django': {
-            'handlers': ['file'],
-            'level': 'DEBUG',
-            'propagate': True,
+        'loggers': {
+            'django': {
+                'handlers': ['file', 'console'],
+                'level': LOG_LEVEL,
+                'propagate': False,
+            },
+            '': {
+                'handlers': ['file', 'console'],
+                'level': LOG_LEVEL,
+                'propagate': False,
+            },
         },
-    },
-}
+    }
+except:
+    pass
+
+
 
 # logger = logging.getLogger('django')
 # lh = LogtailHandler(source_token=os.getenv('LOGTAIL_KEY'))
