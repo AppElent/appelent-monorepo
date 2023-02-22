@@ -325,7 +325,7 @@ try:
             'file': {
                 'level': LOG_LEVEL,
                 'class': 'logging.FileHandler',
-                'filename': './logs/logging.log',
+                'filename': os.path.join(BASE_DIR, 'logs/logging.log'),  #'./logs/logging.log',
                 'formatter': 'verbose',
                 'filters': ['skip_endpoints'],
             },
