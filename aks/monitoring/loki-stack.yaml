@@ -1,0 +1,12 @@
+prometheus:
+  enabled: true
+  server:
+    remoteWrite: 
+      - url: https://prometheus-prod-22-prod-eu-west-3.grafana.net/api/prom/push
+        basic_auth:
+          username: 783808
+          password: eyJrIjoiNGRiNjI4MTc1MWJlZGZmMjRiNmUyNmE3NWFhYTE2MWM0NWYxOWUxNCIsIm4iOiJwcm9tZXRoZXVzIGFwaSBrZXkiLCJpZCI6Nzk5MTY2fQ==
+
+
+grafana:
+  enabled: true

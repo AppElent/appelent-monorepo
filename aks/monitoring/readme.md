@@ -24,3 +24,23 @@ helm upgrade --install -f elastic.yaml elastic elastic/elasticsearch --namespace
 
 Change password and run command, user is admin:
 helm upgrade --install -f grafana.yaml grafana grafana/grafana --namespace grafana --create-namespace --set adminPassword=demo123
+
+### Loki-stack
+
+### https://anaisurl.com/loki-access-logs-the-smart-way/
+
+https://github.com/grafana/helm-charts/tree/main/charts/loki-stack
+
+helm repo add grafana https://grafana.github.io/helm-charts
+helm repo update
+
+helm upgrade --install loki --namespace=monitoring grafana/loki-stack -f loki-stack.yaml --create-namespace
+
+### Grafana cloud
+
+Send logs to grafana cloud: https://grafana.com/docs/grafana-cloud/data-configuration/logs/collect-logs-with-promtail/#option-2-send-logs-from-a-kubernetes-cluster
+
+### Dashboards
+
+Django: 17617
+Kubernetes: 6417

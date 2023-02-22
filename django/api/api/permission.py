@@ -27,3 +27,15 @@ class IsOwner(permissions.BasePermission):
     def has_object_permission(self, request, view, obj):
         # Instance must have an attribute named `owner`.
         return obj.user == request.user
+
+class IsStaff(permissions.BasePermission):
+    """
+    Object-level permission to only allow users with is_staff set to true
+    """
+
+    def has_permission(self, request, view):
+        return request.user and request.user.is_authenticated
+
+    def has_object_permission(self, request, view, obj):
+        # Instance must have an attribute named `owner`.
+        return request.user.is_staff

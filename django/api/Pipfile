@@ -27,6 +27,7 @@ azure-appconfiguration-provider = "==1.0.0b2"
 django-prometheus = "*"
 django-redis = "*"
 logtail-python = "*"
+python-json-logger = "*"
 
 [dev-packages]
 

@@ -7,6 +7,7 @@
         {
             "name": "Python: Django",
             "type": "python",
+            "cwd": "${workspaceFolder}\\django\\api",
             "request": "launch",
             "program": "${workspaceFolder}\\django\\api\\manage.py",
             "args": [
@@ -14,9 +15,6 @@
             ],
             "django": true,
             "justMyCode": true,
-            "env": {
-                "PYTHONPATH": "C:\\Users\\ericj\\.virtualenvs\\api-5PO9FBGi"
-            }
         }
     ]
 }
