@@ -15,7 +15,6 @@ import {
   useGridApiContext,
 } from "@mui/x-data-grid";
 
-
 import { createGuid } from "libs/create-guid";
 import {
   Autocomplete,
@@ -26,6 +25,7 @@ import {
   TextField,
 } from "@mui/material";
 import { toast } from "react-hot-toast";
+import { tokens } from "locales/tokens";
 
 // const initialRows = [
 //   {
@@ -87,7 +87,7 @@ function EditToolbar(props) {
   return (
     <GridToolbarContainer>
       <Button color="primary" startIcon={<AddIcon />} onClick={handleClick}>
-        Add recipe
+        Add
       </Button>
     </GridToolbarContainer>
   );
@@ -99,7 +99,7 @@ EditToolbar.propTypes = {
 };
 
 export function SatisfactoryGamesFactoryRecipes(props) {
-  const { factoryIndex, formik, recipes, products } = props;
+  const { factoryIndex, formik, recipes, products, translate } = props;
   const rows = formik.values.factories[factoryIndex].recipes || [];
   //const [rowsNew, setRows] = React.useState(initialRows);
   const [rowModesModel, setRowModesModel] = React.useState({});
@@ -199,17 +199,25 @@ export function SatisfactoryGamesFactoryRecipes(props) {
           <div>
             {value.name}
             <br />
-            <b>Inputs</b> <br />
+            <b>
+              {translate(tokens.satisfactory.pages.games.factories.inputs)}
+            </b>{" "}
+            <br />
             {value.ingredients.map(
               (i) => `${i.quantity} x ${products[i.itemClass].name}\r\n`
             )}
             <br />
-            <b>Outputs</b> <br />
+            <b>
+              {translate(tokens.satisfactory.pages.games.factories.outputs)}
+            </b>{" "}
+            <br />
             {value.products.map(
               (i) => `${i.quantity} x ${products[i.itemClass].name}\r\n`
             )}
             <br />
-            <button onClick={() => toast.dismiss(t.id)}>Dismiss</button>
+            <button onClick={() => toast.dismiss(t.id)}>
+              {translate(tokens.common.buttons.dismiss)}
+            </button>
           </div>
         ),
         {
@@ -239,7 +247,7 @@ export function SatisfactoryGamesFactoryRecipes(props) {
           <TextField
             {...params}
             fullWidth
-            label="Recipe"
+            label={translate(tokens.satisfactory.pages.games.factories.recipe)}
             name={`factories.${factoryIndex}.recipes.${index}`}
           />
         )}
@@ -273,7 +281,7 @@ export function SatisfactoryGamesFactoryRecipes(props) {
     // },
     {
       field: "recipe",
-      headerName: "Recipe",
+      headerName: translate(tokens.satisfactory.pages.games.factories.recipe),
       renderEditCell: renderSelectEditInputCell,
       editable: true,
       width: 350,
@@ -290,7 +298,7 @@ export function SatisfactoryGamesFactoryRecipes(props) {
     },
     {
       field: "amount",
-      headerName: "Amount",
+      headerName: translate(tokens.satisfactory.pages.games.factories.amount),
       editable: true,
       preProcessEditCellProps: (params) => {
         try {
@@ -312,7 +320,7 @@ export function SatisfactoryGamesFactoryRecipes(props) {
     },
     {
       field: "inputs",
-      headerName: "Inputs",
+      headerName: translate(tokens.satisfactory.pages.games.factories.inputs),
       editable: false,
       renderCell: (params) => {
         if (params.row.recipe === "" || !params.row.recipe) {
@@ -343,7 +351,7 @@ export function SatisfactoryGamesFactoryRecipes(props) {
     },
     {
       field: "outputs",
-      headerName: "Outputs",
+      headerName: translate(tokens.satisfactory.pages.games.factories.outputs),
       editable: false,
       renderCell: (params) => {
         if (params.row.recipe === "" || !params.row.recipe) {
@@ -375,7 +383,7 @@ export function SatisfactoryGamesFactoryRecipes(props) {
     {
       field: "actions",
       type: "actions",
-      headerName: "Actions",
+      headerName: "",
       width: 100,
       cellClassName: "actions",
       getActions: ({ id }) => {
@@ -425,7 +433,7 @@ export function SatisfactoryGamesFactoryRecipes(props) {
     <Card>
       <CardHeader title="Recipes" />
       <CardContent>
-        These are the recipes produced in this factory.
+        {translate(tokens.satisfactory.pages.games.factories.recipeHelperText)}
         <Box
           sx={{
             height: 500,

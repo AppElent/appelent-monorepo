@@ -21,20 +21,24 @@ import { FormikProvider, FieldArray } from "formik";
 import { CardDefault } from "components/app/card-default";
 import { satisfactoryVersions } from "libs/satisfactory";
 import { getAuth } from "firebase/auth";
+import { tokens } from "locales/tokens";
+import { createGuid } from "libs/create-guid";
 
 const addPlayer = () => {};
 
 export const SatisfactoryGamesGeneral = (props) => {
-  const { game, formik, handleDeleteGame } = props;
+  const { game, formik, handleDeleteGame, translate } = props;
   const [secondary, setSecondary] = useState(false);
 
   return (
     <FormikProvider value={formik}>
       <Stack spacing={4}>
-        <CardDefault title="General information">
+        <CardDefault
+          title={translate(tokens.satisfactory.pages.games.general.generalinfo)}
+        >
           <Stack alignItems="center" direction="row" spacing={2}>
             <TextField
-              label="Name"
+              label={translate(tokens.common.fields.name)}
               sx={{ flexGrow: 1 }}
               name="name"
               onChange={formik.handleChange}
@@ -43,7 +47,7 @@ export const SatisfactoryGamesGeneral = (props) => {
           </Stack>
           <Stack alignItems="center" direction="row" spacing={2}>
             <TextField
-              label="Description"
+              label={translate(tokens.common.fields.description)}
               sx={{ flexGrow: 1 }}
               name="description"
               onChange={formik.handleChange}
@@ -54,7 +58,7 @@ export const SatisfactoryGamesGeneral = (props) => {
             <TextField
               value={formik.values?.version || ""}
               name="version"
-              label="Version"
+              label={translate(tokens.satisfactory.pages.games.version)}
               select
               onChange={formik.handleChange}
             >
@@ -77,11 +81,13 @@ export const SatisfactoryGamesGeneral = (props) => {
           Save
         </Button> */}
         </CardDefault>
-        <CardDefault title="Players">
+        <CardDefault
+          title={translate(tokens.satisfactory.pages.games.general.players)}
+        >
           <Typography variant="subtitle1">
-            You can add players here. The owner of the game is able to delete
-            the game and add other players, whereas players can only update game
-            data.
+            {translate(
+              tokens.satisfactory.pages.games.general.addPlayerHelperText
+            )}
           </Typography>
 
           <FieldArray
@@ -105,9 +111,12 @@ export const SatisfactoryGamesGeneral = (props) => {
                   </ListItem> */}
                   {formik.values?.players?.map((player, index) => {
                     const isOwner = player.uid === game.owner;
+                    if (isOwner) {
+                      player.id = createGuid(false);
+                    }
                     return (
                       <ListItem
-                        key={player.uid}
+                        key={player.id}
                         secondaryAction={
                           !isOwner && (
                             <IconButton
@@ -131,7 +140,10 @@ export const SatisfactoryGamesGeneral = (props) => {
                         {isOwner ? (
                           <ListItemText
                             primary={`${game.owner}`}
-                            secondary="This is the owner of the game. The owner cannot be deleted."
+                            secondary={translate(
+                              tokens.satisfactory.pages.games.general
+                                .cantDeleteOwner
+                            )}
                           />
                         ) : (
                           <TextField
@@ -139,7 +151,9 @@ export const SatisfactoryGamesGeneral = (props) => {
                               !(game.owner === getAuth().currentUser.uid) ||
                               isOwner
                             }
-                            label="User id"
+                            label={translate(
+                              tokens.satisfactory.pages.games.general.userId
+                            )}
                             sx={{ flexGrow: 1 }}
                             name={`players.${index}.uid`}
                             onChange={formik.handleChange}
@@ -159,20 +173,30 @@ export const SatisfactoryGamesGeneral = (props) => {
                   //color="inherit"
                   disabled={!(game.owner === getAuth().currentUser.uid)}
                   size="small"
-                  onClick={() => arrayHelpers.push({ name: "", uid: "" })}
+                  onClick={() =>
+                    arrayHelpers.push({
+                      id: createGuid(false),
+                      name: "",
+                      uid: "",
+                    })
+                  }
                   variant="contained"
                 >
-                  Add player
+                  {translate(tokens.satisfactory.pages.games.general.addPlayer)}
                 </Button>
               </div>
             )}
           />
         </CardDefault>
-        <CardDefault title="Delete game">
+        <CardDefault
+          title={translate(tokens.satisfactory.pages.games.general.deleteGame)}
+        >
           <Grid xs={12} md={8}>
             <Stack alignItems="flex-start" spacing={3}>
               <Typography variant="subtitle1">
-                Delete this game and all related data. This is irreversible!
+                {translate(
+                  tokens.satisfactory.pages.games.general.deleteGameWarning
+                )}
               </Typography>
               <Button
                 color="error"
@@ -180,7 +204,7 @@ export const SatisfactoryGamesGeneral = (props) => {
                 onClick={handleDeleteGame}
                 variant="outlined"
               >
-                Delete game
+                {translate(tokens.satisfactory.pages.games.general.deleteGame)}
               </Button>
             </Stack>
           </Grid>

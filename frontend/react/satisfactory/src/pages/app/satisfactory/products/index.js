@@ -36,6 +36,8 @@ import {
 } from "libs/satisfactory";
 import { paths } from "paths";
 import { SatisfactoryProductDetail } from "sections/app/satisfactory/product/satisfactory-product-detail";
+import { useTranslate } from "@pankod/refine-core";
+import { tokens } from "locales/tokens";
 
 let satisfactoryProductsArray = Object.keys(satisfactoryProducts).map((k) => ({
   ...satisfactoryProducts[k],
@@ -156,6 +158,7 @@ const Page = () => {
   const router = useRouter();
   const { search, updateSearch } = useSearch();
   const [version, setVersion] = useState(SatisfactoryCurrentVersion);
+  const translate = useTranslate();
 
   const { items, itemsCount } = useItems(search);
   const [drawer, setDrawer] = useState({
@@ -179,19 +182,6 @@ const Page = () => {
       console.log(values);
     },
   });
-
-  if (currentItem) {
-    // let productIngredients = getSatisfactoryRecipesByItem(
-    //   currentItem.className
-    // );
-    // const resource = getSatisfactoryResourceByItem(currentItem.className);
-    // const buildablerecipes = getSatisfactoryBuildableRecipeByItem(
-    //   currentItem.className
-    // );
-    //const item = getSatisfactoryItem(currentItem.className);
-
-    console.log(currentItem);
-  }
 
   useEffect(() => {
     // If product query param is present, set currentItem
@@ -332,7 +322,9 @@ const Page = () => {
                 spacing={4}
               >
                 <div>
-                  <Typography variant="h4">Items</Typography>
+                  <Typography variant="h4">
+                    {translate(tokens.satisfactory.pages.products.title)}
+                  </Typography>
                 </div>
                 <div>
                   {/* <Button
@@ -477,10 +469,13 @@ const Page = () => {
                   size="small"
                   variant="contained"
                 >
-                  Open in full screen
+                  {translate(tokens.satisfactory.pages.products.fullscreen)}
                 </Button>
                 {currentItem && (
-                  <SatisfactoryProductDetail product={currentItem} />
+                  <SatisfactoryProductDetail
+                    product={currentItem}
+                    translate={translate}
+                  />
                 )}
               </ItemDetailsContainer>
             ) : (

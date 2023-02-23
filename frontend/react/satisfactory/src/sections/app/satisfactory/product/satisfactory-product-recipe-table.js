@@ -14,6 +14,7 @@ import {
 import React from "react";
 
 import { SeverityPill } from "components/severity-pill";
+import { tokens } from "locales/tokens";
 
 export const SatisfactoryProductRecipeTable = ({
   recipes,
@@ -21,15 +22,16 @@ export const SatisfactoryProductRecipeTable = ({
   products,
   machineTypes,
   conditionFunction,
+  translate,
 }) => {
   const lgUp = useMediaQuery((theme) => theme.breakpoints.up("lg"));
 
   const columns = [
-    { label: "Recipe name" },
-    { label: "Input" },
-    { label: "Machine" },
-    { label: "Output" },
-    { label: "Requirements" },
+    { label: translate(tokens.common.fields.name) },
+    { label: translate(tokens.satisfactory.pages.products.input) },
+    { label: translate(tokens.satisfactory.pages.products.machine) },
+    { label: translate(tokens.satisfactory.pages.products.output) },
+    { label: translate(tokens.satisfactory.pages.products.requirements) },
   ];
 
   //   return <Stack></Stack>;

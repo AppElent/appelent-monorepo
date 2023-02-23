@@ -39,10 +39,14 @@ import { SatisfactoryGamesFactories } from "sections/app/satisfactory/games/sati
 import { useQueryParam } from "libs/appelent-framework/hooks/use-query-param";
 import { generateName } from "libs/random-name-generator";
 import { useKey } from "libs/appelent-framework/hooks/use-key";
+import { SplashScreen } from "components/splash-screen";
+import { useTranslate } from "@pankod/refine-core";
+import { tokens } from "locales/tokens";
 
 const Page = () => {
   const auth = getAuth();
   const settings = useSettings();
+  const translate = useTranslate();
   usePageView();
 
   const router = useRouter();
@@ -54,9 +58,7 @@ const Page = () => {
   const [selectedGameId, setSelectedGameId, deleteSelectedGameId] =
     useLocalStorage("satisfactory_game_id");
 
-  const confirm = useConfirm({
-    title: "Are you sure you want to delete this game?",
-  });
+  const confirm = useConfirm();
 
   const { value: gameId, setQueryParam: setGameId } = useQueryParam(
     "game",
@@ -71,6 +73,7 @@ const Page = () => {
       }
       return found;
     }
+    return undefined;
   }, [gamesData.data, gameId]);
 
   // useEffect(() => {
@@ -102,15 +105,26 @@ const Page = () => {
           });
         }
 
+        // Fix linebreaks at the end of scribble field
+        let endLinebreaks = rest.scribble.endsWith("<p><br></p>");
+        while (endLinebreaks) {
+          rest.scribble = rest.scribble.substring(0, rest.scribble.length - 11);
+          console.log(rest.scribble);
+          endLinebreaks = rest.scribble.endsWith("<p><br></p>");
+        }
+
         rest.playerIds = rest.players.map((player) => player.uid);
         const savedGame = await saveSatisfactoryGame(
           gamesData.meta.path,
           values.id,
           rest
         );
-        toast.success("Saved successfully");
+        toast.success(translate(tokens.common.notifications.savedSuccess));
       } catch (err) {
         console.error(err);
+        toast.error(
+          translate(tokens.common.notifications.savedError + ":" + err.message)
+        );
 
         if (isMounted()) {
           helpers.setStatus({ success: false });
@@ -132,54 +146,26 @@ const Page = () => {
     formik.values.version
   );
 
-  // useEffect(() => {
-  //   console.log("jaaaaa formik is dirty", formik.dirty, formDirty);
-  //   if (formik.dirty) {
-  //   }
-  // }, [formik.dirty]);
-
-  // useEffect(() => {
-  //   if (gamesData.data) {
-  //     const defaultGame =
-  //       gamesData.data?.find((oneGame) => oneGame.id === selectedGameId) ||
-  //       (gamesData.data ? gamesData.data[0] : undefined);
-  //     if (
-  //       !selectedGameId ||
-  //       (selectedGameId !== defaultGame?.id && defaultGame)
-  //     ) {
-  //       setSelectedGameId(defaultGame?.id);
-  //     }
-  //   }
-  // }, [gamesData.data, selectedGameId]);
-
-  // useEffect(() => {
-  //   if (selectedGameId && gamesData.data) {
-  //     const foundGame = gamesData.data?.find(
-  //       (oneGame) => oneGame.id === selectedGameId
-  //     );
-  //     if (foundGame) {
-  //       formik.setValues(foundGame);
-  //       setSelectedGame(foundGame);
-  //       router.replace(
-  //         {
-  //           query: { ...router.query, game: selectedGameId },
-  //         },
-  //         undefined,
-  //         { shallow: true }
-  //       );
-  //     }
-  //   }
-  // }, [selectedGameId, gamesData.data]);
-
   const tabsData = [
-    { label: "General", value: "general" },
-    { label: "Factories", value: "factories", disabled: !selectedGame },
     {
-      label: "Train stations",
+      label: translate(tokens.satisfactory.pages.games.tabs.general),
+      value: "general",
+    },
+    {
+      label: translate(tokens.satisfactory.pages.games.tabs.factories),
+      value: "factories",
+      disabled: !selectedGame,
+    },
+    {
+      label: translate(tokens.satisfactory.pages.games.tabs.trainstations),
       value: "trainstations",
       disabled: !selectedGame,
     },
-    { label: "Scribble", value: "scribble", disabled: !selectedGame },
+    {
+      label: translate(tokens.satisfactory.pages.games.tabs.notepad),
+      value: "scribble",
+      disabled: !selectedGame,
+    },
   ];
 
   useEffect(() => {
@@ -222,20 +208,6 @@ const Page = () => {
     const deleted = await deleteSatisfactoryGame(gamesData.meta.path, id);
   }, [gamesData, selectedGame]);
 
-  // const gameValue = useMemo(() => {
-  //   // if (gamesData.data) {
-  //   //   let value = gamesData.data?.find(
-  //   //     (oneGame) => oneGame.id === selectedGameId
-  //   //   );
-  //   //   if (!value) {
-  //   //     value = gamesData.data[0];
-  //   //   }
-  //   //   return value;
-  //   // } else {
-  //   //   return undefined;
-  //   // }
-  // }, [gamesData.data, selectedGameId]);
-
   if (!selectedGame) {
     return (
       <React.Fragment>
@@ -244,12 +216,13 @@ const Page = () => {
         </Head>
         <Box textAlign="center" sx={{ mt: 20 }}>
           <Button
+            disabled={gamesData.loading}
             onClick={() => {
               createNewGame();
             }}
             variant="contained"
           >
-            Add first game
+            {translate(tokens.satisfactory.pages.games.addFirstGame)}
           </Button>
         </Box>
       </React.Fragment>
@@ -261,7 +234,10 @@ const Page = () => {
   return (
     <>
       <Head>
-        <title>Games | {siteSettings.title}</title>
+        <title>
+          {translate(tokens.satisfactory.pages.games.title)} |{" "}
+          {siteSettings.title}
+        </title>
       </Head>
       <Box
         component="main"
@@ -271,8 +247,8 @@ const Page = () => {
         }}
       >
         <Container maxWidth={settings.stretch ? false : "xl"}>
-          <Stack spacing={3} sx={{ mb: 3 }}>
-            <Stack spacing={3} sx={{ mb: 3 }}>
+          <Stack spacing={3}>
+            <Stack spacing={3}>
               <Stack
                 alignItems="center"
                 direction="row"
@@ -289,7 +265,7 @@ const Page = () => {
                       <TextField
                         {...params}
                         fullWidth
-                        label="Games"
+                        label={translate(tokens.satisfactory.pages.games.title)}
                         name="game"
                       />
                     )}
@@ -320,7 +296,7 @@ const Page = () => {
                     }}
                     variant="contained"
                   >
-                    Create new
+                    {translate(tokens.satisfactory.pages.games.addGame)}
                   </Button>
                 </Stack>
               </Stack>
@@ -355,26 +331,33 @@ const Page = () => {
                     onClick={formik.handleSubmit}
                     variant="contained"
                   >
-                    Save
+                    {translate(tokens.common.buttons.save)}
                   </Button>
                 </Stack>
                 <Divider />
               </div>
             </Stack>
-            <Stack spacing={3}>
+            <Stack spacing={1}>
               {tabs.tab === "general" && (
                 <SatisfactoryGamesGeneral
                   formik={formik}
                   game={selectedGame}
                   handleDeleteGame={() => {
-                    confirm({ process: () => deleteGame() });
+                    confirm({
+                      title: translate(
+                        tokens.satisfactory.pages.games.deleteGame
+                      ),
+                      process: () => deleteGame(),
+                    });
                   }}
+                  translate={translate}
                 />
               )}
               {tabs.tab === "scribble" && (
                 <SatisfactoryGamesScribble
                   formik={formik}
                   game={selectedGame}
+                  translate={translate}
                 />
               )}
               {tabs.tab === "factories" && (
@@ -383,6 +366,7 @@ const Page = () => {
                   game={selectedGame}
                   recipes={satisfactoryRecipes}
                   products={satisfactoryProducts}
+                  translate={translate}
                 />
               )}
               {/* {JSON.stringify(selectedGame)} */}

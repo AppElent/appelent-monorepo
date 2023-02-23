@@ -8,30 +8,31 @@ import {
 } from "@mui/material";
 import { SeverityPill } from "components/severity-pill";
 import { PropertyListTemplate } from "components/app/property-list-template";
+import { tokens } from "locales/tokens";
 
-export const SatisfactoryProductDetail = ({ product }) => {
+export const SatisfactoryProductDetail = ({ product, translate }) => {
   const lgUp = useMediaQuery((theme) => theme.breakpoints.up("lg"));
   const getSeverityPill = (item) => {
     let status = "error";
-    let text = "No";
+    let text = translate(tokens.common.words.no);
     if (item) {
       status = "success";
-      text = "Yes";
+      text = translate(tokens.common.words.yes);
     }
     return <SeverityPill color={status}>{text}</SeverityPill>;
   };
 
   const propertyItems = [
     {
-      label: "Name",
+      label: translate(tokens.common.fields.name),
       value: product.name,
     },
     {
-      label: "Description",
+      label: translate(tokens.common.fields.description),
       value: product.description,
     },
     {
-      label: "Stacksize",
+      label: translate(tokens.satisfactory.pages.products.stackSize),
       value: product.stackSize.toString(),
     },
     {
@@ -60,7 +61,9 @@ export const SatisfactoryProductDetail = ({ product }) => {
   return (
     <Stack>
       <Card>
-        <CardHeader title="Info" />
+        <CardHeader
+          title={translate(tokens.satisfactory.pages.products.info)}
+        />
         <CardContent>
           {/* <Stack spacing={3} maxWidth={500}> */}
           <PropertyListTemplate items={propertyItems} />

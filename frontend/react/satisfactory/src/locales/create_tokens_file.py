@@ -57,7 +57,7 @@ def write_to_output_file(results, output_file_path):
 
 
 folder_path = '../../public/locales/en'
-output_file_path = './tokens2.js'
+output_file_path = './tokens.js'
 
 results = process_folder(folder_path)
 write_to_output_file(results, output_file_path)

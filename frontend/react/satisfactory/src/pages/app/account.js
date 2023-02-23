@@ -11,12 +11,20 @@ import {
   Typography,
 } from "@mui/material";
 import { usePageView } from "../../hooks/use-page-view";
-import { Layout as DashboardLayout } from "../../layouts/dashboard";
-import { AccountGeneralSettings } from "../../sections/app/account/account-general-settings";
-import { AccountSecuritySettings } from "../../sections/dashboard/account/account-security-settings";
+import { Layout as DashboardLayout } from "layouts/dashboard";
+import { AccountGeneralSettings } from "sections/app/account/account-general-settings";
+import { AccountSecuritySettings } from "sections/app/account/account-security-settings";
 import { useAuth } from "hooks/use-auth";
 import { siteSettings } from "config";
 import { useData } from "libs/appelent-framework";
+import { useUpdatePassword } from "@pankod/refine-core";
+import { toast } from "react-hot-toast";
+import { useFormik } from "formik";
+import {
+  EmailAuthProvider,
+  getAuth,
+  reauthenticateWithCredential,
+} from "firebase/auth";
 
 const now = new Date();
 
@@ -30,8 +38,46 @@ const tabs = [
 
 const Page = () => {
   const { user } = useAuth();
+  const { mutate: updatePassword } = useUpdatePassword();
   const [currentTab, setCurrentTab] = useState("general");
   const { data, dispatch } = useData();
+
+  const updatePasswordFn = useCallback(async (oldPassword, newPassword) => {
+    // onSubmit={async (values, { setSubmitting }) => {
+    //   try {
+    //     const auth = getAuth();
+    //     const credential = EmailAuthProvider.credential(
+    //       auth.currentUser.email,
+    //       values.oldpassword
+    //     );
+    //     await reauthenticateWithCredential(auth.currentUser, credential);
+    //     await updatePassword(auth.currentUser, values.password);
+    //     // Update successful.
+    //     enqueueSnackbar('Successfully updated password', { variant: 'success' });
+    //   } catch (error) {
+    //     console.log(error);
+    //     let { message } = error;
+    //     if (error.code === 'auth/wrong-password') message = "Old password doesn't match";
+    //     enqueueSnackbar(`Error updating password: ${message}`, { variant: 'error' });
+    //   } finally {
+    //     setSubmitting(false);
+    //   }
+    // }}
+
+    try {
+      const auth = getAuth();
+      console.log(oldPassword, newPassword);
+      const credential = EmailAuthProvider.credential(
+        auth.currentUser.email,
+        oldPassword
+      );
+      await reauthenticateWithCredential(auth.currentUser, credential);
+      await updatePassword({ password: newPassword });
+      toast.success("Update password succesful");
+    } catch (error) {
+      toast.error("Password update failed: " + error.message);
+    }
+  });
 
   usePageView();
 
@@ -150,6 +196,7 @@ const Page = () => {
                   userAgent: "Chrome, Mac OS 10.15.7",
                 },
               ]}
+              updatePassword={updatePasswordFn}
             />
           )}
         </Container>

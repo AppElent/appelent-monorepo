@@ -60,7 +60,7 @@
             }
         },
         "errors": {
-            "info": "You may have forgotten to add the {{action}} component to {{resource}} resource.",
+            "info": "You may have forgotten to add the action component to resource resource.",
             "notFound": "Sorry, the page you visited does not exist.",
             "resource404": "Are you sure you have created the {{resource}} resource.",
             "backHome": "Back Home"
@@ -88,12 +88,7 @@
         "undo": "Undo",
         "import": "Import",
         "clone": "Clone",
-        "notAccessTitle": "You don't have permission to access",
-        "dismiss": "Dismiss"
-    },
-    "fields": {
-        "name": "Name",
-        "description": "Description"
+        "notAccessTitle": "You don't have permission to access"
     },
     "warnWhenUnsavedChanges": "Are you sure you want to leave? You have unsaved changes.",
     "notifications": {
@@ -106,9 +101,7 @@
         "deleteError": "Error when deleting {{resource}} (status code: {{statusCode}})",
         "editSuccess": "Successfully edited {{resource}}",
         "editError": "Error when editing {{resource}} (status code: {{statusCode}})",
-        "importProgress": "Importing: {{processed}}/{{total}}",
-        "savedSuccess": "Saved Successfully",
-        "savedError": "Error saving"
+        "importProgress": "Importing: {{processed}}/{{total}}"
     },
     "loading": "Loading",
     "tags": {
@@ -141,9 +134,5 @@
     },
     "table": {
         "actions": "Actions"
-    },
-    "words": {
-        "no": "No",
-        "yes": "Yes"
     }
 }

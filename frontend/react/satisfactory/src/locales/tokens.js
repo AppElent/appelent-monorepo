@@ -59,11 +59,11 @@ export const tokens = {
           "submit": "common:pages.updatePassword.buttons.submit"
         }
       },
-      "error": {
-        "info": "common:pages.error.info",
-        "404": "common:pages.error.404",
-        "resource404": "common:pages.error.resource404",
-        "backHome": "common:pages.error.backHome"
+      "errors": {
+        "info": "common:pages.errors.info",
+        "notFound": "common:pages.errors.notFound",
+        "resource404": "common:pages.errors.resource404",
+        "backHome": "common:pages.errors.backHome"
       }
     },
     "actions": {
@@ -87,7 +87,12 @@ export const tokens = {
       "undo": "common:buttons.undo",
       "import": "common:buttons.import",
       "clone": "common:buttons.clone",
-      "notAccessTitle": "common:buttons.notAccessTitle"
+      "notAccessTitle": "common:buttons.notAccessTitle",
+      "dismiss": "common:buttons.dismiss"
+    },
+    "fields": {
+      "name": "common:fields.name",
+      "description": "common:fields.description"
     },
     "warnWhenUnsavedChanges": "common:warnWhenUnsavedChanges",
     "notifications": {
@@ -100,7 +105,9 @@ export const tokens = {
       "deleteError": "common:notifications.deleteError",
       "editSuccess": "common:notifications.editSuccess",
       "editError": "common:notifications.editError",
-      "importProgress": "common:notifications.importProgress"
+      "importProgress": "common:notifications.importProgress",
+      "savedSuccess": "common:notifications.savedSuccess",
+      "savedError": "common:notifications.savedError"
     },
     "loading": "common:loading",
     "tags": {
@@ -133,6 +140,10 @@ export const tokens = {
     },
     "table": {
       "actions": "common:table.actions"
+    },
+    "words": {
+      "no": "common:words.no",
+      "yes": "common:words.yes"
     }
   },
   "dashboard": {
@@ -195,6 +206,60 @@ export const tokens = {
     },
     "products": "satisfactory:products",
     "product_details": "satisfactory:product_details",
-    "games": "satisfactory:games"
+    "games": "satisfactory:games",
+    "version": "satisfactory:version",
+    "recipes": "satisfactory:recipes",
+    "pages": {
+      "games": {
+        "title": "satisfactory:pages.games.title",
+        "deleteGame": "satisfactory:pages.games.deleteGame",
+        "addFirstGame": "satisfactory:pages.games.addFirstGame",
+        "addGame": "satisfactory:pages.games.addGame",
+        "version": "satisfactory:pages.games.version",
+        "tabs": {
+          "general": "satisfactory:pages.games.tabs.general",
+          "factories": "satisfactory:pages.games.tabs.factories",
+          "trainstations": "satisfactory:pages.games.tabs.trainstations",
+          "notepad": "satisfactory:pages.games.tabs.notepad"
+        },
+        "general": {
+          "generalinfo": "satisfactory:pages.games.general.generalinfo",
+          "version": "satisfactory:pages.games.general.version",
+          "players": "satisfactory:pages.games.general.players",
+          "addPlayerHelperText": "satisfactory:pages.games.general.addPlayerHelperText",
+          "cantDeleteOwner": "satisfactory:pages.games.general.cantDeleteOwner",
+          "userId": "satisfactory:pages.games.general.userId",
+          "addPlayer": "satisfactory:pages.games.general.addPlayer",
+          "deleteGame": "satisfactory:pages.games.general.deleteGame",
+          "deleteGameConfirmation": "satisfactory:pages.games.general.deleteGameConfirmation",
+          "deleteGameWarning": "satisfactory:pages.games.general.deleteGameWarning"
+        },
+        "factories": {
+          "addFirst": "satisfactory:pages.games.factories.addFirst",
+          "add": "satisfactory:pages.games.factories.add",
+          "checked": "satisfactory:pages.games.factories.checked",
+          "finished": "satisfactory:pages.games.factories.finished",
+          "inputs": "satisfactory:pages.games.factories.inputs",
+          "outputs": "satisfactory:pages.games.factories.outputs",
+          "product": "satisfactory:pages.games.factories.product",
+          "amount": "satisfactory:pages.games.factories.amount",
+          "recipe": "satisfactory:pages.games.factories.recipe",
+          "recipeHelperText": "satisfactory:pages.games.factories.recipeHelperText"
+        },
+        "scribble": {
+          "helperText": "satisfactory:pages.games.scribble.helperText"
+        }
+      },
+      "products": {
+        "title": "satisfactory:pages.products.title",
+        "stackSize": "satisfactory:pages.products.stackSize",
+        "info": "satisfactory:pages.products.info",
+        "input": "satisfactory:pages.products.input",
+        "machine": "satisfactory:pages.products.machine",
+        "output": "satisfactory:pages.products.output",
+        "requirements": "satisfactory:pages.products.requirements",
+        "fullscreen": "satisfactory:pages.products.fullscreen"
+      }
+    }
   }
 }

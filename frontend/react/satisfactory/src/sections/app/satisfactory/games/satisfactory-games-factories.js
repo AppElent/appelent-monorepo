@@ -5,6 +5,7 @@ import {
   Box,
   Button,
   Checkbox,
+  Divider,
   Stack,
   Table,
   TableBody,
@@ -20,6 +21,7 @@ import { useRouter } from "next/router";
 import { useQueryParam } from "libs/appelent-framework/hooks/use-query-param";
 import { generateName } from "libs/random-name-generator";
 import { getSatisfactoryRecipeStatistics } from "libs/satisfactory";
+import { tokens } from "locales/tokens";
 
 const newObject = {
   name: "",
@@ -35,7 +37,7 @@ const FACTORY_TEMPLATE = {
 };
 
 export const SatisfactoryGamesFactories = (props) => {
-  const { formik, game, recipes, products } = props;
+  const { formik, game, recipes, products, translate } = props;
   const router = useRouter();
   const { value: factoryId, setQueryParam: setFactoryId } =
     useQueryParam("factory");
@@ -70,80 +72,6 @@ export const SatisfactoryGamesFactories = (props) => {
   }, [selectedFactory]);
 
   useEffect(() => {
-    // let productUsage = {};
-    // let recipeData = {};
-    // let inputsAndOutputs = { inputs: {}, outputs: {} };
-    // if (!formik.values.factories?.[selectedFactoryIndex]?.recipes)
-    //   return undefined;
-    // formik.values.factories[selectedFactoryIndex]?.recipes.forEach((recipe) => {
-    //   console.log(recipe);
-    //   const foundRecipe = recipes.find((r) => r.className === recipe.recipe);
-    //   if (foundRecipe) {
-    //     const itemsPerMinute = 60 / foundRecipe?.craftTime || 0;
-    //     const inputs = foundRecipe.ingredients.map((ingredient) => {
-    //       let currentUsage = productUsage[ingredient.itemClass] || {
-    //         needed: 0,
-    //         produced: 0,
-    //       };
-    //       currentUsage = {
-    //         needed:
-    //           currentUsage.needed +
-    //           itemsPerMinute * ingredient.quantity * parseFloat(recipe.amount),
-    //         produced: currentUsage.produced,
-    //       };
-    //       productUsage[ingredient.itemClass] = currentUsage;
-
-    //       return {
-    //         name: products[ingredient.itemClass],
-    //         quantity: ingredient.quantity,
-    //         quantityMin: itemsPerMinute * ingredient.quantity,
-    //         quantityMinTotal:
-    //           itemsPerMinute * ingredient.quantity * parseFloat(recipe.amount),
-    //       };
-    //     });
-    //     const outputs = foundRecipe.products.map((ingredient) => {
-    //       let currentUsage = productUsage[ingredient.itemClass] || {
-    //         needed: 0,
-    //         produced: 0,
-    //       };
-    //       currentUsage = {
-    //         needed: currentUsage.needed,
-    //         produced:
-    //           currentUsage.produced +
-    //           itemsPerMinute * ingredient.quantity * parseFloat(recipe.amount),
-    //       };
-    //       productUsage[ingredient.itemClass] = currentUsage;
-
-    //       return {
-    //         name: products[ingredient.itemClass],
-    //         quantity: ingredient.quantity,
-    //         quantityMin: itemsPerMinute * ingredient.quantity,
-    //         quantityMinTotal:
-    //           itemsPerMinute * ingredient.quantity * parseFloat(recipe.amount),
-    //       };
-    //       // return {
-    //       //   name: products[ingredient.itemClass],
-    //       //   quantity: ingredient.quantity,
-    //       //   quantityMin: itemsPerMinute * ingredient.quantity,
-    //       //   quantityMinTotal:
-    //       //     itemsPerMinute * ingredient.quantity * parseFloat(recipe.amount),
-    //       // };
-    //     });
-    //     recipeData[recipe.recipe] = { inputs, outputs };
-    //   }
-
-    //   for (const [key, value] of Object.entries(productUsage)) {
-    //     const net = parseFloat((value.produced - value.needed).toPrecision(12));
-    //     if (net < 0) {
-    //       _.set(inputsAndOutputs, `inputs.${key}`, net * -1);
-    //     } else if (net > 0) {
-    //       inputsAndOutputs.outputs[key] = net;
-    //     }
-    //     productUsage[key].net = net;
-    //   }
-    //   console.log(recipeData, productUsage, inputsAndOutputs);
-    //   setRecipeState({ recipeData, productUsage, inputsAndOutputs });
-    // });
     const satisfactoryStatistics = getSatisfactoryRecipeStatistics(
       formik.values.factories?.[selectedFactoryIndex]?.recipes,
       recipes,
@@ -172,12 +100,13 @@ export const SatisfactoryGamesFactories = (props) => {
       <React.Fragment>
         <Box textAlign="center" sx={{ mt: 20 }}>
           <Button
+            disabled={!game}
             onClick={() => {
               createFactory();
             }}
             variant="contained"
           >
-            Add first factory
+            {translate(tokens.satisfactory.pages.games.factories.addFirst)}
           </Button>
         </Box>
       </React.Fragment>
@@ -199,7 +128,7 @@ export const SatisfactoryGamesFactories = (props) => {
             <TextField
               {...params}
               fullWidth
-              label="Factories"
+              label={translate(tokens.satisfactory.pages.games.tabs.factories)}
               name="factories"
             />
           )}
@@ -228,13 +157,13 @@ export const SatisfactoryGamesFactories = (props) => {
           onClick={createFactory}
           variant="contained"
         >
-          Create new factory
+          {translate(tokens.satisfactory.pages.games.factories.add)}
         </Button>
       </Stack>
       <CardDefault title="Factory information">
         <Stack alignItems="center" direction="row" spacing={2}>
           <TextField
-            label="Factory name"
+            label={translate(tokens.common.fields.name)}
             sx={{ flexGrow: 1 }}
             name={`factories.${selectedFactoryIndex}.name`}
             onChange={formik.handleChange}
@@ -243,7 +172,7 @@ export const SatisfactoryGamesFactories = (props) => {
         </Stack>
         <Stack alignItems="center" direction="row" spacing={2}>
           <TextField
-            label="Factory description"
+            label={translate(tokens.common.fields.description)}
             sx={{ flexGrow: 1 }}
             name={`factories.${selectedFactoryIndex}.description`}
             onChange={formik.handleChange}
@@ -262,7 +191,7 @@ export const SatisfactoryGamesFactories = (props) => {
             name={`factories.${selectedFactoryIndex}.finished`}
             sx={{ "& .MuiSvgIcon-root": { fontSize: 28 } }}
           />{" "}
-          Finished
+          {translate(tokens.satisfactory.pages.games.factories.finished)}
         </Stack>
         <Stack alignItems="center" direction="row" spacing={2}>
           <Checkbox
@@ -273,7 +202,7 @@ export const SatisfactoryGamesFactories = (props) => {
             name={`factories.${selectedFactoryIndex}.checked`}
             sx={{ "& .MuiSvgIcon-root": { fontSize: 28 } }}
           />{" "}
-          Checked
+          {translate(tokens.satisfactory.pages.games.factories.checked)}
         </Stack>
         {/* <Button
           //color="inherit"
@@ -286,15 +215,36 @@ export const SatisfactoryGamesFactories = (props) => {
           
         </Button> */}
       </CardDefault>
-      <CardDefault title="Inputs and outputs">
-        <Stack alignItems="center" direction="row" spacing={2}>
+
+      <CardDefault
+        title={
+          translate(tokens.satisfactory.pages.games.factories.inputs) +
+          " / " +
+          translate(tokens.satisfactory.pages.games.factories.outputs)
+        }
+      >
+        <Stack
+          alignItems="flex-start"
+          direction="row"
+          spacing={2}
+          divider={<Divider orientation="vertical" flexItem />}
+          // sx={{ verticalAlign: "top" }}
+        >
           <Stack>
-            Inputs
+            {translate(tokens.satisfactory.pages.games.factories.inputs)}
             <Table sx={{ minWidth: 400 }}>
               <TableHead>
                 <TableRow>
-                  <TableCell>Product</TableCell>
-                  <TableCell>Amount</TableCell>
+                  <TableCell>
+                    {translate(
+                      tokens.satisfactory.pages.games.factories.product
+                    )}
+                  </TableCell>
+                  <TableCell>
+                    {translate(
+                      tokens.satisfactory.pages.games.factories.amount
+                    )}
+                  </TableCell>
                 </TableRow>
               </TableHead>
               <TableBody>
@@ -314,12 +264,20 @@ export const SatisfactoryGamesFactories = (props) => {
           </Stack>
           <Stack>
             {" "}
-            Outputs
+            {translate(tokens.satisfactory.pages.games.factories.outputs)}
             <Table sx={{ minWidth: 400 }}>
               <TableHead>
                 <TableRow>
-                  <TableCell>Product</TableCell>
-                  <TableCell>Amount</TableCell>
+                  <TableCell>
+                    {translate(
+                      tokens.satisfactory.pages.games.factories.product
+                    )}
+                  </TableCell>
+                  <TableCell>
+                    {translate(
+                      tokens.satisfactory.pages.games.factories.amount
+                    )}
+                  </TableCell>
                 </TableRow>
               </TableHead>
               <TableBody>
@@ -345,6 +303,7 @@ export const SatisfactoryGamesFactories = (props) => {
         formik={formik}
         recipes={recipes}
         products={products}
+        translate={translate}
       />
     </Stack>
   );

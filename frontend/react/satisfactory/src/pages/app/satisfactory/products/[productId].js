@@ -24,11 +24,14 @@ import { SatisfactoryProductDetail } from "sections/app/satisfactory/product/sat
 import { paths } from "paths";
 import _ from "lodash";
 import { SatisfactoryProductRecipeTable } from "sections/app/satisfactory/product/satisfactory-product-recipe-table";
+import { useTranslate } from "@pankod/refine-core";
+import { tokens } from "locales/tokens";
 
 const Page = () => {
   const settings = useSettings();
   usePageView();
   const router = useRouter();
+  const translate = useTranslate();
   let { productId, version } = router.query;
 
   const version_correct =
@@ -90,7 +93,10 @@ const Page = () => {
   return (
     <>
       <Head>
-        <title>Product details | {siteSettings.title}</title>
+        <title>
+          {translate(tokens.satisfactory.pages.products.title)} |{" "}
+          {siteSettings.title}
+        </title>
       </Head>
       <Box
         component="main"
@@ -115,7 +121,7 @@ const Page = () => {
                   <TextField
                     {...params}
                     fullWidth
-                    label="Products"
+                    label={translate(tokens.satisfactory.pages.products.title)}
                     name="product"
                   />
                 )}
@@ -136,12 +142,16 @@ const Page = () => {
               />
             </Stack>
             <Stack spacing={3}>
-              <SatisfactoryProductDetail product={product} />
+              <SatisfactoryProductDetail
+                product={product}
+                translate={translate}
+              />
               <SatisfactoryProductRecipeTable
                 title="Recipes"
                 recipes={product.recipes_by}
                 machineTypes={machineTypes}
                 products={getSatisfactoryData("items", version)}
+                translate={translate}
               />
               <SatisfactoryProductRecipeTable
                 title="Used for"
@@ -149,6 +159,7 @@ const Page = () => {
                 products={getSatisfactoryData("items", version)}
                 machineTypes={machineTypes}
                 conditionFunction={isEquipment(true)}
+                translate={translate}
               />
               <SatisfactoryProductRecipeTable
                 title="Equipment"
@@ -156,6 +167,7 @@ const Page = () => {
                 products={getSatisfactoryData("items", version)}
                 machineTypes={machineTypes}
                 conditionFunction={isEquipment(false)}
+                translate={translate}
               />
             </Stack>
           </Stack>

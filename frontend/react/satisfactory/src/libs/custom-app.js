@@ -4,7 +4,7 @@ import { db } from "./firebase";
 import { siteSettings } from "config";
 
 import { AppelentFramework, useData } from "libs/appelent-framework";
-import { FirebaseAuth } from "refine-firebase";
+import { FirebaseAuth } from "libs/appelent-framework/authProviders/firebase";
 import { useEffect, useMemo } from "react";
 import { ActionType } from "./appelent-framework/caching";
 import dataProvider from "@pankod/refine-simple-rest";
@@ -27,6 +27,7 @@ const CustomApp = ({ queryClient, children }) => {
   useEffect(() => {
     if (website && siteSettings[website]) {
       const newSiteSettings = { ...siteSettings };
+      siteSettings.website = website;
       Object.keys(siteSettings[website]).forEach((key) => {
         siteSettings[key] = siteSettings[website][key];
         newSiteSettings[key] = siteSettings[website][key];
@@ -170,7 +171,12 @@ const CustomAppChild = ({ children }) => {
   let returnComponent = <>{children}</>;
 
   useEffect(() => {
-    if (auth.currentUser?.uid && globalData.dispatch) {
+    if (
+      auth.currentUser?.uid &&
+      globalData.dispatch &&
+      (siteSettings.website === "satisfactory" ||
+        siteSettings.website === "localhost")
+    ) {
       console.log("Adding resource satisfactory_games");
       globalData.dispatch({
         type: ActionType.ADD_RESOURCE,
@@ -191,7 +197,7 @@ const CustomAppChild = ({ children }) => {
       });
     } else if (!auth.currentUser?.uid && globalData.dispatch) {
     }
-  }, [auth.currentUser, globalData.dispatch]);
+  }, [auth.currentUser, globalData.dispatch, siteSettings.website]);
 
   // const firestoreComponents = useLoadFirestore(globalData);
 
