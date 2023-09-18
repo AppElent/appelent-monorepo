@@ -15,12 +15,13 @@ export const auth0Config = {
 };
 
 export const firebaseConfig = {
-  apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
-  appId: import.meta.env.VITE_FIREBASE_APP_ID,
-  authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN,
-  messagingSenderId: import.meta.env.VITE_FIREBASE_MESSAGING_SENDER_ID,
-  projectId: import.meta.env.VITE_FIREBASE_PROJECT_ID,
-  storageBucket: import.meta.env.VITE_FIREBASE_STORAGE_BUCKET,
+  apiKey: 'AIzaSyDAwdqU-4k5Azb1fNF9RFLAlT-RaMSDUPo',
+  authDomain: 'appelent-bc868.firebaseapp.com',
+  projectId: 'appelent-bc868',
+  storageBucket: 'appelent-bc868.appspot.com',
+  messagingSenderId: '726562505952',
+  appId: '1:726562505952:web:d05c0d37da55129551fc85',
+  measurementId: 'G-SCBJ5EM94B',
 };
 
 export const gtmConfig = {
@@ -32,3 +33,22 @@ export const mapboxConfig = {
 };
 
 export const version = '6.4.2';
+
+export const siteSettings = {
+  title: 'Site title',
+  subtitle: 'Subtitle',
+  //plan: "PRO",
+  version: 'v1.0.0',
+  copyright: 'AppElent',
+  url: 'https://url.appelent.com',
+  loginRedirect: '/app',
+  backend: 'https://api.appelent.com',
+  localhost: {
+    title: 'New title',
+    //sections: ["Satisfactory"],
+  },
+  satisfactory: {
+    title: 'Satisfactory',
+    sections: ['Satisfactory'],
+  },
+};

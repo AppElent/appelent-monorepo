@@ -1,30 +1,30 @@
-import PropTypes from "prop-types";
-import { format } from "date-fns";
-import { Button, Stack, TextField, Typography } from "@mui/material";
+import PropTypes from 'prop-types';
+import { format } from 'date-fns';
+import { Button, Stack, Typography } from '@mui/material';
 
 const statusOptions = [
   {
-    label: "Canceled",
-    value: "canceled",
+    label: 'Canceled',
+    value: 'canceled',
   },
   {
-    label: "Complete",
-    value: "complete",
+    label: 'Complete',
+    value: 'complete',
   },
   {
-    label: "Pending",
-    value: "pending",
+    label: 'Pending',
+    value: 'pending',
   },
   {
-    label: "Rejected",
-    value: "rejected",
+    label: 'Rejected',
+    value: 'rejected',
   },
 ];
 
 export const ItemEditContainer = (props) => {
   const { onCancel, onSave, item, children } = props;
 
-  const createdAt = format(item.createdAt, "dd/MM/yyyy HH:mm");
+  const createdAt = format(item.createdAt, 'dd/MM/yyyy HH:mm');
 
   return (
     <Stack spacing={6}>
@@ -93,7 +93,12 @@ export const ItemEditContainer = (props) => {
           </TextField>
         </Stack> */}
         {children}
-        <Stack alignItems="center" direction="row" flexWrap="wrap" spacing={2}>
+        <Stack
+          alignItems="center"
+          direction="row"
+          flexWrap="wrap"
+          spacing={2}
+        >
           <Button
             color="primary"
             onClick={onSave}
@@ -102,7 +107,11 @@ export const ItemEditContainer = (props) => {
           >
             Save changes
           </Button>
-          <Button color="inherit" onClick={onCancel} size="small">
+          <Button
+            color="inherit"
+            onClick={onCancel}
+            size="small"
+          >
             Cancel
           </Button>
         </Stack>
@@ -112,8 +121,8 @@ export const ItemEditContainer = (props) => {
 };
 
 ItemEditContainer.propTypes = {
-  onCancel: PropTypes.func,
-  onSave: PropTypes.func,
-  // @ts-ignore
+  children: PropTypes.any,
   item: PropTypes.object,
+  onCancel: PropTypes.func,
+  onSave: PropTypes.func, // @ts-ignore
 };

@@ -23,6 +23,9 @@ export const paths = {
       register: '/auth/amplify/register',
       resetPassword: '/auth/amplify/reset-password',
     },
+    login: '/auth/login',
+    register: '/auth/register',
+    reset: '/auth/forgot-password',
   },
   authDemo: {
     forgotPassword: {
@@ -44,6 +47,15 @@ export const paths = {
     verifyCode: {
       classic: '/auth-demo/verify-code/classic',
       modern: '/auth-demo/verify-code/modern',
+    },
+  },
+  app: {
+    index: '/app',
+    account: '/app/account',
+    list: '/app/list',
+    oauth: '/app/oauth',
+    admin: {
+      index: '/app/admin',
     },
   },
   dashboard: {

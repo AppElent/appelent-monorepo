@@ -8,6 +8,9 @@
     "plugin:@typescript-eslint/recommended",
     "prettier"
   ],
+  "plugins": [
+    "react-refresh"
+  ],
   "overrides": [
     {
       "files": [
@@ -29,8 +32,7 @@
     "import/resolver": {
       "node": {
         "paths": [
-          ".",
-          "src"
+          "."
         ],
         "extensions": [
           ".js",
@@ -62,6 +64,8 @@
     "@typescript-eslint/no-unused-vars": "off",
     "import/newline-after-import": "error",
     "jsx-a11y/alt-text": "off",
-    "no-unused-vars": "off"
+    "no-unused-vars": "off",
+    //"react-refresh/only-export-components": "warn",
+    "react/prop-types": "warn"
   }
 }

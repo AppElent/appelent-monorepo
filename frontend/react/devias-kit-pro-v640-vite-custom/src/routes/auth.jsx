@@ -25,6 +25,11 @@ const FirebaseRegisterPage = lazy(() => import('src/pages/auth/firebase/register
 const JwtLoginPage = lazy(() => import('src/pages/auth/jwt/login'));
 const JwtRegisterPage = lazy(() => import('src/pages/auth/jwt/register'));
 
+// Custom
+const LoginPage = lazy(() => import('src/pages/auth/login'));
+const RegisterPage = lazy(() => import('src/pages/auth/register'));
+//const ForgotPasswordPage = lazy(() => import('src/pages/auth/forgot-password'));
+
 export const authRoutes = [
   {
     path: 'auth',
@@ -127,6 +132,34 @@ export const authRoutes = [
           },
         ],
       },
+      {
+        path: 'login',
+        element: (
+          <IssuerGuard issuer={Issuer.Firebase}>
+            <GuestGuard>
+              <AuthLayout>
+                <LoginPage />
+              </AuthLayout>
+            </GuestGuard>
+          </IssuerGuard>
+        ),
+      },
+      {
+        path: 'register',
+        element: (
+          <IssuerGuard issuer={Issuer.Firebase}>
+            <GuestGuard>
+              <AuthLayout>
+                <RegisterPage />
+              </AuthLayout>
+            </GuestGuard>
+          </IssuerGuard>
+        ),
+      },
+      // {
+      //   path: 'forgot',
+      //   element: <ForgotPasswordPage />,
+      // },
     ],
   },
 ];

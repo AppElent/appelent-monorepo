@@ -52,9 +52,10 @@ export const AuthProvider = (props) => {
             user: {
               id: user.uid,
               avatar: user.photoURL || undefined,
-              email: user.email || 'anika.visser@devias.io',
-              name: 'Anika Visser',
+              email: user.email || 'user@demo.com',
+              name: user.displayName || 'Unknown user',
               plan: 'Premium',
+              raw: user,
             },
           },
         });

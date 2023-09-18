@@ -1,23 +1,23 @@
-import { styled } from "@mui/material/styles";
+import { styled } from '@mui/material/styles';
 
-export const ItemListContainer = styled("div", {
-  shouldForwardProp: (prop) => prop !== "open",
+export const ItemListContainer = styled('div', {
+  shouldForwardProp: (prop) => prop !== 'open',
 })(({ theme, open }) => ({
   flexGrow: 1,
-  overflow: "auto",
+  overflow: 'auto',
   zIndex: 1,
-  [theme.breakpoints.up("lg")]: {
+  [theme.breakpoints.up('lg')]: {
     marginRight: -750,
   },
-  transition: theme.transitions.create("margin", {
+  transition: theme.transitions.create('margin', {
     easing: theme.transitions.easing.sharp,
     duration: theme.transitions.duration.leavingScreen,
   }),
   ...(open && {
-    [theme.breakpoints.up("lg")]: {
+    [theme.breakpoints.up('lg')]: {
       marginRight: 0,
     },
-    transition: theme.transitions.create("margin", {
+    transition: theme.transitions.create('margin', {
       easing: theme.transitions.easing.easeOut,
       duration: theme.transitions.duration.enteringScreen,
     }),

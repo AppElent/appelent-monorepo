@@ -1,5 +1,5 @@
-import PropTypes from "prop-types";
-import { Table, TableBody, TablePagination } from "@mui/material";
+import PropTypes from 'prop-types';
+import { Table, TableBody, TablePagination } from '@mui/material';
 
 export const ItemListTableContainer = (props) => {
   const {

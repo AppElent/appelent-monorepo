@@ -1,34 +1,17 @@
-import PropTypes from "prop-types";
-import { format } from "date-fns";
-import numeral from "numeral";
-import Edit02Icon from "@untitled-ui/icons-react/build/esm/Edit02";
-import {
-  Button,
-  Stack,
-  SvgIcon,
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableRow,
-  Typography,
-  useMediaQuery,
-} from "@mui/material";
-import { PropertyList } from "../../../../components/property-list";
-import { PropertyListItem } from "../../../../components/property-list-item";
-import { SeverityPill } from "../../../../components/severity-pill";
-import { Scrollbar } from "../../../../components/scrollbar";
+import PropTypes from 'prop-types';
+import Edit02Icon from '@untitled-ui/icons-react/build/esm/Edit02';
+import { Button, Stack, SvgIcon, Typography, useMediaQuery } from '@mui/material';
 
 const statusMap = {
-  canceled: "warning",
-  complete: "success",
-  pending: "info",
-  rejected: "error",
+  canceled: 'warning',
+  complete: 'success',
+  pending: 'info',
+  rejected: 'error',
 };
 
 export const ItemDetailsContainer = (props) => {
   const { onEdit, children } = props;
-  const lgUp = useMediaQuery((theme) => theme.breakpoints.up("lg"));
+  const lgUp = useMediaQuery((theme) => theme.breakpoints.up('lg'));
 
   // const align = lgUp ? "horizontal" : "vertical";
   // const items = item.items || [];
@@ -48,18 +31,20 @@ export const ItemDetailsContainer = (props) => {
           spacing={3}
         >
           <Typography variant="h6">Details</Typography>
-          <Button
-            color="inherit"
-            onClick={onEdit}
-            size="small"
-            startIcon={
-              <SvgIcon>
-                <Edit02Icon />
-              </SvgIcon>
-            }
-          >
-            Edit
-          </Button>
+          {onEdit && (
+            <Button
+              color="inherit"
+              onClick={onEdit}
+              size="small"
+              startIcon={
+                <SvgIcon>
+                  <Edit02Icon />
+                </SvgIcon>
+              }
+            >
+              Edit
+            </Button>
+          )}
         </Stack>
         {/* <PropertyList>
           <PropertyListItem
@@ -177,9 +162,9 @@ export const ItemDetailsContainer = (props) => {
 };
 
 ItemDetailsContainer.propTypes = {
+  children: PropTypes.any,
+  item: PropTypes.object,
   onApprove: PropTypes.func,
   onEdit: PropTypes.func,
-  onReject: PropTypes.func,
-  // @ts-ignore
-  item: PropTypes.object,
+  onReject: PropTypes.func, // @ts-ignore
 };

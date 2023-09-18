@@ -1,22 +1,28 @@
-import PropTypes from "prop-types";
-import {
-  Card,
-  CardContent,
-  Stack,
-  Typography,
-  Unstable_Grid2 as Grid,
-} from "@mui/material";
+import PropTypes from 'prop-types';
+import { Card, CardContent, Stack, Typography, Unstable_Grid2 as Grid } from '@mui/material';
 
 export const CardDefault = (props) => {
   return (
-    <Stack spacing={4} {...props}>
+    <Stack
+      spacing={4}
+      {...props}
+    >
       <Card>
         <CardContent>
-          <Grid container spacing={3}>
-            <Grid xs={12} md={4}>
-              <Typography variant="h6">Basic {props.title}</Typography>
+          <Grid
+            container
+            spacing={3}
+          >
+            <Grid
+              xs={12}
+              md={4}
+            >
+              <Typography variant="h6">{props.title}</Typography>
             </Grid>
-            <Grid xs={12} md={8}>
+            <Grid
+              xs={12}
+              md={8}
+            >
               <Stack spacing={3}>
                 {/* <Stack alignItems="center" direction="row" spacing={2}>
                   <TextField
@@ -45,5 +51,6 @@ export const CardDefault = (props) => {
 };
 
 CardDefault.propTypes = {
+  children: PropTypes.any,
   title: PropTypes.string.isRequired,
 };

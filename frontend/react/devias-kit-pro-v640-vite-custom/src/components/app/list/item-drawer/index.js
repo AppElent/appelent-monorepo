@@ -1,22 +1,14 @@
-import { useCallback, useState } from "react";
-import PropTypes from "prop-types";
-import XIcon from "@untitled-ui/icons-react/build/esm/X";
-import {
-  Box,
-  Drawer,
-  IconButton,
-  Stack,
-  SvgIcon,
-  Typography,
-  useMediaQuery,
-} from "@mui/material";
+import { useState } from 'react';
+import PropTypes from 'prop-types';
+import XIcon from '@untitled-ui/icons-react/build/esm/X';
+import { Box, Drawer, IconButton, Stack, SvgIcon, Typography, useMediaQuery } from '@mui/material';
 // import { ItemDetailsContainer } from "./item-details";
 // import { ItemEditContainer } from "./item-edit";
 
 export const ItemDrawer = (props) => {
   const { container, onClose, open, item, children, title } = props;
   const [isEditing, setIsEditing] = useState(false);
-  const lgUp = useMediaQuery((theme) => theme.breakpoints.up("lg"));
+  const lgUp = useMediaQuery((theme) => theme.breakpoints.up('lg'));
 
   // const handleEditOpen = useCallback(() => {
   //   setIsEditing(true);
@@ -40,10 +32,16 @@ export const ItemDrawer = (props) => {
             py: 2,
           }}
         >
-          <Typography color="inherit" variant="h6">
+          <Typography
+            color="inherit"
+            variant="h6"
+          >
             {title}
           </Typography>
-          <IconButton color="inherit" onClick={onClose}>
+          <IconButton
+            color="inherit"
+            onClick={onClose}
+          >
             <SvgIcon>
               <XIcon />
             </SvgIcon>
@@ -86,7 +84,7 @@ export const ItemDrawer = (props) => {
         open={open}
         PaperProps={{
           sx: {
-            position: "relative",
+            position: 'relative',
             width: 750,
           },
         }}
@@ -105,18 +103,18 @@ export const ItemDrawer = (props) => {
       ModalProps={{
         container,
         sx: {
-          pointerEvents: "none",
-          position: "absolute",
+          pointerEvents: 'none',
+          position: 'absolute',
         },
       }}
       onClose={onClose}
       open={open}
       PaperProps={{
         sx: {
-          maxWidth: "100%",
+          maxWidth: '100%',
           width: 400,
-          pointerEvents: "auto",
-          position: "absolute",
+          pointerEvents: 'auto',
+          position: 'absolute',
         },
       }}
       SlideProps={{ container }}
@@ -128,9 +126,10 @@ export const ItemDrawer = (props) => {
 };
 
 ItemDrawer.propTypes = {
+  children: PropTypes.any,
   container: PropTypes.any,
-  onClose: PropTypes.func,
-  open: PropTypes.bool,
-  // @ts-ignore
   item: PropTypes.object,
+  onClose: PropTypes.func,
+  open: PropTypes.bool, // @ts-ignore
+  title: PropTypes.any,
 };

@@ -7,6 +7,7 @@ import { authRoutes } from './auth';
 import { authDemoRoutes } from './auth-demo';
 import { componentsRoutes } from './components';
 import { dashboardRoutes } from './dashboard';
+import { appRoutes } from './app';
 
 const Error401Page = lazy(() => import('src/pages/401'));
 const Error404Page = lazy(() => import('src/pages/404'));
@@ -39,6 +40,7 @@ export const routes = [
   ...authRoutes,
   ...authDemoRoutes,
   ...dashboardRoutes,
+  ...appRoutes,
   {
     path: 'checkout',
     element: <CheckoutPage />,
