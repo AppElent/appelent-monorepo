@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import _ from "lodash";
 
 import { useAppelentFramework } from "./index";
+import { Logger, logger } from "./logging";
 
 export const useData = (key, options) => {
   const globalData = useAppelentFramework();
@@ -38,28 +39,7 @@ export const useData = (key, options) => {
     data = _.get(globalData, "data." + key.name);
   }
 
-  // const resource = globalData.resources?.find(
-  //   (resource) => resource.name === key
-  // );
-
-  // if (resource?.options?.postProcess && data?.data) {
-  //   const newData = resource.options.postProcess(data.data);
-  //   return { ...data, data: newData };
-  // }
-
   return data || {};
-
-  // const returnData = useMemo(() => {
-  //   console.log("jaja", data, resource?.postProcess);
-  //   if (resource?.options?.postProcess && data?.data) {
-  //     const newData = resource.options.postProcess(data.data);
-  //     return { ...data, data: newData };
-  //   } else {
-  //     return data;
-  //   }
-  // }, [key, globalData.data[key]?.data]);
-
-  // return returnData || {};
 };
 
 export let ActionType;
@@ -71,7 +51,7 @@ export let ActionType;
 })(ActionType || (ActionType = {}));
 
 export const reducer = (state, action) => {
-  console.log("Globaldatadispatch", state, action);
+  logger.log("Globaldatadispatch", { state, action });
   //let newState = global.structuredClone(state);
   let newState = state; //JSONfn.clone(state);
   let currentValue;
@@ -126,34 +106,10 @@ export const reducer = (state, action) => {
         return state;
       }
 
-      // if (!foundResource) {
-      //   foundResource = {
-      //     name: action.payload.key,
-      //     options: action.payload.options,
-      //     loadData: true,
-      //   };
-      //   newState.resources?.push(foundResource);
-      // } else {
-      //   foundResource.loadData = true;
-      //   newState.resources[foundIndex] = foundResource;
-      // }
-
       return { ...newState };
     case "SET_DATA":
       currentValue = _.get(newState, action.payload.key);
       if (currentValue === action.payload.value) return state;
-      // let foundResourceSet = newState.resources?.find(
-      //   (one) => one.name === action.payload.key
-      // );
-      // console.log(action.payload.key, foundResourceSet);
-      // if (foundResourceSet && foundResourceSet.options?.postProcess) {
-      //   const newValue = foundResourceSet.options.postProcess(
-      //     action.payload.value
-      //   );
-      //   newState = _.set(newState, action.payload.key, newValue);
-      // } else {
-      //   newState = _.set(newState, action.payload.key, action.payload.value);
-      // }
 
       newState = _.set(newState, action.payload.key, action.payload.value);
 

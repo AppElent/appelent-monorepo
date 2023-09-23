@@ -157,6 +157,11 @@ const Page = () => {
       disabled: !selectedGame,
     },
     {
+      label: translate(tokens.satisfactory.pages.games.tabs.power),
+      value: "power",
+      disabled: !selectedGame,
+    },
+    {
       label: translate(tokens.satisfactory.pages.games.tabs.trainstations),
       value: "trainstations",
       disabled: !selectedGame,

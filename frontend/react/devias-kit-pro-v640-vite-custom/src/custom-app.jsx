@@ -1,3 +1,6 @@
+import { QueryParamProvider } from 'use-query-params';
+import { ReactRouter6Adapter } from 'use-query-params/adapters/react-router-6';
+
 import { logger, setLogger } from 'src/custom/libs/logging';
 import Refine from 'src/custom/libs/refine';
 import { useHttpsRedirect } from 'src/custom/hooks/use-https-redirect';
@@ -6,10 +9,14 @@ import { ConfirmProvider } from './custom/libs/confirmation';
 import { DataFramework } from './custom/libs/data-framework';
 import { collection } from 'firebase/firestore';
 import { db } from './libs/firebase';
+import { useRouter } from './hooks/use-router';
 
 const CustomApp = ({ children }) => {
   // Redirect to HTTPS if condition is TRUE
   useHttpsRedirect(!import.meta.env.DEV);
+
+  //Navigate component
+  const navigate = useRouter();
 
   // Retrieve locally saved user settings
   const [userSettings] = useLocalStorage('user_settings');
@@ -57,6 +64,14 @@ const CustomApp = ({ children }) => {
       },
     },
     {
+      name: 'user_settings',
+      key: 'user_settings',
+      loadData: true,
+      options: {
+        dataProviderName: 'localStorage',
+      },
+    },
+    {
       name: 'dummy03',
       options: {
         collection: collection(db, 'dummy'),
@@ -74,14 +89,16 @@ const CustomApp = ({ children }) => {
 
   return (
     <>
-      <DataFramework
-        logger={logger}
-        resources={resources}
-      >
-        <ConfirmProvider defaultOptions={confirmationDialogOptions}>
-          <Refine>{children}</Refine>
-        </ConfirmProvider>
-      </DataFramework>
+      <QueryParamProvider adapter={ReactRouter6Adapter}>
+        <DataFramework
+          logger={logger}
+          resources={resources}
+        >
+          <ConfirmProvider defaultOptions={confirmationDialogOptions}>
+            <Refine>{children}</Refine>
+          </ConfirmProvider>
+        </DataFramework>
+      </QueryParamProvider>
     </>
   );
 };

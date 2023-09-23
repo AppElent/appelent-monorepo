@@ -30,6 +30,10 @@ export const SatisfactoryGamesGeneral = (props) => {
   const { game, formik, handleDeleteGame, translate } = props;
   const [secondary, setSecondary] = useState(false);
 
+  const handleDownloadGame = () => {};
+
+  const handleUploadGame = () => {};
+
   return (
     <FormikProvider value={formik}>
       <Stack spacing={4}>
@@ -187,6 +191,43 @@ export const SatisfactoryGamesGeneral = (props) => {
               </div>
             )}
           />
+        </CardDefault>
+        <CardDefault
+          title={translate(
+            tokens.satisfactory.pages.games.general.downloadGame
+          )}
+        >
+          <Grid xs={12} md={8}>
+            <Stack alignItems="flex-start" spacing={1}>
+              <Typography variant="subtitle1">
+                {translate(
+                  tokens.satisfactory.pages.games.general.downloadGameHelperText
+                )}
+              </Typography>
+              <Stack direction="row" spacing={3}>
+                <Button
+                  //color="info"
+                  disabled={!(game.owner === getAuth().currentUser.uid)}
+                  onClick={handleDownloadGame}
+                  variant="contained"
+                >
+                  {translate(
+                    tokens.satisfactory.pages.games.general.downloadGame
+                  )}
+                </Button>
+                <Button
+                  //color="info"
+                  disabled={!(game.owner === getAuth().currentUser.uid)}
+                  onClick={handleUploadGame}
+                  variant="outlined"
+                >
+                  {translate(
+                    tokens.satisfactory.pages.games.general.uploadGame
+                  )}
+                </Button>
+              </Stack>
+            </Stack>
+          </Grid>
         </CardDefault>
         <CardDefault
           title={translate(tokens.satisfactory.pages.games.general.deleteGame)}

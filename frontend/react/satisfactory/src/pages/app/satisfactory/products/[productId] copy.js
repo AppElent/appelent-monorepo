@@ -1,0 +1,182 @@
+import Head from "next/head";
+import {
+  Autocomplete,
+  Box,
+  Container,
+  TextField,
+  Typography,
+} from "@mui/material";
+import { usePageView } from "hooks/use-page-view";
+import { useSettings } from "hooks/use-settings";
+import { Layout as DashboardLayout } from "layouts/dashboard";
+import { siteSettings } from "config";
+import { useRouter } from "next/router";
+import { useMemo, useEffect } from "react";
+import {
+  getSatisfactoryDataArray,
+  getSatisfactoryItem,
+  satisfactoryVersions,
+  SatisfactoryCurrentVersion,
+  getSatisfactoryData,
+} from "libs/satisfactory";
+import { Stack } from "@mui/system";
+import { SatisfactoryProductDetail } from "sections/app/satisfactory/product/satisfactory-product-detail";
+import { paths } from "paths";
+import _ from "lodash";
+import { SatisfactoryProductRecipeTable } from "sections/app/satisfactory/product/satisfactory-product-recipe-table";
+import { useTranslate } from "@pankod/refine-core";
+import { tokens } from "locales/tokens";
+
+const Page = () => {
+  const settings = useSettings();
+  usePageView();
+  const router = useRouter();
+  const translate = useTranslate();
+  let { productId, version } = router.query;
+
+  const version_correct =
+    satisfactoryVersions.find((vers) => vers.key === version) || !version
+      ? true
+      : false;
+
+  const machineTypes = useMemo(() => {
+    if (version_correct) {
+      return getSatisfactoryData("buildables", version);
+    }
+  }, [version_correct, version]);
+
+  const products =
+    useMemo(() => {
+      if (version_correct) {
+        let productsArray = getSatisfactoryDataArray("items", version);
+        return _.sortBy(productsArray, "name");
+      }
+    }, [version_correct, version]) || [];
+
+  productId = productId === "dummy" ? products[0].className : productId;
+
+  useEffect(() => {
+    if (!version_correct) {
+      router.replace(
+        {
+          query: { ...router.query, version: SatisfactoryCurrentVersion },
+        },
+        undefined,
+        { shallow: true }
+      );
+    }
+  }, [version_correct]);
+
+  const product =
+    useMemo(() => {
+      if (version_correct) {
+        return getSatisfactoryItem(productId, version);
+      }
+    }, [productId, version_correct]) || {};
+
+  if (!version_correct) return <></>;
+
+  const isEquipment = (reverse) => (recipe, products) => {
+    let _isEquipment = false;
+    recipe.products.every((product) => {
+      const item = products[product.itemClass];
+      if (item.isEquipment) {
+        _isEquipment = true;
+        return false;
+      }
+      return true;
+    });
+    if (reverse) return !_isEquipment;
+    return _isEquipment;
+  };
+
+  return (
+    <>
+      <Head>
+        <title>
+          {translate(tokens.satisfactory.pages.products.title)} |{" "}
+          {siteSettings.title}
+        </title>
+      </Head>
+      <Box
+        component="main"
+        sx={{
+          flexGrow: 1,
+          py: 8,
+        }}
+      >
+        <Container maxWidth={settings.stretch ? false : "xl"}>
+          <Stack spacing={3} sx={{ mb: 3 }}>
+            <Stack
+              alignItems="center"
+              direction="row"
+              justifyContent="space-between"
+              spacing={3}
+            >
+              <Typography variant="h4">{product.name}</Typography>
+              <Autocomplete
+                getOptionLabel={(option) => option.name}
+                options={products}
+                renderInput={(params) => (
+                  <TextField
+                    {...params}
+                    fullWidth
+                    label={translate(tokens.satisfactory.pages.products.title)}
+                    name="product"
+                  />
+                )}
+                onChange={(e, value) => {
+                  if (value) {
+                    router.push(
+                      paths.app.satisfactory.products.detail + value?.className
+                    );
+                  }
+                }}
+                // onInputChange={(event, newInputValue) => {
+                //   setInputValue(newInputValue);
+                // }}
+                sx={{ width: 300 }}
+                value={products.find(
+                  (oneProduct) => oneProduct.className === product.className
+                )}
+              />
+            </Stack>
+            <Stack spacing={3}>
+              <SatisfactoryProductDetail
+                product={product}
+                translate={translate}
+              />
+              <SatisfactoryProductRecipeTable
+                title="Recipes"
+                recipes={product.recipes_by}
+                machineTypes={machineTypes}
+                products={getSatisfactoryData("items", version)}
+                translate={translate}
+              />
+              <SatisfactoryProductRecipeTable
+                title="Used for"
+                recipes={product.recipes_for}
+                products={getSatisfactoryData("items", version)}
+                machineTypes={machineTypes}
+                conditionFunction={isEquipment(true)}
+                translate={translate}
+              />
+              <SatisfactoryProductRecipeTable
+                title="Equipment"
+                recipes={product.recipes_for}
+                products={getSatisfactoryData("items", version)}
+                machineTypes={machineTypes}
+                conditionFunction={isEquipment(false)}
+                translate={translate}
+              />
+            </Stack>
+          </Stack>
+        </Container>
+      </Box>
+    </>
+  );
+};
+
+Page.getLayout = (page) => <DashboardLayout>{page}</DashboardLayout>;
+
+export default Page;

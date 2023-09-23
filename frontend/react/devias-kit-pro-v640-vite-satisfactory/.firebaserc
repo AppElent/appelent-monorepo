@@ -1,0 +1,18 @@
+{
+  "projects": {
+    "default": "appelent-satisfactory"
+  },
+  "targets": {
+    "appelent-satisfactory": {
+      "hosting": {
+        "stg": [
+          "appelent-satisfactory-stg"
+        ],
+        "prd": [
+          "appelent-satisfactory"
+        ]
+      }
+    }
+  },
+  "etags": {}
+}

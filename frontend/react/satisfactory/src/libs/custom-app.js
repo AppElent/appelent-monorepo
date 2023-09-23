@@ -9,9 +9,11 @@ import { useEffect, useMemo } from "react";
 import { ActionType } from "./appelent-framework/caching";
 import dataProvider from "@pankod/refine-simple-rest";
 import { MuiInferencer } from "@pankod/refine-inferencer/mui";
+import { logger } from "libs/appelent-framework/logging";
 
 const CustomApp = ({ queryClient, children }) => {
   const auth = getAuth();
+  logger.log("Environment variables", process.env);
 
   const website = useMemo(() => {
     if (typeof window !== "undefined") {

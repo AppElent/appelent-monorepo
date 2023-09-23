@@ -219,6 +219,7 @@ export const tokens = {
         "tabs": {
           "general": "satisfactory:pages.games.tabs.general",
           "factories": "satisfactory:pages.games.tabs.factories",
+          "power": "satisfactory:pages.games.tabs.power",
           "trainstations": "satisfactory:pages.games.tabs.trainstations",
           "notepad": "satisfactory:pages.games.tabs.notepad"
         },
@@ -232,7 +233,10 @@ export const tokens = {
           "addPlayer": "satisfactory:pages.games.general.addPlayer",
           "deleteGame": "satisfactory:pages.games.general.deleteGame",
           "deleteGameConfirmation": "satisfactory:pages.games.general.deleteGameConfirmation",
-          "deleteGameWarning": "satisfactory:pages.games.general.deleteGameWarning"
+          "deleteGameWarning": "satisfactory:pages.games.general.deleteGameWarning",
+          "downloadGame": "satisfactory:pages.games.general.downloadGame",
+          "uploadGame": "satisfactory:pages.games.general.uploadGame",
+          "downloadGameHelperText": "satisfactory:pages.games.general.downloadGameHelperText"
         },
         "factories": {
           "addFirst": "satisfactory:pages.games.factories.addFirst",
@@ -244,7 +248,9 @@ export const tokens = {
           "product": "satisfactory:pages.games.factories.product",
           "amount": "satisfactory:pages.games.factories.amount",
           "recipe": "satisfactory:pages.games.factories.recipe",
-          "recipeHelperText": "satisfactory:pages.games.factories.recipeHelperText"
+          "recipeHelperText": "satisfactory:pages.games.factories.recipeHelperText",
+          "noInputsOutputsStarter": "satisfactory:pages.games.factories.noInputsOutputsStarter",
+          "noInputsOutputs": "satisfactory:pages.games.factories.noInputsOutputs"
         },
         "scribble": {
           "helperText": "satisfactory:pages.games.scribble.helperText"

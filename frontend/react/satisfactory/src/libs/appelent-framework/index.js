@@ -26,11 +26,24 @@ import useLocalStorage from "./hooks/use-local-storage";
 import axios from "axios";
 import _ from "lodash";
 
+import { logger, Logger, setLogger } from "./logging";
+
 export const GlobalDataContext = createContext();
 
-export const useAppelentFramework = () => useContext(GlobalDataContext);
+export const useAppelentFramework = (load = true) => {
+  return useContext(load ? GlobalDataContext : undefined);
+};
 
 const userDataLocalStorageKey = "user_data";
+
+// export const useLogger = (logLevel) => {
+//   const { logger } = useAppelentFramework(logLevel ? false : true);
+//   if (logLevel) {
+//     return new Logger({ level: logLevel });
+//   }
+
+//   return logger;
+// };
 
 export const AppelentFramework = ({
   confirmDefaultOptions,
@@ -40,7 +53,13 @@ export const AppelentFramework = ({
   refineProps,
   resources,
   children,
+  logLevel = process.env.NODE_ENV,
 }) => {
+  // Load logger
+  const APP_ENV = logLevel === "production" ? "production" : "development";
+  const LOG_LEVEL = APP_ENV === "production" ? "warn" : "log";
+  setLogger({ level: LOG_LEVEL });
+
   const usersettings = useMemo(() => {
     if (typeof window !== "undefined") {
       const item = window.localStorage.getItem(userDataLocalStorageKey);
@@ -55,7 +74,7 @@ export const AppelentFramework = ({
     ...initialData,
     resources: resources || [],
   });
-  console.log("Globaldata", data);
+  logger.log("Globaldata", data);
 
   let {
     routerProvider: givenRouterProvider,

@@ -4,9 +4,14 @@ import ShoppingBag03Icon from "../../icons/untitled-ui/duocolor/shopping-bag-03"
 import LineChartUp04Icon from "../../icons/untitled-ui/duocolor/line-chart-up-04";
 import { tokens } from "../../locales/tokens";
 import { paths } from "../../paths";
+import { logger } from "libs/appelent-framework/logging";
 
 export const getSections = (t, sections, refineMenuItems, permissionData) => {
-  console.log(sections);
+  logger.log("Setting navigation settings", {
+    sections,
+    refineMenuItems,
+    permissionData,
+  });
   let returnArray = [
     {
       items: [
@@ -136,8 +141,6 @@ export const getSections = (t, sections, refineMenuItems, permissionData) => {
       returnArray.push(refineMenuObject);
     }
   }
-
-  console.log(returnArray);
 
   return returnArray;
 };

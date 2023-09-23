@@ -5,8 +5,9 @@ import productionRecipes_v700 from "data/satisfactory/v700/productionRecipes.jso
 import resources_v700 from "data/satisfactory/v700/resources.json";
 import schematics_v700 from "data/satisfactory/v700/schematics.json";
 import tierList_v700 from "data/satisfactory/v700/tierList.json";
-import { db } from "./firebase";
-import { addDoc, setDoc, collection, deleteDoc, doc } from "firebase/firestore";
+// import { db } from "./firebase";
+// import { addDoc, setDoc, collection, deleteDoc, doc } from "firebase/firestore";
+import _ from "lodash";
 
 const satisfactory_data = {
   v700: {
@@ -165,21 +166,21 @@ export const getSatisfactoryBuildableRecipeByItem = (
   return returnObject;
 };
 
-export const createSatisfactoryGame = async (path, payload) => {
-  const collectionRef = collection(db, path);
-  const result = await addDoc(collectionRef, payload || { name: "<new game>" });
-  return result;
-};
+// export const createSatisfactoryGame = async (path, payload) => {
+//   const collectionRef = collection(db, path);
+//   const result = await addDoc(collectionRef, payload || { name: "<new game>" });
+//   return result;
+// };
 
-export const saveSatisfactoryGame = async (path, id, payload) => {
-  const collectionRef = collection(db, path);
-  const result = await setDoc(doc(collectionRef, id), payload);
-  return result;
-};
+// export const saveSatisfactoryGame = async (path, id, payload) => {
+//   const collectionRef = collection(db, path);
+//   const result = await setDoc(doc(collectionRef, id), payload);
+//   return result;
+// };
 
-export const deleteSatisfactoryGame = async (path, id) => {
-  const deleted = await deleteDoc(doc(db, path, id));
-};
+// export const deleteSatisfactoryGame = async (path, id) => {
+//   const deleted = await deleteDoc(doc(db, path, id));
+// };
 
 export const addSatisfactoryPlayer = async () => {};
 
@@ -260,4 +261,170 @@ export const getSatisfactoryRecipeStatistics = (
     //setRecipeState({ recipeData, productUsage, inputsAndOutputs });
   });
   return { recipeData, productUsage, inputsAndOutputs };
+};
+
+export const getSatisfactoryEndProducts = (version) => {
+  let endProducts = [];
+  let endProductsAlternate = [];
+  let ingredientsArray = [];
+  let ingredientsArrayAlternate = [];
+  const recipes = getSatisfactoryData("recipes", version);
+  for (const [recipeKey, recipeValue] of Object.entries(recipes)) {
+    //console.log(recipeValue);
+
+    if (!recipeValue.isAlternate) {
+      recipeValue.products.forEach((product) => {
+        if (!endProducts.find((e) => e === product.itemClass)) {
+          endProducts.push(product.itemClass);
+        }
+      });
+      recipeValue.ingredients.forEach((ingredient) => {
+        //endProducts = endProducts.filter((n) => n !== ingredient.itemClass);
+        if (!ingredientsArray.find((e) => e === ingredient.itemClass)) {
+          ingredientsArray.push(ingredient.itemClass);
+        }
+      });
+    }
+    recipeValue.products.forEach((product) => {
+      if (!endProductsAlternate.find((e) => e === product.itemClass)) {
+        endProductsAlternate.push(product.itemClass);
+      }
+    });
+    recipeValue.ingredients.forEach((ingredient) => {
+      //endProducts = endProducts.filter((n) => n !== ingredient.itemClass);
+      if (!ingredientsArrayAlternate.find((e) => e === ingredient.itemClass)) {
+        ingredientsArrayAlternate.push(ingredient.itemClass);
+      }
+    });
+  }
+  _.remove(endProducts, (n) => ingredientsArray.find((i) => i === n));
+  _.remove(endProductsAlternate, (n) =>
+    ingredientsArrayAlternate.find((i) => i === n)
+  );
+
+  return { endProducts, endProductsAlternate };
+};
+
+export const getSatisfactoryBuildList = (itemClass, itemsMinute, version) => {
+  const items = getSatisfactoryData("items", version);
+  const recipes = getSatisfactoryDataArray("recipes", version);
+  const item = items[itemClass];
+  if (!item) return undefined;
+  const initialRecipe = recipes.find(
+    (recipe) =>
+      !recipe.isAlternate &&
+      recipe.products.find((prod) => prod.itemClass === itemClass)
+  );
+  const initialMachines = itemsMinute / (60 / initialRecipe.craftTime);
+  let allItems = {
+    [itemClass]: {
+      amount: itemsMinute,
+      machines: initialMachines,
+      recipe: initialRecipe.className,
+      machineType: initialRecipe.producedIn,
+    },
+  };
+
+  const calculateIngredients = (productClass, multiplier = 1) => {
+    const productionRecipe = recipes.find(
+      (recipe) =>
+        !recipe.isAlternate &&
+        recipe.products.find((prod) => prod.itemClass === productClass)
+    );
+
+    if (!productionRecipe) return;
+    const productionRecipeAmount = productionRecipe.products.find(
+      (prod) => prod.itemClass === productClass
+    );
+
+    // const machineItemsMin = 60 / productionRecipe.craftTime;
+
+    // allItems[productionRecipe.itemClass]?.machines =
+    //   (allItems[productionRecipe.itemClass]?.amount /
+    //     productionRecipeAmount.quantity) *
+    //   multiplier;
+
+    // console.log(
+    //   productionRecipe.name,
+    //   productionRecipe.craftTime,
+    //   productionRecipeAmount
+    // );
+
+    //const machineItemsMin = 60 / productionRecipe.craftTime;
+
+    //const factor = multiplier / producedItemsMin;
+    //console.log(productionRecipe, factor, producedItemsMin);
+    productionRecipe?.ingredients.forEach((prodRecipe) => {
+      if (!allItems[prodRecipe.itemClass])
+        allItems[prodRecipe.itemClass] = {
+          amount: 0,
+          //machines: 0,
+          //recipe: prodRecipe.itemClass,
+          //products: [],
+        };
+      //const productObject = items[prodRecipe.itemClass]
+      const ingredientRecipe = recipes.find(
+        (recipe) =>
+          !recipe.isAlternate &&
+          recipe.products.find(
+            (prod) => prod.itemClass === prodRecipe.itemClass
+          )
+      );
+      const ingredientRecipeAmount = ingredientRecipe?.products.find(
+        (prod) => prod.itemClass === prodRecipe.itemClass
+      );
+      const factor =
+        (prodRecipe.quantity * multiplier) / productionRecipeAmount.quantity;
+      const producedItemsMin =
+        (60 / ingredientRecipe?.craftTime) *
+        (ingredientRecipeAmount?.quantity || 1);
+
+      allItems[prodRecipe.itemClass].amount =
+        allItems[prodRecipe.itemClass].amount + factor;
+      if (ingredientRecipe) {
+        allItems[prodRecipe.itemClass].recipe = ingredientRecipe.className;
+        allItems[prodRecipe.itemClass].machineType =
+          ingredientRecipe.producedIn;
+        allItems[prodRecipe.itemClass].machines =
+          allItems[prodRecipe.itemClass].amount / producedItemsMin;
+      }
+
+      calculateIngredients(prodRecipe.itemClass, factor);
+    });
+  };
+
+  calculateIngredients(itemClass, itemsMinute);
+
+  // let isResource = false
+  // recipes.forEach(recipe => {
+
+  // })
+  return allItems;
+};
+
+export const getSatisfactoryBuildListArray = (productArray, version) => {
+  let returnObject = {};
+  productArray.forEach((product) => {
+    const result = getSatisfactoryBuildList(
+      product.itemClass,
+      product.quantity,
+      version
+    );
+    console.log(result);
+    for (const [key, value] of Object.entries(result)) {
+      if (returnObject[key]) {
+        returnObject[key] = {
+          ...returnObject[key],
+          amount: returnObject[key].amount + value.amount,
+          machines: (returnObject[key].machines || 0) + (value.machines || 0),
+          // recipe: returnObject[key].recipe,
+          // machineType: returnObject[key].machin
+        };
+      } else {
+        returnObject[key] = { ...value };
+      }
+    }
+    //returnObject = { ...returnObject, ...result };
+  });
+  return returnObject;
 };

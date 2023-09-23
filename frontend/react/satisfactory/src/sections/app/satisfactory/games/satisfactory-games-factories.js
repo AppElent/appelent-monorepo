@@ -22,6 +22,7 @@ import { useQueryParam } from "libs/appelent-framework/hooks/use-query-param";
 import { generateName } from "libs/random-name-generator";
 import { getSatisfactoryRecipeStatistics } from "libs/satisfactory";
 import { tokens } from "locales/tokens";
+import _ from "lodash";
 
 const newObject = {
   name: "",
@@ -223,79 +224,96 @@ export const SatisfactoryGamesFactories = (props) => {
           translate(tokens.satisfactory.pages.games.factories.outputs)
         }
       >
-        <Stack
-          alignItems="flex-start"
-          direction="row"
-          spacing={2}
-          divider={<Divider orientation="vertical" flexItem />}
-          // sx={{ verticalAlign: "top" }}
-        >
-          <Stack>
-            {translate(tokens.satisfactory.pages.games.factories.inputs)}
-            <Table sx={{ minWidth: 400 }}>
-              <TableHead>
-                <TableRow>
-                  <TableCell>
-                    {translate(
-                      tokens.satisfactory.pages.games.factories.product
+        {_.isEmpty(recipeState?.inputsAndOutputs?.inputs) &&
+        _.isEmpty(recipeState?.inputsAndOutputs?.outputs) ? (
+          formik.values.factories[selectedFactoryIndex]?.recipes?.length > 0 ? (
+            <>
+              {translate(
+                tokens.satisfactory.pages.games.factories.noInputsOutputs
+              )}
+            </>
+          ) : (
+            <>
+              {translate(
+                tokens.satisfactory.pages.games.factories.noInputsOutputsStarter
+              )}
+            </>
+          )
+        ) : (
+          <Stack
+            alignItems="flex-start"
+            direction="row"
+            spacing={2}
+            divider={<Divider orientation="vertical" flexItem />}
+            // sx={{ verticalAlign: "top" }}
+          >
+            <Stack>
+              {translate(tokens.satisfactory.pages.games.factories.inputs)}
+              <Table sx={{ minWidth: 400 }}>
+                <TableHead>
+                  <TableRow>
+                    <TableCell>
+                      {translate(
+                        tokens.satisfactory.pages.games.factories.product
+                      )}
+                    </TableCell>
+                    <TableCell>
+                      {translate(
+                        tokens.satisfactory.pages.games.factories.amount
+                      )}
+                    </TableCell>
+                  </TableRow>
+                </TableHead>
+                <TableBody>
+                  {recipeState?.inputsAndOutputs &&
+                    Object.entries(recipeState.inputsAndOutputs.inputs).map(
+                      ([key, value]) => {
+                        return (
+                          <TableRow key={key}>
+                            <TableCell>{products[key].name}</TableCell>
+                            <TableCell>{value}</TableCell>
+                          </TableRow>
+                        );
+                      }
                     )}
-                  </TableCell>
-                  <TableCell>
-                    {translate(
-                      tokens.satisfactory.pages.games.factories.amount
+                </TableBody>
+              </Table>
+            </Stack>
+            <Stack>
+              {" "}
+              {translate(tokens.satisfactory.pages.games.factories.outputs)}
+              <Table sx={{ minWidth: 400 }}>
+                <TableHead>
+                  <TableRow>
+                    <TableCell>
+                      {translate(
+                        tokens.satisfactory.pages.games.factories.product
+                      )}
+                    </TableCell>
+                    <TableCell>
+                      {translate(
+                        tokens.satisfactory.pages.games.factories.amount
+                      )}
+                    </TableCell>
+                  </TableRow>
+                </TableHead>
+                <TableBody>
+                  {recipeState?.inputsAndOutputs &&
+                    Object.entries(recipeState.inputsAndOutputs.outputs).map(
+                      ([key, value]) => {
+                        return (
+                          <TableRow key={key}>
+                            <TableCell>{products[key].name}</TableCell>
+                            <TableCell>{value}</TableCell>
+                          </TableRow>
+                        );
+                      }
                     )}
-                  </TableCell>
-                </TableRow>
-              </TableHead>
-              <TableBody>
-                {recipeState?.inputsAndOutputs &&
-                  Object.entries(recipeState.inputsAndOutputs.inputs).map(
-                    ([key, value]) => {
-                      return (
-                        <TableRow key={key}>
-                          <TableCell>{products[key].name}</TableCell>
-                          <TableCell>{value}</TableCell>
-                        </TableRow>
-                      );
-                    }
-                  )}
-              </TableBody>
-            </Table>
+                </TableBody>
+              </Table>
+            </Stack>
           </Stack>
-          <Stack>
-            {" "}
-            {translate(tokens.satisfactory.pages.games.factories.outputs)}
-            <Table sx={{ minWidth: 400 }}>
-              <TableHead>
-                <TableRow>
-                  <TableCell>
-                    {translate(
-                      tokens.satisfactory.pages.games.factories.product
-                    )}
-                  </TableCell>
-                  <TableCell>
-                    {translate(
-                      tokens.satisfactory.pages.games.factories.amount
-                    )}
-                  </TableCell>
-                </TableRow>
-              </TableHead>
-              <TableBody>
-                {recipeState?.inputsAndOutputs &&
-                  Object.entries(recipeState.inputsAndOutputs.outputs).map(
-                    ([key, value]) => {
-                      return (
-                        <TableRow key={key}>
-                          <TableCell>{products[key].name}</TableCell>
-                          <TableCell>{value}</TableCell>
-                        </TableRow>
-                      );
-                    }
-                  )}
-              </TableBody>
-            </Table>
-          </Stack>
-        </Stack>
+        )}
       </CardDefault>
       <SatisfactoryGamesFactoryRecipes
         game={game}
