@@ -11,8 +11,6 @@ import {
 } from '@mui/material';
 import { usePageView } from 'src/hooks/use-page-view';
 import { useSettings } from 'src/hooks/use-settings';
-import { Layout as DashboardLayout } from 'src/layouts/dashboard';
-import { siteSettings } from 'src/config';
 import { useRouter } from 'src/hooks/use-router';
 import React, { useMemo, useEffect, useCallback } from 'react';
 import {
@@ -30,20 +28,18 @@ import { useData } from 'src/custom/libs/data-framework';
 import { SatisfactoryGamesGeneral } from 'src/sections/app/satisfactory/games/satisfactory-games-general';
 import { getAuth } from 'firebase/auth';
 import { useFormik } from 'formik';
-import useLocalStorage from 'src/custom/hooks/use-local-storage';
 import { useConfirm } from 'src/custom/libs/confirmation';
 import { toast } from 'react-hot-toast';
 import { SatisfactoryGamesScribble } from 'src/sections/app/satisfactory/games/satisfactory-games-scribble';
 import { SatisfactoryGamesFactories } from 'src/sections/app/satisfactory/games/satisfactory-games-factories';
-import { StringParam, useQueryParam, withDefault } from 'use-query-params';
 import { generateName } from 'src/custom/libs/random-name-generator';
 import { useKey } from 'src/custom/hooks/use-key';
-import { SplashScreen } from 'src/components/splash-screen';
 import { useTranslate } from '@refinedev/core';
 import { tokens } from 'src/locales/tokens';
 import { Seo } from 'src/components/seo';
 import useQueryOrLocalStorage from 'src/custom/hooks/use-query-or-localstorage';
 import { useMounted } from 'src/hooks/use-mounted';
+import { useLocation } from 'react-router';
 
 const Page = () => {
   const isMounted = useMounted();
@@ -69,6 +65,8 @@ const Page = () => {
   // const QueryFilter = withDefault(StringParam, selectedGameId);
   // const [gameId, setGameId] = useQueryParam('game', QueryFilter);
 
+  const location = useLocation();
+
   // Set selected game
   const selectedGame = useMemo(() => {
     if (gamesData.data) {
@@ -80,8 +78,6 @@ const Page = () => {
     }
     return undefined;
   }, [gamesData.data, selectedGameId]);
-
-  console.log(999, selectedGameId, selectedGame, gamesData);
 
   // useEffect(() => {
   //   formik.setValues(selectedGame);
@@ -116,7 +112,6 @@ const Page = () => {
         let endLinebreaks = rest?.scribble?.endsWith('<p><br></p>');
         while (endLinebreaks) {
           rest.scribble = rest.scribble.substring(0, rest.scribble.length - 11);
-          console.log(rest.scribble);
           endLinebreaks = rest.scribble.endsWith('<p><br></p>');
         }
 
@@ -137,6 +132,21 @@ const Page = () => {
       }
     },
   });
+
+  useEffect(() => {
+    window.addEventListener('beforeunload', alertUser);
+    window.addEventListener('popstate', alertUser);
+    return () => {
+      window.removeEventListener('beforeunload', alertUser);
+      window.removeEventListener('popstate', alertUser);
+    };
+  }, [formik.dirty]);
+  const alertUser = (e) => {
+    if (formik.dirty) {
+      e.preventDefault();
+      e.returnValue = '';
+    }
+  };
 
   useKey('ctrls', () => formik.handleSubmit());
 
@@ -236,7 +246,6 @@ const Page = () => {
   return (
     <>
       <Seo title={translate(tokens.satisfactory.pages.games.title)} />
-
       <Box
         component="main"
         sx={{
@@ -330,7 +339,7 @@ const Page = () => {
                   </Tabs>
                   <Button
                     //color="inherit"
-                    //disabled={!formik.dirty}
+                    disabled={!formik.dirty}
                     size="small"
                     onClick={formik.handleSubmit}
                     variant="contained"

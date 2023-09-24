@@ -22,11 +22,10 @@ import { usePageView } from 'src/hooks/use-page-view';
 import { useRouter } from 'src/hooks/use-router';
 import { useSearchParams } from 'src/hooks/use-search-params';
 import { paths } from 'src/paths';
-import { AuthIssuer } from 'src/sections/auth/auth-issuer';
 
 const initialValues = {
-  email: 'demo@devias.io',
-  password: 'Password123!',
+  email: 'demo@demo.com',
+  password: 'demo123',
   submit: null,
 };
 
@@ -223,7 +222,7 @@ const Page = () => {
         >
           <Alert severity="error">
             <div>
-              You can use <b>demo@devias.io</b> and password <b>Password123!</b>
+              You can use <b>demo@demo.com</b> and password <b>demo123</b>
             </div>
           </Alert>
           {/* <AuthIssuer issuer={issuer} /> */}

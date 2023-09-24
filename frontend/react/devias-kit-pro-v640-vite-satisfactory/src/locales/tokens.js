@@ -262,6 +262,12 @@ export const tokens = {
         requirements: 'satisfactory:pages.products.requirements',
         fullscreen: 'satisfactory:pages.products.fullscreen',
       },
+      recipes: {
+        title: 'satisfactory:pages.recipes.title',
+        info: 'satisfactory:pages.recipes.info',
+        machine: 'satisfactory:pages.recipes.machine',
+        fullscreen: 'satisfactory:pages.recipes.fullscreen',
+      },
     },
   },
 };

@@ -1,5 +1,3 @@
-import { useEffect, useState } from 'react';
-import _ from 'lodash';
 
 import { useDataFramwork } from '../index';
 

@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import { Button, Stack } from '@mui/material';
+import { Stack } from '@mui/material';
 
 import { QuillEditor } from 'src/components/quill-editor';
 import { tokens } from 'src/locales/tokens';

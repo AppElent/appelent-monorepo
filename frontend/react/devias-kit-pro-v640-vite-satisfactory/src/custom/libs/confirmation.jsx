@@ -5,7 +5,7 @@ import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
-import React, { useState, useCallback, Fragment, createContext, useContext } from 'react';
+import { useState, useCallback, createContext, useContext } from 'react';
 
 const DEFAULT_OPTIONS = {
   title: 'Are you sure?',

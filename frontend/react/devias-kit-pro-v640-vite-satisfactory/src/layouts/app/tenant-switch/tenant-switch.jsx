@@ -10,10 +10,15 @@ import { usePopover } from 'src/hooks/use-popover';
 
 import { TenantPopover } from './tenant-popover';
 
-const tenants = ['Devias', 'Acme Corp'];
+const tenants = ['Test', 'Live'];
 
 export const TenantSwitch = (props) => {
   const popover = usePopover();
+
+  const handleTenantSwitch = (tenant) => {
+    console.log(tenant);
+    popover.handleClose();
+  };
 
   return (
     <>
@@ -28,13 +33,13 @@ export const TenantSwitch = (props) => {
             color="inherit"
             variant="h6"
           >
-            Devias
+            AppElent
           </Typography>
           <Typography
             color="neutral.400"
             variant="body2"
           >
-            Production
+            Live
           </Typography>
         </Box>
         <IconButton
@@ -48,7 +53,7 @@ export const TenantSwitch = (props) => {
       </Stack>
       <TenantPopover
         anchorEl={popover.anchorRef.current}
-        onChange={popover.handleClose}
+        onChange={handleTenantSwitch}
         onClose={popover.handleClose}
         open={popover.open}
         tenants={tenants}

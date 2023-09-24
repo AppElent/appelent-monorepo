@@ -7,6 +7,8 @@ import schematics_v700 from './data/v700/schematics.json';
 import tierList_v700 from './data/v700/tierList.json';
 import _ from 'lodash';
 
+export { recipeChart } from './charts';
+
 const satisfactory_data = {
   v700: {
     items: items_v700,
@@ -17,7 +19,7 @@ const satisfactory_data = {
     schematics: schematics_v700,
     tierList: tierList_v700,
   },
-  v600: {
+  v800: {
     items: items_v700,
     buildables: buildables_v700,
     buildableRecipes: buildableRecipes_v700,
@@ -29,6 +31,10 @@ const satisfactory_data = {
 };
 
 export const satisfactoryVersions = [
+  {
+    label: 'Update 8',
+    key: 'v800',
+  },
   {
     label: 'Update 7',
     key: 'v700',

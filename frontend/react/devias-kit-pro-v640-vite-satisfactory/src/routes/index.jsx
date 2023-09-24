@@ -18,6 +18,9 @@ const ContactPage = lazy(() => import('src/pages/contact'));
 const CheckoutPage = lazy(() => import('src/pages/checkout'));
 const PricingPage = lazy(() => import('src/pages/pricing'));
 
+const TermsPage = lazy(() => import('src/custom/pages/terms'));
+const PrivacyPage = lazy(() => import('src/custom/pages/privacy'));
+
 export const routes = [
   {
     element: (
@@ -41,6 +44,14 @@ export const routes = [
   ...authDemoRoutes,
   ...dashboardRoutes,
   ...appRoutes,
+  {
+    path: 'terms',
+    element: <TermsPage />,
+  },
+  {
+    path: 'privacy',
+    element: <PrivacyPage />,
+  },
   {
     path: 'checkout',
     element: <CheckoutPage />,

@@ -1,6 +1,5 @@
-import _ from 'lodash';
 
-import { useDataFramwork, logger } from '../index';
+import { useDataFramwork } from '../index';
 
 export const useResource = (key) => {
   const globalData = useDataFramwork();

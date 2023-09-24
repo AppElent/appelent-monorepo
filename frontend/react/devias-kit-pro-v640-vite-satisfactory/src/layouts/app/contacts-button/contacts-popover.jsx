@@ -32,63 +32,69 @@ export const ContactsPopover = (props) => {
       <Box sx={{ p: 2 }}>
         <Typography variant="h6">Contacts</Typography>
       </Box>
-      <Box sx={{ p: 2 }}>
-        <List disablePadding>
-          {contacts.map((contact) => {
-            const showOnline = contact.isActive;
-            const lastActivity =
-              !contact.isActive && contact.lastActivity
-                ? formatDistanceStrict(contact.lastActivity, new Date(), {
-                    addSuffix: true,
-                    locale: customLocale,
-                  })
-                : undefined;
+      {contacts.length === 0 ? (
+        <Box sx={{ p: 2 }}>
+          <Typography variant="subtitle2">No contacts to show</Typography>
+        </Box>
+      ) : (
+        <Box sx={{ p: 2 }}>
+          <List disablePadding>
+            {contacts.map((contact) => {
+              const showOnline = contact.isActive;
+              const lastActivity =
+                !contact.isActive && contact.lastActivity
+                  ? formatDistanceStrict(contact.lastActivity, new Date(), {
+                      addSuffix: true,
+                      locale: customLocale,
+                    })
+                  : undefined;
 
-            return (
-              <ListItem
-                disableGutters
-                key={contact.id}
-              >
-                <ListItemAvatar>
-                  <Avatar
-                    src={contact.avatar}
-                    sx={{ cursor: 'pointer' }}
-                  />
-                </ListItemAvatar>
-                <ListItemText
-                  disableTypography
-                  primary={
-                    <Link
-                      color="text.primary"
-                      noWrap
+              return (
+                <ListItem
+                  disableGutters
+                  key={contact.id}
+                >
+                  <ListItemAvatar>
+                    <Avatar
+                      src={contact.avatar}
                       sx={{ cursor: 'pointer' }}
-                      underline="none"
-                      variant="subtitle2"
-                    >
-                      {contact.name}
-                    </Link>
-                  }
-                />
-                {showOnline && (
-                  <Presence
-                    size="small"
-                    status="online"
+                    />
+                  </ListItemAvatar>
+                  <ListItemText
+                    disableTypography
+                    primary={
+                      <Link
+                        color="text.primary"
+                        noWrap
+                        sx={{ cursor: 'pointer' }}
+                        underline="none"
+                        variant="subtitle2"
+                      >
+                        {contact.name}
+                      </Link>
+                    }
                   />
-                )}
-                {lastActivity && (
-                  <Typography
-                    color="text.secondary"
-                    noWrap
-                    variant="caption"
-                  >
-                    {lastActivity}
-                  </Typography>
-                )}
-              </ListItem>
-            );
-          })}
-        </List>
-      </Box>
+                  {showOnline && (
+                    <Presence
+                      size="small"
+                      status="online"
+                    />
+                  )}
+                  {lastActivity && (
+                    <Typography
+                      color="text.secondary"
+                      noWrap
+                      variant="caption"
+                    >
+                      {lastActivity}
+                    </Typography>
+                  )}
+                </ListItem>
+              );
+            })}
+          </List>
+        </Box>
+      )}
     </Popover>
   );
 };

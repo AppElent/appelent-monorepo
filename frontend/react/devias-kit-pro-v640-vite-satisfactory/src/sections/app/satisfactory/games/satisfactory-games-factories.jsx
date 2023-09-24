@@ -40,7 +40,7 @@ const FACTORY_TEMPLATE = {
 export const SatisfactoryGamesFactories = (props) => {
   const { formik, game, recipes, products, translate } = props;
   const router = useRouter();
-  const { value: factoryId, setQueryParam: setFactoryId } = useQueryParam('factory');
+  const [factoryId, setFactoryId] = useQueryParam('factory');
   const [recipeState, setRecipeState] = useState({});
 
   const selectedFactory = useMemo(() => {
@@ -90,6 +90,15 @@ export const SatisfactoryGamesFactories = (props) => {
     currentFactories.push(newFactory);
     formik.setFieldValue('factories', currentFactories);
     setFactoryId(id);
+  };
+
+  const deleteFactory = (id) => {
+    /* eslint-disable-next-line no-unsafe-optional-chaining */
+    const currentFactories = formik.values?.factories ? [...formik.values?.factories] : [];
+    formik.setFieldValue(
+      'factories',
+      currentFactories.filter((item) => item.id !== id)
+    );
   };
 
   if (!selectedFactory) {
@@ -217,16 +226,16 @@ export const SatisfactoryGamesFactories = (props) => {
           />{' '}
           {translate(tokens.satisfactory.pages.games.factories.checked)}
         </Stack>
-        {/* <Button
-          //color="inherit"
-          disabled={!formik.dirty}
+        <Button
+          color="error"
           size="small"
-          onClick={formik.handleSubmit}
+          onClick={() => {
+            deleteFactory(selectedFactory.id);
+          }}
           variant="contained"
         >
-          Save
-          
-        </Button> */}
+          Delete
+        </Button>
       </CardDefault>
 
       <CardDefault

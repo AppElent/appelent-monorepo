@@ -15,6 +15,8 @@ import React from 'react';
 
 import { SeverityPill } from 'src/components/severity-pill';
 import { tokens } from 'src/locales/tokens';
+import { recipeChart } from 'src/custom/libs/satisfactory';
+import Mermaid from 'src/custom/libs/mermaid';
 
 export const SatisfactoryProductRecipeTable = ({
   recipes,
@@ -32,6 +34,7 @@ export const SatisfactoryProductRecipeTable = ({
     { label: translate(tokens.satisfactory.pages.products.machine) },
     { label: translate(tokens.satisfactory.pages.products.output) },
     { label: translate(tokens.satisfactory.pages.products.requirements) },
+    { label: '' },
   ];
 
   //   return <Stack></Stack>;
@@ -86,6 +89,7 @@ export const SatisfactoryProductRecipeTable = ({
                   </Tooltip>
                 );
               };
+              const chartCode = recipeChart(recipe, products, machineTypes, { hideTitle: true });
 
               return (
                 <TableRow key={recipe.className}>
@@ -135,6 +139,9 @@ export const SatisfactoryProductRecipeTable = ({
                   <TableCell>
                     {recipe.schematic.name} (
                     {schematicTypes[recipe.schematic.type] || recipe.schematic.type})
+                  </TableCell>
+                  <TableCell>
+                    <Mermaid chart={chartCode} />
                   </TableCell>
                 </TableRow>
               );

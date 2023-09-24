@@ -9,7 +9,8 @@
     "prettier"
   ],
   "plugins": [
-    "react-refresh"
+    "react-refresh",
+    "unused-imports"
   ],
   "overrides": [
     {
@@ -66,6 +67,8 @@
     "jsx-a11y/alt-text": "off",
     "no-unused-vars": "off",
     //"react-refresh/only-export-components": "warn",
-    "react/prop-types": "warn"
+    "react/prop-types": "warn",
+    "unused-imports/no-unused-imports": "error",
+    "unused-imports/no-unused-vars": "warn"
   }
 }

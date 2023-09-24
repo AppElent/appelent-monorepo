@@ -24,6 +24,10 @@ const languageOptions = {
     icon: '/assets/flags/flag-es.svg',
     label: 'Spanish',
   },
+  nl: {
+    icon: '/assets/flags/flag-nl.webp',
+    label: 'Nederlands',
+  },
 };
 
 export const LanguagePopover = (props) => {

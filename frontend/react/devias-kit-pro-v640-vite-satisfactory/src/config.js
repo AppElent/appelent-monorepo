@@ -35,7 +35,7 @@ export const mapboxConfig = {
 export const version = '6.4.2';
 
 export const siteSettings = {
-  title: 'Site title',
+  title: 'Satisfactory',
   subtitle: 'Subtitle',
   //plan: "PRO",
   version: 'v1.0.0',

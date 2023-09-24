@@ -15,6 +15,8 @@ import {
   TextField,
   Typography,
   Unstable_Grid2 as Grid,
+  Paper,
+  Dialog,
 } from '@mui/material';
 import { FormikProvider, FieldArray } from 'formik';
 
@@ -23,19 +25,82 @@ import { satisfactoryVersions } from 'src/custom/libs/satisfactory';
 import { getAuth } from 'firebase/auth';
 import { tokens } from 'src/locales/tokens';
 import { createGuid } from 'src/custom/libs/create-guid';
+import useModal from 'src/custom/hooks/use-modal';
+import { Box } from '@mui/system';
 
 const addPlayer = () => {};
+
+const ModalContent = () => {
+  <Box
+    sx={{
+      backgroundColor: (theme) => (theme.palette.mode === 'dark' ? 'neutral.800' : 'neutral.100'),
+      p: 3,
+    }}
+  >
+    <Paper
+      elevation={12}
+      sx={{
+        display: 'flex',
+        flexDirection: 'column',
+        margin: 3,
+        maxWidth: '100%',
+        minHeight: 500,
+        mx: 'auto',
+        outline: 'none',
+        width: 600,
+      }}
+    >
+      <Stack
+        alignItems="center"
+        direction="row"
+        spacing={1}
+        sx={{
+          px: 2,
+          py: 1,
+        }}
+      >
+        <Typography
+          sx={{ flexGrow: 1 }}
+          variant="h6"
+        >
+          New Message
+        </Typography>
+        <IconButton></IconButton>
+        <IconButton></IconButton>
+      </Stack>
+
+      <div>
+        <Button variant="contained">Send</Button>
+      </div>
+    </Paper>
+  </Box>;
+};
 
 export const SatisfactoryGamesGeneral = (props) => {
   const { game, formik, handleDeleteGame, translate } = props;
   const [secondary, setSecondary] = useState(false);
+  const { modalOpen, data: modalData, setData, setModalState } = useModal(false, formik.values);
 
-  const handleDownloadGame = () => {};
+  const handleDownloadGame = () => {
+    const { meta, ...rest } = formik.values;
+    setData(rest);
+    setModalState(true);
+  };
 
   const handleUploadGame = () => {};
 
   return (
     <FormikProvider value={formik}>
+      <Dialog
+        open={modalOpen}
+        onClose={() => setModalState(false)}
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description"
+      >
+        <div>
+          <pre>{JSON.stringify(modalData, null, 2)}</pre>
+        </div>
+      </Dialog>
       <Stack spacing={4}>
         <CardDefault title={translate(tokens.satisfactory.pages.games.general.generalinfo)}>
           <Stack

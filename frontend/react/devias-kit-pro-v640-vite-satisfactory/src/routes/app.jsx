@@ -4,11 +4,13 @@ import { Outlet } from 'react-router-dom';
 import { Layout as DashboardLayout } from 'src/layouts/app';
 
 const OverviewPage = lazy(() => import('src/pages/app/index'));
+const AccountPage = lazy(() => import('src/pages/app/account'));
 
 // Satisfactory
 const GamesPage = lazy(() => import('src/pages/app/satisfactory/games'));
 const ProductsPage = lazy(() => import('src/pages/app/satisfactory/products'));
 const ProductsDetailPage = lazy(() => import('src/pages/app/satisfactory/product-detail'));
+const Recipes = lazy(() => import('src/pages/app/satisfactory/recipes'));
 
 export const appRoutes = [
   {
@@ -24,6 +26,10 @@ export const appRoutes = [
       {
         index: true,
         element: <OverviewPage />,
+      },
+      {
+        path: 'account',
+        element: <AccountPage />,
       },
       {
         path: 'satisfactory',
@@ -48,6 +54,10 @@ export const appRoutes = [
                 element: <ProductsDetailPage />,
               },
             ],
+          },
+          {
+            path: 'recipes',
+            element: <Recipes />,
           },
         ],
       },

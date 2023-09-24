@@ -20,11 +20,11 @@ import { ItemListContainer } from 'src/components/app/list/item-list-container';
 import { ItemListSearch } from 'src/components/app/list/item-list-search';
 import { ItemListTableContainer } from 'src/components/app/list/item-list-table';
 import { ItemDetailsContainer } from 'src/components/app/list/item-drawer/item-details';
-import { ItemEditContainer } from 'src/components/app/list/item-drawer/item-edit';
 import { SeverityPill } from 'src/components/severity-pill';
 //import { useSearch, useItems } from "components/app/list/utils";
 
-import satisfactoryProducts from 'src/custom/libs/satisfactory/data/v700/items.json';
+import prodv700 from 'src/custom/libs/satisfactory/data/v700/items.json';
+import prodv800 from 'src/custom/libs/satisfactory/data/v800/items.json';
 import { paginate } from 'src/custom/libs/paginate';
 import { useRouter } from 'src/hooks/use-router';
 import {
@@ -37,15 +37,22 @@ import { SatisfactoryProductDetail } from 'src/sections/app/satisfactory/product
 import { useTranslate } from '@refinedev/core';
 import { tokens } from 'src/locales/tokens';
 import { Seo } from 'src/components/seo';
-import { useQueryParam } from 'use-query-params';
+import { StringParam, useQueryParam, withDefault } from 'use-query-params';
 
-let satisfactoryProductsArray = Object.keys(satisfactoryProducts).map((k) => ({
-  ...satisfactoryProducts[k],
-  className: k,
-}));
-satisfactoryProductsArray = satisfactoryProductsArray.sort(function (a, b) {
-  return a.name > b.name ? 1 : b.name > a.name ? -1 : 0;
-});
+const products = {
+  v600: [],
+  v700: prodv700,
+  v800: prodv800,
+};
+
+// let satisfactoryProducts = products[SatisfactoryCurrentVersion]
+// let satisfactoryProductsArray = Object.keys(satisfactoryProducts).map((k) => ({
+//   ...satisfactoryProducts[k],
+//   className: k,
+// }));
+// satisfactoryProductsArray = satisfactoryProductsArray.sort(function (a, b) {
+//   return a.name > b.name ? 1 : b.name > a.name ? -1 : 0;
+// });
 
 const statusMap = {
   complete: 'success',
@@ -72,7 +79,7 @@ const useSearch = () => {
   };
 };
 
-const useItems = (search) => {
+const useItems = (search, version) => {
   const isMounted = useMounted();
   const [state, setState] = useState({
     items: [],
@@ -81,20 +88,23 @@ const useItems = (search) => {
 
   const getItems = useCallback(async () => {
     try {
+      const satisfactoryProducts = products[version];
+      let satisfactoryProductsArray = Object.keys(satisfactoryProducts).map((k) => ({
+        ...satisfactoryProducts[k],
+        className: k,
+      }));
+      satisfactoryProductsArray = satisfactoryProductsArray.sort(function (a, b) {
+        return a.name > b.name ? 1 : b.name > a.name ? -1 : 0;
+      });
       //const response = satisfactoryProducts; // filter items here
       let response = satisfactoryProductsArray;
-
-      console.log(1, search.filters?.query, response);
 
       // search result
       if (search.filters?.query) {
         response = response.filter((obj) => {
-          //console.log(obj, JSON.stringify(obj), JSON.stringify(obj).includes);
           return JSON.stringify(obj).toLowerCase().includes(search.filters.query.toLowerCase());
         });
       }
-
-      console.log(2, response);
 
       const responsePaginated = paginate(response, search.rowsPerPage, search.page + 1);
 
@@ -107,14 +117,14 @@ const useItems = (search) => {
     } catch (err) {
       console.error(err);
     }
-  }, [search, isMounted]);
+  }, [search, version, isMounted]);
 
   useEffect(
     () => {
       getItems();
     },
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    [search]
+    [search, version]
   );
 
   return state;
@@ -159,10 +169,13 @@ const Page = () => {
   const router = useRouter();
   const [productQuery, setProductQuery] = useQueryParam('product');
   const { search, updateSearch } = useSearch();
-  const [version, setVersion] = useState(SatisfactoryCurrentVersion);
+  const [version, setVersion] = useQueryParam(
+    'version',
+    withDefault(StringParam, SatisfactoryCurrentVersion)
+  );
   const translate = useTranslate();
+  const { items, itemsCount } = useItems(search, version);
 
-  const { items, itemsCount } = useItems(search);
   const [drawer, setDrawer] = useState({
     isOpen: false,
     data: undefined,
@@ -172,8 +185,8 @@ const Page = () => {
       return undefined;
     }
     const item = items.find((item) => item.slug === drawer.data);
-    return getSatisfactoryItem(item.className);
-  }, [drawer]);
+    return getSatisfactoryItem(item.className, version);
+  }, [drawer, version]);
 
   const itemsPaginated = paginate(items, search.rowsPerPage, search.page + 1);
 
@@ -465,14 +478,16 @@ const Page = () => {
                 )}
               </ItemDetailsContainer>
             ) : (
-              <ItemEditContainer
+              <></>
+            )}
+            {/* <ItemEditContainer
                 onCancel={handleEditCancel}
                 onSave={formik.handleSubmit}
                 item={currentItem}
               >
                 Content edit
               </ItemEditContainer>
-            )}
+            )} */}
           </ItemDrawer>
         </Box>
       </Box>

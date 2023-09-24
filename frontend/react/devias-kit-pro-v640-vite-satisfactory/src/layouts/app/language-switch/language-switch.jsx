@@ -11,6 +11,7 @@ const languages = {
   en: '/assets/flags/flag-uk.svg',
   de: '/assets/flags/flag-de.svg',
   es: '/assets/flags/flag-es.svg',
+  nl: '/assets/flags/flag-nl.webp',
 };
 
 export const LanguageSwitch = () => {

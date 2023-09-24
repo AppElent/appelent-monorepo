@@ -62,6 +62,12 @@
             "output": "Output",
             "requirements": "Requirements",
             "fullscreen": "Open in fullscreen"
+        },
+        "recipes": {
+            "title": "Recipes",
+            "info": "Info",
+            "machine": "Machine",
+            "fullscreen": "Open in fullscreen"
         }
     }
 }

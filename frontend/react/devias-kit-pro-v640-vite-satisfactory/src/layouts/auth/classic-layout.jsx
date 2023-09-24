@@ -73,7 +73,7 @@ export const Layout = (props) => {
                   },
                 }}
               >
-                Devias Kit <span>PRO</span>
+                AppElent <span>PRO</span>
               </Box>
             </Stack>
           </Stack>

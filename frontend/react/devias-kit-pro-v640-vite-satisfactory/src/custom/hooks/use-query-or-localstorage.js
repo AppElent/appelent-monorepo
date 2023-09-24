@@ -6,10 +6,7 @@ const useQueryOrLocalStorage = (key, initialValue) => {
   const [getLS, setLS, deleteLS] = useLocalStorage(key, initialValue);
   const [query, setQuery] = useQueryParam(key);
 
-  console.log(query, getLS);
-
   useEffect(() => {
-    console.log(456, query, getLS);
     setQuery(getLS);
   }, [getLS]);
 

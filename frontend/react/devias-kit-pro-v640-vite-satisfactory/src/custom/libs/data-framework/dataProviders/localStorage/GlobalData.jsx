@@ -1,8 +1,7 @@
-import React, { useState, useEffect, useMemo } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import PropTypes from 'prop-types';
 import { useData } from '../../framework/useData';
 import { ActionType } from '../../framework/ActionType';
-import _ from 'lodash';
 
 function useLocalStorage(key, initialValue) {
   // Get from local storage then

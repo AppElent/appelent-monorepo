@@ -1,4 +1,3 @@
-import React from 'react';
 import GlobalData from './GlobalData';
 
 const useLocalStorageMount = (globalData) => {

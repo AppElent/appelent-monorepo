@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import { createContext, useContext, useEffect, useMemo, useReducer } from 'react';
+import { createContext, useContext, useReducer } from 'react';
 import { reducer } from './caching';
 import { useData } from './framework/useData';
 
@@ -8,8 +8,8 @@ export { useResource } from './framework/useResource';
 
 import useFirestoreMount from './dataProviders/firestore/useFirestoreMount';
 
-import _ from 'lodash';
 import useLocalStorageMount from './dataProviders/localStorage/useLocalStorageMount';
+import useStateMount from './dataProviders/state/useStateMount';
 
 export const GlobalDataContext = createContext();
 
@@ -59,11 +59,13 @@ const DataFrameworkChild = ({ children }) => {
   const state = useData();
   const firestoreComponents = useFirestoreMount(state);
   const localStorageComponents = useLocalStorageMount(state);
+  const stateComponents = useStateMount(state);
 
   return (
     <>
       {firestoreComponents}
       {localStorageComponents}
+      {stateComponents}
       {children}
     </>
   );

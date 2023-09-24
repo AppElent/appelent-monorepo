@@ -49,6 +49,8 @@ export const paths = {
       modern: '/auth-demo/verify-code/modern',
     },
   },
+  terms: '/terms',
+  privacy: '/privacy',
   app: {
     index: '/app',
     account: '/app/account',
@@ -64,6 +66,9 @@ export const paths = {
       },
       games: {
         index: '/app/satisfactory/games',
+      },
+      recipes: {
+        index: '/app/satisfactory/recipes',
       },
     },
   },

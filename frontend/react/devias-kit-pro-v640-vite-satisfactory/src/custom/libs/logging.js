@@ -2,6 +2,21 @@
 
 const NO_OP = (message, ...optionalParams) => {};
 
+export const LogLevelOptions = [
+  {
+    key: 'info',
+    label: 'Information',
+  },
+  {
+    key: 'warn',
+    label: 'Warning',
+  },
+  {
+    key: 'error',
+    label: 'Error',
+  },
+];
+
 export class Logger {
   log;
   warn;
@@ -17,6 +32,7 @@ export class Logger {
   }
 
   set = (level) => {
+    this.level = level;
     if (level === 'error') {
       this.warn = NO_OP;
       this.log = NO_OP;

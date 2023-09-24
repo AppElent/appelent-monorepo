@@ -1,9 +1,7 @@
 import { useCallback } from 'react';
 import PropTypes from 'prop-types';
 import toast from 'react-hot-toast';
-import CreditCard01Icon from '@untitled-ui/icons-react/build/esm/CreditCard01';
 import Settings04Icon from '@untitled-ui/icons-react/build/esm/Settings04';
-import User03Icon from '@untitled-ui/icons-react/build/esm/User03';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Divider from '@mui/material/Divider';
@@ -16,7 +14,6 @@ import Typography from '@mui/material/Typography';
 
 import { RouterLink } from 'src/components/router-link';
 import { useAuth } from 'src/hooks/use-auth';
-import { useMockedUser } from 'src/hooks/use-mocked-user';
 import { useRouter } from 'src/hooks/use-router';
 import { paths } from 'src/paths';
 import { Issuer } from 'src/utils/auth';
@@ -25,7 +22,8 @@ export const AccountPopover = (props) => {
   const { anchorEl, onClose, open, ...other } = props;
   const router = useRouter();
   const auth = useAuth();
-  const user = useMockedUser();
+  //console.log(123, auth);
+  const user = auth.user;
 
   const handleLogout = useCallback(async () => {
     try {
@@ -83,12 +81,12 @@ export const AccountPopover = (props) => {
           color="text.secondary"
           variant="body2"
         >
-          demo@devias.io
+          {user?.email}
         </Typography>
       </Box>
       <Divider />
       <Box sx={{ p: 1 }}>
-        <ListItemButton
+        {/* <ListItemButton
           component={RouterLink}
           href={paths.dashboard.social.profile}
           onClick={onClose}
@@ -104,10 +102,10 @@ export const AccountPopover = (props) => {
             </SvgIcon>
           </ListItemIcon>
           <ListItemText primary={<Typography variant="body1">Profile</Typography>} />
-        </ListItemButton>
+        </ListItemButton> */}
         <ListItemButton
           component={RouterLink}
-          href={paths.dashboard.account}
+          href={paths.app.account}
           onClick={onClose}
           sx={{
             borderRadius: 1,
@@ -122,7 +120,7 @@ export const AccountPopover = (props) => {
           </ListItemIcon>
           <ListItemText primary={<Typography variant="body1">Settings</Typography>} />
         </ListItemButton>
-        <ListItemButton
+        {/* <ListItemButton
           component={RouterLink}
           href={paths.dashboard.index}
           onClick={onClose}
@@ -138,7 +136,7 @@ export const AccountPopover = (props) => {
             </SvgIcon>
           </ListItemIcon>
           <ListItemText primary={<Typography variant="body1">Billing</Typography>} />
-        </ListItemButton>
+        </ListItemButton> */}
       </Box>
       <Divider sx={{ my: '0 !important' }} />
       <Box

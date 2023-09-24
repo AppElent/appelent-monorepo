@@ -22,7 +22,6 @@ import { usePageView } from 'src/hooks/use-page-view';
 import { useRouter } from 'src/hooks/use-router';
 import { useSearchParams } from 'src/hooks/use-search-params';
 import { paths } from 'src/paths';
-import { AuthIssuer } from 'src/sections/auth/auth-issuer';
 
 const initialValues = {
   email: '',
@@ -203,7 +202,7 @@ const Page = () => {
                   I have read the{' '}
                   <Link
                     component="a"
-                    href="#"
+                    href={paths.terms}
                   >
                     Terms and Conditions
                   </Link>
