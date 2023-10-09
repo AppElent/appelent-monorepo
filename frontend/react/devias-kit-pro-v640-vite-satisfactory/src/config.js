@@ -40,7 +40,8 @@ export const siteSettings = {
   //plan: "PRO",
   version: 'v1.0.0',
   copyright: 'AppElent',
-  url: 'https://url.appelent.com',
+  url: 'satisfactory.appelent.com',
+  stagingUrl: 'satisfactory-stg.appelent.com',
   loginRedirect: '/app',
   backend: 'https://api.appelent.com',
   localhost: {

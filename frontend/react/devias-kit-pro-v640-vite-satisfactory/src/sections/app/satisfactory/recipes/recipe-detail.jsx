@@ -1,11 +1,21 @@
 import PropTypes from 'prop-types';
-import { Card, CardContent, CardHeader, Stack, useMediaQuery } from '@mui/material';
+import { Card, CardContent, CardHeader, Stack } from '@mui/material';
 import { SeverityPill } from 'src/components/severity-pill';
 import { PropertyListTemplate } from 'src/components/app/property-list-template';
 import { tokens } from 'src/locales/tokens';
+import {
+  getSatisfactoryData,
+  getSatisfactoryDataArray,
+  recipeChart,
+} from 'src/custom/libs/satisfactory';
+import Mermaid from 'src/custom/libs/mermaid';
+import { useMemo } from 'react';
 
 export const SatisfactoryRecipeDetail = ({ recipe, translate }) => {
-  const lgUp = useMediaQuery((theme) => theme.breakpoints.up('lg'));
+  const machines = getSatisfactoryData('buildables');
+  const schematics = useMemo(() => {
+    return getSatisfactoryDataArray('schematics');
+  }, []);
   const getSeverityPill = (item) => {
     let status = 'error';
     let text = translate(tokens.common.words.no);
@@ -16,6 +26,8 @@ export const SatisfactoryRecipeDetail = ({ recipe, translate }) => {
     return <SeverityPill color={status}>{text}</SeverityPill>;
   };
 
+  console.log(schematics, recipe);
+
   const propertyItems = [
     {
       label: translate(tokens.common.fields.name),
@@ -23,17 +35,27 @@ export const SatisfactoryRecipeDetail = ({ recipe, translate }) => {
     },
     {
       label: translate(tokens.satisfactory.pages.recipes.machine),
-      value: recipe.producedIn,
+      value: machines[recipe.producedIn]?.name,
     },
     {
-      label: translate(tokens.satisfactory.pages.products.stackSize),
+      label: translate(tokens.satisfactory.pages.recipes.slug),
       value: recipe.slug,
     },
     {
-      label: 'Active',
-      value: getSeverityPill(true),
+      label: 'Alternate',
+      value: getSeverityPill(recipe.isAlternate),
+    },
+
+    {
+      label: 'Tier',
+      value:
+        schematics?.find((schematic) =>
+          schematic.unlocks?.recipes?.find((r) => r === recipe.className)
+        )?.techTier || '',
     },
   ];
+
+  const chart = recipeChart(recipe, getSatisfactoryData('items'), machines);
 
   return (
     <Stack>
@@ -43,9 +65,15 @@ export const SatisfactoryRecipeDetail = ({ recipe, translate }) => {
           {/* <Stack spacing={3} maxWidth={500}> */}
           <PropertyListTemplate items={propertyItems} />
           {/* </Stack> */}
-          {/* <Stack spacing={3} maxWidth={500}> */}
-
-          {/* </Stack> */}
+          <Stack
+            spacing={3}
+            sx={{
+              mt: 5,
+            }}
+            //maxWidth={500}
+          >
+            <Mermaid chart={chart} />
+          </Stack>
         </CardContent>
       </Card>
     </Stack>

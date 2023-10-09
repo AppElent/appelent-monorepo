@@ -5,13 +5,14 @@ import Drawer from '@mui/material/Drawer';
 import Stack from '@mui/material/Stack';
 import { useTheme } from '@mui/material/styles';
 
-import { Logo } from 'src/components/logo';
+import { Logo } from 'src/components/app/logo';
 import { RouterLink } from 'src/components/router-link';
 import { Scrollbar } from 'src/components/scrollbar';
 import { usePathname } from 'src/hooks/use-pathname';
 import { paths } from 'src/paths';
 import { TenantSwitch } from '../tenant-switch';
 import { SideNavSection } from './side-nav-section';
+import VersionSelector from 'src/components/app/satisfactory/version-selector';
 
 const SIDE_NAV_WIDTH = 280;
 
@@ -209,6 +210,7 @@ export const SideNav = (props) => {
               px: 2,
             }}
           >
+            <VersionSelector />
             {sections.map((section, index) => (
               <SideNavSection
                 items={section.items}

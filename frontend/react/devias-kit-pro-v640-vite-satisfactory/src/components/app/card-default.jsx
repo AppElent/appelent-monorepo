@@ -1,7 +1,15 @@
 import PropTypes from 'prop-types';
-import { Card, CardContent, Stack, Typography, Unstable_Grid2 as Grid } from '@mui/material';
+import {
+  Card,
+  CardContent,
+  Stack,
+  Typography,
+  Unstable_Grid2 as Grid,
+  Divider,
+} from '@mui/material';
 
 export const CardDefault = (props) => {
+  const { title, subtitle, style, gridLeft, gridRight, children } = props;
   return (
     <Stack
       spacing={4}
@@ -15,33 +23,24 @@ export const CardDefault = (props) => {
           >
             <Grid
               xs={12}
-              md={4}
+              md={3}
+              {...gridLeft}
             >
-              <Typography variant="h6">{props.title}</Typography>
+              <Typography variant="h6">{title}</Typography>
+              <br />
+              <Typography
+                sx={{ whiteSpace: 'pre-wrap' }}
+                variant="bodytext2"
+              >
+                {subtitle}
+              </Typography>
             </Grid>
             <Grid
               xs={12}
-              md={8}
+              md={9}
+              {...gridRight}
             >
-              <Stack spacing={3}>
-                {/* <Stack alignItems="center" direction="row" spacing={2}>
-                  <TextField
-                    label="Full Name"
-                    sx={{ flexGrow: 1 }}
-                    name="name"
-                    onChange={formikUsername.handleChange}
-                    value={formikUsername.values.name}
-                  />
-                  <Button
-                    color="inherit"
-                    size="small"
-                    onClick={formikUsername.handleSubmit}
-                  >
-                    Save
-                  </Button>
-                </Stack> */}
-                {props.children}
-              </Stack>
+              <Stack spacing={3}>{children}</Stack>
             </Grid>
           </Grid>
         </CardContent>
@@ -52,5 +51,9 @@ export const CardDefault = (props) => {
 
 CardDefault.propTypes = {
   children: PropTypes.any,
+  gridLeft: PropTypes.any,
+  gridRight: PropTypes.any,
+  style: PropTypes.any,
+  subtitle: PropTypes.string,
   title: PropTypes.string.isRequired,
 };

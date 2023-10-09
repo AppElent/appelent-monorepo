@@ -3,7 +3,7 @@ import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Stack from '@mui/material/Stack';
 
-import { Logo } from 'src/components/logo';
+import { Logo } from 'src/components/app/logo';
 import { LogoSamsung } from 'src/components/logos/logo-samsung';
 import { LogoVisma } from 'src/components/logos/logo-visma';
 import { LogoBolt } from 'src/components/logos/logo-bolt';

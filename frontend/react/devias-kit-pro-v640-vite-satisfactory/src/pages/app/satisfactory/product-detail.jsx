@@ -36,6 +36,10 @@ const Page = () => {
   const version_correct =
     satisfactoryVersions.find((vers) => vers.key === version) || !version ? true : false;
 
+  const recipeArray = useMemo(() => {
+    return getSatisfactoryDataArray('recipes', version);
+  }, [version]);
+
   const machineTypes = useMemo(() => {
     if (version_correct) {
       return getSatisfactoryData('buildables', version);
@@ -50,7 +54,7 @@ const Page = () => {
       }
     }, [version_correct, version]) || [];
 
-  productId = productId === 'dummy' ? products[0].className : productId;
+  productId = productId === 'dummy' || !productId ? products[0]?.className : productId;
 
   useEffect(() => {
     if (!version_correct) {
@@ -64,6 +68,12 @@ const Page = () => {
         return getSatisfactoryItem(productId, version);
       }
     }, [productId, version_correct]) || {};
+
+  const productRecipes = useMemo(() => {
+    return recipeArray.filter((rec) => rec.products.find((p) => p.itemClass === productId));
+  }, [productId, recipeArray]);
+
+  console.log(product, productRecipes);
 
   if (!version_correct) return <></>;
 
@@ -134,27 +144,29 @@ const Page = () => {
               />
               <SatisfactoryProductRecipeTable
                 title="Recipes"
-                recipes={product.recipes_by}
+                recipes={product.recipes_by || []}
                 machineTypes={machineTypes}
                 products={getSatisfactoryData('items', version)}
                 translate={translate}
               />
               <SatisfactoryProductRecipeTable
                 title="Used for"
-                recipes={product.recipes_for}
+                recipes={product.recipes_for || []}
                 products={getSatisfactoryData('items', version)}
                 machineTypes={machineTypes}
                 conditionFunction={isEquipment(true)}
                 translate={translate}
               />
-              <SatisfactoryProductRecipeTable
-                title="Equipment"
-                recipes={product.recipes_for}
-                products={getSatisfactoryData('items', version)}
-                machineTypes={machineTypes}
-                conditionFunction={isEquipment(false)}
-                translate={translate}
-              />
+              {product.recipes_for && (
+                <SatisfactoryProductRecipeTable
+                  title="Equipment"
+                  recipes={product.recipes_for || []}
+                  products={getSatisfactoryData('items', version)}
+                  machineTypes={machineTypes}
+                  conditionFunction={isEquipment(false)}
+                  translate={translate}
+                />
+              )}
             </Stack>
           </Stack>
         </Container>

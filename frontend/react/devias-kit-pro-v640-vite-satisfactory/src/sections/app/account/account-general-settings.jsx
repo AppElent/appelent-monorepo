@@ -1,4 +1,4 @@
-import { useCallback, useState } from 'react';
+import { useState } from 'react';
 import PropTypes from 'prop-types';
 import Camera01Icon from '@untitled-ui/icons-react/build/esm/Camera01';
 import User01Icon from '@untitled-ui/icons-react/build/esm/User01';
@@ -71,10 +71,6 @@ export const AccountGeneralSettings = (props) => {
   });
   const [isEditing, setIsEditing] = useState(false);
 
-  const handleEdit = useCallback(() => {
-    setIsEditing((prevState) => !prevState);
-  }, []);
-
   const generateRandomName = () => {
     const generatedName = generateName();
     formik.setFieldValue('name', generatedName);
@@ -85,176 +81,158 @@ export const AccountGeneralSettings = (props) => {
       spacing={4}
       {...rest}
     >
-      <Card>
-        <CardContent>
-          <Grid
-            container
-            spacing={3}
+      <CardDefault title="Basic details">
+        <Stack spacing={3}>
+          <Stack
+            alignItems="center"
+            direction="row"
+            spacing={2}
           >
-            <Grid
-              xs={12}
-              md={4}
+            <Box
+              sx={{
+                borderColor: 'neutral.300',
+                borderRadius: '50%',
+                borderStyle: 'dashed',
+                borderWidth: 1,
+                p: '4px',
+              }}
             >
-              <Typography variant="h6">Basic details</Typography>
-            </Grid>
-            <Grid
-              xs={12}
-              md={8}
-            >
-              <Stack spacing={3}>
-                <Stack
-                  alignItems="center"
-                  direction="row"
-                  spacing={2}
+              <Box
+                sx={{
+                  borderRadius: '50%',
+                  height: '100%',
+                  width: '100%',
+                  position: 'relative',
+                }}
+              >
+                <Box
+                  sx={{
+                    alignItems: 'center',
+                    backgroundColor: (theme) => alpha(theme.palette.neutral[700], 0.5),
+                    borderRadius: '50%',
+                    color: 'common.white',
+                    cursor: 'pointer',
+                    display: 'flex',
+                    height: '100%',
+                    justifyContent: 'center',
+                    left: 0,
+                    opacity: 0,
+                    position: 'absolute',
+                    top: 0,
+                    width: '100%',
+                    zIndex: 1,
+                    '&:hover': {
+                      opacity: 1,
+                    },
+                  }}
                 >
-                  <Box
-                    sx={{
-                      borderColor: 'neutral.300',
-                      borderRadius: '50%',
-                      borderStyle: 'dashed',
-                      borderWidth: 1,
-                      p: '4px',
-                    }}
+                  <Stack
+                    alignItems="center"
+                    direction="row"
+                    spacing={1}
                   >
-                    <Box
-                      sx={{
-                        borderRadius: '50%',
-                        height: '100%',
-                        width: '100%',
-                        position: 'relative',
-                      }}
+                    <SvgIcon color="inherit">
+                      <Camera01Icon />
+                    </SvgIcon>
+                    <Typography
+                      color="inherit"
+                      variant="subtitle2"
+                      sx={{ fontWeight: 700 }}
                     >
-                      <Box
-                        sx={{
-                          alignItems: 'center',
-                          backgroundColor: (theme) => alpha(theme.palette.neutral[700], 0.5),
-                          borderRadius: '50%',
-                          color: 'common.white',
-                          cursor: 'pointer',
-                          display: 'flex',
-                          height: '100%',
-                          justifyContent: 'center',
-                          left: 0,
-                          opacity: 0,
-                          position: 'absolute',
-                          top: 0,
-                          width: '100%',
-                          zIndex: 1,
-                          '&:hover': {
-                            opacity: 1,
-                          },
-                        }}
-                      >
-                        <Stack
-                          alignItems="center"
-                          direction="row"
-                          spacing={1}
-                        >
-                          <SvgIcon color="inherit">
-                            <Camera01Icon />
-                          </SvgIcon>
-                          <Typography
-                            color="inherit"
-                            variant="subtitle2"
-                            sx={{ fontWeight: 700 }}
-                          >
-                            Select
-                          </Typography>
-                        </Stack>
-                      </Box>
-                      <Avatar
-                        src={avatar}
-                        sx={{
-                          height: 100,
-                          width: 100,
-                        }}
-                      >
-                        <SvgIcon>
-                          <User01Icon />
-                        </SvgIcon>
-                      </Avatar>
-                    </Box>
-                  </Box>
-                  <Button
-                    color="inherit"
-                    size="small"
-                  >
-                    Change
-                  </Button>
-                </Stack>
-                <Stack
-                  alignItems="center"
-                  direction="row"
-                  spacing={2}
+                      Select
+                    </Typography>
+                  </Stack>
+                </Box>
+                <Avatar
+                  src={avatar}
+                  sx={{
+                    height: 100,
+                    width: 100,
+                  }}
                 >
-                  <TextField
-                    defaultValue={getAuth().currentUser?.uid}
-                    disabled={true}
-                    label="User ID"
-                    sx={{
-                      flexGrow: 1,
-                      '& .MuiOutlinedInput-notchedOutline': {
-                        borderStyle: 'dashed',
-                      },
-                    }}
-                  />
-                  {/* <Button onClick={handleEdit}>
+                  <SvgIcon>
+                    <User01Icon />
+                  </SvgIcon>
+                </Avatar>
+              </Box>
+            </Box>
+            <Button
+              color="inherit"
+              size="small"
+            >
+              Change
+            </Button>
+          </Stack>
+          <Stack
+            alignItems="center"
+            direction="row"
+            spacing={2}
+          >
+            <TextField
+              defaultValue={getAuth().currentUser?.uid}
+              disabled={true}
+              label="User ID"
+              sx={{
+                flexGrow: 1,
+                '& .MuiOutlinedInput-notchedOutline': {
+                  borderStyle: 'dashed',
+                },
+              }}
+            />
+            {/* <Button onClick={handleEdit}>
                     {isEditing ? "Save" : "Edit"}
                   </Button> */}
-                </Stack>
-                <Stack
-                  alignItems="center"
-                  direction="row"
-                  spacing={2}
-                >
-                  <TextField
-                    label="Displayname"
-                    sx={{ flexGrow: 1 }}
-                    name="name"
-                    onChange={formik.handleChange}
-                    value={formik.values.name}
-                  />
-                  <Button
-                    color="inherit"
-                    size="small"
-                    onClick={generateRandomName}
-                  >
-                    Generate
-                  </Button>
-                  <Button
-                    color="inherit"
-                    size="small"
-                    onClick={formik.handleSubmit}
-                  >
-                    Save
-                  </Button>
-                </Stack>
-                <Stack
-                  alignItems="center"
-                  direction="row"
-                  spacing={2}
-                >
-                  <TextField
-                    defaultValue={email}
-                    disabled={!isEditing}
-                    label="Email Address"
-                    required
-                    sx={{
-                      flexGrow: 1,
-                      '& .MuiOutlinedInput-notchedOutline': {
-                        borderStyle: 'dashed',
-                      },
-                    }}
-                  />
-                  {/* <Button onClick={handleEdit}>
+          </Stack>
+          <Stack
+            alignItems="center"
+            direction="row"
+            spacing={2}
+          >
+            <TextField
+              label="Displayname"
+              sx={{ flexGrow: 1 }}
+              name="name"
+              onChange={formik.handleChange}
+              value={formik.values.name}
+            />
+            <Button
+              color="inherit"
+              size="small"
+              onClick={generateRandomName}
+            >
+              Generate
+            </Button>
+            <Button
+              color="inherit"
+              size="small"
+              onClick={formik.handleSubmit}
+            >
+              Save
+            </Button>
+          </Stack>
+          <Stack
+            alignItems="center"
+            direction="row"
+            spacing={2}
+          >
+            <TextField
+              defaultValue={email}
+              disabled={!isEditing}
+              label="Email Address"
+              required
+              sx={{
+                flexGrow: 1,
+                '& .MuiOutlinedInput-notchedOutline': {
+                  borderStyle: 'dashed',
+                },
+              }}
+            />
+            {/* <Button onClick={handleEdit}>
                     {isEditing ? "Save" : "Edit"}
                   </Button> */}
-                </Stack>
-              </Stack>
-            </Grid>
-          </Grid>
-        </CardContent>
-      </Card>
+          </Stack>
+        </Stack>
+      </CardDefault>
       <CardDefault title="Settings">
         <Stack
           alignItems="center"
@@ -360,40 +338,22 @@ export const AccountGeneralSettings = (props) => {
           </Grid>
         </CardContent>
       </Card> */}
-      <Card>
-        <CardContent>
-          <Grid
-            container
-            spacing={3}
+      <CardDefault title="Delete account">
+        <Stack
+          alignItems="flex-start"
+          spacing={3}
+        >
+          <Typography variant="subtitle1">
+            Delete your account and all of your source data. This is irreversible.
+          </Typography>
+          <Button
+            color="error"
+            variant="outlined"
           >
-            <Grid
-              xs={12}
-              md={4}
-            >
-              <Typography variant="h6">Delete Account</Typography>
-            </Grid>
-            <Grid
-              xs={12}
-              md={8}
-            >
-              <Stack
-                alignItems="flex-start"
-                spacing={3}
-              >
-                <Typography variant="subtitle1">
-                  Delete your account and all of your source data. This is irreversible.
-                </Typography>
-                <Button
-                  color="error"
-                  variant="outlined"
-                >
-                  Delete account
-                </Button>
-              </Stack>
-            </Grid>
-          </Grid>
-        </CardContent>
-      </Card>
+            Delete account
+          </Button>
+        </Stack>
+      </CardDefault>
     </Stack>
   );
 };

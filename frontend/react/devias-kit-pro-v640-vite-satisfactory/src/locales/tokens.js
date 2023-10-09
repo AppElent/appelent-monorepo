@@ -218,6 +218,7 @@ export const tokens = {
           power: 'satisfactory:pages.games.tabs.power',
           trainstations: 'satisfactory:pages.games.tabs.trainstations',
           notepad: 'satisfactory:pages.games.tabs.notepad',
+          transport: 'satisfactory:pages.games.tabs.transport',
         },
         general: {
           generalinfo: 'satisfactory:pages.games.general.generalinfo',
@@ -248,6 +249,12 @@ export const tokens = {
           noInputsOutputsStarter: 'satisfactory:pages.games.factories.noInputsOutputsStarter',
           noInputsOutputs: 'satisfactory:pages.games.factories.noInputsOutputs',
         },
+        stations: {
+          addFirst: 'satisfactory:pages.games.stations.addFirst',
+          add: 'satisfactory:pages.games.stations.add',
+          information: 'satisfactory:pages.games.stations.information',
+          name: 'satisfactory:pages.games.stations.name',
+        },
         scribble: {
           helperText: 'satisfactory:pages.games.scribble.helperText',
         },
@@ -267,6 +274,7 @@ export const tokens = {
         info: 'satisfactory:pages.recipes.info',
         machine: 'satisfactory:pages.recipes.machine',
         fullscreen: 'satisfactory:pages.recipes.fullscreen',
+        slug: 'satisfactory:pages.recipes.slug',
       },
     },
   },

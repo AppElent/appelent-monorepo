@@ -1,8 +1,14 @@
 import PropTypes from 'prop-types';
-import { Card, CardContent, CardHeader, Stack, useMediaQuery } from '@mui/material';
+import { Card, CardContent, CardHeader, Stack, Typography, useMediaQuery } from '@mui/material';
 import { SeverityPill } from 'src/components/severity-pill';
 import { PropertyListTemplate } from 'src/components/app/property-list-template';
 import { tokens } from 'src/locales/tokens';
+import {
+  getSatisfactoryData,
+  getSatisfactoryDataArray,
+  recipeChart,
+} from 'src/custom/libs/satisfactory';
+import Mermaid from 'src/custom/libs/mermaid';
 
 export const SatisfactoryProductDetail = ({ product, translate }) => {
   const lgUp = useMediaQuery((theme) => theme.breakpoints.up('lg'));
@@ -27,11 +33,11 @@ export const SatisfactoryProductDetail = ({ product, translate }) => {
     },
     {
       label: translate(tokens.satisfactory.pages.products.stackSize),
-      value: product.stackSize.toString(),
+      value: product.stackSize?.toString(),
     },
     {
       label: 'Sink points',
-      value: product.sinkPoints.toString(),
+      value: product.sinkPoints?.toString(),
     },
     {
       label: 'Is Fuel',
@@ -52,6 +58,15 @@ export const SatisfactoryProductDetail = ({ product, translate }) => {
       value: getSeverityPill(product.resource != undefined),
     },
   ];
+
+  const recipe = getSatisfactoryDataArray('recipes').find((recipe) =>
+    recipe.products.find((p) => p.itemClass === product.className)
+  );
+
+  console.log(recipe);
+  const machines = getSatisfactoryData('buildables');
+  const chart = recipeChart(recipe, getSatisfactoryData('items'), machines);
+
   return (
     <Stack>
       <Card>
@@ -63,6 +78,20 @@ export const SatisfactoryProductDetail = ({ product, translate }) => {
           {/* <Stack spacing={3} maxWidth={500}> */}
           <PropertyListTemplate items={propertyItems2} />
           {/* </Stack> */}
+          <Stack
+            spacing={3}
+            sx={{
+              mt: 5,
+            }}
+            //maxWidth={500}
+          >
+            {recipe && (
+              <>
+                <Typography variant="subtitle2">Default recipe:</Typography>
+                <Mermaid chart={chart} />
+              </>
+            )}
+          </Stack>
         </CardContent>
       </Card>
     </Stack>

@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import PersonIcon from '@mui/icons-material/Person';
 import DeleteIcon from '@mui/icons-material/Delete';
@@ -17,64 +17,27 @@ import {
   Unstable_Grid2 as Grid,
   Paper,
   Dialog,
+  DialogTitle,
+  DialogContentText,
+  DialogActions,
 } from '@mui/material';
 import { FormikProvider, FieldArray } from 'formik';
 
 import { CardDefault } from 'src/components/app/card-default';
-import { satisfactoryVersions } from 'src/custom/libs/satisfactory';
+import {
+  getRecipesByProduct,
+  getSatisfactoryData,
+  getSatisfactoryDataArray,
+  satisfactoryVersions,
+} from 'src/custom/libs/satisfactory';
 import { getAuth } from 'firebase/auth';
 import { tokens } from 'src/locales/tokens';
 import { createGuid } from 'src/custom/libs/create-guid';
 import useModal from 'src/custom/hooks/use-modal';
 import { Box } from '@mui/system';
+import { GameEditJsonDialog } from './general/game-edit-json-dialog';
 
 const addPlayer = () => {};
-
-const ModalContent = () => {
-  <Box
-    sx={{
-      backgroundColor: (theme) => (theme.palette.mode === 'dark' ? 'neutral.800' : 'neutral.100'),
-      p: 3,
-    }}
-  >
-    <Paper
-      elevation={12}
-      sx={{
-        display: 'flex',
-        flexDirection: 'column',
-        margin: 3,
-        maxWidth: '100%',
-        minHeight: 500,
-        mx: 'auto',
-        outline: 'none',
-        width: 600,
-      }}
-    >
-      <Stack
-        alignItems="center"
-        direction="row"
-        spacing={1}
-        sx={{
-          px: 2,
-          py: 1,
-        }}
-      >
-        <Typography
-          sx={{ flexGrow: 1 }}
-          variant="h6"
-        >
-          New Message
-        </Typography>
-        <IconButton></IconButton>
-        <IconButton></IconButton>
-      </Stack>
-
-      <div>
-        <Button variant="contained">Send</Button>
-      </div>
-    </Paper>
-  </Box>;
-};
 
 export const SatisfactoryGamesGeneral = (props) => {
   const { game, formik, handleDeleteGame, translate } = props;
@@ -89,18 +52,32 @@ export const SatisfactoryGamesGeneral = (props) => {
 
   const handleUploadGame = () => {};
 
+  const products = getSatisfactoryData('items');
+  const recipes = getSatisfactoryDataArray('recipes');
+  const test = () => {
+    let result = [];
+    Object.keys(products).forEach((product) => {
+      const attachedRecipes = recipes.filter((recipe) =>
+        recipe.products.find((p) => p.itemClass === product)
+      );
+      const defaultRecipes = attachedRecipes?.filter((recipe) => !recipe.isAlternate);
+      const alternateRecipes = attachedRecipes?.filter((recipe) => recipe.isAlternate);
+      if (defaultRecipes.length > 1) console.log(product, defaultRecipes);
+      //console.log(product, attachedRecipes, defaultRecipes, alternateRecipes);
+    });
+  };
+  useEffect(() => {
+    //test();
+    //console.log(getRecipesByProduct('Desc_Computer_C', 10));
+  }, []);
+
   return (
     <FormikProvider value={formik}>
-      <Dialog
-        open={modalOpen}
-        onClose={() => setModalState(false)}
-        aria-labelledby="modal-modal-title"
-        aria-describedby="modal-modal-description"
-      >
-        <div>
-          <pre>{JSON.stringify(modalData, null, 2)}</pre>
-        </div>
-      </Dialog>
+      <GameEditJsonDialog
+        formik={formik}
+        modalOpen={modalOpen}
+        setModalState={setModalState}
+      />
       <Stack spacing={4}>
         <CardDefault title={translate(tokens.satisfactory.pages.games.general.generalinfo)}>
           <Stack
@@ -112,6 +89,9 @@ export const SatisfactoryGamesGeneral = (props) => {
               label={translate(tokens.common.fields.name)}
               sx={{ flexGrow: 1 }}
               name="name"
+              required
+              error={formik.errors.name}
+              helperText={formik.errors.name}
               onChange={formik.handleChange}
               value={formik.values?.name || ''}
             />
@@ -125,6 +105,8 @@ export const SatisfactoryGamesGeneral = (props) => {
               label={translate(tokens.common.fields.description)}
               sx={{ flexGrow: 1 }}
               name="description"
+              multiline
+              minRows={3}
               onChange={formik.handleChange}
               value={formik.values?.description || ''}
             />
@@ -139,6 +121,8 @@ export const SatisfactoryGamesGeneral = (props) => {
               name="version"
               label={translate(tokens.satisfactory.pages.games.version)}
               select
+              error
+              helperText="Changing the version might break your save!"
               onChange={formik.handleChange}
             >
               {satisfactoryVersions.map((version) => {
@@ -152,6 +136,20 @@ export const SatisfactoryGamesGeneral = (props) => {
                 );
               })}
             </TextField>
+          </Stack>
+          <Stack
+            alignItems="center"
+            direction="row"
+            spacing={2}
+          >
+            Number of factories: {formik.values?.factories?.length || 0}
+          </Stack>
+          <Stack
+            alignItems="center"
+            direction="row"
+            spacing={2}
+          >
+            Number of Transport stations: {formik.values?.transport?.stations?.length || 0}
           </Stack>
           {/* <Button
           //color="inherit"
@@ -262,14 +260,6 @@ export const SatisfactoryGamesGeneral = (props) => {
                   variant="contained"
                 >
                   {translate(tokens.satisfactory.pages.games.general.downloadGame)}
-                </Button>
-                <Button
-                  //color="info"
-                  disabled={!(game.owner === getAuth().currentUser.uid)}
-                  onClick={handleUploadGame}
-                  variant="outlined"
-                >
-                  {translate(tokens.satisfactory.pages.games.general.uploadGame)}
                 </Button>
               </Stack>
             </Stack>

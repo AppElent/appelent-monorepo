@@ -70,6 +70,12 @@ export const paths = {
       recipes: {
         index: '/app/satisfactory/recipes',
       },
+      calculations: {
+        index: '/app/satisfactory/calculations',
+      },
+      planner: {
+        index: '/app/satisfactory/planner',
+      },
     },
   },
   dashboard: {

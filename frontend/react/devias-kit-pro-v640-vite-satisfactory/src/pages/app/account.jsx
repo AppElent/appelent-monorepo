@@ -11,6 +11,8 @@ import { useUpdatePassword } from '@refinedev/core';
 import { toast } from 'react-hot-toast';
 
 import { EmailAuthProvider, getAuth, reauthenticateWithCredential } from 'firebase/auth';
+import { useSettings } from 'src/hooks/use-settings';
+import { Seo } from 'src/components/seo';
 
 const now = new Date();
 
@@ -27,6 +29,7 @@ const Page = () => {
   const { mutate: updatePassword } = useUpdatePassword();
   const [currentTab, setCurrentTab] = useState('general');
   const { data, dispatch } = useData();
+  const settings = useSettings();
 
   const updatePasswordFn = useCallback(async (oldPassword, newPassword) => {
     // onSubmit={async (values, { setSubmitting }) => {
@@ -70,6 +73,7 @@ const Page = () => {
 
   return (
     <>
+      <Seo title={'Account'} />
       <Box
         component="main"
         sx={{
@@ -77,7 +81,7 @@ const Page = () => {
           py: 8,
         }}
       >
-        <Container maxWidth="xl">
+        <Container maxWidth={settings.stretch ? false : 'xl'}>
           <Stack
             spacing={3}
             sx={{ mb: 3 }}
@@ -109,7 +113,7 @@ const Page = () => {
               email={user.email || ''}
               name={user.name || ''}
               user={user || {}}
-              settings={data.settings}
+              settings={data?.settings}
               updatesettings={(value) =>
                 dispatch({
                   type: 'SET_DATA',

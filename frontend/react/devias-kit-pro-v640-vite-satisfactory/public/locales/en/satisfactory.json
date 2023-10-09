@@ -18,7 +18,8 @@
                 "factories": "Factories",
                 "power": "Power",
                 "trainstations": "Train stations",
-                "notepad": "Notepad"
+                "notepad": "Notepad",
+                "transport": "Transport"
             },
             "general": {
                 "generalinfo": "General information",
@@ -49,6 +50,12 @@
                 "noInputsOutputsStarter": "Add recipes in the recipe table below to start producing products in this factory.",
                 "noInputsOutputs": "There are no inputs or outputs from this factory. If this is intended: GREAT JOB!"
             },
+            "stations": {
+                "addFirst": "Create first transport station",
+                "add": "Create transport station",
+                "information": "Information",
+                "name": "Station name"
+            },
             "scribble": {
                 "helperText": "Make your notes here"
             }
@@ -67,7 +74,8 @@
             "title": "Recipes",
             "info": "Info",
             "machine": "Machine",
-            "fullscreen": "Open in fullscreen"
+            "fullscreen": "Open in fullscreen",
+            "slug": "ID"
         }
     }
 }

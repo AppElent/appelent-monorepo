@@ -1,6 +1,6 @@
 import Box from '@mui/material/Box';
 
-import { Logo } from 'src/components/logo';
+import { Logo } from 'src/components/app/logo';
 
 export const SplashScreen = () => (
   <Box
@@ -19,14 +19,14 @@ export const SplashScreen = () => (
       zIndex: 1400,
     }}
   >
-    <Box
+    {/* <Box
       sx={{
         display: 'inline-flex',
         height: 48,
         width: 48,
       }}
-    >
-      <Logo />
-    </Box>
+    > */}
+    <Logo />
+    {/* </Box> */}
   </Box>
 );

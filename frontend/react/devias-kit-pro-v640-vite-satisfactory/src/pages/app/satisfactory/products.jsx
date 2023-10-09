@@ -4,15 +4,13 @@ import {
   Button,
   Divider,
   MenuItem,
-  Select,
   Stack,
   TableCell,
   TableRow,
+  TextField,
   Typography,
 } from '@mui/material';
 import numeral from 'numeral';
-import { useFormik } from 'formik';
-import { useMounted } from 'src/hooks/use-mounted';
 import { usePageView } from 'src/hooks/use-page-view';
 import { Layout as DashboardLayout } from 'src/layouts/app';
 import { ItemDrawer } from 'src/components/app/list/item-drawer';
@@ -38,6 +36,8 @@ import { useTranslate } from '@refinedev/core';
 import { tokens } from 'src/locales/tokens';
 import { Seo } from 'src/components/seo';
 import { StringParam, useQueryParam, withDefault } from 'use-query-params';
+import { useItems } from 'src/custom/hooks/use-items';
+import VersionSelector from 'src/components/app/satisfactory/version-selector';
 
 const products = {
   v600: [],
@@ -45,89 +45,11 @@ const products = {
   v800: prodv800,
 };
 
-// let satisfactoryProducts = products[SatisfactoryCurrentVersion]
-// let satisfactoryProductsArray = Object.keys(satisfactoryProducts).map((k) => ({
-//   ...satisfactoryProducts[k],
-//   className: k,
-// }));
-// satisfactoryProductsArray = satisfactoryProductsArray.sort(function (a, b) {
-//   return a.name > b.name ? 1 : b.name > a.name ? -1 : 0;
-// });
-
 const statusMap = {
   complete: 'success',
   pending: 'info',
   canceled: 'warning',
   rejected: 'error',
-};
-
-const useSearch = () => {
-  const [search, setSearch] = useState({
-    filters: {
-      query: undefined,
-      status: undefined,
-    },
-    page: 0,
-    rowsPerPage: 5,
-    sortBy: 'createdAt',
-    sortDir: 'desc',
-  });
-
-  return {
-    search,
-    updateSearch: setSearch,
-  };
-};
-
-const useItems = (search, version) => {
-  const isMounted = useMounted();
-  const [state, setState] = useState({
-    items: [],
-    itemsCount: 0,
-  });
-
-  const getItems = useCallback(async () => {
-    try {
-      const satisfactoryProducts = products[version];
-      let satisfactoryProductsArray = Object.keys(satisfactoryProducts).map((k) => ({
-        ...satisfactoryProducts[k],
-        className: k,
-      }));
-      satisfactoryProductsArray = satisfactoryProductsArray.sort(function (a, b) {
-        return a.name > b.name ? 1 : b.name > a.name ? -1 : 0;
-      });
-      //const response = satisfactoryProducts; // filter items here
-      let response = satisfactoryProductsArray;
-
-      // search result
-      if (search.filters?.query) {
-        response = response.filter((obj) => {
-          return JSON.stringify(obj).toLowerCase().includes(search.filters.query.toLowerCase());
-        });
-      }
-
-      const responsePaginated = paginate(response, search.rowsPerPage, search.page + 1);
-
-      if (isMounted()) {
-        setState({
-          items: response,
-          itemsCount: response.length,
-        });
-      }
-    } catch (err) {
-      console.error(err);
-    }
-  }, [search, version, isMounted]);
-
-  useEffect(
-    () => {
-      getItems();
-    },
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    [search, version]
-  );
-
-  return state;
 };
 
 const tabOptions = [
@@ -168,35 +90,48 @@ const Page = () => {
   const rootRef = useRef(null);
   const router = useRouter();
   const [productQuery, setProductQuery] = useQueryParam('product');
-  const { search, updateSearch } = useSearch();
+  //const { search, updateSearch } = useSearch();
   const [version, setVersion] = useQueryParam(
     'version',
     withDefault(StringParam, SatisfactoryCurrentVersion)
   );
   const translate = useTranslate();
-  const { items, itemsCount } = useItems(search, version);
+
+  const [productArray, setProductArray] = useState([]);
+
+  console.log(productArray);
+
+  const { items, search, handlers } = useItems(productArray, {
+    sortBy: 'name',
+    filters: { isFuel: { min: true } },
+    rowsPerPage: 10,
+  });
 
   const [drawer, setDrawer] = useState({
     isOpen: false,
     data: undefined,
   });
   const currentItem = useMemo(() => {
-    if (!drawer.data) {
-      return undefined;
+    if (items.length > 0) {
+      if (!drawer.data) {
+        return undefined;
+      }
+      const item = items.find((item) => item.slug === drawer.data);
+      return getSatisfactoryItem(item.className, version);
     }
-    const item = items.find((item) => item.slug === drawer.data);
-    return getSatisfactoryItem(item.className, version);
-  }, [drawer, version]);
+  }, [items, drawer, version]);
+
+  useEffect(() => {
+    const satisfactoryProducts = products[version];
+    let satisfactoryProductsArray = Object.keys(satisfactoryProducts).map((k) => ({
+      ...satisfactoryProducts[k],
+      className: k,
+    }));
+    setProductArray(satisfactoryProductsArray);
+    handlers.handlePageChange(undefined, 0);
+  }, [version]);
 
   const itemsPaginated = paginate(items, search.rowsPerPage, search.page + 1);
-
-  const formik = useFormik({
-    initialValues: currentItem,
-    enableReinitialize: true,
-    onSubmit: async (values, helpers) => {
-      console.log(values);
-    },
-  });
 
   useEffect(() => {
     // If product query param is present, set currentItem
@@ -206,57 +141,6 @@ const Page = () => {
   }, []);
 
   usePageView();
-
-  const [isEditing, setIsEditing] = useState(false);
-
-  const handleEditOpen = useCallback(() => {
-    setIsEditing(true);
-  }, []);
-
-  const handleEditCancel = useCallback(() => {
-    setIsEditing(false);
-  }, []);
-
-  const handleFiltersChange = useCallback(
-    (filters) => {
-      updateSearch((prevState) => ({
-        ...prevState,
-        filters,
-        page: 0,
-      }));
-    },
-    [updateSearch]
-  );
-
-  const handleSortChange = useCallback(
-    (sortDir) => {
-      updateSearch((prevState) => ({
-        ...prevState,
-        sortDir,
-      }));
-    },
-    [updateSearch]
-  );
-
-  const handlePageChange = useCallback(
-    (event, page) => {
-      updateSearch((prevState) => ({
-        ...prevState,
-        page,
-      }));
-    },
-    [updateSearch]
-  );
-
-  const handleRowsPerPageChange = useCallback(
-    (event) => {
-      updateSearch((prevState) => ({
-        ...prevState,
-        rowsPerPage: parseInt(event.target.value, 10),
-      }));
-    },
-    [updateSearch]
-  );
 
   const handleItemOpen = useCallback(
     (orderId) => {
@@ -326,42 +210,12 @@ const Page = () => {
                     {translate(tokens.satisfactory.pages.products.title)}
                   </Typography>
                 </div>
-                <div>
-                  {/* <Button
-                    startIcon={
-                      <SvgIcon>
-                        <PlusIcon />
-                      </SvgIcon>
-                    }
-                    variant="contained"
-                  >
-                    Add
-                  </Button> */}
-                  <Select
-                    defaultValue={version}
-                    label="Version"
-                    name="version"
-                    onChange={(event) => {
-                      setVersion(event.target.value);
-                    }}
-                    value={version}
-                  >
-                    {satisfactoryVersions.map((satisfactoryVersion) => (
-                      <MenuItem
-                        key={satisfactoryVersion.key}
-                        value={satisfactoryVersion.key}
-                      >
-                        {satisfactoryVersion.label}
-                      </MenuItem>
-                    ))}
-                  </Select>
-                </div>
               </Stack>
             </Box>
             <Divider />
             <ItemListSearch
-              onFiltersChange={handleFiltersChange}
-              onSortChange={handleSortChange}
+              onFiltersChange={handlers.handleSetChange}
+              onSortChange={handlers.handleSortChange}
               sortBy={search.sortBy}
               sortDir={search.sortDir}
               tabOptions={tabOptions}
@@ -371,19 +225,14 @@ const Page = () => {
             <Divider />
             <ItemListTableContainer
               onItemSelect={handleItemOpen}
-              onPageChange={handlePageChange}
-              onRowsPerPageChange={handleRowsPerPageChange}
+              onPageChange={handlers.handlePageChange}
+              onRowsPerPageChange={handlers.handleRowsPerPageChange}
               items={items}
-              itemsCount={itemsCount}
+              itemsCount={items.length || 0}
               page={search.page}
               rowsPerPage={search.rowsPerPage}
             >
               {itemsPaginated.map((item) => {
-                // const createdAtMonth = format(
-                //   item.createdAt,
-                //   "LLL"
-                // ).toUpperCase();
-                // const createdAtDay = format(item.createdAt, "d");
                 const totalAmount = numeral(item.totalAmount).format(`${item.currency}0,0.00`);
                 const statusColor = item.isFluid ? 'info' : 'success';
 
@@ -394,19 +243,14 @@ const Page = () => {
                     onClick={() => handleItemOpen?.(item.slug)}
                     sx={{ cursor: 'pointer' }}
                   >
-                    <TableCell
-                      sx={{
-                        alignItems: 'center',
-                        display: 'flex',
-                      }}
-                    >
+                    <TableCell>
                       <Box
                         sx={{
                           backgroundColor: (theme) =>
                             theme.palette.mode === 'dark' ? 'neutral.800' : 'neutral.200',
-                          bitemRadius: 2,
+                          //bitemRadius: 2,
                           maxWidth: 'fit-content',
-                          ml: 3,
+                          ml: 1,
                           p: 1,
                         }}
                       >
@@ -417,11 +261,24 @@ const Page = () => {
                           {item.stackSize}
                         </Typography>
                       </Box>
-                      <Box sx={{ ml: 2 }}>
+                    </TableCell>
+                    <TableCell
+                      sx={{
+                        alignItems: 'center',
+                        display: 'flex',
+                      }}
+                    >
+                      <Box sx={{ ml: 1 }}>
                         <Typography variant="subtitle2">{item.name}</Typography>
                         <Typography
                           color="text.secondary"
                           variant="body2"
+                          sx={{
+                            display: '-webkit-box',
+                            overflow: 'hidden',
+                            WebkitBoxOrient: 'vertical',
+                            WebkitLineClamp: 1,
+                          }}
                         >
                           {item.description}
                         </Typography>
@@ -445,49 +302,23 @@ const Page = () => {
             item={currentItem}
             title={currentItem?.number}
           >
-            {!isEditing ? (
-              <ItemDetailsContainer>
-                {/* Content details
-                <br />
-                <Button
-                  onClick={() =>
-                    router.push(
-                      paths.app.satisfactory.products.detail +
-                        currentItem.className
-                    )
-                  }
-                  variant="contained"
-                >
-                  Open product
-                </Button>
-                {JSON.stringify(currentItem)} */}
-                <Button
-                  onClick={() => {
-                    router.push(paths.app.satisfactory.products.detail + currentItem.className);
-                  }}
-                  size="small"
-                  variant="contained"
-                >
-                  {translate(tokens.satisfactory.pages.products.fullscreen)}
-                </Button>
-                {currentItem && (
-                  <SatisfactoryProductDetail
-                    product={currentItem}
-                    translate={translate}
-                  />
-                )}
-              </ItemDetailsContainer>
-            ) : (
-              <></>
-            )}
-            {/* <ItemEditContainer
-                onCancel={handleEditCancel}
-                onSave={formik.handleSubmit}
-                item={currentItem}
+            <ItemDetailsContainer>
+              <Button
+                onClick={() => {
+                  router.push(paths.app.satisfactory.products.detail + currentItem.className);
+                }}
+                size="small"
+                variant="contained"
               >
-                Content edit
-              </ItemEditContainer>
-            )} */}
+                {translate(tokens.satisfactory.pages.products.fullscreen)}
+              </Button>
+              {currentItem && (
+                <SatisfactoryProductDetail
+                  product={currentItem}
+                  translate={translate}
+                />
+              )}
+            </ItemDetailsContainer>
           </ItemDrawer>
         </Box>
       </Box>

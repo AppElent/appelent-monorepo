@@ -1,6 +1,8 @@
 import { useEffect, useState } from 'react';
 
-function useLocalStorage(key, initialValue) {
+function useLocalStorage(key, initialValue, type = 'localStorage') {
+  if (type !== 'localStorage' && type !== 'sessionStorage')
+    throw 'Only localStorage and sessionStorage are allowed values';
   // Get from local storage then
   // parse stored json or return initialValue
   const readValue = () => {
@@ -10,7 +12,7 @@ function useLocalStorage(key, initialValue) {
     }
 
     try {
-      const item = window.localStorage.getItem(key);
+      const item = window[type].getItem(key);
       return item ? JSON.parse(item) : initialValue;
     } catch (error) {
       console.warn(`Error reading localStorage key “${key}”:`, error);
@@ -37,7 +39,7 @@ function useLocalStorage(key, initialValue) {
       const newValue = value instanceof Function ? value(storedValue) : value;
 
       // Save to local storage
-      window.localStorage.setItem(key, JSON.stringify(newValue));
+      window[type].setItem(key, JSON.stringify(newValue));
 
       // Save state
       setStoredValue(newValue);
@@ -61,7 +63,7 @@ function useLocalStorage(key, initialValue) {
 
     try {
       // Delete from LocalStorage
-      window.localStorage.removeItem(key);
+      window[type].removeItem(key);
 
       // We dispatch a custom event so every useLocalStorage hook are notified
       window.dispatchEvent(new Event('local-storage'));

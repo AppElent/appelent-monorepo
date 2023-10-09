@@ -5,7 +5,6 @@ import { logger, setLogger } from 'src/custom/libs/logging';
 import Refine from 'src/custom/libs/refine';
 import { useHttpsRedirect } from 'src/custom/hooks/use-https-redirect';
 import useLocalStorage from './custom/hooks/use-local-storage';
-import { ConfirmProvider } from './custom/libs/confirmation';
 import { DataFramework, useData } from './custom/libs/data-framework';
 import { collection, where } from 'firebase/firestore';
 import { db } from './libs/firebase';
@@ -13,6 +12,9 @@ import { getAuth } from 'firebase/auth';
 import { useRouter } from './hooks/use-router';
 import { useEffect } from 'react';
 import { ActionType } from './custom/libs/data-framework/framework/ActionType';
+import { ConfirmProvider } from 'material-ui-confirm';
+import RecipeList from './components/app/satisfactory/recipe-list';
+import ProductListDialog from './components/app/satisfactory/product-list-dialog';
 
 const CustomApp = ({ children }) => {
   // Redirect to HTTPS if condition is TRUE
@@ -43,8 +45,8 @@ const CustomApp = ({ children }) => {
 
   // Set the options for confirmation dialogs
   const confirmationDialogOptions = {
-    confirmationButtonProps: { variant: 'contained', color: 'error' },
-    cancellationButtonProps: { variant: 'contained' },
+    confirmationButtonProps: { variant: 'contained', autoFocus: true },
+    cancellationButtonProps: { variant: 'outlined', color: 'error' },
   };
 
   // set resources for data framework
@@ -129,7 +131,11 @@ const CustomApp = ({ children }) => {
         >
           <ConfirmProvider defaultOptions={confirmationDialogOptions}>
             <Refine>
-              <CustomAppChild>{children}</CustomAppChild>
+              <CustomAppChild>
+                <RecipeList />
+                <ProductListDialog />
+                {children}
+              </CustomAppChild>
             </Refine>
           </ConfirmProvider>
         </DataFramework>

@@ -109,6 +109,24 @@ export const useSections = () => {
               </SvgIcon>
             ),
           },
+          {
+            title: 'Calculations',
+            path: paths.app.satisfactory.calculations.index,
+            icon: (
+              <SvgIcon fontSize="small">
+                <CheckDone01Icon />
+              </SvgIcon>
+            ),
+          },
+          {
+            title: 'Factory planner',
+            path: paths.app.satisfactory.planner.index,
+            icon: (
+              <SvgIcon fontSize="small">
+                <CheckDone01Icon />
+              </SvgIcon>
+            ),
+          },
         ],
       },
 

@@ -7,9 +7,9 @@ import {
   Stack,
   TableCell,
   TableRow,
+  TextField,
   Typography,
 } from '@mui/material';
-import { useMounted } from 'src/hooks/use-mounted';
 import { usePageView } from 'src/hooks/use-page-view';
 import { Layout as DashboardLayout } from 'src/layouts/app';
 import { ItemDrawer } from 'src/components/app/list/item-drawer';
@@ -23,9 +23,9 @@ import { SeverityPill } from 'src/components/severity-pill';
 import prodv700 from 'src/custom/libs/satisfactory/data/v700/productionRecipes.json';
 import prodv800 from 'src/custom/libs/satisfactory/data/v800/productionRecipes.json';
 import { paginate } from 'src/custom/libs/paginate';
-import { useRouter } from 'src/hooks/use-router';
 import {
   getSatisfactoryData,
+  getSatisfactoryDataArray,
   SatisfactoryCurrentVersion,
   satisfactoryVersions,
 } from 'src/custom/libs/satisfactory';
@@ -34,96 +34,12 @@ import { useTranslate } from '@refinedev/core';
 import { tokens } from 'src/locales/tokens';
 import { Seo } from 'src/components/seo';
 import { StringParam, useQueryParam, withDefault } from 'use-query-params';
+import { useItems } from 'src/custom/hooks/use-items';
 
 const recipes = {
   v600: [],
   v700: prodv700,
   v800: prodv800,
-};
-
-// let satisfactoryProducts = products[SatisfactoryCurrentVersion]
-// let satisfactoryProductsArray = Object.keys(satisfactoryProducts).map((k) => ({
-//   ...satisfactoryProducts[k],
-//   className: k,
-// }));
-// satisfactoryProductsArray = satisfactoryProductsArray.sort(function (a, b) {
-//   return a.name > b.name ? 1 : b.name > a.name ? -1 : 0;
-// });
-
-const statusMap = {
-  complete: 'success',
-  pending: 'info',
-  canceled: 'warning',
-  rejected: 'error',
-};
-
-const useSearch = () => {
-  const [search, setSearch] = useState({
-    filters: {
-      query: undefined,
-      status: undefined,
-    },
-    page: 0,
-    rowsPerPage: 5,
-    sortBy: 'createdAt',
-    sortDir: 'desc',
-  });
-
-  return {
-    search,
-    updateSearch: setSearch,
-  };
-};
-
-const useItems = (search, version) => {
-  const isMounted = useMounted();
-  const [state, setState] = useState({
-    items: [],
-    itemsCount: 0,
-  });
-
-  const getItems = useCallback(async () => {
-    try {
-      const satisfactoryProducts = recipes[version];
-      let satisfactoryProductsArray = Object.keys(satisfactoryProducts).map((k) => ({
-        ...satisfactoryProducts[k],
-        className: k,
-      }));
-      satisfactoryProductsArray = satisfactoryProductsArray.sort(function (a, b) {
-        return a.name > b.name ? 1 : b.name > a.name ? -1 : 0;
-      });
-      //const response = satisfactoryProducts; // filter items here
-      let response = satisfactoryProductsArray;
-
-      // search result
-      if (search.filters?.query) {
-        response = response.filter((obj) => {
-          return JSON.stringify(obj).toLowerCase().includes(search.filters.query.toLowerCase());
-        });
-      }
-
-      const responsePaginated = paginate(response, search.rowsPerPage, search.page + 1);
-
-      if (isMounted()) {
-        setState({
-          items: response,
-          itemsCount: response.length,
-        });
-      }
-    } catch (err) {
-      console.error(err);
-    }
-  }, [search, version, isMounted]);
-
-  useEffect(
-    () => {
-      getItems();
-    },
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    [search, version]
-  );
-
-  return state;
 };
 
 const tabOptions = [
@@ -170,15 +86,29 @@ const sortOptions = [
 
 const Page = () => {
   const rootRef = useRef(null);
-  const router = useRouter();
   const [productQuery, setProductQuery] = useQueryParam('recipe');
-  const { search, updateSearch } = useSearch();
   const [version, setVersion] = useQueryParam(
     'version',
     withDefault(StringParam, SatisfactoryCurrentVersion)
   );
   const translate = useTranslate();
-  const { items, itemsCount } = useItems(search, version);
+
+  const [recipeArray, setRecipeArray] = useState([]);
+  const { items, search, handlers, pageItems } = useItems(recipeArray, {
+    sortBy: 'name',
+    rowsPerPage: 10,
+  });
+
+  useEffect(() => {
+    const satisfactoryProducts = recipes[version];
+    let satisfactoryProductsArray = Object.keys(satisfactoryProducts).map((k) => ({
+      ...satisfactoryProducts[k],
+      className: k,
+    }));
+    setRecipeArray(satisfactoryProductsArray);
+    handlers.handlePageChange(undefined, 0);
+  }, [version]);
+
   const buildables = getSatisfactoryData('buildables');
 
   const [drawer, setDrawer] = useState({
@@ -186,14 +116,19 @@ const Page = () => {
     data: undefined,
   });
   const currentItem = useMemo(() => {
-    if (!drawer.data) {
-      return undefined;
-    }
-    const item = items.find((item) => item.slug === drawer.data);
-    return getSatisfactoryData('recipes', version)[item.className];
-  }, [drawer, version]);
+    if (items.length > 0) {
+      if (!drawer.data) {
+        return undefined;
+      }
 
-  const itemsPaginated = paginate(items, search.rowsPerPage, search.page + 1);
+      const item = items.find((item) => item.slug === drawer.data);
+      console.log(items, item, drawer.data);
+      return getSatisfactoryDataArray('recipes', version).find(
+        (r) => r.className === item.className
+      );
+    }
+    return undefined;
+  }, [items, drawer, version]);
 
   useEffect(() => {
     // If product query param is present, set currentItem
@@ -203,49 +138,6 @@ const Page = () => {
   }, []);
 
   usePageView();
-
-  const [isEditing, setIsEditing] = useState(false);
-
-  const handleFiltersChange = useCallback(
-    (filters) => {
-      updateSearch((prevState) => ({
-        ...prevState,
-        filters,
-        page: 0,
-      }));
-    },
-    [updateSearch]
-  );
-
-  const handleSortChange = useCallback(
-    (sortDir) => {
-      updateSearch((prevState) => ({
-        ...prevState,
-        sortDir,
-      }));
-    },
-    [updateSearch]
-  );
-
-  const handlePageChange = useCallback(
-    (event, page) => {
-      updateSearch((prevState) => ({
-        ...prevState,
-        page,
-      }));
-    },
-    [updateSearch]
-  );
-
-  const handleRowsPerPageChange = useCallback(
-    (event) => {
-      updateSearch((prevState) => ({
-        ...prevState,
-        rowsPerPage: parseInt(event.target.value, 10),
-      }));
-    },
-    [updateSearch]
-  );
 
   const handleItemOpen = useCallback(
     (orderId) => {
@@ -315,42 +207,12 @@ const Page = () => {
                     {translate(tokens.satisfactory.pages.recipes.title)}
                   </Typography>
                 </div>
-                <div>
-                  {/* <Button
-                    startIcon={
-                      <SvgIcon>
-                        <PlusIcon />
-                      </SvgIcon>
-                    }
-                    variant="contained"
-                  >
-                    Add
-                  </Button> */}
-                  <Select
-                    defaultValue={version}
-                    label="Version"
-                    name="version"
-                    onChange={(event) => {
-                      setVersion(event.target.value);
-                    }}
-                    value={version}
-                  >
-                    {satisfactoryVersions.map((satisfactoryVersion) => (
-                      <MenuItem
-                        key={satisfactoryVersion.key}
-                        value={satisfactoryVersion.key}
-                      >
-                        {satisfactoryVersion.label}
-                      </MenuItem>
-                    ))}
-                  </Select>
-                </div>
               </Stack>
             </Box>
             <Divider />
             <ItemListSearch
-              onFiltersChange={handleFiltersChange}
-              onSortChange={handleSortChange}
+              onFiltersChange={handlers.handleSetChange}
+              onSortChange={handlers.handleSortChange}
               sortBy={search.sortBy}
               sortDir={search.sortDir}
               tabOptions={tabOptions}
@@ -360,14 +222,14 @@ const Page = () => {
             <Divider />
             <ItemListTableContainer
               onItemSelect={handleItemOpen}
-              onPageChange={handlePageChange}
-              onRowsPerPageChange={handleRowsPerPageChange}
+              onPageChange={handlers.handlePageChange}
+              onRowsPerPageChange={handlers.handleRowsPerPageChange}
               items={items}
-              itemsCount={itemsCount}
-              page={search.page}
+              itemsCount={items.length || 0}
+              page={search.page || 0}
               rowsPerPage={search.rowsPerPage}
             >
-              {itemsPaginated.map((item) => {
+              {pageItems.map((item) => {
                 return (
                   <TableRow
                     hover
@@ -403,6 +265,12 @@ const Page = () => {
                         <Typography
                           color="text.secondary"
                           variant="body2"
+                          sx={{
+                            display: '-webkit-box',
+                            overflow: 'hidden',
+                            WebkitBoxOrient: 'vertical',
+                            WebkitLineClamp: 1,
+                          }}
                         >
                           {item.description}
                         </Typography>
@@ -423,9 +291,8 @@ const Page = () => {
             item={currentItem}
             title={currentItem?.number}
           >
-            {!isEditing ? (
-              <ItemDetailsContainer>
-                {/* <Button
+            <ItemDetailsContainer>
+              {/* <Button
                   onClick={() => {
                     router.push(paths.app.satisfactory.recipes.detail + currentItem.className);
                   }}
@@ -434,24 +301,13 @@ const Page = () => {
                 >
                   {translate(tokens.satisfactory.pages.recipes.fullscreen)}
                 </Button> */}
-                {currentItem && (
-                  <SatisfactoryRecipeDetail
-                    recipe={currentItem}
-                    translate={translate}
-                  />
-                )}
-              </ItemDetailsContainer>
-            ) : (
-              <></>
-            )}
-            {/* <ItemEditContainer
-                onCancel={handleEditCancel}
-                onSave={formik.handleSubmit}
-                item={currentItem}
-              >
-                Content edit
-              </ItemEditContainer>
-            )} */}
+              {currentItem && (
+                <SatisfactoryRecipeDetail
+                  recipe={currentItem}
+                  translate={translate}
+                />
+              )}
+            </ItemDetailsContainer>
           </ItemDrawer>
         </Box>
       </Box>

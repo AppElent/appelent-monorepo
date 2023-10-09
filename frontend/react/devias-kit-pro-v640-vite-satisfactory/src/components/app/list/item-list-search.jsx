@@ -27,10 +27,7 @@ export const ItemListSearch = (props) => {
   } = props;
   const queryRef = useRef(null);
   const [currentTab, setCurrentTab] = useState('all');
-  const [filters, setFilters] = useState({
-    query: undefined,
-    status: undefined,
-  });
+  const [filters, setFilters] = useState(undefined);
   const formik = useFormik({ initialValues: { search: '' } });
 
   // Effect for triggering filter change on every value change
@@ -38,7 +35,7 @@ export const ItemListSearch = (props) => {
     if (directQuery) {
       setFilters((prevState) => ({
         ...prevState,
-        query: formik.values.search,
+        search: formik.values.search,
       }));
     }
   }, [formik.values]);
@@ -57,7 +54,7 @@ export const ItemListSearch = (props) => {
 
     setFilters((prevState) => ({
       ...prevState,
-      status,
+      tab,
     }));
   }, []);
 
@@ -67,7 +64,7 @@ export const ItemListSearch = (props) => {
       const query = queryRef.current?.value || '';
       setFilters((prevState) => ({
         ...prevState,
-        query,
+        search: query,
       }));
     }
   }, []);

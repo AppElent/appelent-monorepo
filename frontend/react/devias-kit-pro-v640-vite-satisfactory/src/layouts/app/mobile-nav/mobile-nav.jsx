@@ -9,13 +9,14 @@ import SvgIcon from '@mui/material/SvgIcon';
 import Typography from '@mui/material/Typography';
 import { useTheme } from '@mui/material/styles';
 
-import { Logo } from 'src/components/logo';
+import { Logo } from 'src/components/app/logo';
 import { RouterLink } from 'src/components/router-link';
 import { Scrollbar } from 'src/components/scrollbar';
 import { usePathname } from 'src/hooks/use-pathname';
 import { paths } from 'src/paths';
 import { TenantSwitch } from '../tenant-switch';
 import { MobileNavSection } from './mobile-nav-section';
+import VersionSelector from 'src/components/app/satisfactory/version-selector';
 
 const MOBILE_NAV_WIDTH = 280;
 
@@ -171,6 +172,7 @@ export const MobileNav = (props) => {
               px: 2,
             }}
           >
+            <VersionSelector />
             {sections.map((section, index) => (
               <MobileNavSection
                 items={section.items}
@@ -180,35 +182,6 @@ export const MobileNav = (props) => {
               />
             ))}
           </Stack>
-          <Box sx={{ p: 3 }}>
-            <Typography
-              color="neutral.400"
-              variant="subtitle1"
-            >
-              Need help?
-            </Typography>
-            <Typography
-              color="neutral.400"
-              sx={{ mb: 2 }}
-              variant="body2"
-            >
-              Please check our docs.
-            </Typography>
-            <Button
-              component="a"
-              fullWidth
-              href={paths.docs}
-              startIcon={
-                <SvgIcon>
-                  <File04Icon />
-                </SvgIcon>
-              }
-              target="_blank"
-              variant="contained"
-            >
-              Documentation
-            </Button>
-          </Box>
         </Stack>
       </Scrollbar>
     </Drawer>

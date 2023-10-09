@@ -9,14 +9,29 @@ import Typography from '@mui/material/Typography';
 import { usePopover } from 'src/hooks/use-popover';
 
 import { TenantPopover } from './tenant-popover';
+import { siteSettings } from 'src/config';
 
 const tenants = ['Test', 'Live'];
 
 export const TenantSwitch = (props) => {
   const popover = usePopover();
+  let tenant = 'Live';
+  switch (window.location.hostname) {
+    case siteSettings.url:
+      tenant = 'Live';
+      break;
+    case siteSettings.stagingUrl:
+      tenant = 'Test';
+      break;
+  }
 
   const handleTenantSwitch = (tenant) => {
-    console.log(tenant);
+    console.log(tenant, siteSettings);
+    if (siteSettings.url && tenant === 'Live') {
+      window.location = 'https://' + siteSettings.url;
+    } else if (siteSettings.stagingUrl && tenant === 'Test') {
+      window.location = 'https://' + siteSettings.stagingUrl;
+    }
     popover.handleClose();
   };
 
@@ -33,13 +48,13 @@ export const TenantSwitch = (props) => {
             color="inherit"
             variant="h6"
           >
-            AppElent
+            {siteSettings.title || 'AppElent'}
           </Typography>
           <Typography
             color="neutral.400"
             variant="body2"
           >
-            Live
+            {tenant}
           </Typography>
         </Box>
         <IconButton

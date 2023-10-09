@@ -8,7 +8,7 @@ import SvgIcon from '@mui/material/SvgIcon';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import { useTheme } from '@mui/material/styles';
 
-import { Logo } from 'src/components/logo';
+import { Logo } from 'src/components/app/logo';
 import { RouterLink } from 'src/components/router-link';
 import { Scrollbar } from 'src/components/scrollbar';
 import { usePathname } from 'src/hooks/use-pathname';
@@ -20,6 +20,7 @@ import { LanguageSwitch } from '../language-switch';
 import { NotificationsButton } from '../notifications-button';
 import { TenantSwitch } from '../tenant-switch';
 import { TopNavSection } from './top-nav-section';
+import VersionSelector from 'src/components/app/satisfactory/version-selector';
 
 const useCssVars = (color) => {
   const theme = useTheme();
@@ -240,23 +241,35 @@ export const TopNav = (props) => {
             }}
           >
             <Stack
-              alignItems="center"
-              component="nav"
               direction="row"
+              justifyContent={'space-between'}
               spacing={1}
-              sx={{
-                px: 2,
-                py: 1.5,
-              }}
             >
-              {sections.map((section, index) => (
-                <TopNavSection
-                  items={section.items}
-                  key={index}
-                  pathname={pathname}
-                  subheader={section.subheader}
-                />
-              ))}
+              <Stack
+                alignItems="center"
+                component="nav"
+                direction="row"
+                spacing={1}
+                sx={{
+                  px: 2,
+                  py: 1.5,
+                }}
+              >
+                {sections.map((section, index) => (
+                  <TopNavSection
+                    items={section.items}
+                    key={index}
+                    pathname={pathname}
+                    subheader={section.subheader}
+                  />
+                ))}
+              </Stack>
+              <VersionSelector
+                sx={{
+                  px: 1,
+                  py: 1,
+                }}
+              />
             </Stack>
           </Scrollbar>
         </Box>

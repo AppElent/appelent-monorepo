@@ -6,10 +6,12 @@ import {
   Button,
   Checkbox,
   Divider,
+  Grid,
   Stack,
   Table,
   TableBody,
   TableCell,
+  TableContainer,
   TableHead,
   TableRow,
   TextField,
@@ -23,6 +25,9 @@ import { generateName } from 'src/custom/libs/random-name-generator';
 import { getSatisfactoryRecipeStatistics } from 'src/custom/libs/satisfactory';
 import { tokens } from 'src/locales/tokens';
 import _ from 'lodash';
+import { useSelected } from 'src/custom/hooks/use-selected';
+import { getFactoryStatistics } from 'src/custom/libs/satisfactory/statistics';
+import { useConfirm } from 'material-ui-confirm';
 
 const newObject = {
   name: '',
@@ -40,49 +45,56 @@ const FACTORY_TEMPLATE = {
 export const SatisfactoryGamesFactories = (props) => {
   const { formik, game, recipes, products, translate } = props;
   const router = useRouter();
+  const confirm = useConfirm();
   const [factoryId, setFactoryId] = useQueryParam('factory');
-  const [recipeState, setRecipeState] = useState({});
+  //const [recipeState, setRecipeState] = useState({});
 
-  const selectedFactory = useMemo(() => {
-    if (formik.values.factories) {
-      if (factoryId) {
-        const found = formik.values.factories.find((factory) => factory.id === factoryId);
-        if (found) {
-          return found;
-        } else {
-          return formik.values.factories[0];
-        }
-      } else {
-        return formik.values.factories[0];
-      }
-    }
-    return undefined;
-  }, [formik.values.factories, factoryId]);
+  const [selectedFactory, selectedFactoryIndex] = useSelected(formik.values.factories, factoryId);
 
-  const selectedFactoryIndex = useMemo(() => {
-    const index = formik.values.factories?.findIndex(
-      (factory) => factory.id === selectedFactory.id
-    );
-    if (!index) {
-      return 0;
-    }
-    return index;
-  }, [selectedFactory]);
+  // const selectedFactory = useMemo(() => {
+  //   if (formik.values.factories) {
+  //     if (factoryId) {
+  //       const found = formik.values.factories.find((factory) => factory.id === factoryId);
+  //       if (found) {
+  //         return found;
+  //       } else {
+  //         return formik.values.factories[0];
+  //       }
+  //     } else {
+  //       return formik.values.factories[0];
+  //     }
+  //   }
+  //   return undefined;
+  // }, [formik.values.factories, factoryId]);
 
-  useEffect(() => {
-    const satisfactoryStatistics = getSatisfactoryRecipeStatistics(
-      formik.values.factories?.[selectedFactoryIndex]?.recipes,
-      recipes,
-      products
-    );
-    setRecipeState(satisfactoryStatistics);
+  // const selectedFactoryIndex = useMemo(() => {
+  //   const index = formik.values.factories?.findIndex(
+  //     (factory) => factory.id === selectedFactory.id
+  //   );
+  //   if (!index) {
+  //     return 0;
+  //   }
+  //   return index;
+  // }, [selectedFactory]);
 
-    //return returnObject;
-  }, [formik.values.factories?.[selectedFactoryIndex]?.recipes]);
+  // useEffect(() => {
+  //   const satisfactoryStatistics = getSatisfactoryRecipeStatistics(
+  //     formik.values.factories?.[selectedFactoryIndex]?.recipes,
+  //     recipes,
+  //     products
+  //   );
+  //   setRecipeState(satisfactoryStatistics);
+
+  //   //return returnObject;
+  // }, [formik.values.factories?.[selectedFactoryIndex]?.recipes]);
+
+  const statistics = useMemo(
+    () => getFactoryStatistics(formik.values.factories?.[selectedFactoryIndex]?.recipes),
+    [formik.values.factories?.[selectedFactoryIndex]?.recipes]
+  );
 
   const createFactory = () => {
-    /* eslint-disable-next-line no-unsafe-optional-chaining */
-    const currentFactories = formik.values.factories ? [...formik.values?.factories] : [];
+    const currentFactories = formik.values.factories ? [...formik.values.factories] : [];
     const id = createGuid(false);
     const name = generateName();
     const newFactory = { id, name, ...FACTORY_TEMPLATE };
@@ -93,12 +105,16 @@ export const SatisfactoryGamesFactories = (props) => {
   };
 
   const deleteFactory = (id) => {
-    /* eslint-disable-next-line no-unsafe-optional-chaining */
-    const currentFactories = formik.values?.factories ? [...formik.values?.factories] : [];
-    formik.setFieldValue(
-      'factories',
-      currentFactories.filter((item) => item.id !== id)
-    );
+    confirm({
+      description:
+        'Deleting a factory can cause parts of the game to get reset. Only delete factories if you are sure what you are doing.',
+    }).then(() => {
+      const currentFactories = formik.values?.factories ? [...formik.values.factories] : [];
+      formik.setFieldValue(
+        'factories',
+        currentFactories.filter((item) => item.id !== id)
+      );
+    });
   };
 
   if (!selectedFactory) {
@@ -183,7 +199,10 @@ export const SatisfactoryGamesFactories = (props) => {
             sx={{ flexGrow: 1 }}
             name={`factories.${selectedFactoryIndex}.name`}
             onChange={formik.handleChange}
-            value={formik.values.factories[selectedFactoryIndex].name || ''}
+            required
+            error={formik.errors?.factories?.[selectedFactoryIndex]?.name}
+            helperText={formik.errors?.factories?.[selectedFactoryIndex]?.name}
+            value={formik.values.factories?.[selectedFactoryIndex].name || ''}
           />
         </Stack>
         <Stack
@@ -194,6 +213,8 @@ export const SatisfactoryGamesFactories = (props) => {
           <TextField
             label={translate(tokens.common.fields.description)}
             sx={{ flexGrow: 1 }}
+            multiline
+            minRows={3}
             name={`factories.${selectedFactoryIndex}.description`}
             onChange={formik.handleChange}
             value={formik.values.factories[selectedFactoryIndex].description || ''}
@@ -226,16 +247,23 @@ export const SatisfactoryGamesFactories = (props) => {
           />{' '}
           {translate(tokens.satisfactory.pages.games.factories.checked)}
         </Stack>
-        <Button
-          color="error"
-          size="small"
-          onClick={() => {
-            deleteFactory(selectedFactory.id);
-          }}
-          variant="contained"
+        <Stack
+          justifyContent="flex-end"
+          direction="row"
         >
-          Delete
-        </Button>
+          <div>
+            <Button
+              color="error"
+              size="small"
+              onClick={() => {
+                deleteFactory(selectedFactory.id);
+              }}
+              variant="contained"
+            >
+              Delete
+            </Button>
+          </div>
+        </Stack>
       </CardDefault>
 
       <CardDefault
@@ -245,80 +273,75 @@ export const SatisfactoryGamesFactories = (props) => {
           translate(tokens.satisfactory.pages.games.factories.outputs)
         }
       >
-        {_.isEmpty(recipeState?.inputsAndOutputs?.inputs) &&
-        _.isEmpty(recipeState?.inputsAndOutputs?.outputs) ? (
+        {statistics?.totalInputs.length === 0 && statistics?.totalOutputs.length === 0 ? (
           formik.values.factories[selectedFactoryIndex]?.recipes?.length > 0 ? (
             <>{translate(tokens.satisfactory.pages.games.factories.noInputsOutputs)}</>
           ) : (
             <>{translate(tokens.satisfactory.pages.games.factories.noInputsOutputsStarter)}</>
           )
         ) : (
-          <Stack
-            alignItems="flex-start"
-            direction="row"
-            spacing={2}
-            divider={
-              <Divider
-                orientation="vertical"
-                flexItem
-              />
-            }
-            // sx={{ verticalAlign: "top" }}
+          <Grid
+            container
+            spacing={3}
           >
-            <Stack>
+            <Grid item>
               {translate(tokens.satisfactory.pages.games.factories.inputs)}
-              <Table sx={{ minWidth: 400 }}>
-                <TableHead>
-                  <TableRow>
-                    <TableCell>
-                      {translate(tokens.satisfactory.pages.games.factories.product)}
-                    </TableCell>
-                    <TableCell>
-                      {translate(tokens.satisfactory.pages.games.factories.amount)}
-                    </TableCell>
-                  </TableRow>
-                </TableHead>
-                <TableBody>
-                  {recipeState?.inputsAndOutputs &&
-                    Object.entries(recipeState.inputsAndOutputs.inputs).map(([key, value]) => {
-                      return (
-                        <TableRow key={key}>
-                          <TableCell>{products[key].name}</TableCell>
-                          <TableCell>{value}</TableCell>
-                        </TableRow>
-                      );
-                    })}
-                </TableBody>
-              </Table>
-            </Stack>
-            <Stack>
+              <TableContainer>
+                <Table sx={{ minWidth: 400 }}>
+                  <TableHead>
+                    <TableRow>
+                      <TableCell>
+                        {translate(tokens.satisfactory.pages.games.factories.product)}
+                      </TableCell>
+                      <TableCell>
+                        {translate(tokens.satisfactory.pages.games.factories.amount)}
+                      </TableCell>
+                    </TableRow>
+                  </TableHead>
+                  <TableBody>
+                    {statistics.totalInputs.length > 0 &&
+                      statistics.totalInputs.map((input) => {
+                        return (
+                          <TableRow key={input.product}>
+                            <TableCell>{products[input.product]?.name}</TableCell>
+                            <TableCell>{input.quantityMin} p.m.</TableCell>
+                          </TableRow>
+                        );
+                      })}
+                  </TableBody>
+                </Table>
+              </TableContainer>
+            </Grid>
+            <Grid item>
               {' '}
               {translate(tokens.satisfactory.pages.games.factories.outputs)}
-              <Table sx={{ minWidth: 400 }}>
-                <TableHead>
-                  <TableRow>
-                    <TableCell>
-                      {translate(tokens.satisfactory.pages.games.factories.product)}
-                    </TableCell>
-                    <TableCell>
-                      {translate(tokens.satisfactory.pages.games.factories.amount)}
-                    </TableCell>
-                  </TableRow>
-                </TableHead>
-                <TableBody>
-                  {recipeState?.inputsAndOutputs &&
-                    Object.entries(recipeState.inputsAndOutputs.outputs).map(([key, value]) => {
-                      return (
-                        <TableRow key={key}>
-                          <TableCell>{products[key].name}</TableCell>
-                          <TableCell>{value}</TableCell>
-                        </TableRow>
-                      );
-                    })}
-                </TableBody>
-              </Table>
-            </Stack>
-          </Stack>
+              <TableContainer>
+                <Table sx={{ minWidth: 400 }}>
+                  <TableHead>
+                    <TableRow>
+                      <TableCell>
+                        {translate(tokens.satisfactory.pages.games.factories.product)}
+                      </TableCell>
+                      <TableCell>
+                        {translate(tokens.satisfactory.pages.games.factories.amount)}
+                      </TableCell>
+                    </TableRow>
+                  </TableHead>
+                  <TableBody>
+                    {statistics.totalOutputs.length &&
+                      statistics.totalOutputs.map((output) => {
+                        return (
+                          <TableRow key={output.product}>
+                            <TableCell>{products[output.product]?.name}</TableCell>
+                            <TableCell>{output.quantityMin} p.m.</TableCell>
+                          </TableRow>
+                        );
+                      })}
+                  </TableBody>
+                </Table>
+              </TableContainer>
+            </Grid>
+          </Grid>
         )}
       </CardDefault>
       <SatisfactoryGamesFactoryRecipes

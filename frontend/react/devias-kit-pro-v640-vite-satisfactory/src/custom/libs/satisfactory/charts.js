@@ -1,20 +1,22 @@
-export const recipeChart = (recipe, items, machines, options = {}) => {
-  const { hideTitle } = options;
+/**
+ *
+ * @param {object} recipe Recipe object
+ * @param {array} items
+ * @param {array} machines
+ * @returns {string}
+ */
+export const recipeChart = (recipe, items, machines) => {
   console.log(recipe, items);
+  if (!recipe) return '';
   const itemsMin = 60 / recipe.craftTime;
-  let graphString = hideTitle
-    ? `graph LR;
-`
-    : `---
-title: Recipe ${recipe.name}
----
-graph LR;
-    ${recipe.slug}[${recipe.name}
-    ${machines[recipe.producedIn].name}]`;
+  let graphString = `graph LR;
+    ${recipe.slug}([${machines[recipe.producedIn]?.name || 'Workshop'}])`;
+
+  console.log(graphString);
 
   recipe.ingredients.forEach((ingredient) => {
     graphString += `
-    ${ingredient.itemClass}[${items[ingredient.itemClass].name}] -->|${
+    ${ingredient.itemClass}[${ingredient.quantity} x ${items[ingredient.itemClass].name}] -->|${
       ingredient.quantity * itemsMin
     } p.m.| ${recipe.slug}`;
   });
@@ -26,6 +28,8 @@ graph LR;
     } x ${items[product.itemClass].name}]
     `;
   });
+
+  console.log(graphString);
 
   return graphString;
 };

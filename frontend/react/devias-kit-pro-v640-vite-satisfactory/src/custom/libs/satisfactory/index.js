@@ -8,8 +8,18 @@ import tierList_v700 from './data/v700/tierList.json';
 import _ from 'lodash';
 
 export { recipeChart } from './charts';
+export { getFactoryStatistics, getRecipesByProduct } from './statistics';
 
 const satisfactory_data = {
+  v600: {
+    items: [],
+    buildables: [],
+    buildableRecipes: [],
+    recipes: [],
+    resources: [],
+    schematics: [],
+    tierList: [],
+  },
   v700: {
     items: items_v700,
     buildables: buildables_v700,
@@ -66,9 +76,11 @@ export const getSatisfactoryDataArray = (type, version) => {
 
 export const getSatisfactoryItem = (itemClassName, version) => {
   const item = getSatisfactoryData('items', version)[itemClassName];
+  if (!item) return;
   const recipes = getSatisfactoryRecipesByItem(itemClassName, version);
-  item['recipes_for'] = recipes.used_for;
-  item['recipes_by'] = recipes.made_by;
+  if (!recipes) return;
+  item['recipes_for'] = recipes?.used_for || [];
+  item['recipes_by'] = recipes?.made_by || [];
   item['resource'] = getSatisfactoryResourceByItem(itemClassName, version);
   item['buildable_recipes'] = getSatisfactoryBuildableRecipeByItem(itemClassName, version);
   item['schematics'] = getSatisfactorySchematicByItem(itemClassName, version);

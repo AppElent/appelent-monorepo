@@ -11,6 +11,8 @@ const GamesPage = lazy(() => import('src/pages/app/satisfactory/games'));
 const ProductsPage = lazy(() => import('src/pages/app/satisfactory/products'));
 const ProductsDetailPage = lazy(() => import('src/pages/app/satisfactory/product-detail'));
 const Recipes = lazy(() => import('src/pages/app/satisfactory/recipes'));
+const Calculations = lazy(() => import('src/pages/app/satisfactory/calculations'));
+const FactoryPlanner = lazy(() => import('src/pages/app/satisfactory/factory-planner'));
 
 export const appRoutes = [
   {
@@ -58,6 +60,14 @@ export const appRoutes = [
           {
             path: 'recipes',
             element: <Recipes />,
+          },
+          {
+            path: 'calculations',
+            element: <Calculations />,
+          },
+          {
+            path: 'planner',
+            element: <FactoryPlanner />,
           },
         ],
       },

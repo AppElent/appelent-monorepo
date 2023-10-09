@@ -4,6 +4,7 @@ import {
   Button,
   Container,
   Divider,
+  Grid,
   Tab,
   Tabs,
   TextField,
@@ -20,6 +21,7 @@ import {
   //   saveSatisfactoryGame,
   getSatisfactoryDataArray,
   getSatisfactoryData,
+  satisfactoryVersions,
 } from 'src/custom/libs/satisfactory/index';
 import { Stack } from '@mui/system';
 import _ from 'lodash';
@@ -32,6 +34,7 @@ import { useConfirm } from 'src/custom/libs/confirmation';
 import { toast } from 'react-hot-toast';
 import { SatisfactoryGamesScribble } from 'src/sections/app/satisfactory/games/satisfactory-games-scribble';
 import { SatisfactoryGamesFactories } from 'src/sections/app/satisfactory/games/satisfactory-games-factories';
+import { SatisfactoryGamesTransport } from 'src/sections/app/satisfactory/games/satisfactory-games-transport';
 import { generateName } from 'src/custom/libs/random-name-generator';
 import { useKey } from 'src/custom/hooks/use-key';
 import { useTranslate } from '@refinedev/core';
@@ -40,6 +43,10 @@ import { Seo } from 'src/components/seo';
 import useQueryOrLocalStorage from 'src/custom/hooks/use-query-or-localstorage';
 import { useMounted } from 'src/hooks/use-mounted';
 import { useLocation } from 'react-router';
+import { SatisfactoryGamesOverview } from 'src/sections/app/satisfactory/games/satisfactory-games-overview';
+import { SatisfactoryGamesVehicles } from 'src/sections/app/satisfactory/games/vehicles/vehicles';
+import * as Yup from 'yup';
+import { nanoid } from 'nanoid';
 
 const Page = () => {
   const isMounted = useMounted();
@@ -84,15 +91,80 @@ const Page = () => {
   //   setFormDirty(false);
   // }, [selectedGame]);
 
-  const onGameChange = useCallback((newId) => {
-    //setGameId(newId);
-    setSelectedGameId(newId);
-  }, []);
-
   const initialValues = {
     ...selectedGame,
     version: selectedGame?.version || SatisfactoryCurrentVersion,
   };
+
+  const SatisfactoryVersions = satisfactoryVersions.map((v) => v.key);
+
+  const gamesValidation = Yup.object().shape({
+    id: Yup.string().required('Required'),
+    name: Yup.string().required('Name of game is required'),
+    description: Yup.string().strict(true),
+    version: Yup.mixed().oneOf(SatisfactoryVersions),
+    transport: Yup.object().shape({
+      vehicles: Yup.array().of(
+        Yup.object().shape({
+          id: Yup.string().required('Required'),
+          name: Yup.string().required('Name is required'),
+          description: Yup.string(),
+          type: Yup.string().required('Required'),
+          cars: Yup.array().of(
+            Yup.object().shape({
+              id: Yup.string().required('Required'),
+              type: Yup.string(),
+            })
+          ),
+          stops: Yup.array().of(
+            Yup.object().shape({
+              id: Yup.string().required('Required'),
+              direction: Yup.string(),
+              station: Yup.string().required('Required'),
+            })
+          ),
+        })
+      ),
+      stations: Yup.array().of(
+        Yup.object().shape({
+          id: Yup.string().required('Required'),
+          name: Yup.string().required('Name is required'),
+          description: Yup.string(),
+          type: Yup.string().required('Required'),
+          direction: Yup.string().when('type', {
+            is: 'train',
+            then: () => Yup.string(),
+            otherwise: () => Yup.string().required('Direction is required'),
+          }),
+          platforms: Yup.array().of(
+            Yup.object().shape({
+              id: Yup.string().required('Required'),
+              direction: Yup.string(),
+              type: Yup.string(),
+              products: Yup.array().of(Yup.string()),
+            })
+          ),
+          factories: Yup.array().of(Yup.string()),
+        })
+      ),
+    }),
+    factories: Yup.array().of(
+      Yup.object().shape({
+        name: Yup.string().required('Name is required'),
+        id: Yup.string().required('Required'),
+        description: Yup.string(),
+        finished: Yup.boolean(),
+        checked: Yup.boolean(),
+        recipes: Yup.array().of(
+          Yup.object().shape({
+            amount: Yup.string().required('Required'),
+            recipe: Yup.string().required('Required'),
+            id: Yup.string().required('Required'),
+          })
+        ),
+      })
+    ),
+  });
 
   const formik = useFormik({
     initialValues,
@@ -100,12 +172,35 @@ const Page = () => {
     //validationSchema,
     onSubmit: async (values, helpers) => {
       try {
+        console.log('Saving values', values);
         let { meta, ...rest } = values;
         if (!rest.players.find((player) => player.uid === values.owner)) {
           rest.players.push({
             uid: values.owner,
             name: auth.currentUser.displayName,
           });
+        }
+
+        // For each station, check if it is a train station. If not, add 1 platform. If it is a train, add train station
+        if (rest.transport?.stations?.length > 0) {
+          rest.transport.stations = rest.transport?.stations.map((station) => {
+            console.log('station', station);
+            if (station.type !== 'train') {
+              if (station.platforms === undefined || station.platforms.length === 0) {
+                station.platforms = [{ id: nanoid() }];
+              } else if (station.platforms.length > 1) {
+                station.platforms = [station.platforms[0]];
+              }
+            } else {
+              //TODO: add train station
+            }
+            return station;
+          });
+        }
+
+        // For each vehicle, check if it is a train station. If not, add 1 car
+        if (rest.transport?.vehicles?.length > 0) {
+          console.log(rest.transport.vehicles);
         }
 
         // Fix linebreaks at the end of scribble field
@@ -131,7 +226,14 @@ const Page = () => {
         }
       }
     },
+    validationSchema: gamesValidation,
   });
+
+  useEffect(() => console.log('FORMIK', formik), [formik]);
+
+  useEffect(() => {
+    if (Object.keys(formik.errors)?.length > 0) console.error(formik.errors);
+  }, [formik.errors]);
 
   useEffect(() => {
     window.addEventListener('beforeunload', alertUser);
@@ -148,7 +250,7 @@ const Page = () => {
     }
   };
 
-  useKey('ctrls', () => formik.handleSubmit());
+  useKey({ key: 's', event: 'ctrlKey' }, () => formik.handleSubmit());
 
   const satisfactoryRecipes = _.sortBy(
     getSatisfactoryDataArray('recipes', formik.values.version),
@@ -162,6 +264,10 @@ const Page = () => {
       value: 'general',
     },
     {
+      label: 'Overview',
+      value: 'overview',
+    },
+    {
       label: translate(tokens.satisfactory.pages.games.tabs.factories),
       value: 'factories',
       disabled: !selectedGame,
@@ -172,8 +278,13 @@ const Page = () => {
       disabled: !selectedGame,
     },
     {
-      label: translate(tokens.satisfactory.pages.games.tabs.trainstations),
-      value: 'trainstations',
+      label: 'Transport station',
+      value: 'transport',
+      disabled: !selectedGame,
+    },
+    {
+      label: 'Vehicles',
+      value: 'vehicles',
       disabled: !selectedGame,
     },
     {
@@ -182,6 +293,12 @@ const Page = () => {
       disabled: !selectedGame,
     },
   ];
+
+  const onGameChange = useCallback((newId) => {
+    //setGameId(newId);
+    tabs.setTab(tabsData[0].value);
+    setSelectedGameId(newId);
+  }, []);
 
   // useEffect(() => {
   //   let tabToSet = tabs.tab ? tabs.tab : tabsData[0];
@@ -215,6 +332,7 @@ const Page = () => {
   const deleteGame = useCallback(async () => {
     const id = selectedGame.id;
     deleteSelectedGameId();
+    window.scrollTo(0, 0);
     return await gamesData.resource?.actions.delete(id);
   }, [gamesData, selectedGame]);
 
@@ -263,54 +381,74 @@ const Page = () => {
                 spacing={3}
               >
                 <Typography variant="h4">Game: {selectedGame.name}</Typography>
-
                 <Stack
                   direction="row"
                   spacing={2}
                 >
-                  <Autocomplete
-                    getOptionLabel={(option) => option.name}
-                    options={sortedGames}
-                    renderInput={(params) => (
-                      <TextField
-                        {...params}
-                        fullWidth
-                        label={translate(tokens.satisfactory.pages.games.title)}
-                        name="game"
-                      />
-                    )}
-                    renderOption={(props, option) => {
-                      return (
-                        <li
-                          {...props}
-                          key={option.id}
-                        >
-                          {option.name}
-                        </li>
-                      );
-                    }}
-                    // isOptionEqualToValue={(option, value) =>
-                    //   option.name === value.name
-                    // }
-                    onChange={(e, value) => {
-                      if (value) {
-                        onGameChange(value.id);
-                      }
-                    }}
-                    // onInputChange={(event, newInputValue) => {
-                    //   setInputValue(newInputValue);
-                    // }}
-                    sx={{ width: 300 }}
-                    value={selectedGame}
-                  />
-                  <Button
-                    onClick={() => {
-                      createNewGame();
-                    }}
-                    variant="contained"
+                  <Grid
+                    container
+                    alignItems="center"
+                    spacing={2}
+                    justifyContent="flex-start"
+                    minWidth={350}
                   >
-                    {translate(tokens.satisfactory.pages.games.addGame)}
-                  </Button>
+                    <Grid
+                      item
+                      xs={12}
+                      md={7}
+                    >
+                      <Autocomplete
+                        getOptionLabel={(option) => option.name}
+                        options={sortedGames}
+                        renderInput={(params) => (
+                          <TextField
+                            {...params}
+                            fullWidth
+                            label={translate(tokens.satisfactory.pages.games.title)}
+                            name="game"
+                          />
+                        )}
+                        renderOption={(props, option) => {
+                          return (
+                            <li
+                              {...props}
+                              key={option.id}
+                            >
+                              {option.name}
+                            </li>
+                          );
+                        }}
+                        // isOptionEqualToValue={(option, value) =>
+                        //   option.name === value.name
+                        // }
+                        onChange={(e, value) => {
+                          if (value) {
+                            onGameChange(value.id);
+                          }
+                        }}
+                        // onInputChange={(event, newInputValue) => {
+                        //   setInputValue(newInputValue);
+                        // }}
+                        sx={{ minWidth: 250 }}
+                        value={selectedGame}
+                      />
+                    </Grid>
+                    <Grid
+                      item
+                      xs
+                      lg
+                      md={5}
+                    >
+                      <Button
+                        onClick={() => {
+                          createNewGame();
+                        }}
+                        variant="contained"
+                      >
+                        {translate(tokens.satisfactory.pages.games.addGame)}
+                      </Button>
+                    </Grid>
+                  </Grid>
                 </Stack>
               </Stack>
               <div>
@@ -371,8 +509,27 @@ const Page = () => {
                   translate={translate}
                 />
               )}
+              {tabs.tab === 'overview' && <SatisfactoryGamesOverview game={selectedGame} />}
               {tabs.tab === 'factories' && (
                 <SatisfactoryGamesFactories
+                  formik={formik}
+                  game={selectedGame}
+                  recipes={satisfactoryRecipes}
+                  products={satisfactoryProducts}
+                  translate={translate}
+                />
+              )}
+              {tabs.tab === 'transport' && (
+                <SatisfactoryGamesTransport
+                  formik={formik}
+                  game={selectedGame}
+                  recipes={satisfactoryRecipes}
+                  products={satisfactoryProducts}
+                  translate={translate}
+                />
+              )}
+              {tabs.tab === 'vehicles' && (
+                <SatisfactoryGamesVehicles
                   formik={formik}
                   game={selectedGame}
                   recipes={satisfactoryRecipes}

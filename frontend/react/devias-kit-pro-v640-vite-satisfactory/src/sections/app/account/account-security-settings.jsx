@@ -13,6 +13,7 @@ import * as Yup from 'yup';
 import { tokens } from 'src/locales/tokens';
 import { useTranslate } from '@refinedev/core';
 import { useMounted } from 'src/hooks/use-mounted';
+import { CardDefault } from 'src/components/app/card-default';
 
 export const AccountSecuritySettings = (props) => {
   const { loginEvents, updatePassword } = props;
@@ -61,120 +62,97 @@ export const AccountSecuritySettings = (props) => {
 
   return (
     <Stack spacing={4}>
-      <Card>
-        <CardContent>
-          <Grid
-            container
-            spacing={3}
+      <CardDefault title="Change password">
+        <Stack spacing={3}>
+          <Stack
+            alignItems="center"
+            direction="row"
+            spacing={2}
           >
-            <Grid
-              xs={12}
-              md={4}
-            >
-              <Typography variant="h6">Change password</Typography>
-            </Grid>
-            <Grid
-              xs={12}
-              sm={12}
-              md={8}
-            >
-              <Stack spacing={3}>
-                <Stack
-                  alignItems="center"
-                  direction="row"
-                  spacing={2}
-                >
-                  <TextField
-                    label="Old password"
-                    type="password"
-                    name="oldPassword"
-                    error={!!(formik.touched.oldPassword && formik.errors.oldPassword)}
-                    helperText={formik.touched.oldPassword && formik.errors.oldPassword}
-                    value={formik.values.oldPassword}
-                    onBlur={formik.handleBlur}
-                    onChange={formik.handleChange}
-                    sx={{
-                      flexGrow: 1,
-                      // ...(!isEditing && {
-                      //   '& .MuiOutlinedInput-notchedOutline': {
-                      //     borderStyle: 'dotted',
-                      //   },
-                      // }),
-                    }}
-                  />
-                </Stack>
+            <TextField
+              label="Old password"
+              type="password"
+              name="oldPassword"
+              error={!!(formik.touched.oldPassword && formik.errors.oldPassword)}
+              helperText={formik.touched.oldPassword && formik.errors.oldPassword}
+              value={formik.values.oldPassword}
+              onBlur={formik.handleBlur}
+              onChange={formik.handleChange}
+              sx={{
+                flexGrow: 1,
+                // ...(!isEditing && {
+                //   '& .MuiOutlinedInput-notchedOutline': {
+                //     borderStyle: 'dotted',
+                //   },
+                // }),
+              }}
+            />
+          </Stack>
 
-                <Stack
-                  alignItems="center"
-                  direction="row"
-                  spacing={2}
-                >
-                  <TextField
-                    label="New password"
-                    type="password"
-                    name="newPassword"
-                    error={!!(formik.touched.newPassword && formik.errors.newPassword)}
-                    helperText={formik.touched.newPassword && formik.errors.newPassword}
-                    value={formik.values.newPassword}
-                    onBlur={formik.handleBlur}
-                    onChange={formik.handleChange}
-                    sx={{
-                      marginTop: 2,
-                      flexGrow: 1,
-                      // ...(!isEditing && {
-                      //   '& .MuiOutlinedInput-notchedOutline': {
-                      //     borderStyle: 'dotted',
-                      //   },
-                      // }),
-                    }}
-                  />
-                  {/* <Button
+          <Stack
+            alignItems="center"
+            direction="row"
+            spacing={2}
+          >
+            <TextField
+              label="New password"
+              type="password"
+              name="newPassword"
+              error={!!(formik.touched.newPassword && formik.errors.newPassword)}
+              helperText={formik.touched.newPassword && formik.errors.newPassword}
+              value={formik.values.newPassword}
+              onBlur={formik.handleBlur}
+              onChange={formik.handleChange}
+              sx={{
+                marginTop: 2,
+                flexGrow: 1,
+                // ...(!isEditing && {
+                //   '& .MuiOutlinedInput-notchedOutline': {
+                //     borderStyle: 'dotted',
+                //   },
+                // }),
+              }}
+            />
+            {/* <Button
                     disabled={!formik.isValid}
                     onClick={handleEdit}
                   >
                     {isEditing ? 'Save' : 'Edit'}
                   </Button> */}
-                </Stack>
-                <Stack
-                  alignItems="center"
-                  direction="row"
-                  spacing={2}
-                >
-                  <TextField
-                    label="Confirm new password"
-                    type="password"
-                    error={
-                      !!(formik.touched.newPasswordConfirmed && formik.errors.newPasswordConfirmed)
-                    }
-                    helperText={
-                      formik.touched.newPasswordConfirmed && formik.errors.newPasswordConfirmed
-                    }
-                    name="newPasswordConfirmed"
-                    value={formik.values.newPasswordConfirmed}
-                    onBlur={formik.handleBlur}
-                    onChange={formik.handleChange}
-                    sx={{
-                      marginTop: 2,
-                      flexGrow: 1,
-                      // ...(!isEditing && {
-                      //   '& .MuiOutlinedInput-notchedOutline': {
-                      //     borderStyle: 'dotted',
-                      //   },
-                      // }),
-                    }}
-                  />
-                  <Button
-                    disabled={!formik.isValid}
-                    onClick={formik.handleSubmit}
-                  >
-                    {translate(tokens.common.buttons.save)}
-                  </Button>
-                </Stack>
-              </Stack>
-            </Grid>
-          </Grid>
-        </CardContent>
-      </Card>
+          </Stack>
+          <Stack
+            alignItems="center"
+            direction="row"
+            spacing={2}
+          >
+            <TextField
+              label="Confirm new password"
+              type="password"
+              error={!!(formik.touched.newPasswordConfirmed && formik.errors.newPasswordConfirmed)}
+              helperText={formik.touched.newPasswordConfirmed && formik.errors.newPasswordConfirmed}
+              name="newPasswordConfirmed"
+              value={formik.values.newPasswordConfirmed}
+              onBlur={formik.handleBlur}
+              onChange={formik.handleChange}
+              sx={{
+                marginTop: 2,
+                flexGrow: 1,
+                // ...(!isEditing && {
+                //   '& .MuiOutlinedInput-notchedOutline': {
+                //     borderStyle: 'dotted',
+                //   },
+                // }),
+              }}
+            />
+            <Button
+              disabled={!formik.isValid}
+              onClick={formik.handleSubmit}
+            >
+              {translate(tokens.common.buttons.save)}
+            </Button>
+          </Stack>
+        </Stack>
+      </CardDefault>
       {/* <Card>
         <CardHeader title="Multi Factor Authentication" />
         <CardContent sx={{ pt: 0 }}>
