@@ -2,19 +2,19 @@ import { deepCopy } from 'src/utils/deep-copy';
 import { connections, feed, posts, profile } from './data';
 
 class SocialApi {
-  getProfile(request) {
+  getProfile() {
     return Promise.resolve(deepCopy(profile));
   }
 
-  getConnections(request) {
+  getConnections() {
     return Promise.resolve(deepCopy(connections));
   }
 
-  getPosts(request) {
+  getPosts() {
     return Promise.resolve(deepCopy(posts));
   }
 
-  getFeed(request) {
+  getFeed() {
     return Promise.resolve(deepCopy(feed));
   }
 }

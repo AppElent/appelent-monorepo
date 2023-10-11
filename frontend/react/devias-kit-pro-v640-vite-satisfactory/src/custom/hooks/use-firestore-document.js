@@ -7,7 +7,7 @@ export const useFirestoreDocument = (query, options, process) => {
 
   useEffect(() => {
     if (values) {
-      const returnObject = {
+      let returnObject = {
         ...values.data(),
         id: values.id,
         //docRef: values.ref,
@@ -19,14 +19,14 @@ export const useFirestoreDocument = (query, options, process) => {
       };
 
       if (process) {
-        const valueArray = process(returnObject);
+        returnObject = process(returnObject);
       }
 
       setValuesNew(returnObject);
     } else {
       setValuesNew(values);
     }
-  }, [values]);
+  }, [values, process]);
 
   return [valuesNew, loading, error, snapshot];
 };

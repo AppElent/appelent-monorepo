@@ -4,6 +4,9 @@ import nProgress from 'nprogress';
 import { useMounted } from 'src/hooks/use-mounted';
 import { usePathname } from 'src/hooks/use-pathname';
 
+/**
+ *
+ */
 export function useNprogress() {
   const isMounted = useMounted();
   const pathname = usePathname();

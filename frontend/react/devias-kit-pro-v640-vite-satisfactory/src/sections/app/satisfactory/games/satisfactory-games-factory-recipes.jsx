@@ -64,6 +64,11 @@ const FACTORY_RECIPE_TEMPLATE = {
   isNew: true,
 };
 
+/**
+ *
+ * @param {object} props props
+ * @returns {any} toolbar
+ */
 function EditToolbar(props) {
   const { setRows, setRowModesModel } = props;
 
@@ -95,6 +100,11 @@ EditToolbar.propTypes = {
   setRows: PropTypes.func.isRequired,
 };
 
+/**
+ *
+ * @param {any} props props
+ * @returns {any} object
+ */
 export function SatisfactoryGamesFactoryRecipes(props) {
   const { factoryIndex, formik, recipes, products, translate } = props;
   const rows = formik.values.factories[factoryIndex].recipes || [];
@@ -123,9 +133,6 @@ export function SatisfactoryGamesFactoryRecipes(props) {
   };
 
   const handleDeleteClick = (id) => () => {
-    const recipeIndex = formik.values.factories[factoryIndex]?.recipes.find(
-      (recipe) => recipe.id === id
-    );
     const newRecipes = formik.values.factories[factoryIndex].recipes?.filter(
       (row) => row.id !== id
     );
@@ -168,7 +175,7 @@ export function SatisfactoryGamesFactoryRecipes(props) {
   };
 
   const RecipeEditInputCell = (props) => {
-    const { id, value, row, field } = props;
+    const { id, row, field } = props;
 
     const apiRef = useGridApiContext();
     let index = formik.values.factories[factoryIndex].recipes.findIndex((r) => r.id === id);
@@ -281,7 +288,7 @@ export function SatisfactoryGamesFactoryRecipes(props) {
       editable: true,
       preProcessEditCellProps: (params) => {
         try {
-          const newValue = parseFloat(params.props.value);
+          //const newValue = parseFloat(params.props.value);
         } catch {
           return { ...params.props, error: true };
         }

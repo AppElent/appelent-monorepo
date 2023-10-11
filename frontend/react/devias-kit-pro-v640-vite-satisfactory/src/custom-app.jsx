@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import { QueryParamProvider } from 'use-query-params';
 import { ReactRouter6Adapter } from 'use-query-params/adapters/react-router-6';
 
@@ -177,9 +178,18 @@ const CustomAppChild = ({ children }) => {
     } else if (!auth.currentUser?.uid && globalData.dispatch) {
       // delete resource
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [auth.currentUser, globalData.dispatch]);
 
   return returnComponent;
 };
 
 export default CustomApp;
+
+CustomApp.propTypes = {
+  children: PropTypes.any,
+};
+
+CustomAppChild.propTypes = {
+  children: PropTypes.any,
+};

@@ -3,11 +3,11 @@ import { deepCopy } from 'src/utils/deep-copy';
 import { post, posts } from './data';
 
 class BlogApi {
-  getPosts(request = {}) {
+  getPosts() {
     return Promise.resolve(deepCopy(posts));
   }
 
-  getPost(request) {
+  getPost() {
     return Promise.resolve(deepCopy(post));
   }
 }

@@ -1,11 +1,10 @@
-import React, { useState, useEffect, useMemo } from 'react';
+import React, { useMemo } from 'react';
 import PropTypes from 'prop-types';
 import {
   Autocomplete,
   Box,
   Button,
   Checkbox,
-  Divider,
   Grid,
   Stack,
   Table,
@@ -19,21 +18,14 @@ import {
 import { CardDefault } from 'src/components/app/card-default';
 import { createGuid } from 'src/custom/libs/create-guid';
 import { SatisfactoryGamesFactoryRecipes } from './satisfactory-games-factory-recipes';
-import { useRouter } from 'src/hooks/use-router';
 import { useQueryParam } from 'use-query-params';
 import { generateName } from 'src/custom/libs/random-name-generator';
-import { getSatisfactoryRecipeStatistics } from 'src/custom/libs/satisfactory';
 import { tokens } from 'src/locales/tokens';
-import _ from 'lodash';
 import { useSelected } from 'src/custom/hooks/use-selected';
 import { getFactoryStatistics } from 'src/custom/libs/satisfactory/statistics';
 import { useConfirm } from 'material-ui-confirm';
-
-const newObject = {
-  name: '',
-  age: '',
-  isNew: true,
-};
+import FactorySelect from './factories/factory-select';
+import FactoryInputsOutputs from './factories/factory-inputs-outputs';
 
 const FACTORY_TEMPLATE = {
   description: '',
@@ -43,50 +35,12 @@ const FACTORY_TEMPLATE = {
 };
 
 export const SatisfactoryGamesFactories = (props) => {
-  const { formik, game, recipes, products, translate } = props;
-  const router = useRouter();
+  const { formik, game, recipes, products, version, translate } = props;
   const confirm = useConfirm();
   const [factoryId, setFactoryId] = useQueryParam('factory');
   //const [recipeState, setRecipeState] = useState({});
 
   const [selectedFactory, selectedFactoryIndex] = useSelected(formik.values.factories, factoryId);
-
-  // const selectedFactory = useMemo(() => {
-  //   if (formik.values.factories) {
-  //     if (factoryId) {
-  //       const found = formik.values.factories.find((factory) => factory.id === factoryId);
-  //       if (found) {
-  //         return found;
-  //       } else {
-  //         return formik.values.factories[0];
-  //       }
-  //     } else {
-  //       return formik.values.factories[0];
-  //     }
-  //   }
-  //   return undefined;
-  // }, [formik.values.factories, factoryId]);
-
-  // const selectedFactoryIndex = useMemo(() => {
-  //   const index = formik.values.factories?.findIndex(
-  //     (factory) => factory.id === selectedFactory.id
-  //   );
-  //   if (!index) {
-  //     return 0;
-  //   }
-  //   return index;
-  // }, [selectedFactory]);
-
-  // useEffect(() => {
-  //   const satisfactoryStatistics = getSatisfactoryRecipeStatistics(
-  //     formik.values.factories?.[selectedFactoryIndex]?.recipes,
-  //     recipes,
-  //     products
-  //   );
-  //   setRecipeState(satisfactoryStatistics);
-
-  //   //return returnObject;
-  // }, [formik.values.factories?.[selectedFactoryIndex]?.recipes]);
 
   const statistics = useMemo(
     () => getFactoryStatistics(formik.values.factories?.[selectedFactoryIndex]?.recipes),
@@ -146,7 +100,7 @@ export const SatisfactoryGamesFactories = (props) => {
         justifyContent="space-between"
         spacing={3}
       >
-        <Autocomplete
+        {/* <Autocomplete
           getOptionLabel={(option) => option.name}
           options={formik.values.factories || []}
           renderInput={(params) => (
@@ -178,6 +132,11 @@ export const SatisfactoryGamesFactories = (props) => {
           // }}
           sx={{ width: 300 }}
           value={selectedFactory}
+        /> */}
+        <FactorySelect
+          factories={formik.values.factories || []}
+          setFactoryId={setFactoryId}
+          selectedFactory={selectedFactory}
         />
         <Button
           //color="inherit"
@@ -266,7 +225,7 @@ export const SatisfactoryGamesFactories = (props) => {
         </Stack>
       </CardDefault>
 
-      <CardDefault
+      {/* <CardDefault
         title={
           translate(tokens.satisfactory.pages.games.factories.inputs) +
           ' / ' +
@@ -343,7 +302,12 @@ export const SatisfactoryGamesFactories = (props) => {
             </Grid>
           </Grid>
         )}
-      </CardDefault>
+      </CardDefault> */}
+      <FactoryInputsOutputs
+        factories={formik.values.factories}
+        selectedFactoryIndex={selectedFactoryIndex}
+        version={version}
+      />
       <SatisfactoryGamesFactoryRecipes
         game={game}
         factoryIndex={selectedFactoryIndex}

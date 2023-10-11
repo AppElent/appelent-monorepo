@@ -1,4 +1,9 @@
 // eslint-disable-next-line consistent-return
+/**
+ *
+ * @param {any} obj Object to deep copy
+ * @returns {any} Deep copy of object
+ */
 export function deepCopy(obj) {
   if (typeof obj !== 'object' || obj === null) {
     return obj;

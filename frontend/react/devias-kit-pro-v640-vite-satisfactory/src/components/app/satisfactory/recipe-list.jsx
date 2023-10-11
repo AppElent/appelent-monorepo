@@ -3,7 +3,6 @@ import {
   Box,
   Button,
   Card,
-  Checkbox,
   Dialog,
   DialogActions,
   Divider,
@@ -34,12 +33,10 @@ import SearchMdIcon from '@untitled-ui/icons-react/build/esm/SearchMd';
 import { useMemo } from 'react';
 import { Scrollbar } from 'src/components/scrollbar';
 import ArrowRightIcon from '@untitled-ui/icons-react/build/esm/ArrowRight';
-import Edit02Icon from '@untitled-ui/icons-react/build/esm/Edit02';
 import useModal from 'src/custom/hooks/use-modal';
 import { useKey } from 'src/custom/hooks/use-key';
 
 const RecipeList = () => {
-  const [productQuery, setProductQuery] = useQueryParam('recipe');
   const theme = useTheme();
   const matches = useMediaQuery(theme.breakpoints.up('sm'));
   const [version] = useQueryParam('version');
@@ -47,11 +44,11 @@ const RecipeList = () => {
   useKey({ key: 'r', event: 'ctrlKey' }, () => modal.setModalState(true));
 
   const recipeArray = useMemo(() => getSatisfactoryDataArray('recipes', version), [version]);
-  const schematics = useMemo(() => getSatisfactoryDataArray('schematics', version), [version]);
+  //const schematics = useMemo(() => getSatisfactoryDataArray('schematics', version), [version]);
   const products = useMemo(() => getSatisfactoryData('items', version), [version]);
   const machines = useMemo(() => getSatisfactoryData('buildables', version), [version]);
 
-  const { allItems, items, pageItems, search, handlers } = useItems(recipeArray, {
+  const { items, pageItems, search, handlers } = useItems(recipeArray, {
     sortBy: 'name',
     filters: { isFuel: { min: true } },
     rowsPerPage: 5,
@@ -132,6 +129,7 @@ const RecipeList = () => {
                   </SvgIcon>
                 </InputAdornment>
               }
+              autoFocus
               value={search.search}
               sx={{ flexGrow: 1 }}
               onChange={(e) => handlers.handleSearchChange(e.target.value)}

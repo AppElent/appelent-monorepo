@@ -32,8 +32,7 @@ const viewOptions = [
 ];
 
 export const CalendarToolbar = (props) => {
-  const { date, onAddClick, onDateNext, onDatePrev, onDateToday, onViewChange, view, ...other } =
-    props;
+  const { date, onAddClick, onDateNext, onDatePrev, onViewChange, view, ...other } = props;
   const mdUp = useMediaQuery((theme) => theme.breakpoints.up('md'));
 
   const handleViewChange = useCallback(

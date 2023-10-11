@@ -221,7 +221,6 @@ const Page = () => {
             />
             <Divider />
             <ItemListTableContainer
-              onItemSelect={handleItemOpen}
               onPageChange={handlers.handlePageChange}
               onRowsPerPageChange={handlers.handleRowsPerPageChange}
               items={items}

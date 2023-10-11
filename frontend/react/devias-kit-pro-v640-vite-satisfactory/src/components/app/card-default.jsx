@@ -1,12 +1,5 @@
 import PropTypes from 'prop-types';
-import {
-  Card,
-  CardContent,
-  Stack,
-  Typography,
-  Unstable_Grid2 as Grid,
-  Divider,
-} from '@mui/material';
+import { Card, CardContent, Stack, Typography, Unstable_Grid2 as Grid } from '@mui/material';
 
 export const CardDefault = (props) => {
   const { title, subtitle, style, gridLeft, gridRight, children } = props;
@@ -14,6 +7,7 @@ export const CardDefault = (props) => {
     <Stack
       spacing={4}
       {...props}
+      style={style}
     >
       <Card>
         <CardContent>

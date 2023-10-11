@@ -4,11 +4,11 @@ import { useEffect } from 'react';
 
 const useQueryOrLocalStorage = (key, initialValue) => {
   const [getLS, setLS, deleteLS] = useLocalStorage(key, initialValue);
-  const [query, setQuery] = useQueryParam(key);
+  const [, setQuery] = useQueryParam(key);
 
   useEffect(() => {
     setQuery(getLS);
-  }, [getLS]);
+  }, [getLS, setQuery]);
 
   // useEffect(() => {
   //   console.log(123, query, getLS);

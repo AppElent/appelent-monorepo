@@ -1,17 +1,9 @@
 import PropTypes from 'prop-types';
 import Edit02Icon from '@untitled-ui/icons-react/build/esm/Edit02';
-import { Button, Stack, SvgIcon, Typography, useMediaQuery } from '@mui/material';
-
-const statusMap = {
-  canceled: 'warning',
-  complete: 'success',
-  pending: 'info',
-  rejected: 'error',
-};
+import { Button, Stack, SvgIcon, Typography } from '@mui/material';
 
 export const ItemDetailsContainer = (props) => {
   const { onEdit, children } = props;
-  const lgUp = useMediaQuery((theme) => theme.breakpoints.up('lg'));
 
   // const align = lgUp ? "horizontal" : "vertical";
   // const items = item.items || [];

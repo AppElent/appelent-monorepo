@@ -1,22 +1,16 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import {
   Box,
-  Button,
   Card,
   CardContent,
   CardHeader,
   Divider,
-  Grid,
-  MenuItem,
   Stack,
   TableCell,
   TableRow,
-  TextField,
   Typography,
 } from '@mui/material';
-import numeral from 'numeral';
 import { usePageView } from 'src/hooks/use-page-view';
-import { Layout as DashboardLayout } from 'src/layouts/app';
 import { ItemDrawer } from 'src/components/app/list/item-drawer';
 import { ItemListContainer } from 'src/components/app/list/item-list-container';
 import { ItemListSearch } from 'src/components/app/list/item-list-search';
@@ -25,33 +19,18 @@ import { ItemDetailsContainer } from 'src/components/app/list/item-drawer/item-d
 import { SeverityPill } from 'src/components/severity-pill';
 //import { useSearch, useItems } from "components/app/list/utils";
 
-import prodv700 from 'src/custom/libs/satisfactory/data/v700/items.json';
-import prodv800 from 'src/custom/libs/satisfactory/data/v800/items.json';
-import { paginate } from 'src/custom/libs/paginate';
-import { useRouter } from 'src/hooks/use-router';
 import {
   getSatisfactoryData,
   getSatisfactoryDataArray,
   getSatisfactoryItem,
   recipeChart,
-  SatisfactoryCurrentVersion,
-  satisfactoryVersions,
 } from 'src/custom/libs/satisfactory';
-import { paths } from 'src/paths';
-import { SatisfactoryProductDetail } from 'src/sections/app/satisfactory/products/product-detail';
 import { useTranslate } from '@refinedev/core';
 import { tokens } from 'src/locales/tokens';
-import { Seo } from 'src/components/seo';
-import { StringParam, useQueryParam, withDefault } from 'use-query-params';
+import { useQueryParam } from 'use-query-params';
 import { useItems } from 'src/custom/hooks/use-items';
 import { PropertyListTemplate } from '../property-list-template';
 import Mermaid from 'src/custom/libs/mermaid';
-
-const products = {
-  v600: [],
-  v700: prodv700,
-  v800: prodv800,
-};
 
 const tabOptions = [
   {
@@ -101,10 +80,9 @@ const sortOptions = [
 
 const ProductList = () => {
   const rootRef = useRef(null);
-  const router = useRouter();
   const [productQuery, setProductQuery] = useQueryParam('product');
   //const { search, updateSearch } = useSearch();
-  const [version, setVersion] = useQueryParam('version');
+  const [version] = useQueryParam('version');
   const translate = useTranslate();
 
   const productArray = useMemo(() => getSatisfactoryDataArray('items', version), [version]);
@@ -156,15 +134,14 @@ const ProductList = () => {
   });
 
   const currentItem = useMemo(() => {
-    if (items.length > 0) {
+    if (allItems.length > 0) {
       if (!drawer.data) {
         return undefined;
       }
-      console.log(drawer, items);
       const item = allItems.find((item) => item.slug === drawer.data);
       return getSatisfactoryItem(item.className, version);
     }
-  }, [drawer, version]);
+  }, [drawer, version, allItems]);
 
   useEffect(() => {
     // If product query param is present, set currentItem
@@ -194,7 +171,7 @@ const ProductList = () => {
         data: orderId,
       });
     },
-    [drawer]
+    [drawer, setProductQuery]
   );
 
   const handleItemClose = useCallback(() => {
@@ -203,7 +180,7 @@ const ProductList = () => {
       isOpen: false,
       data: undefined,
     });
-  }, []);
+  }, [setProductQuery]);
 
   const propertyItems = useMemo(
     () =>
@@ -225,7 +202,7 @@ const ProductList = () => {
           value: currentItem.sinkPoints?.toString(),
         },
       ],
-    [currentItem]
+    [currentItem, translate]
   );
 
   console.log(currentItem);

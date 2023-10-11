@@ -19,7 +19,7 @@ export const ItemListSearch = (props) => {
   const {
     onFiltersChange,
     onSortChange,
-    sortBy = 'createdAt',
+    //sortBy = 'createdAt',
     sortDir = 'asc',
     tabOptions,
     sortOptions,
@@ -38,7 +38,7 @@ export const ItemListSearch = (props) => {
         search: formik.values.search,
       }));
     }
-  }, [formik.values]);
+  }, [formik.values, directQuery]);
 
   const handleFiltersUpdate = useCallback(() => {
     onFiltersChange?.(filters);
@@ -50,7 +50,6 @@ export const ItemListSearch = (props) => {
 
   const handleTabsChange = useCallback((event, tab) => {
     setCurrentTab(tab);
-    const status = tab === 'all' ? undefined : tab;
 
     setFilters((prevState) => ({
       ...prevState,
@@ -58,16 +57,19 @@ export const ItemListSearch = (props) => {
     }));
   }, []);
 
-  const handleQueryChange = useCallback((event) => {
-    if (!directQuery) {
-      event.preventDefault();
-      const query = queryRef.current?.value || '';
-      setFilters((prevState) => ({
-        ...prevState,
-        search: query,
-      }));
-    }
-  }, []);
+  const handleQueryChange = useCallback(
+    (event) => {
+      if (!directQuery) {
+        event.preventDefault();
+        const query = queryRef.current?.value || '';
+        setFilters((prevState) => ({
+          ...prevState,
+          search: query,
+        }));
+      }
+    },
+    [directQuery]
+  );
 
   const handleSortChange = useCallback(
     (event) => {

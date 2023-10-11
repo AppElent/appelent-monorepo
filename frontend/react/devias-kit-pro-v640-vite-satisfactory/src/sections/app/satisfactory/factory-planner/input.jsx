@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import {
   Button,
   Dialog,
@@ -108,6 +109,13 @@ const Input = ({ handleClose, open, config, setConfig }) => {
       </DialogActions>
     </Dialog>
   );
+};
+
+Input.propTypes = {
+  config: PropTypes.any,
+  handleClose: PropTypes.func,
+  open: PropTypes.bool,
+  setConfig: PropTypes.func,
 };
 
 export default Input;

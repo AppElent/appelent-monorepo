@@ -1,6 +1,6 @@
 import { useMemo } from 'react';
 import { CardDefault } from 'src/components/app/card-default';
-import { getSatisfactoryData, getSatisfactoryDataArray } from 'src/custom/libs/satisfactory';
+import { getSatisfactoryDataArray } from 'src/custom/libs/satisfactory';
 
 const EndProducts = ({ version }) => {
   const products = useMemo(() => getSatisfactoryDataArray('items', version), [version]);

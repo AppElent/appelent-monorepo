@@ -4,7 +4,7 @@ import { deepCopy } from 'src/utils/deep-copy';
 import { data } from './data';
 
 class CalendarApi {
-  getEvents(request = {}) {
+  getEvents() {
     return Promise.resolve(deepCopy(data.events));
   }
 

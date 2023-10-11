@@ -4,10 +4,9 @@ import { Table, TableBody, TablePagination } from '@mui/material';
 export const ItemListTableContainer = (props) => {
   const {
     children,
-    onItemSelect,
     onPageChange,
     onRowsPerPageChange,
-    items,
+    //items,
     itemsCount,
     page,
     rowsPerPage,
@@ -88,11 +87,12 @@ export const ItemListTableContainer = (props) => {
 };
 
 ItemListTableContainer.propTypes = {
+  children: PropTypes.any,
+  items: PropTypes.array.isRequired,
+  itemsCount: PropTypes.number.isRequired,
   onItemSelect: PropTypes.func,
   onPageChange: PropTypes.func.isRequired,
   onRowsPerPageChange: PropTypes.func,
-  items: PropTypes.array.isRequired,
-  itemsCount: PropTypes.number.isRequired,
   page: PropTypes.number.isRequired,
   rowsPerPage: PropTypes.number.isRequired,
 };

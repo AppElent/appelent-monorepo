@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import { Card, CardContent, CardHeader, Stack, Typography, useMediaQuery } from '@mui/material';
+import { Card, CardContent, CardHeader, Stack, Typography } from '@mui/material';
 import { SeverityPill } from 'src/components/severity-pill';
 import { PropertyListTemplate } from 'src/components/app/property-list-template';
 import { tokens } from 'src/locales/tokens';
@@ -11,7 +11,6 @@ import {
 import Mermaid from 'src/custom/libs/mermaid';
 
 export const SatisfactoryProductDetail = ({ product, translate }) => {
-  const lgUp = useMediaQuery((theme) => theme.breakpoints.up('lg'));
   const getSeverityPill = (item) => {
     let status = 'error';
     let text = translate(tokens.common.words.no);

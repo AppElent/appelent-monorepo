@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import Box from '@mui/material/Box';
 import Card from '@mui/material/Card';
 import CardHeader from '@mui/material/CardHeader';
@@ -249,4 +250,17 @@ export const SatisfactoryGamesTransportTrainPlatforms = (props) => {
   );
 };
 
-SatisfactoryGamesTransportTrainPlatforms.propTypes = {};
+SatisfactoryGamesTransportTrainPlatforms.propTypes = {
+  addPlatform: PropTypes.func,
+  deletePlatform: PropTypes.func,
+  platforms: PropTypes.array,
+  setPlatform: PropTypes.func,
+  showProductSelector: PropTypes.any,
+  station: PropTypes.shape({
+    direction: PropTypes.string,
+    factories: PropTypes.array,
+    platforms: PropTypes.array,
+    type: PropTypes.string,
+  }),
+  version: PropTypes.string,
+};

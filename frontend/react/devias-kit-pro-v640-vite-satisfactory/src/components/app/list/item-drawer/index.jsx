@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import PropTypes from 'prop-types';
 import XIcon from '@untitled-ui/icons-react/build/esm/X';
 import { Box, Drawer, IconButton, Stack, SvgIcon, Typography, useMediaQuery } from '@mui/material';
@@ -7,7 +6,6 @@ import { Box, Drawer, IconButton, Stack, SvgIcon, Typography, useMediaQuery } fr
 
 export const ItemDrawer = (props) => {
   const { container, onClose, open, item, children, title } = props;
-  const [isEditing, setIsEditing] = useState(false);
   const lgUp = useMediaQuery((theme) => theme.breakpoints.up('lg'));
 
   // const handleEditOpen = useCallback(() => {

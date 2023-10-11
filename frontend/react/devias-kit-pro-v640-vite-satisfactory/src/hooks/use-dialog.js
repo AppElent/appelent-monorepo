@@ -1,5 +1,8 @@
 import { useCallback, useState } from 'react';
 
+/**
+ *
+ */
 export function useDialog() {
   const [state, setState] = useState({
     open: false,

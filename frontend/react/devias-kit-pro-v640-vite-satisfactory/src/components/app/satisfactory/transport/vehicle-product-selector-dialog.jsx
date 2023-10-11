@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import { useTheme } from '@emotion/react';
 import {
   Button,
@@ -20,7 +21,7 @@ import {
 } from '@mui/material';
 import { nanoid } from 'nanoid';
 import { useMemo, useState } from 'react';
-import { getFactoryStatistics, getSatisfactoryData } from 'src/custom/libs/satisfactory';
+import { getSatisfactoryData } from 'src/custom/libs/satisfactory';
 
 const VehicleProductSelectorDialog = ({
   modal,
@@ -170,6 +171,23 @@ const VehicleProductSelectorDialog = ({
       </DialogActions>
     </Dialog>
   );
+};
+
+VehicleProductSelectorDialog.propTypes = {
+  modal: PropTypes.shape({
+    data: PropTypes.any,
+    modalOpen: PropTypes.bool,
+    setModalState: PropTypes.func,
+  }),
+  setCarStopProducts: PropTypes.func,
+  stations: PropTypes.array,
+  vehicle: PropTypes.shape({
+    cars: PropTypes.array,
+    name: PropTypes.string,
+    stops: PropTypes.array,
+    type: PropTypes.string,
+  }),
+  version: PropTypes.string,
 };
 
 export default VehicleProductSelectorDialog;

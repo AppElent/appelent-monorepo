@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import Box from '@mui/material/Box';
 import Card from '@mui/material/Card';
 import CardHeader from '@mui/material/CardHeader';
@@ -7,23 +8,9 @@ import TableCell from '@mui/material/TableCell';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 
-import {
-  Button,
-  CardContent,
-  Checkbox,
-  FormControlLabel,
-  FormGroup,
-  FormLabel,
-  MenuItem,
-  TextField,
-} from '@mui/material';
+import { Button, CardContent, MenuItem, TextField } from '@mui/material';
 import { createGuid } from 'src/custom/libs/create-guid';
 import { GridDeleteIcon } from '@mui/x-data-grid';
-import { Stack } from 'immutable';
-import {
-  getFactoryStatistics,
-  getSatisfactoryRecipeStatistics,
-} from 'src/custom/libs/satisfactory';
 import VehicleProductSelectorDialog from 'src/components/app/satisfactory/transport/vehicle-product-selector-dialog';
 import useModal from 'src/custom/hooks/use-modal';
 
@@ -33,8 +20,7 @@ const STOP_TEMPLATE = {
 };
 
 export const VehicleStops = (props) => {
-  const { addStop, deleteStop, setStop, stops, stations, vehicle, factories, products, recipes } =
-    props;
+  const { addStop, deleteStop, setStop, stops, stations, vehicle, factories, products } = props;
   const modal = useModal();
 
   const filteredStations = stations.filter((station) => {
@@ -104,13 +90,13 @@ export const VehicleStops = (props) => {
                   const factoriesFiltered = factories?.filter((factory) =>
                     station?.factories?.includes(factory.id)
                   );
-                  const productList = station?.platforms
-                    ?.filter((platform) => platform.products !== undefined)
-                    .map((platform) => platform?.products?.map((product) => product));
-                  const recipeList = factoriesFiltered.map((factory) => {
-                    return factory.recipes;
-                  });
-                  const satisfactoryStatistics = getFactoryStatistics(recipeList);
+                  // const productList = station?.platforms
+                  //   ?.filter((platform) => platform.products !== undefined)
+                  //   .map((platform) => platform?.products?.map((product) => product));
+                  // const recipeList = factoriesFiltered.map((factory) => {
+                  //   return factory.recipes;
+                  // });
+                  // const satisfactoryStatistics = getFactoryStatistics(recipeList);
 
                   return (
                     <TableRow
@@ -211,4 +197,16 @@ export const VehicleStops = (props) => {
   );
 };
 
-VehicleStops.propTypes = {};
+VehicleStops.propTypes = {
+  addStop: PropTypes.func,
+  deleteStop: PropTypes.func,
+  factories: PropTypes.array,
+  products: PropTypes.object,
+  recipes: PropTypes.any,
+  setStop: PropTypes.func,
+  stations: PropTypes.array,
+  stops: PropTypes.array,
+  vehicle: PropTypes.shape({
+    type: PropTypes.string,
+  }),
+};

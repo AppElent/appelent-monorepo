@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: pages/dashboard/chat.jsx</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: pages/dashboard/chat.jsx</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import { useCallback, useEffect, useRef, useState } from 'react';
+import Menu01Icon from '@untitled-ui/icons-react/build/esm/Menu01';
+import Box from '@mui/material/Box';
+import Divider from '@mui/material/Divider';
+import IconButton from '@mui/material/IconButton';
+import SvgIcon from '@mui/material/SvgIcon';
+import useMediaQuery from '@mui/material/useMediaQuery';
+
+import { Seo } from 'src/components/seo';
+import { usePageView } from 'src/hooks/use-page-view';
+import { useSearchParams } from 'src/hooks/use-search-params';
+import { ChatBlank } from 'src/sections/dashboard/chat/chat-blank';
+import { ChatComposer } from 'src/sections/dashboard/chat/chat-composer';
+import { ChatContainer } from 'src/sections/dashboard/chat/chat-container';
+import { ChatSidebar } from 'src/sections/dashboard/chat/chat-sidebar';
+import { ChatThread } from 'src/sections/dashboard/chat/chat-thread';
+import { useDispatch } from 'src/store';
+import { thunks } from 'src/thunks/chat';
+
+/**
+ * NOTE:
+ * In our case there two possible routes
+ * one that contains /chat and one with a chat?threadKey={{threadKey}}
+ * if threadKey does not exist, it means that the chat is in compose mode
+ */
+
+const useThreads = () => {
+  const dispatch = useDispatch();
+
+  const handleThreadsGet = useCallback(() => {
+    dispatch(thunks.getThreads());
+  }, [dispatch]);
+
+  useEffect(
+    () => {
+      handleThreadsGet();
+    },
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    []
+  );
+};
+
+const useSidebar = () => {
+  const searchParams = useSearchParams();
+  const mdUp = useMediaQuery((theme) => theme.breakpoints.up('md'));
+  const [open, setOpen] = useState(mdUp);
+
+  const handleScreenResize = useCallback(() => {
+    if (!mdUp) {
+      setOpen(false);
+    } else {
+      setOpen(true);
+    }
+  }, [mdUp]);
+
+  useEffect(
+    () => {
+      handleScreenResize();
+    },
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [mdUp]
+  );
+
+  const handeParamsUpdate = useCallback(() => {
+    if (!mdUp) {
+      setOpen(false);
+    }
+  }, [mdUp]);
+
+  useEffect(
+    () => {
+      handeParamsUpdate();
+    },
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [searchParams]
+  );
+
+  const handleToggle = useCallback(() => {
+    setOpen((prevState) => !prevState);
+  }, []);
+
+  const handleClose = useCallback(() => {
+    setOpen(false);
+  }, []);
+
+  return {
+    handleToggle,
+    handleClose,
+    open,
+  };
+};
+
+const Page = () => {
+  const rootRef = useRef(null);
+  const searchParams = useSearchParams();
+  const compose = searchParams.get('compose') === 'true';
+  const threadKey = searchParams.get('threadKey') || undefined;
+  const sidebar = useSidebar();
+
+  usePageView();
+
+  useThreads();
+
+  const view = threadKey ? 'thread' : compose ? 'compose' : 'blank';
+
+  return (
+    &lt;>
+      &lt;Seo title="Dashboard: Chat" />
+      &lt;Divider />
+      &lt;Box
+        component="main"
+        sx={{
+          backgroundColor: 'background.paper',
+          flex: '1 1 auto',
+          overflow: 'hidden',
+          position: 'relative',
+        }}
+      >
+        &lt;Box
+          ref={rootRef}
+          sx={{
+            bottom: 0,
+            display: 'flex',
+            left: 0,
+            position: 'absolute',
+            right: 0,
+            top: 0,
+          }}
+        >
+          &lt;ChatSidebar
+            container={rootRef.current}
+            onClose={sidebar.handleClose}
+            open={sidebar.open}
+          />
+          &lt;ChatContainer open={sidebar.open}>
+            &lt;Box sx={{ p: 2 }}>
+              &lt;IconButton onClick={sidebar.handleToggle}>
+                &lt;SvgIcon>
+                  &lt;Menu01Icon />
+                &lt;/SvgIcon>
+              &lt;/IconButton>
+            &lt;/Box>
+            &lt;Divider />
+            {view === 'thread' &amp;&amp; &lt;ChatThread threadKey={threadKey} />}
+            {view === 'compose' &amp;&amp; &lt;ChatComposer />}
+            {view === 'blank' &amp;&amp; &lt;ChatBlank />}
+          &lt;/ChatContainer>
+        &lt;/Box>
+      &lt;/Box>
+    &lt;/>
+  );
+};
+
+export default Page;
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#EditToolbar">EditToolbar</a></li><li><a href="global.html#NO_OP">NO_OP</a></li><li><a href="global.html#RouterLink">RouterLink</a></li><li><a href="global.html#SatisfactoryGamesFactoryRecipes">SatisfactoryGamesFactoryRecipes</a></li><li><a href="global.html#applyPagination">applyPagination</a></li><li><a href="global.html#applySort">applySort</a></li><li><a href="global.html#capFirst">capFirst</a></li><li><a href="global.html#createGuid">createGuid</a></li><li><a href="global.html#deepCopy">deepCopy</a></li><li><a href="global.html#descendingComparator">descendingComparator</a></li><li><a href="global.html#generateName">generateName</a></li><li><a href="global.html#getComparator">getComparator</a></li><li><a href="global.html#getEdgeLabel">getEdgeLabel</a></li><li><a href="global.html#getNodeClasses">getNodeClasses</a></li><li><a href="global.html#getNodeLabel">getNodeLabel</a></li><li><a href="global.html#getRandomInt">getRandomInt</a></li><li><a href="global.html#pageSizeReducer">pageSizeReducer</a></li><li><a href="global.html#paginate">paginate</a></li><li><a href="global.html#paginationStateReducer">paginationStateReducer</a></li><li><a href="global.html#recipeChart">recipeChart</a></li><li><a href="global.html#totalItemsReducer">totalItemsReducer</a></li><li><a href="global.html#truncateFloat">truncateFloat</a></li><li><a href="global.html#useAnalytics">useAnalytics</a></li><li><a href="global.html#useDialog">useDialog</a></li><li><a href="global.html#useKey">useKey</a></li><li><a href="global.html#useLocalStorage">useLocalStorage</a></li><li><a href="global.html#useNprogress">useNprogress</a></li><li><a href="global.html#usePopover">usePopover</a></li><li><a href="global.html#useRouter">useRouter</a></li><li><a href="global.html#useSearchParams">useSearchParams</a></li><li><a href="global.html#useThreads">useThreads</a></li><li><a href="global.html#useUpdateEffect">useUpdateEffect</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.2</a> on Mon Oct 09 2023 13:07:06 GMT+0200 (Midden-Europese zomertijd)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

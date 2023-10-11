@@ -3,7 +3,7 @@ import { Box, Button, Container, Stack, Tab, Tabs, Typography } from '@mui/mater
 import { usePageView } from 'src/hooks/use-page-view';
 import { useSettings } from 'src/hooks/use-settings';
 import { Seo } from 'src/components/seo';
-import { useMemo, useState } from 'react';
+import { useMemo } from 'react';
 
 import { useQueryParam } from 'use-query-params';
 import useTabs from 'src/custom/hooks/use-tabs';
@@ -105,7 +105,12 @@ const FactoryPlanner = () => {
             layout={layout}
             // /stylesheet={}
           /> */}
-          {tabs.tab === 'graph' && <Graph data={plannerData} />}
+          {tabs.tab === 'graph' && (
+            <Graph
+              data={plannerData}
+              setData={() => {}}
+            />
+          )}
           {tabs.tab === 'table' && <ProductList />}
         </Container>
       </Box>

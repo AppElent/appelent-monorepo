@@ -5,7 +5,7 @@ import { QuillEditor } from 'src/components/quill-editor';
 import { tokens } from 'src/locales/tokens';
 
 export const SatisfactoryGamesScribble = (props) => {
-  const { formik, game, translate } = props;
+  const { formik, translate } = props;
 
   console.log(formik.values.scribble);
   return (

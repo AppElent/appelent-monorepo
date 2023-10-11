@@ -65,19 +65,19 @@ class CustomersApi {
     });
   }
 
-  getCustomer(request) {
+  getCustomer() {
     return Promise.resolve(deepCopy(customer));
   }
 
-  getEmails(request) {
+  getEmails() {
     return Promise.resolve(deepCopy(emails));
   }
 
-  getInvoices(request) {
+  getInvoices() {
     return Promise.resolve(deepCopy(invoices));
   }
 
-  getLogs(request) {
+  getLogs() {
     return Promise.resolve(deepCopy(logs));
   }
 }

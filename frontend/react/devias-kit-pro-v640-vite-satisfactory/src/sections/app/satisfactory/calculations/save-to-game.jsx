@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import {
   Autocomplete,
   Button,
@@ -7,7 +8,6 @@ import {
   DialogTitle,
   TextField,
 } from '@mui/material';
-import { useEffect, useState } from 'react';
 import { useData } from 'src/custom/libs/data-framework';
 
 export const SaveToGame = ({ saveToGame, modalOpen, setModalState }) => {
@@ -50,6 +50,7 @@ export const SaveToGame = ({ saveToGame, modalOpen, setModalState }) => {
         // }
         onChange={(e, value) => {
           if (value) {
+            console.log(value);
           }
         }}
         // onInputChange={(event, newInputValue) => {
@@ -76,4 +77,10 @@ export const SaveToGame = ({ saveToGame, modalOpen, setModalState }) => {
       </DialogActions>
     </Dialog>
   );
+};
+
+SaveToGame.propTypes = {
+  modalOpen: PropTypes.bool,
+  saveToGame: PropTypes.func,
+  setModalState: PropTypes.func,
 };

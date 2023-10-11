@@ -1,58 +1,26 @@
 import PropTypes from 'prop-types';
-import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import {
   Autocomplete,
-  Box,
   Button,
   Chip,
-  Container,
-  Divider,
   Grid,
-  MenuItem,
-  Stack,
-  Tab,
   Table,
   TableBody,
   TableCell,
   TableContainer,
   TableHead,
   TableRow,
-  Tabs,
   TextField,
   Typography,
 } from '@mui/material';
-import numeral from 'numeral';
 import { usePageView } from 'src/hooks/use-page-view';
-import { Layout as DashboardLayout } from 'src/layouts/app';
-import { ItemDrawer } from 'src/components/app/list/item-drawer';
-import { ItemListContainer } from 'src/components/app/list/item-list-container';
-import { ItemListSearch } from 'src/components/app/list/item-list-search';
-import { ItemListTableContainer } from 'src/components/app/list/item-list-table';
-import { ItemDetailsContainer } from 'src/components/app/list/item-drawer/item-details';
-import { SeverityPill } from 'src/components/severity-pill';
 //import { useSearch, useItems } from "components/app/list/utils";
 
-import prodv700 from 'src/custom/libs/satisfactory/data/v700/items.json';
-import prodv800 from 'src/custom/libs/satisfactory/data/v800/items.json';
-import { paginate } from 'src/custom/libs/paginate';
-import { useRouter } from 'src/hooks/use-router';
-import {
-  getRecipesByProduct,
-  getSatisfactoryData,
-  getSatisfactoryItem,
-  SatisfactoryCurrentVersion,
-  satisfactoryVersions,
-} from 'src/custom/libs/satisfactory';
-import { paths } from 'src/paths';
-import { SatisfactoryProductDetail } from 'src/sections/app/satisfactory/products/product-detail';
-import { useTranslate } from '@refinedev/core';
-import { tokens } from 'src/locales/tokens';
-import { Seo } from 'src/components/seo';
-import { NumberParam, StringParam, useQueryParam, withDefault } from 'use-query-params';
-import { useItems } from 'src/custom/hooks/use-items';
+import { getRecipesByProduct, getSatisfactoryData } from 'src/custom/libs/satisfactory';
+import { NumberParam, useQueryParam, withDefault } from 'use-query-params';
 import { CardDefault } from 'src/components/app/card-default';
 import _ from 'lodash';
-import useTabs from 'src/custom/hooks/use-tabs';
 import toast from 'react-hot-toast';
 
 const tabsData = [
@@ -65,7 +33,6 @@ const RecipeList = ({ version, preferredRecipes = [], setPreferredRecipes }) => 
   const [itemsMin, setItemsMin] = useQueryParam('itemsMin', withDefault(NumberParam, 1));
   const [productRecipes, setProductRecipes] = useState();
   const [remembered, setRemembered] = useState([]);
-  const tabs = useTabs({ initial: tabsData[0].value, tabname: 'tab' });
 
   usePageView();
   //const { search, updateSearch } = useSearch();
@@ -516,6 +483,8 @@ Usage 2:
 };
 
 RecipeList.propTypes = {
+  preferredRecipes: PropTypes.array,
+  setPreferredRecipes: PropTypes.func,
   version: PropTypes.string.isRequired,
 };
 

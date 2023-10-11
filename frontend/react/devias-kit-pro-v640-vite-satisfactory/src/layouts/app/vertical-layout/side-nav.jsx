@@ -210,7 +210,7 @@ export const SideNav = (props) => {
               px: 2,
             }}
           >
-            <VersionSelector sx={{color: 'var(--nav-item-color)'}}/>
+            <VersionSelector sx={{ color: 'var(--nav-item-color)' }} />
             {sections.map((section, index) => (
               <SideNavSection
                 items={section.items}

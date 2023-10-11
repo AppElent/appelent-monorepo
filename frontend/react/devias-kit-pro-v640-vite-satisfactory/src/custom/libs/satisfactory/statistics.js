@@ -1,7 +1,5 @@
-import { RoundaboutRight } from '@mui/icons-material';
 import { getSatisfactoryData, getSatisfactoryDataArray } from '.';
 import { createGuid } from '../create-guid';
-import { red } from '@mui/material/colors';
 
 // inputobject: [{recipe: 'class', amount: 2}]
 export const getFactoryStatistics = (factoryItems, version) => {

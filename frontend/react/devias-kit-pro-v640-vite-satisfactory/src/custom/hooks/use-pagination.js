@@ -51,6 +51,12 @@ const getCurrentPageReducer = (rootState) =>
     }
   };
 
+/**
+ *Reduce total items
+ * @param {any} state State
+ * @param {any} action Action
+ * @returns {any} Return reduced items
+ */
 function totalItemsReducer(state, action) {
   switch (action.type) {
     case 'SET_TOTALITEMS':
@@ -60,6 +66,12 @@ function totalItemsReducer(state, action) {
   }
 }
 
+/**
+ *
+ * @param {any} state State
+ * @param {any} action Action
+ * @returns {any} Return reduced
+ */
 function pageSizeReducer(state, action) {
   switch (action.type) {
     case 'SET_PAGESIZE':
@@ -69,6 +81,12 @@ function pageSizeReducer(state, action) {
   }
 }
 
+/**
+ *
+ * @param {any} state State
+ * @param {any} action Action
+ * @returns {any} Return reduced
+ */
 export function paginationStateReducer(state, action) {
   return {
     currentPage: getCurrentPageReducer(state)(state.currentPage, action),
@@ -77,11 +95,15 @@ export function paginationStateReducer(state, action) {
   };
 }
 
-export default function usePagination({
-  totalItems = 0,
-  initialPage = 0,
-  initialPageSize = 0,
-} = {}) {
+/**
+ *
+ * @param root0
+ * @param root0.totalItems
+ * @param root0.initialPage
+ * @param root0.initialPageSize
+ * @returns {any} Return pagination object
+ */
+export default function usePagination({ totalItems = 0, initialPage = 0, initialPageSize = 0 }) {
   const initialState = {
     totalItems,
     pageSize: initialPageSize,

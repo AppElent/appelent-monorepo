@@ -9,13 +9,10 @@ import {
   FormGroup,
   FormLabel,
   MenuItem,
-  Modal,
   Stack,
   TextField,
-  Typography,
 } from '@mui/material';
 import { CardDefault } from 'src/components/app/card-default';
-import { createGuid } from 'src/custom/libs/create-guid';
 import { useQueryParam } from 'use-query-params';
 import { generateName } from 'src/custom/libs/random-name-generator';
 import { tokens } from 'src/locales/tokens';
@@ -77,6 +74,7 @@ export const SatisfactoryGamesTransport = (props) => {
     ) {
       formik.setFieldValue(`transport.stations.${stationExists}.platforms.0`, { id: nanoid() });
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selectedStation]);
 
   if (!selectedStation) {

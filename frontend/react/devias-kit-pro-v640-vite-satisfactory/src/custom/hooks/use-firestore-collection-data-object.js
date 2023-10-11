@@ -21,7 +21,7 @@ export const useFirestoreCollectionDataObject = (query, options, process) => {
     } else {
       setValuesNew(values);
     }
-  }, [values]);
+  }, [values, process]);
 
   return [valuesNew, loading, error, snapshot];
 };

@@ -1,6 +1,5 @@
 import PropTypes from 'prop-types';
 import {
-  useMediaQuery,
   Card,
   CardHeader,
   Table,
@@ -29,8 +28,6 @@ export const SatisfactoryProductRecipeTable = ({
   conditionFunction,
   translate,
 }) => {
-  const lgUp = useMediaQuery((theme) => theme.breakpoints.up('lg'));
-
   const columns = [
     { label: translate(tokens.common.fields.name) },
     { label: translate(tokens.satisfactory.pages.products.input) },

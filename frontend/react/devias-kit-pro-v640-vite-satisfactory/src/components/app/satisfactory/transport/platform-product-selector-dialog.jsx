@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import { useTheme } from '@emotion/react';
 import {
   Button,
@@ -170,6 +171,23 @@ const PlatformProductSelectorDialog = ({ modal, station, factories, setProducts,
       </DialogActions>
     </Dialog>
   );
+};
+
+PlatformProductSelectorDialog.propTypes = {
+  factories: PropTypes.array,
+  modal: PropTypes.shape({
+    modalOpen: PropTypes.any,
+    setModalState: PropTypes.func,
+    data: PropTypes.any,
+  }),
+  setProducts: PropTypes.func,
+  station: PropTypes.shape({
+    direction: PropTypes.string,
+    factories: PropTypes.array,
+    platforms: PropTypes.array,
+    type: PropTypes.string,
+  }),
+  version: PropTypes.string,
 };
 
 export default PlatformProductSelectorDialog;

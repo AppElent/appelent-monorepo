@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import PersonIcon from '@mui/icons-material/Person';
 import DeleteIcon from '@mui/icons-material/Delete';
@@ -15,57 +15,43 @@ import {
   TextField,
   Typography,
   Unstable_Grid2 as Grid,
-  Paper,
-  Dialog,
-  DialogTitle,
-  DialogContentText,
-  DialogActions,
 } from '@mui/material';
 import { FormikProvider, FieldArray } from 'formik';
 
 import { CardDefault } from 'src/components/app/card-default';
-import {
-  getRecipesByProduct,
-  getSatisfactoryData,
-  getSatisfactoryDataArray,
-  satisfactoryVersions,
-} from 'src/custom/libs/satisfactory';
+import { satisfactoryVersions } from 'src/custom/libs/satisfactory';
 import { getAuth } from 'firebase/auth';
 import { tokens } from 'src/locales/tokens';
 import { createGuid } from 'src/custom/libs/create-guid';
 import useModal from 'src/custom/hooks/use-modal';
-import { Box } from '@mui/system';
 import { GameEditJsonDialog } from './general/game-edit-json-dialog';
-
-const addPlayer = () => {};
 
 export const SatisfactoryGamesGeneral = (props) => {
   const { game, formik, handleDeleteGame, translate } = props;
-  const [secondary, setSecondary] = useState(false);
-  const { modalOpen, data: modalData, setData, setModalState } = useModal(false, formik.values);
+  // const [secondary, setSecondary] = useState(false);
+  const { modalOpen, setData, setModalState } = useModal(false, formik.values);
 
   const handleDownloadGame = () => {
+    // eslint-disable-next-line unused-imports/no-unused-vars
     const { meta, ...rest } = formik.values;
     setData(rest);
     setModalState(true);
   };
 
-  const handleUploadGame = () => {};
+  // const handleUploadGame = () => {};
 
-  const products = getSatisfactoryData('items');
-  const recipes = getSatisfactoryDataArray('recipes');
-  const test = () => {
-    let result = [];
-    Object.keys(products).forEach((product) => {
-      const attachedRecipes = recipes.filter((recipe) =>
-        recipe.products.find((p) => p.itemClass === product)
-      );
-      const defaultRecipes = attachedRecipes?.filter((recipe) => !recipe.isAlternate);
-      const alternateRecipes = attachedRecipes?.filter((recipe) => recipe.isAlternate);
-      if (defaultRecipes.length > 1) console.log(product, defaultRecipes);
-      //console.log(product, attachedRecipes, defaultRecipes, alternateRecipes);
-    });
-  };
+  // const products = getSatisfactoryData('items');
+  // const recipes = getSatisfactoryDataArray('recipes');
+  // const test = () => {
+  //   Object.keys(products).forEach((product) => {
+  //     const attachedRecipes = recipes.filter((recipe) =>
+  //       recipe.products.find((p) => p.itemClass === product)
+  //     );
+  //     const defaultRecipes = attachedRecipes?.filter((recipe) => !recipe.isAlternate);
+  //     if (defaultRecipes.length > 1) console.log(product, defaultRecipes);
+  //     //console.log(product, attachedRecipes, defaultRecipes, alternateRecipes);
+  //   });
+  // };
   useEffect(() => {
     //test();
     //console.log(getRecipesByProduct('Desc_Computer_C', 10));
@@ -295,11 +281,17 @@ export const SatisfactoryGamesGeneral = (props) => {
 
 SatisfactoryGamesGeneral.propTypes = {
   formik: PropTypes.shape({
+    errors: PropTypes.any,
     handleChange: PropTypes.any,
     values: PropTypes.shape({
       description: PropTypes.string,
+      factories: PropTypes.array,
+      meta: PropTypes.any,
       name: PropTypes.string,
       players: PropTypes.array,
+      transport: PropTypes.shape({
+        stations: PropTypes.array,
+      }),
       version: PropTypes.string,
     }),
   }),

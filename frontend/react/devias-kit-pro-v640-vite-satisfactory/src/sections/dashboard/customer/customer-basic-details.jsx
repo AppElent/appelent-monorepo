@@ -8,7 +8,7 @@ import { PropertyList } from 'src/components/property-list';
 import { PropertyListItem } from 'src/components/property-list-item';
 
 export const CustomerBasicDetails = (props) => {
-  const { address1, address2, country, email, isVerified, phone, state, ...other } = props;
+  const { address2, country, email, phone, state, ...other } = props;
 
   return (
     <Card {...other}>

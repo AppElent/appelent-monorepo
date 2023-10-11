@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import {
   Autocomplete,
   Button,
@@ -11,7 +12,7 @@ import {
   TableRow,
   TextField,
 } from '@mui/material';
-import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import { useEffect, useMemo } from 'react';
 import { CardDefault } from 'src/components/app/card-default';
 import { getSatisfactoryData, getSatisfactoryDataArray } from 'src/custom/libs/satisfactory';
 import _ from 'lodash';
@@ -222,6 +223,12 @@ Note: if you click Save to browser, it will save your preference to the browser 
       </Stack>
     </CardDefault>
   );
+};
+
+PreferredRecipes.propTypes = {
+  preferredRecipes: PropTypes.array,
+  setPreferredRecipes: PropTypes.func,
+  version: PropTypes.string,
 };
 
 export default PreferredRecipes;

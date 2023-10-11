@@ -1,53 +1,75 @@
+import PropTypes from 'prop-types';
 import Cytoscape from 'src/custom/libs/Cytoscape';
 
-import { stylesheet, NODE_TYPE, NODE_COLOR_CLASS } from 'src/custom/libs/satisfactory/graph';
+import { stylesheet } from 'src/custom/libs/satisfactory/graph';
 
+/**
+ * Returns a rounded float
+ * @param {number} n Original number
+ * @param {number} places Placed to round
+ * @returns {number} Rounded float
+ */
 function truncateFloat(n, places = 4) {
   return n.toFixed(places).replace(/\.?0+$/, '');
 }
 
-function getNodeLabel(node, gameData) {
-  let label = '';
-  let amountText = '';
-  if (node.type === NODE_TYPE.RECIPE) {
-    const recipe = gameData.recipes[node.key];
-    label = recipe.name;
-    amountText = `${truncateFloat(node.multiplier)}x ${gameData.buildings[recipe.producedIn].name}`;
-  } else {
-    const item = gameData.items[node.key];
-    if (node.type === NODE_TYPE.SIDE_PRODUCT) {
-      label = `Side Product:\n${item.name}`;
-    } else {
-      label = item.name;
-    }
-    amountText = `${truncateFloat(node.multiplier)} / min`;
-  }
-  return `${label}\n${amountText}`;
-}
+// /**
+//  *
+//  * @param node
+//  * @param gameData
+//  */
+// function getNodeLabel(node, gameData) {
+//   let label = '';
+//   let amountText = '';
+//   if (node.type === NODE_TYPE.RECIPE) {
+//     const recipe = gameData.recipes[node.key];
+//     label = recipe.name;
+//     amountText = `${truncateFloat(node.multiplier)}x ${gameData.buildings[recipe.producedIn].name}`;
+//   } else {
+//     const item = gameData.items[node.key];
+//     if (node.type === NODE_TYPE.SIDE_PRODUCT) {
+//       label = `Side Product:\n${item.name}`;
+//     } else {
+//       label = item.name;
+//     }
+//     amountText = `${truncateFloat(node.multiplier)} / min`;
+//   }
+//   return `${label}\n${amountText}`;
+// }
 
-function getNodeClasses(node, gameData) {
-  const classes = [];
-  if (node.type === NODE_TYPE.RECIPE) {
-    classes.push('recipe-shape');
-    const recipe = gameData.recipes[node.key];
-    if (recipe.producedIn === 'Desc_GeneratorNuclear_C') {
-      classes.push('nuclear');
-    } else {
-      classes.push(NODE_COLOR_CLASS[node.type]);
-    }
-  } else {
-    classes.push('item-shape');
-    classes.push(NODE_COLOR_CLASS[node.type]);
-  }
-  return classes;
-}
+// /**
+//  *
+//  * @param node
+//  * @param gameData
+//  */
+// function getNodeClasses(node, gameData) {
+//   const classes = [];
+//   if (node.type === NODE_TYPE.RECIPE) {
+//     classes.push('recipe-shape');
+//     const recipe = gameData.recipes[node.key];
+//     if (recipe.producedIn === 'Desc_GeneratorNuclear_C') {
+//       classes.push('nuclear');
+//     } else {
+//       classes.push(NODE_COLOR_CLASS[node.type]);
+//     }
+//   } else {
+//     classes.push('item-shape');
+//     classes.push(NODE_COLOR_CLASS[node.type]);
+//   }
+//   return classes;
+// }
 
-function getEdgeLabel(edge, gameData) {
-  const item = gameData.items[edge.key];
-  const label = item.name;
-  const amountText = `${truncateFloat(edge.productionRate)} / min`;
-  return `${label}\n${amountText}`;
-}
+// /**
+//  *
+//  * @param edge
+//  * @param gameData
+//  */
+// function getEdgeLabel(edge, gameData) {
+//   const item = gameData.items[edge.key];
+//   const label = item.name;
+//   const amountText = `${truncateFloat(edge.productionRate)} / min`;
+//   return `${label}\n${amountText}`;
+// }
 
 const layout = {
   name: 'random',
@@ -67,6 +89,7 @@ const layout = {
 };
 
 const Graph = ({ data, setData }) => {
+  console.log(data, setData);
   return (
     <Cytoscape
       elements={data.elements}
@@ -76,6 +99,13 @@ const Graph = ({ data, setData }) => {
       stylesheet={stylesheet}
     />
   );
+};
+
+Graph.propTypes = {
+  data: PropTypes.shape({
+    elements: PropTypes.array.isRequired,
+  }),
+  setData: PropTypes.func.isRequired,
 };
 
 export default Graph;

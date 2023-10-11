@@ -12,7 +12,6 @@ import {
 } from '@mui/material';
 import { usePageView } from 'src/hooks/use-page-view';
 import { useSettings } from 'src/hooks/use-settings';
-import { useRouter } from 'src/hooks/use-router';
 import React, { useMemo, useEffect, useCallback } from 'react';
 import {
   SatisfactoryCurrentVersion,
@@ -42,11 +41,12 @@ import { tokens } from 'src/locales/tokens';
 import { Seo } from 'src/components/seo';
 import useQueryOrLocalStorage from 'src/custom/hooks/use-query-or-localstorage';
 import { useMounted } from 'src/hooks/use-mounted';
-import { useLocation } from 'react-router';
 import { SatisfactoryGamesOverview } from 'src/sections/app/satisfactory/games/satisfactory-games-overview';
 import { SatisfactoryGamesVehicles } from 'src/sections/app/satisfactory/games/vehicles/vehicles';
 import * as Yup from 'yup';
 import { nanoid } from 'nanoid';
+import GameSelect from 'src/sections/app/satisfactory/games/game-select';
+import PowerStationOverview from 'src/sections/app/satisfactory/games/power/power-station-overview';
 
 const Page = () => {
   const isMounted = useMounted();
@@ -55,7 +55,6 @@ const Page = () => {
   const translate = useTranslate();
   const confirm = useConfirm();
   usePageView();
-  const router = useRouter();
 
   // Try resolving tab to set from query params
   const tabs = useTabs({ initial: 'general', queryParamName: 'tab' });
@@ -65,14 +64,6 @@ const Page = () => {
 
   // Try resolving default game from localstorage
   const [selectedGameId, setSelectedGameId, deleteSelectedGameId] = useQueryOrLocalStorage('game');
-  // const [selectedGameId, setSelectedGameId, deleteSelectedGameId] =
-  //   useLocalStorage('satisfactory_game_id');
-
-  // Get game from query parameter
-  // const QueryFilter = withDefault(StringParam, selectedGameId);
-  // const [gameId, setGameId] = useQueryParam('game', QueryFilter);
-
-  const location = useLocation();
 
   // Set selected game
   const selectedGame = useMemo(() => {
@@ -85,11 +76,6 @@ const Page = () => {
     }
     return undefined;
   }, [gamesData.data, selectedGameId]);
-
-  // useEffect(() => {
-  //   formik.setValues(selectedGame);
-  //   setFormDirty(false);
-  // }, [selectedGame]);
 
   const initialValues = {
     ...selectedGame,
@@ -173,6 +159,7 @@ const Page = () => {
     onSubmit: async (values, helpers) => {
       try {
         console.log('Saving values', values);
+        // eslint-disable-next-line unused-imports/no-unused-vars
         let { meta, ...rest } = values;
         if (!rest.players.find((player) => player.uid === values.owner)) {
           rest.players.push({
@@ -212,7 +199,7 @@ const Page = () => {
 
         rest.playerIds = rest.players.map((player) => player.uid);
         //console.log(values, rest);
-        const savedGame = await gamesData.resource?.actions?.update(values.id, rest);
+        await gamesData.resource?.actions?.update(values.id, rest);
         //await saveSatisfactoryGame(gamesData.meta.path, values.id, rest);
         toast.success(translate(tokens.common.notifications.savedSuccess));
       } catch (err) {
@@ -235,6 +222,16 @@ const Page = () => {
     if (Object.keys(formik.errors)?.length > 0) console.error(formik.errors);
   }, [formik.errors]);
 
+  const alertUser = useCallback(
+    (e) => {
+      if (formik.dirty) {
+        e.preventDefault();
+        e.returnValue = '';
+      }
+    },
+    [formik.dirty]
+  );
+
   useEffect(() => {
     window.addEventListener('beforeunload', alertUser);
     window.addEventListener('popstate', alertUser);
@@ -242,13 +239,7 @@ const Page = () => {
       window.removeEventListener('beforeunload', alertUser);
       window.removeEventListener('popstate', alertUser);
     };
-  }, [formik.dirty]);
-  const alertUser = (e) => {
-    if (formik.dirty) {
-      e.preventDefault();
-      e.returnValue = '';
-    }
-  };
+  }, [formik.dirty, alertUser]);
 
   useKey({ key: 's', event: 'ctrlKey' }, () => formik.handleSubmit());
 
@@ -298,20 +289,8 @@ const Page = () => {
     //setGameId(newId);
     tabs.setTab(tabsData[0].value);
     setSelectedGameId(newId);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-
-  // useEffect(() => {
-  //   let tabToSet = tabs.tab ? tabs.tab : tabsData[0];
-  //   if (tabToSet) {
-  //     router.replace(
-  //       {
-  //         query: { ...router.query, tab: tabToSet },
-  //       },
-  //       undefined,
-  //       { shallow: true }
-  //     );
-  //   }
-  // }, [tabs.tab]);
 
   const createNewGame = async () => {
     let newName = generateName();
@@ -334,7 +313,7 @@ const Page = () => {
     deleteSelectedGameId();
     window.scrollTo(0, 0);
     return await gamesData.resource?.actions.delete(id);
-  }, [gamesData, selectedGame]);
+  }, [gamesData, selectedGame, deleteSelectedGameId]);
 
   if (!selectedGame) {
     if (gamesData.loading) return <></>;
@@ -397,7 +376,12 @@ const Page = () => {
                       xs={12}
                       md={7}
                     >
-                      <Autocomplete
+                      <GameSelect
+                        games={sortedGames}
+                        onGameChange={onGameChange}
+                        selectedGame={selectedGame}
+                      />
+                      {/* <Autocomplete
                         getOptionLabel={(option) => option.name}
                         options={sortedGames}
                         renderInput={(params) => (
@@ -431,7 +415,7 @@ const Page = () => {
                         // }}
                         sx={{ minWidth: 250 }}
                         value={selectedGame}
-                      />
+                      /> */}
                     </Grid>
                     <Grid
                       item
@@ -516,6 +500,7 @@ const Page = () => {
                   game={selectedGame}
                   recipes={satisfactoryRecipes}
                   products={satisfactoryProducts}
+                  version={formik.values.version}
                   translate={translate}
                 />
               )}
@@ -537,25 +522,20 @@ const Page = () => {
                   translate={translate}
                 />
               )}
-              {/* {JSON.stringify(selectedGame)} */}
-              {/* <SatisfactoryProductDetail product={product} />
-              <SatisfactoryProductRecipeTable
-                title="Recipes"
-                recipes={product.recipes_by}
-                products={getSatisfactoryData("items", version)}
-              />
-              <SatisfactoryProductRecipeTable
-                title="Used for"
-                recipes={product.recipes_for}
-                products={getSatisfactoryData("items", version)}
-                conditionFunction={isEquipment(true)}
-              />
-              <SatisfactoryProductRecipeTable
-                title="Equipment"
-                recipes={product.recipes_for}
-                products={getSatisfactoryData("items", version)}
-                conditionFunction={isEquipment(false)}
-              /> */}
+              {tabs.tab === 'power' && (
+                <PowerStationOverview
+                  powerStations={formik.values.power?.stations || []}
+                  createPowerStation={() => {
+                    const currentStations = formik.values.power?.stations || [];
+                    formik.setFieldValue('power.stations', [
+                      ...currentStations,
+                      { id: nanoid(), name: generateName() },
+                    ]);
+                  }}
+                  deletePowerStation={() => {}}
+                  setPowerStation={() => {}}
+                />
+              )}
             </Stack>
           </Stack>
         </Container>

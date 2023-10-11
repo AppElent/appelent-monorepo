@@ -1,30 +1,8 @@
 import PropTypes from 'prop-types';
-import { format } from 'date-fns';
 import { Button, Stack, Typography } from '@mui/material';
 
-const statusOptions = [
-  {
-    label: 'Canceled',
-    value: 'canceled',
-  },
-  {
-    label: 'Complete',
-    value: 'complete',
-  },
-  {
-    label: 'Pending',
-    value: 'pending',
-  },
-  {
-    label: 'Rejected',
-    value: 'rejected',
-  },
-];
-
 export const ItemEditContainer = (props) => {
-  const { onCancel, onSave, item, children } = props;
-
-  const createdAt = format(item.createdAt, 'dd/MM/yyyy HH:mm');
+  const { onCancel, onSave, children } = props;
 
   return (
     <Stack spacing={6}>

@@ -55,7 +55,7 @@ class ChatApi {
     });
   }
 
-  getThreads(request = {}) {
+  getThreads() {
     const expandedThreads = threads.map((thread) => {
       const participants = [user];
 

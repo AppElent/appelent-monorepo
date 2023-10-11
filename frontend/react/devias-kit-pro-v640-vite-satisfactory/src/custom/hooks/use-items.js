@@ -1,6 +1,13 @@
 import { useCallback, useEffect, useState } from 'react';
 import { useMounted } from './use-mounted';
 
+/**
+ *
+ * @param {Array} array Array to paginate
+ * @param {number} page_size Page size
+ * @param {number} page_number Number of page
+ * @returns {Array} Paginated array
+ */
 function paginate(array, page_size, page_number) {
   // human-readable page numbers usually start with 1, so we reduce 1 in the first argument
   return array.slice((page_number - 1) * page_size, page_number * page_size);
@@ -186,22 +193,26 @@ export const useItems = (items, initialSearch) => {
     [setSelected]
   );
 
-  const handleTabsChange = useCallback((event, tab) => {
-    (event) => {
-      updateSearch((prevState) => ({
-        ...prevState,
-        tab: event.target.value,
-      }));
+  // eslint-disable-next-line unused-imports/no-unused-vars
+  const handleTabsChange = useCallback(
+    (event, tab) => {
+      (event) => {
+        updateSearch((prevState) => ({
+          ...prevState,
+          tab: event.target.value,
+        }));
+      },
+        [updateSearch];
     },
-      [updateSearch];
-  }, []);
+    [updateSearch]
+  );
 
   const resetFilters = useCallback(() => {
     () => {
       resetSearch();
     },
       [updateSearch];
-  }, []);
+  }, [resetSearch, updateSearch]);
 
   return {
     handlers: {

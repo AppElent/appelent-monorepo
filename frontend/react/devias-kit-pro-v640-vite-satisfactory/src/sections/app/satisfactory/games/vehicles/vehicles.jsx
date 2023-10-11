@@ -1,17 +1,12 @@
-import React, { useEffect, useMemo } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import {
   Autocomplete,
   Box,
   Button,
-  Checkbox,
   Dialog,
   DialogActions,
   DialogContent,
-  DialogTitle,
-  FormControlLabel,
-  FormGroup,
-  FormLabel,
   MenuItem,
   Stack,
   TextField,

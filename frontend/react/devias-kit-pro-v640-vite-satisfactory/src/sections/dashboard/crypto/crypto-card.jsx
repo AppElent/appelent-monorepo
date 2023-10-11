@@ -13,7 +13,7 @@ const brandIcon = {
 };
 
 export const CryptoCard = (props) => {
-  const { brand, cardNumber, holderName, expiryDate, id, ...other } = props;
+  const { brand, cardNumber, holderName, expiryDate, ...other } = props;
 
   return (
     <Box

@@ -1,18 +1,7 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
-import {
-  Box,
-  Button,
-  Divider,
-  MenuItem,
-  Stack,
-  TableCell,
-  TableRow,
-  TextField,
-  Typography,
-} from '@mui/material';
+import { Box, Button, Divider, Stack, TableCell, TableRow, Typography } from '@mui/material';
 import numeral from 'numeral';
 import { usePageView } from 'src/hooks/use-page-view';
-import { Layout as DashboardLayout } from 'src/layouts/app';
 import { ItemDrawer } from 'src/components/app/list/item-drawer';
 import { ItemListContainer } from 'src/components/app/list/item-list-container';
 import { ItemListSearch } from 'src/components/app/list/item-list-search';
@@ -25,11 +14,7 @@ import prodv700 from 'src/custom/libs/satisfactory/data/v700/items.json';
 import prodv800 from 'src/custom/libs/satisfactory/data/v800/items.json';
 import { paginate } from 'src/custom/libs/paginate';
 import { useRouter } from 'src/hooks/use-router';
-import {
-  getSatisfactoryItem,
-  SatisfactoryCurrentVersion,
-  satisfactoryVersions,
-} from 'src/custom/libs/satisfactory';
+import { getSatisfactoryItem, SatisfactoryCurrentVersion } from 'src/custom/libs/satisfactory';
 import { paths } from 'src/paths';
 import { SatisfactoryProductDetail } from 'src/sections/app/satisfactory/products/product-detail';
 import { useTranslate } from '@refinedev/core';
@@ -37,19 +22,12 @@ import { tokens } from 'src/locales/tokens';
 import { Seo } from 'src/components/seo';
 import { StringParam, useQueryParam, withDefault } from 'use-query-params';
 import { useItems } from 'src/custom/hooks/use-items';
-import VersionSelector from 'src/components/app/satisfactory/version-selector';
+//import ProductTableRows from 'src/sections/app/satisfactory/products/product-table-rows';
 
 const products = {
   v600: [],
   v700: prodv700,
   v800: prodv800,
-};
-
-const statusMap = {
-  complete: 'success',
-  pending: 'info',
-  canceled: 'warning',
-  rejected: 'error',
 };
 
 const tabOptions = [
@@ -86,15 +64,12 @@ const sortOptions = [
   // },
 ];
 
-const Page = () => {
+const Products = () => {
   const rootRef = useRef(null);
   const router = useRouter();
   const [productQuery, setProductQuery] = useQueryParam('product');
   //const { search, updateSearch } = useSearch();
-  const [version, setVersion] = useQueryParam(
-    'version',
-    withDefault(StringParam, SatisfactoryCurrentVersion)
-  );
+  const [version] = useQueryParam('version', withDefault(StringParam, SatisfactoryCurrentVersion));
   const translate = useTranslate();
 
   const [productArray, setProductArray] = useState([]);
@@ -224,7 +199,6 @@ const Page = () => {
             />
             <Divider />
             <ItemListTableContainer
-              onItemSelect={handleItemOpen}
               onPageChange={handlers.handlePageChange}
               onRowsPerPageChange={handlers.handleRowsPerPageChange}
               items={items}
@@ -326,6 +300,4 @@ const Page = () => {
   );
 };
 
-Page.getLayout = (page) => <DashboardLayout>{page}</DashboardLayout>;
-
-export default Page;
+export default Products;

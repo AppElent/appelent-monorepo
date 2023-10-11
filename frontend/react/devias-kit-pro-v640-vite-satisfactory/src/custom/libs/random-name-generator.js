@@ -3,14 +3,28 @@
 Random Name Generator for Javascript
 */
 
+/**
+ *
+ * @param {string} string string
+ * @returns {string} Capatilized string
+ */
 function capFirst(string) {
   return string.charAt(0).toUpperCase() + string.slice(1);
 }
 
+/**
+ * Return random int between min and max
+ * @param {number} min min
+ * @param {number} max max
+ * @returns {number} random int
+ */
 function getRandomInt(min, max) {
   return Math.floor(Math.random() * (max - min)) + min;
 }
 
+/**
+ * @returns {string} Random name
+ */
 export function generateName() {
   var name1 = [
     'abandoned',

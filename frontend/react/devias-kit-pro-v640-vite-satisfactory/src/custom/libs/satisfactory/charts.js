@@ -1,8 +1,8 @@
 /**
  *
  * @param {object} recipe Recipe object
- * @param {array} items
- * @param {array} machines
+ * @param {Array} items
+ * @param {Array} machines
  * @returns {string}
  */
 export const recipeChart = (recipe, items, machines) => {

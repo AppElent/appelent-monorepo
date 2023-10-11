@@ -6,11 +6,13 @@
     "plugin:react-hooks/recommended",
     "plugin:import/recommended",
     "plugin:@typescript-eslint/recommended",
-    "prettier"
+    "prettier",
+    "plugin:jsdoc/recommended"
   ],
   "plugins": [
     "react-refresh",
-    "unused-imports"
+    "unused-imports",
+    "jsdoc"
   ],
   "overrides": [
     {

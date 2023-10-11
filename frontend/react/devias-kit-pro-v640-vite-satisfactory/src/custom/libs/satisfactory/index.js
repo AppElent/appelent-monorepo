@@ -5,6 +5,12 @@ import productionRecipes_v700 from './data/v700/productionRecipes.json';
 import resources_v700 from './data/v700/resources.json';
 import schematics_v700 from './data/v700/schematics.json';
 import tierList_v700 from './data/v700/tierList.json';
+import items_v800 from './data/v800/items.json';
+import buildables_v800 from './data/v800/buildables.json';
+import buildableRecipes_v800 from './data/v800/buildableRecipes.json';
+import productionRecipes_v800 from './data/v800/productionRecipes.json';
+import resources_v800 from './data/v800/resources.json';
+import schematics_v800 from './data/v800/schematics.json';
 import _ from 'lodash';
 
 export { recipeChart } from './charts';
@@ -30,19 +36,19 @@ const satisfactory_data = {
     tierList: tierList_v700,
   },
   v800: {
-    items: items_v700,
-    buildables: buildables_v700,
-    buildableRecipes: buildableRecipes_v700,
-    recipes: productionRecipes_v700,
-    resources: resources_v700,
-    schematics: schematics_v700,
+    items: items_v800,
+    buildables: buildables_v800,
+    buildableRecipes: buildableRecipes_v800,
+    recipes: productionRecipes_v800,
+    resources: resources_v800,
+    schematics: schematics_v800,
     tierList: tierList_v700,
   },
 };
 
 export const satisfactoryVersions = [
   {
-    label: 'Update 8',
+    label: 'Update 8 (Experimental)',
     key: 'v800',
   },
   {

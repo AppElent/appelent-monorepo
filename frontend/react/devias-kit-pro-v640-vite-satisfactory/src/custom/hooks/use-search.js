@@ -46,6 +46,7 @@ const useSearch = (items, attributesOrPredicate) => {
   const itemStrings = useMemo(
     () => items.map((i) => getItemString(i, attributes)),
     // Intentional that we use attributeJson instead of attributes
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     [items, attributeJson]
   );
 

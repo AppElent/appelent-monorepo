@@ -1,5 +1,20 @@
 import { useEffect, useRef } from 'react';
 
+/**
+ * @typedef KeyConfig
+ * @property {string} key Key to press
+ * @property {string} event Event to watch for
+ */
+
+/**
+ * @callback KeyCallback
+ */
+
+/**
+ *
+ * @param {KeyConfig} keyConfig Key configuration
+ * @param {KeyCallback} cb Callback function
+ */
 export function useKey(keyConfig, cb) {
   const callback = useRef(cb);
 
@@ -11,6 +26,10 @@ export function useKey(keyConfig, cb) {
   });
 
   useEffect(() => {
+    /**
+     * Handle function connected to event listener
+     * @param {any} event The event that fires after pressdown
+     */
     function handle(event) {
       if (event && event[keyConfig.event] && keyConfig.key && keyConfig.key === event.key) {
         event.preventDefault();

@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import {
   Button,
   Dialog,
@@ -12,6 +13,7 @@ export const GameEditJsonDialog = ({ formik, modalOpen, setModalState }) => {
   const [jsonData, setJsonData] = useState();
 
   useEffect(() => {
+    // eslint-disable-next-line unused-imports/no-unused-vars
     const { id, meta, owner, playerIds, players, ...data } = formik.values;
     setJsonData(data);
   }, [formik.values]);
@@ -67,4 +69,10 @@ export const GameEditJsonDialog = ({ formik, modalOpen, setModalState }) => {
       </DialogActions>
     </Dialog>
   );
+};
+
+GameEditJsonDialog.propTypes = {
+  formik: PropTypes.any,
+  modalOpen: PropTypes.bool,
+  setModalState: PropTypes.func,
 };

@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import {
   Box,
   Button,
@@ -35,6 +36,12 @@ const SimpleCard = ({ title, content, onClick }) => {
       </Card>
     </Grid>
   );
+};
+
+SimpleCard.propTypes = {
+  content: PropTypes.any,
+  onClick: PropTypes.func,
+  title: PropTypes.string,
 };
 
 const Index = () => {

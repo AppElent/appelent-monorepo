@@ -6,16 +6,7 @@ import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
 
 export const PostComment = (props) => {
-  const {
-    authorAvatar,
-    authorName,
-    authorRole,
-    content,
-    createdAt,
-    isLiked: isLikedProp,
-    likes: likesProp,
-    ...other
-  } = props;
+  const { authorAvatar, authorName, content, createdAt, ...other } = props;
 
   return (
     <Stack

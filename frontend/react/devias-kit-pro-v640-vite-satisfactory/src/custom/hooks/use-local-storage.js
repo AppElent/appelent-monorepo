@@ -1,5 +1,12 @@
 import { useEffect, useState } from 'react';
 
+/**
+ * use LocalStorage hook. Optionally use session storage
+ * @param {string} key Key to look for in localstorage
+ * @param {any} initialValue Initial value to pass back
+ * @param {('localStorage'|'sessionStorage')} type Type to use.
+ * @returns {[any, Function, Function]} Returns data, a setfunction and a delete-function
+ */
 function useLocalStorage(key, initialValue, type = 'localStorage') {
   if (type !== 'localStorage' && type !== 'sessionStorage')
     throw 'Only localStorage and sessionStorage are allowed values';

@@ -73,7 +73,7 @@ const Page = () => {
     return recipeArray.filter((rec) => rec.products.find((p) => p.itemClass === productId));
   }, [productId, recipeArray]);
 
-  console.log(product, productRecipes);
+  console.log(product, productRecipes, machineTypes);
 
   if (!version_correct) return <></>;
 

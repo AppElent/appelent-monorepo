@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import CytoscapeComponent from 'react-cytoscapejs';
 import { useEffect, useRef, useState } from 'react';
 import popper from 'cytoscape-popper';
@@ -18,6 +19,10 @@ const Cytoscape = ({ elements, layout, ...options }) => {
 
   console.log(elements, layout);
 
+  /**
+   *
+   * @param {any} instance cy instance
+   */
   function setCyRef(instance) {
     if (instance && cyRef.current !== instance) {
       cyRef.current = instance;
@@ -25,6 +30,10 @@ const Cytoscape = ({ elements, layout, ...options }) => {
     }
   }
 
+  /**
+   *
+   * @param {any} graphRef GraphRef
+   */
   function _resizeListener(graphRef) {
     if (graphRef?.current) {
       const bounds = graphRef.current.getBoundingClientRect();
@@ -37,6 +46,10 @@ const Cytoscape = ({ elements, layout, ...options }) => {
     }
   }
 
+  /**
+   *
+   * @param {any} cy cy
+   */
   function setCyListeners(cy) {
     // cy.on('select', 'node', function (e) {
     //   e.target.addClass('selected');
@@ -86,6 +99,10 @@ const Cytoscape = ({ elements, layout, ...options }) => {
     });
   }
 
+  /**
+   *
+   * @param {any} instance Graph insance
+   */
   function setGraphRef(instance) {
     if (instance && !graphRef.current) {
       graphRef.current = instance;
@@ -96,6 +113,11 @@ const Cytoscape = ({ elements, layout, ...options }) => {
 
   console.log(popperRef.current, cyRef.current);
 
+  /**
+   *
+   * @param {any} cy cy
+   * @param {any} node node
+   */
   function activatePopper(cy, node) {
     const popper = node.popper({
       content: () => popupRef.current || undefined,
@@ -113,6 +135,10 @@ const Cytoscape = ({ elements, layout, ...options }) => {
     setPopupNode(node);
   }
 
+  /**
+   *
+   * @param {any} cy cy instance
+   */
   function deactivatePopper(cy) {
     if (!popperRef.current) return;
     const node = cy.getElementById(popperRef.current.nodeId);
@@ -124,6 +150,9 @@ const Cytoscape = ({ elements, layout, ...options }) => {
   }
 
   useEffect(() => {
+    /**
+     *
+     */
     function resizeListener() {
       _resizeListener(graphRef);
     }
@@ -179,6 +208,11 @@ const Cytoscape = ({ elements, layout, ...options }) => {
       <div ref={popupRef}>{JSON.stringify(popupNode?.data())}</div>
     </Container>
   );
+};
+
+Cytoscape.propTypes = {
+  elements: PropTypes.array,
+  layout: PropTypes.object,
 };
 
 export default Cytoscape;
