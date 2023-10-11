@@ -36,12 +36,6 @@ import { Seo } from 'src/components/seo';
 import { StringParam, useQueryParam, withDefault } from 'use-query-params';
 import { useItems } from 'src/custom/hooks/use-items';
 
-const recipes = {
-  v600: [],
-  v700: prodv700,
-  v800: prodv800,
-};
-
 const tabOptions = [
   {
     label: 'All',
@@ -87,34 +81,26 @@ const sortOptions = [
 const Page = () => {
   const rootRef = useRef(null);
   const [productQuery, setProductQuery] = useQueryParam('recipe');
-  const [version, setVersion] = useQueryParam(
-    'version',
-    withDefault(StringParam, SatisfactoryCurrentVersion)
-  );
+  const [version] = useQueryParam('version', withDefault(StringParam, SatisfactoryCurrentVersion));
   const translate = useTranslate();
 
-  const [recipeArray, setRecipeArray] = useState([]);
+  const recipeArray = useMemo(() => getSatisfactoryDataArray('recipes', version), [version]);
+  const buildables = useMemo(() => getSatisfactoryData('buildables', version), [version]);
+
   const { items, search, handlers, pageItems } = useItems(recipeArray, {
     sortBy: 'name',
     rowsPerPage: 10,
   });
 
   useEffect(() => {
-    const satisfactoryProducts = recipes[version];
-    let satisfactoryProductsArray = Object.keys(satisfactoryProducts).map((k) => ({
-      ...satisfactoryProducts[k],
-      className: k,
-    }));
-    setRecipeArray(satisfactoryProductsArray);
     handlers.handlePageChange(undefined, 0);
-  }, [version]);
-
-  const buildables = getSatisfactoryData('buildables');
+  }, [recipeArray, handlers]);
 
   const [drawer, setDrawer] = useState({
     isOpen: false,
     data: undefined,
   });
+
   const currentItem = useMemo(() => {
     if (items.length > 0) {
       if (!drawer.data) {
@@ -171,7 +157,7 @@ const Page = () => {
 
   return (
     <>
-      <Seo title="Products" />
+      <Seo title="Recipes" />
       <Divider />
       <Box
         component="main"
@@ -239,7 +225,9 @@ const Page = () => {
                     <TableCell
                       sx={{
                         alignItems: 'center',
-                        display: 'flex',
+                        //display: 'flex',
+                        width: 'fit-content',
+                        maxWidth: '50px',
                       }}
                     >
                       <Box
@@ -259,6 +247,13 @@ const Page = () => {
                           {60 / item.craftTime} p.m.
                         </Typography>
                       </Box>
+                    </TableCell>
+                    <TableCell
+                      sx={{
+                        alignItems: 'center',
+                        //display: 'flex',
+                      }}
+                    >
                       <Box sx={{ ml: 2 }}>
                         <Typography variant="subtitle2">{item.name}</Typography>
                         <Typography

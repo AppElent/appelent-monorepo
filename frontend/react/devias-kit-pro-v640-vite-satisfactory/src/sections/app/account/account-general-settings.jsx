@@ -176,9 +176,6 @@ export const AccountGeneralSettings = (props) => {
                 },
               }}
             />
-            {/* <Button onClick={handleEdit}>
-                    {isEditing ? "Save" : "Edit"}
-                  </Button> */}
           </Stack>
           <Stack
             alignItems="center"
@@ -224,9 +221,6 @@ export const AccountGeneralSettings = (props) => {
                 },
               }}
             />
-            {/* <Button onClick={handleEdit}>
-                    {isEditing ? "Save" : "Edit"}
-                  </Button> */}
           </Stack>
         </Stack>
       </CardDefault>

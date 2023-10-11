@@ -10,11 +10,13 @@ import { ItemDetailsContainer } from 'src/components/app/list/item-drawer/item-d
 import { SeverityPill } from 'src/components/severity-pill';
 //import { useSearch, useItems } from "components/app/list/utils";
 
-import prodv700 from 'src/custom/libs/satisfactory/data/v700/items.json';
-import prodv800 from 'src/custom/libs/satisfactory/data/v800/items.json';
 import { paginate } from 'src/custom/libs/paginate';
 import { useRouter } from 'src/hooks/use-router';
-import { getSatisfactoryItem, SatisfactoryCurrentVersion } from 'src/custom/libs/satisfactory';
+import {
+  getSatisfactoryDataArray,
+  getSatisfactoryItem,
+  SatisfactoryCurrentVersion,
+} from 'src/custom/libs/satisfactory';
 import { paths } from 'src/paths';
 import { SatisfactoryProductDetail } from 'src/sections/app/satisfactory/products/product-detail';
 import { useTranslate } from '@refinedev/core';
@@ -23,12 +25,6 @@ import { Seo } from 'src/components/seo';
 import { StringParam, useQueryParam, withDefault } from 'use-query-params';
 import { useItems } from 'src/custom/hooks/use-items';
 //import ProductTableRows from 'src/sections/app/satisfactory/products/product-table-rows';
-
-const products = {
-  v600: [],
-  v700: prodv700,
-  v800: prodv800,
-};
 
 const tabOptions = [
   {
@@ -68,15 +64,15 @@ const Products = () => {
   const rootRef = useRef(null);
   const router = useRouter();
   const [productQuery, setProductQuery] = useQueryParam('product');
-  //const { search, updateSearch } = useSearch();
   const [version] = useQueryParam('version', withDefault(StringParam, SatisfactoryCurrentVersion));
   const translate = useTranslate();
+  usePageView();
 
-  const [productArray, setProductArray] = useState([]);
+  const productArray = useMemo(() => {
+    return getSatisfactoryDataArray('items', version);
+  }, [version]);
 
-  console.log(productArray);
-
-  const { items, search, handlers } = useItems(productArray, {
+  const { items, pageItems, search, handlers } = useItems(productArray, {
     sortBy: 'name',
     filters: { isFuel: { min: true } },
     rowsPerPage: 10,
@@ -86,6 +82,7 @@ const Products = () => {
     isOpen: false,
     data: undefined,
   });
+
   const currentItem = useMemo(() => {
     if (items.length > 0) {
       if (!drawer.data) {
@@ -97,16 +94,8 @@ const Products = () => {
   }, [items, drawer, version]);
 
   useEffect(() => {
-    const satisfactoryProducts = products[version];
-    let satisfactoryProductsArray = Object.keys(satisfactoryProducts).map((k) => ({
-      ...satisfactoryProducts[k],
-      className: k,
-    }));
-    setProductArray(satisfactoryProductsArray);
     handlers.handlePageChange(undefined, 0);
-  }, [version]);
-
-  const itemsPaginated = paginate(items, search.rowsPerPage, search.page + 1);
+  }, [productArray, handlers]);
 
   useEffect(() => {
     // If product query param is present, set currentItem
@@ -114,8 +103,6 @@ const Products = () => {
       handleItemOpen(productQuery);
     }
   }, []);
-
-  usePageView();
 
   const handleItemOpen = useCallback(
     (orderId) => {
@@ -206,8 +193,7 @@ const Products = () => {
               page={search.page}
               rowsPerPage={search.rowsPerPage}
             >
-              {itemsPaginated.map((item) => {
-                const totalAmount = numeral(item.totalAmount).format(`${item.currency}0,0.00`);
+              {pageItems.map((item) => {
                 const statusColor = item.isFluid ? 'info' : 'success';
 
                 return (

@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useEffect, useMemo, useState } from 'react';
 import { useMounted } from './use-mounted';
 
 /**
@@ -14,22 +14,25 @@ function paginate(array, page_size, page_number) {
 }
 
 const useSearch = (initialSearch) => {
-  const startingFilters = {
-    query: undefined,
-    search: undefined,
-    filters: undefined,
-    function: undefined,
-    page: 0,
-    rowsPerPage: 5,
-    sortBy: undefined,
-    sortDir: 'asc',
-    ...initialSearch,
-  };
+  const startingFilters = useMemo(
+    () => ({
+      query: undefined,
+      search: undefined,
+      filters: undefined,
+      function: undefined,
+      page: 0,
+      rowsPerPage: 5,
+      sortBy: undefined,
+      sortDir: 'asc',
+      ...initialSearch,
+    }),
+    []
+  );
   const [search, setSearch] = useState(startingFilters);
 
-  const resetSearch = () => {
+  const resetSearch = useCallback(() => {
     setSearch(startingFilters);
-  };
+  }, [setSearch, startingFilters]);
 
   return {
     search,
@@ -214,8 +217,8 @@ export const useItems = (items, initialSearch) => {
       [updateSearch];
   }, [resetSearch, updateSearch]);
 
-  return {
-    handlers: {
+  const handlers = useMemo(
+    () => ({
       handleFiltersChange,
       handleQueryChange,
       handlePageChange,
@@ -227,7 +230,24 @@ export const useItems = (items, initialSearch) => {
       handleSetChange,
       handleTabsChange,
       resetFilters,
-    },
+    }),
+    [
+      handleFiltersChange,
+      handlePageChange,
+      handleQueryChange,
+      handleRowsPerPageChange,
+      handleSearchChange,
+      handleSelectedChange,
+      handleSetChange,
+      handleSortByChange,
+      handleSortChange,
+      handleTabsChange,
+      resetFilters,
+    ]
+  );
+
+  return {
+    handlers,
     search,
     selected,
     pageItems,
