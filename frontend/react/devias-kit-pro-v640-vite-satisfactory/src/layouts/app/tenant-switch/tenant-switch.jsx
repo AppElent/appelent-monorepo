@@ -26,7 +26,6 @@ export const TenantSwitch = (props) => {
   }
 
   const handleTenantSwitch = (tenant) => {
-    console.log(tenant, siteSettings);
     if (siteSettings.url && tenant === 'Live') {
       window.location = 'https://' + siteSettings.url;
     } else if (siteSettings.stagingUrl && tenant === 'Test') {

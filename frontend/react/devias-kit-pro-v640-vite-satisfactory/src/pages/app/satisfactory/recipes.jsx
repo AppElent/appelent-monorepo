@@ -2,12 +2,9 @@ import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import {
   Box,
   Divider,
-  MenuItem,
-  Select,
   Stack,
   TableCell,
   TableRow,
-  TextField,
   Typography,
 } from '@mui/material';
 import { usePageView } from 'src/hooks/use-page-view';
@@ -20,14 +17,10 @@ import { ItemDetailsContainer } from 'src/components/app/list/item-drawer/item-d
 import { SeverityPill } from 'src/components/severity-pill';
 //import { useSearch, useItems } from "components/app/list/utils";
 
-import prodv700 from 'src/custom/libs/satisfactory/data/v700/productionRecipes.json';
-import prodv800 from 'src/custom/libs/satisfactory/data/v800/productionRecipes.json';
-import { paginate } from 'src/custom/libs/paginate';
 import {
   getSatisfactoryData,
   getSatisfactoryDataArray,
   SatisfactoryCurrentVersion,
-  satisfactoryVersions,
 } from 'src/custom/libs/satisfactory';
 import { SatisfactoryRecipeDetail } from 'src/sections/app/satisfactory/recipes/recipe-detail';
 import { useTranslate } from '@refinedev/core';
@@ -108,7 +101,6 @@ const Page = () => {
       }
 
       const item = items.find((item) => item.slug === drawer.data);
-      console.log(items, item, drawer.data);
       return getSatisfactoryDataArray('recipes', version).find(
         (r) => r.className === item.className
       );
@@ -295,12 +287,7 @@ const Page = () => {
                 >
                   {translate(tokens.satisfactory.pages.recipes.fullscreen)}
                 </Button> */}
-              {currentItem && (
-                <SatisfactoryRecipeDetail
-                  recipe={currentItem}
-                  translate={translate}
-                />
-              )}
+              {currentItem && <SatisfactoryRecipeDetail recipe={currentItem} />}
             </ItemDetailsContainer>
           </ItemDrawer>
         </Box>

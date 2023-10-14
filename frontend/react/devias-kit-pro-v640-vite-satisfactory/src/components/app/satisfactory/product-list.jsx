@@ -91,7 +91,6 @@ const ProductList = () => {
 
   const productArrayWithTiers = useMemo(() => {
     if (recipeArray.length === 0 || productArray.length === 0 || schematics.length === 0) return [];
-    console.log(recipeArray, productArray, schematics);
     let returnArray = [];
 
     productArray.forEach((prod) => {
@@ -109,24 +108,12 @@ const ProductList = () => {
   }, [productArray, recipeArray, schematics]);
 
   const unique = [...new Set(schematics.map((item) => item.type))];
-  console.log(schematics, unique, productArrayWithTiers);
-
-  productArrayWithTiers.forEach((pr) => {
-    console.log(
-      'Product ' + pr.className + ', techtiers',
-      pr.schematics?.map((s) => ({ tier: s.techTier, type: s.type, name: s.name }))
-    );
-  });
-
-  console.log(productArray);
 
   const { allItems, items, pageItems, search, handlers } = useItems(productArray, {
     sortBy: 'name',
     filters: { isFuel: { min: true } },
     rowsPerPage: 10,
   });
-
-  console.log(items);
 
   const [drawer, setDrawer] = useState({
     isOpen: false,
@@ -205,8 +192,6 @@ const ProductList = () => {
     [currentItem, translate]
   );
 
-  console.log(currentItem);
-
   const recipes = useMemo(
     () =>
       getSatisfactoryDataArray('recipes', version).filter(
@@ -216,7 +201,6 @@ const ProductList = () => {
     [currentItem, version]
   );
 
-  console.log(recipes);
   const machines = getSatisfactoryData('buildables', version);
   const charts = useMemo(
     () =>
@@ -224,8 +208,6 @@ const ProductList = () => {
       recipes.map((recipe) => recipeChart(recipe, getSatisfactoryData('items', version), machines)),
     [recipes, version, machines]
   );
-
-  console.log(charts, recipes);
 
   return (
     <>

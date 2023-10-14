@@ -1,4 +1,4 @@
-import { useMemo } from 'react';
+import { useContext, useMemo } from 'react';
 import PropTypes from 'prop-types';
 import Box from '@mui/material/Box';
 import Drawer from '@mui/material/Drawer';
@@ -13,6 +13,8 @@ import { paths } from 'src/paths';
 import { TenantSwitch } from '../tenant-switch';
 import { SideNavSection } from './side-nav-section';
 import VersionSelector from 'src/components/app/satisfactory/version-selector';
+import { Button } from '@mui/material';
+import { useGlobalData } from 'src/custom/libs/GlobalContext';
 
 const SIDE_NAV_WIDTH = 280;
 
@@ -149,6 +151,16 @@ export const SideNav = (props) => {
   const pathname = usePathname();
   const cssVars = useCssVars(color);
 
+  const productsClick = () => {
+    var letterEvent = new KeyboardEvent('keydown', { key: 'p', ctrlKey: true });
+    document.dispatchEvent(letterEvent);
+  };
+
+  const recipesClick = () => {
+    var letterEvent = new KeyboardEvent('keydown', { key: 'r', ctrlKey: true });
+    document.dispatchEvent(letterEvent);
+  };
+
   return (
     <Drawer
       anchor="left"
@@ -219,7 +231,20 @@ export const SideNav = (props) => {
                 subheader={section.subheader}
               />
             ))}
+            <Button
+              variant="outlined"
+              onClick={productsClick}
+            >
+              All products
+            </Button>
+            <Button
+              variant="outlined"
+              onClick={recipesClick}
+            >
+              All recipes
+            </Button>
           </Stack>
+
           {/* <Box sx={{ p: 3 }}>
             <Typography variant="subtitle1">Need help?</Typography>
             <Typography

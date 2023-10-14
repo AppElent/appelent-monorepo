@@ -1,15 +1,4 @@
-import {
-  Autocomplete,
-  Box,
-  Button,
-  Container,
-  Divider,
-  Grid,
-  Tab,
-  Tabs,
-  TextField,
-  Typography,
-} from '@mui/material';
+import { Box, Button, Container, Divider, Grid, Tab, Tabs, Typography } from '@mui/material';
 import { usePageView } from 'src/hooks/use-page-view';
 import { useSettings } from 'src/hooks/use-settings';
 import React, { useMemo, useEffect, useCallback } from 'react';
@@ -26,14 +15,14 @@ import { Stack } from '@mui/system';
 import _ from 'lodash';
 import useTabs from 'src/custom/hooks/use-tabs';
 import { useData } from 'src/custom/libs/data-framework';
-import { SatisfactoryGamesGeneral } from 'src/sections/app/satisfactory/games/satisfactory-games-general';
+import TabGeneral from 'src/sections/app/satisfactory/games/tab-general';
 import { getAuth } from 'firebase/auth';
 import { useFormik } from 'formik';
 import { useConfirm } from 'src/custom/libs/confirmation';
 import { toast } from 'react-hot-toast';
-import { SatisfactoryGamesScribble } from 'src/sections/app/satisfactory/games/satisfactory-games-scribble';
-import { SatisfactoryGamesFactories } from 'src/sections/app/satisfactory/games/satisfactory-games-factories';
-import { SatisfactoryGamesTransport } from 'src/sections/app/satisfactory/games/satisfactory-games-transport';
+import TabScribble from 'src/sections/app/satisfactory/games/tab-scribble';
+import TabFactories from 'src/sections/app/satisfactory/games/tab-factories';
+import TabTransport from 'src/sections/app/satisfactory/games/tab-transport';
 import { generateName } from 'src/custom/libs/random-name-generator';
 import { useKey } from 'src/custom/hooks/use-key';
 import { useTranslate } from '@refinedev/core';
@@ -41,12 +30,19 @@ import { tokens } from 'src/locales/tokens';
 import { Seo } from 'src/components/seo';
 import useQueryOrLocalStorage from 'src/custom/hooks/use-query-or-localstorage';
 import { useMounted } from 'src/hooks/use-mounted';
-import { SatisfactoryGamesOverview } from 'src/sections/app/satisfactory/games/satisfactory-games-overview';
-import { SatisfactoryGamesVehicles } from 'src/sections/app/satisfactory/games/vehicles/vehicles';
+import TabOverview from 'src/sections/app/satisfactory/games/tab-overview';
+import TabVehicles from 'src/sections/app/satisfactory/games/tab-vehicles';
 import * as Yup from 'yup';
 import { nanoid } from 'nanoid';
 import GameSelect from 'src/sections/app/satisfactory/games/game-select';
-import PowerStationOverview from 'src/sections/app/satisfactory/games/power/power-station-overview';
+import TabPowerStations from 'src/sections/app/satisfactory/games/tab-power-stations';
+import {
+  addFormikArrayItem,
+  removeFormikArrayItem,
+  setFormikArrayItem,
+} from 'src/custom/utils/formik-crud-functions';
+import { logger } from 'src/custom/libs/logging';
+import TabTodo from 'src/sections/app/satisfactory/games/tab-todo';
 
 const Page = () => {
   const isMounted = useMounted();
@@ -107,6 +103,13 @@ const Page = () => {
               id: Yup.string().required('Required'),
               direction: Yup.string(),
               station: Yup.string().required('Required'),
+              products: Yup.array().of(
+                Yup.object().shape({
+                  car: Yup.string(),
+                  platform: Yup.string(),
+                  products: Yup.array().of(Yup.string()),
+                })
+              ),
             })
           ),
         })
@@ -158,7 +161,7 @@ const Page = () => {
     //validationSchema,
     onSubmit: async (values, helpers) => {
       try {
-        console.log('Saving values', values);
+        logger.log('Saving values', values);
         // eslint-disable-next-line unused-imports/no-unused-vars
         let { meta, ...rest } = values;
         if (!rest.players.find((player) => player.uid === values.owner)) {
@@ -171,7 +174,6 @@ const Page = () => {
         // For each station, check if it is a train station. If not, add 1 platform. If it is a train, add train station
         if (rest.transport?.stations?.length > 0) {
           rest.transport.stations = rest.transport?.stations.map((station) => {
-            console.log('station', station);
             if (station.type !== 'train') {
               if (station.platforms === undefined || station.platforms.length === 0) {
                 station.platforms = [{ id: nanoid() }];
@@ -187,7 +189,7 @@ const Page = () => {
 
         // For each vehicle, check if it is a train station. If not, add 1 car
         if (rest.transport?.vehicles?.length > 0) {
-          console.log(rest.transport.vehicles);
+          logger.log(rest.transport.vehicles);
         }
 
         // Fix linebreaks at the end of scribble field
@@ -198,7 +200,6 @@ const Page = () => {
         }
 
         rest.playerIds = rest.players.map((player) => player.uid);
-        //console.log(values, rest);
         await gamesData.resource?.actions?.update(values.id, rest);
         //await saveSatisfactoryGame(gamesData.meta.path, values.id, rest);
         toast.success(translate(tokens.common.notifications.savedSuccess));
@@ -216,7 +217,7 @@ const Page = () => {
     validationSchema: gamesValidation,
   });
 
-  useEffect(() => console.log('FORMIK', formik), [formik]);
+  useEffect(() => logger.log('FORMIK', formik), [formik]);
 
   useEffect(() => {
     if (Object.keys(formik.errors)?.length > 0) console.error(formik.errors);
@@ -276,6 +277,11 @@ const Page = () => {
     {
       label: 'Vehicles',
       value: 'vehicles',
+      disabled: !selectedGame,
+    },
+    {
+      label: 'To do list',
+      value: 'todo',
       disabled: !selectedGame,
     },
     {
@@ -474,7 +480,7 @@ const Page = () => {
             </Stack>
             <Stack spacing={1}>
               {tabs.tab === 'general' && (
-                <SatisfactoryGamesGeneral
+                <TabGeneral
                   formik={formik}
                   game={selectedGame}
                   handleDeleteGame={() => {
@@ -483,57 +489,65 @@ const Page = () => {
                       process: () => deleteGame(),
                     });
                   }}
-                  translate={translate}
                 />
               )}
               {tabs.tab === 'scribble' && (
-                <SatisfactoryGamesScribble
+                <TabScribble
                   formik={formik}
                   game={selectedGame}
-                  translate={translate}
                 />
               )}
-              {tabs.tab === 'overview' && <SatisfactoryGamesOverview game={selectedGame} />}
+              {tabs.tab === 'overview' && <TabOverview game={selectedGame} />}
               {tabs.tab === 'factories' && (
-                <SatisfactoryGamesFactories
+                <TabFactories
                   formik={formik}
                   game={selectedGame}
                   recipes={satisfactoryRecipes}
                   products={satisfactoryProducts}
                   version={formik.values.version}
-                  translate={translate}
                 />
               )}
               {tabs.tab === 'transport' && (
-                <SatisfactoryGamesTransport
+                <TabTransport
                   formik={formik}
                   game={selectedGame}
                   recipes={satisfactoryRecipes}
                   products={satisfactoryProducts}
-                  translate={translate}
                 />
               )}
               {tabs.tab === 'vehicles' && (
-                <SatisfactoryGamesVehicles
+                <TabVehicles
                   formik={formik}
                   game={selectedGame}
                   recipes={satisfactoryRecipes}
                   products={satisfactoryProducts}
-                  translate={translate}
+                />
+              )}
+              {tabs.tab === 'todo' && (
+                <TabTodo
+                  todos={formik.values.todos || []}
+                  addTodo={addFormikArrayItem(formik, 'todos')}
+                  removeTodo={removeFormikArrayItem(formik, 'todos')}
+                  setTodo={setFormikArrayItem(formik, 'todos')}
+                  formikNamespace={'todos'}
+                  players={formik.values.players || []}
+                  handleChange={formik.handleChange}
                 />
               )}
               {tabs.tab === 'power' && (
-                <PowerStationOverview
+                <TabPowerStations
                   powerStations={formik.values.power?.stations || []}
-                  createPowerStation={() => {
-                    const currentStations = formik.values.power?.stations || [];
-                    formik.setFieldValue('power.stations', [
-                      ...currentStations,
-                      { id: nanoid(), name: generateName() },
-                    ]);
-                  }}
-                  deletePowerStation={() => {}}
-                  setPowerStation={() => {}}
+                  // createPowerStation={() => {
+                  //   const currentStations = formik.values.power?.stations || [];
+                  //   formik.setFieldValue('power.stations', [
+                  //     ...currentStations,
+                  //     { id: nanoid(), name: generateName() },
+                  //   ]);
+                  // }}
+                  formikNamespace={'power.stations'}
+                  createPowerStation={addFormikArrayItem(formik, 'power.stations')}
+                  deletePowerStation={removeFormikArrayItem(formik, 'power.stations')}
+                  setPowerStation={setFormikArrayItem(formik, 'power.stations')}
                 />
               )}
             </Stack>

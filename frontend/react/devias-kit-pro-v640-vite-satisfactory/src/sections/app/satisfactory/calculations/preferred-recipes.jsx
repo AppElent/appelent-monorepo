@@ -42,8 +42,6 @@ const PreferredRecipes = ({ preferredRecipes, setPreferredRecipes, version }) =>
     if (savedRecipeList) setPreferredRecipes(savedRecipeList?.filter((l) => l.product && l.recipe));
   }, [savedRecipeList]);
 
-  console.log(savedRecipeList);
-
   return (
     <CardDefault
       title="Preferred Product recipes"

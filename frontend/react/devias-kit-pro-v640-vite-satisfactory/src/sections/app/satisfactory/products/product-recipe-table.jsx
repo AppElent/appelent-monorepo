@@ -19,6 +19,7 @@ import { recipeChart } from 'src/custom/libs/satisfactory';
 import Mermaid from 'src/custom/libs/mermaid';
 import { Link } from 'react-router-dom';
 import { paths } from 'src/paths';
+import { useTranslate } from '@refinedev/core';
 
 export const SatisfactoryProductRecipeTable = ({
   recipes,
@@ -26,8 +27,8 @@ export const SatisfactoryProductRecipeTable = ({
   products,
   machineTypes,
   conditionFunction,
-  translate,
 }) => {
+  const translate = useTranslate();
   const columns = [
     { label: translate(tokens.common.fields.name) },
     { label: translate(tokens.satisfactory.pages.products.input) },
@@ -181,5 +182,4 @@ SatisfactoryProductRecipeTable.propTypes = {
   products: PropTypes.any,
   recipes: PropTypes.array.isRequired,
   title: PropTypes.string.isRequired,
-  translate: PropTypes.func,
 };

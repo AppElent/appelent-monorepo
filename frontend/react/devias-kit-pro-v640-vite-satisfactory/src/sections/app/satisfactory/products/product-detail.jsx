@@ -9,8 +9,10 @@ import {
   recipeChart,
 } from 'src/custom/libs/satisfactory';
 import Mermaid from 'src/custom/libs/mermaid';
+import { useTranslate } from '@refinedev/core';
 
-export const SatisfactoryProductDetail = ({ product, translate }) => {
+export const SatisfactoryProductDetail = ({ product }) => {
+  const translate = useTranslate();
   const getSeverityPill = (item) => {
     let status = 'error';
     let text = translate(tokens.common.words.no);
@@ -62,7 +64,6 @@ export const SatisfactoryProductDetail = ({ product, translate }) => {
     recipe.products.find((p) => p.itemClass === product.className)
   );
 
-  console.log(recipe);
   const machines = getSatisfactoryData('buildables');
   const chart = recipeChart(recipe, getSatisfactoryData('items'), machines);
 
@@ -99,5 +100,4 @@ export const SatisfactoryProductDetail = ({ product, translate }) => {
 
 SatisfactoryProductDetail.propTypes = {
   product: PropTypes.object.isRequired,
-  translate: PropTypes.func,
 };

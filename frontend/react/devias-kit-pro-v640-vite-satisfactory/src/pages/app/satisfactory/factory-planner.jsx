@@ -40,8 +40,6 @@ const FactoryPlanner = () => {
     };
   }, [plannerConfig]);
 
-  console.log(modal);
-
   // graph page: https://github.com/Greven145/yet-another-factory-planner/blob/master/client/src/containers/ProductionPlanner/PlannerResults/ProductionGraphTab/index.tsx
   // tooltip: https://github.com/Greven145/yet-another-factory-planner/blob/master/client/src/components/GraphTooltip/index.tsx
 

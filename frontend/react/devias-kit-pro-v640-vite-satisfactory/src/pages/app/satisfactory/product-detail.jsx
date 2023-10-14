@@ -73,8 +73,6 @@ const Page = () => {
     return recipeArray.filter((rec) => rec.products.find((p) => p.itemClass === productId));
   }, [productId, recipeArray]);
 
-  console.log(product, productRecipes, machineTypes);
-
   if (!version_correct) return <></>;
 
   const isEquipment = (reverse) => (recipe, products) => {
@@ -138,16 +136,12 @@ const Page = () => {
               />
             </Stack>
             <Stack spacing={3}>
-              <SatisfactoryProductDetail
-                product={product}
-                translate={translate}
-              />
+              <SatisfactoryProductDetail product={product} />
               <SatisfactoryProductRecipeTable
                 title="Recipes"
                 recipes={product.recipes_by || []}
                 machineTypes={machineTypes}
                 products={getSatisfactoryData('items', version)}
-                translate={translate}
               />
               <SatisfactoryProductRecipeTable
                 title="Used for"
@@ -155,7 +149,6 @@ const Page = () => {
                 products={getSatisfactoryData('items', version)}
                 machineTypes={machineTypes}
                 conditionFunction={isEquipment(true)}
-                translate={translate}
               />
               {product.recipes_for && (
                 <SatisfactoryProductRecipeTable
@@ -164,7 +157,6 @@ const Page = () => {
                   products={getSatisfactoryData('items', version)}
                   machineTypes={machineTypes}
                   conditionFunction={isEquipment(false)}
-                  translate={translate}
                 />
               )}
             </Stack>

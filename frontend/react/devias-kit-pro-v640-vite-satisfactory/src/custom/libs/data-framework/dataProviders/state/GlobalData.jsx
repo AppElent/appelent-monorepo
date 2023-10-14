@@ -34,7 +34,6 @@ const GlobalData = ({ resource }) => {
   }, [data]);
 
   const updateData = (value) => {
-    console.log(resource, value);
     if (resource.options.type === 'object') {
       setData((prevState) => ({ ...prevState, ...value }));
     } else if (resource.options.type === 'array') {

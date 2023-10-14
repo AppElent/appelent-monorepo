@@ -206,21 +206,18 @@ const GlobalData = ({ resource }) => {
         }
       },
       set: async (id, value) => {
-        console.log('trying to update', id, value);
         const ref = doc(resource.options?.collection, id);
         if (ref) {
           return await setDoc(ref, value);
         }
       },
       update: async (id, value) => {
-        console.log('trying to update', id, value);
         const ref = doc(resource.options?.collection, id);
         if (ref) {
           return await updateDoc(ref, value);
         }
       },
       delete: async (id) => {
-        console.log('deleting id', id);
         const ref = doc(resource.options?.collection, id);
         if (ref) {
           return await deleteDoc(ref);

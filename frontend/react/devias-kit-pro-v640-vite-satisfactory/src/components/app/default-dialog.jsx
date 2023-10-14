@@ -2,7 +2,6 @@ import PropTypes from 'prop-types';
 import { Dialog, DialogContent, DialogTitle } from '@mui/material';
 
 const DefaultDialog = ({ open, handleClose }) => {
-  console.log(open, handleClose);
   return (
     <Dialog
       onClose={handleClose}

@@ -83,12 +83,12 @@
     "meta": {},
     "event": "NONE"
   },
-  "Desc_NobeliskCluster_C": {
-    "slug": "cluster-nobelisk",
-    "name": "Cluster Nobelisk",
-    "description": "A Nobelisk that detonates into multiple smaller explosions. Practical when clearing out large areas of vegetation and other inconveniences.",
+  "Desc_NobeliskExplosive_C": {
+    "slug": "nobelisk",
+    "name": "Nobelisk",
+    "description": "A simple explosive, useful for clearing boulders, vegetation, and other obstacles.",
     "stackSize": 50,
-    "sinkPoints": 1376,
+    "sinkPoints": 152,
     "isFluid": false,
     "isFuel": false,
     "isBiomass": false,
@@ -97,12 +97,12 @@
     "meta": {},
     "event": "NONE"
   },
-  "Desc_NobeliskExplosive_C": {
-    "slug": "nobelisk",
-    "name": "Nobelisk",
-    "description": "A simple explosive, useful for clearing boulders, vegetation, and other obstacles.",
+  "Desc_NobeliskCluster_C": {
+    "slug": "cluster-nobelisk",
+    "name": "Cluster Nobelisk",
+    "description": "A Nobelisk that detonates into multiple smaller explosions. Practical when clearing out large areas of vegetation and other inconveniences.",
     "stackSize": 50,
-    "sinkPoints": 152,
+    "sinkPoints": 1376,
     "isFluid": false,
     "isFuel": false,
     "isBiomass": false,
@@ -223,12 +223,12 @@
     "meta": {},
     "event": "NONE"
   },
-  "Desc_Berry_C": {
-    "slug": "paleberry",
-    "name": "Paleberry",
-    "description": "Slot: Hands\nConsumable\n\nCan be eaten to restore one health segment.",
-    "stackSize": 50,
-    "sinkPoints": 0,
+  "Desc_Beacon_C": {
+    "slug": "beacon",
+    "name": "Beacon",
+    "description": "PENDING REMOVAL\nThis item will (likely) be removed in a future update.\n\nCurrently only used as an ingredient in an alternative recipe.",
+    "stackSize": 100,
+    "sinkPoints": 320,
     "isFluid": false,
     "isFuel": false,
     "isBiomass": false,
@@ -236,8 +236,7 @@
     "isEquipment": true,
     "meta": {
       "equipmentInfo": {
-        "slot": "ARMS",
-        "healthGain": 10
+        "slot": "ARMS"
       }
     },
     "event": "NONE"
@@ -257,6 +256,25 @@
       "equipmentInfo": {
         "slot": "ARMS",
         "healthGain": 20
+      }
+    },
+    "event": "NONE"
+  },
+  "Desc_Berry_C": {
+    "slug": "paleberry",
+    "name": "Paleberry",
+    "description": "Slot: Hands\nConsumable\n\nCan be eaten to restore one health segment.",
+    "stackSize": 50,
+    "sinkPoints": 0,
+    "isFluid": false,
+    "isFuel": false,
+    "isBiomass": false,
+    "isRadioactive": false,
+    "isEquipment": true,
+    "meta": {
+      "equipmentInfo": {
+        "slot": "ARMS",
+        "healthGain": 10
       }
     },
     "event": "NONE"
@@ -299,12 +317,49 @@
     },
     "event": "NONE"
   },
-  "Desc_Beacon_C": {
-    "slug": "beacon",
-    "name": "Beacon",
-    "description": "PENDING REMOVAL\nThis item will (likely) be removed in a future update.\n\nCurrently only used as an ingredient in an alternative recipe.",
-    "stackSize": 100,
-    "sinkPoints": 320,
+  "Desc_Parachute_C": {
+    "slug": "parachute",
+    "name": "Parachute",
+    "description": "Slows down your fall when activated in mid-air.",
+    "stackSize": 1,
+    "sinkPoints": 608,
+    "isFluid": false,
+    "isFuel": false,
+    "isBiomass": false,
+    "isRadioactive": false,
+    "isEquipment": true,
+    "meta": {
+      "equipmentInfo": {
+        "slot": "BACK"
+      }
+    },
+    "event": "NONE"
+  },
+  "Desc_ShockShank_C": {
+    "slug": "xeno-zapper",
+    "name": "Xeno-Zapper",
+    "description": "Standard issue electroshock self-defense weapon for melee range.",
+    "stackSize": 1,
+    "sinkPoints": 1880,
+    "isFluid": false,
+    "isFuel": false,
+    "isBiomass": false,
+    "isRadioactive": false,
+    "isEquipment": true,
+    "meta": {
+      "equipmentInfo": {
+        "slot": "ARMS",
+        "attackDistance": 350
+      }
+    },
+    "event": "NONE"
+  },
+  "Desc_PortableMiner_C": {
+    "slug": "portable-miner",
+    "name": "Portable Miner",
+    "description": "Can be set up on a resource node to automatically extract the resource. Note that it has limited storage space.",
+    "stackSize": 1,
+    "sinkPoints": 56,
     "isFluid": false,
     "isFuel": false,
     "isBiomass": false,
@@ -317,12 +372,12 @@
     },
     "event": "NONE"
   },
-  "Desc_Parachute_C": {
-    "slug": "parachute",
-    "name": "Parachute",
-    "description": "Slows down your fall when activated in mid-air.",
-    "stackSize": 50,
-    "sinkPoints": 608,
+  "Desc_HoverPack_C": {
+    "slug": "hover-pack",
+    "name": "Hover Pack",
+    "description": "Power consumption: 100 MW\n\nAllows for vertical movement and hovering in mid-air to improve building efficiency and factory traversal. Wirelessly connects to nearby power connections, such as Power Poles and Buildings, for power consumption.\n\nSlow-fall: Hold {PlayerMovement_Jump} after losing connection mid-air.\nDisable Hoverpack: Double tap {PlayerMovement_Crouch} while hovering.",
+    "stackSize": 1,
+    "sinkPoints": 413920,
     "isFluid": false,
     "isFuel": false,
     "isBiomass": false,
@@ -331,6 +386,81 @@
     "meta": {
       "equipmentInfo": {
         "slot": "BACK"
+      }
+    },
+    "event": "NONE"
+  },
+  "Desc_HazmatSuit_C": {
+    "slug": "hazmat-suit",
+    "name": "Hazmat Suit",
+    "description": "Shields Pioneers from the adverse effects of radiation. \nConsumes Iodine Infused Filters from the inventory while worn in radioactive areas.",
+    "stackSize": 1,
+    "sinkPoints": 54100,
+    "isFluid": false,
+    "isFuel": false,
+    "isBiomass": false,
+    "isRadioactive": false,
+    "isEquipment": true,
+    "meta": {
+      "equipmentInfo": {
+        "slot": "BODY",
+        "filterDuration": 240
+      }
+    },
+    "event": "NONE"
+  },
+  "Desc_Gasmask_C": {
+    "slug": "gas-mask",
+    "name": "Gas Mask",
+    "description": "Allows Pioneers to breathe normally while in toxic gas areas.\nConsumes Gas Filters from the inventory when in use.",
+    "stackSize": 1,
+    "sinkPoints": 55000,
+    "isFluid": false,
+    "isFuel": false,
+    "isBiomass": false,
+    "isRadioactive": false,
+    "isEquipment": true,
+    "meta": {
+      "equipmentInfo": {
+        "slot": "HEAD",
+        "filterDuration": 240
+      }
+    },
+    "event": "NONE"
+  },
+  "Desc_JetPack_C": {
+    "slug": "jetpack",
+    "name": "Jetpack",
+    "description": "The Jetpack allows Pioneers to travel through the air with increased control.\n\nFuel is automatically consumed from the inventory to refill the Jetpack while on the ground.\nDifferent fuel types can be used and provide different levels of Jetpack efficiency. The preferred fuel type will be used if available and can be set in the equipment inventory.",
+    "stackSize": 1,
+    "sinkPoints": 49580,
+    "isFluid": false,
+    "isFuel": false,
+    "isBiomass": false,
+    "isRadioactive": false,
+    "isEquipment": true,
+    "meta": {
+      "equipmentInfo": {
+        "slot": "BACK"
+      }
+    },
+    "event": "NONE"
+  },
+  "Desc_StunSpear_C": {
+    "slug": "xeno-basher",
+    "name": "Xeno-Basher",
+    "description": "Heavy electroshock self-defense weapon for melee range.",
+    "stackSize": 1,
+    "sinkPoints": 18800,
+    "isFluid": false,
+    "isFuel": false,
+    "isBiomass": false,
+    "isRadioactive": false,
+    "isEquipment": true,
+    "meta": {
+      "equipmentInfo": {
+        "slot": "ARMS",
+        "attackDistance": 400
       }
     },
     "event": "NONE"
@@ -355,12 +485,12 @@
     },
     "event": "NONE"
   },
-  "Desc_GolfCart_C": {
-    "slug": "factory-cart",
-    "name": "Factory Cart™",
-    "description": "The one and only FICSIT Factory Cart™\nNow with special - FICSIT Foundation only - Grip Wheels, for an even smoother and faster factory floor experience!",
+  "Desc_ObjectScanner_C": {
+    "slug": "object-scanner",
+    "name": "Object Scanner",
+    "description": "Scans the area for a set item. Beeps at a rate proportional to proximity and direction.",
     "stackSize": 1,
-    "sinkPoints": 1552,
+    "sinkPoints": 1400,
     "isFluid": false,
     "isFuel": false,
     "isBiomass": false,
@@ -368,64 +498,8 @@
     "isEquipment": true,
     "meta": {
       "equipmentInfo": {
-        "slot": "ARMS"
-      }
-    },
-    "event": "NONE"
-  },
-  "Desc_HazmatSuit_C": {
-    "slug": "hazmat-suit",
-    "name": "Hazmat Suit",
-    "description": "Shields Pioneers from the adverse effects of radiation. \nConsumes Iodine Infused Filters from the inventory while worn in radioactive areas.",
-    "stackSize": 1,
-    "sinkPoints": 54100,
-    "isFluid": false,
-    "isFuel": false,
-    "isBiomass": false,
-    "isRadioactive": false,
-    "isEquipment": true,
-    "meta": {
-      "equipmentInfo": {
-        "slot": "BODY",
-        "filterDuration": 240
-      }
-    },
-    "event": "NONE"
-  },
-  "Desc_JetPack_C": {
-    "slug": "jetpack",
-    "name": "Jetpack",
-    "description": "The Jetpack allows Pioneers to travel through the air with increased control.\nConsumes Fuel when used and automatically refills the Fuel from the inventory, when on the ground.",
-    "stackSize": 1,
-    "sinkPoints": 49580,
-    "isFluid": false,
-    "isFuel": false,
-    "isBiomass": false,
-    "isRadioactive": false,
-    "isEquipment": true,
-    "meta": {
-      "equipmentInfo": {
-        "slot": "BACK"
-      }
-    },
-    "event": "NONE"
-  },
-  "Desc_JumpingStilts_C": {
-    "slug": "blade-runners",
-    "name": "Blade Runners",
-    "description": "An exoskeleton for the lower legs that assists movement, allowing Pioneers to sprint faster and jump higher.\nAlso dampens the impact of landing.",
-    "stackSize": 1,
-    "sinkPoints": 4088,
-    "isFluid": false,
-    "isFuel": false,
-    "isBiomass": false,
-    "isRadioactive": false,
-    "isEquipment": true,
-    "meta": {
-      "equipmentInfo": {
-        "slot": "LEGS",
-        "sprintSpeedFactor": 1.5,
-        "jumpSpeedFactor": 1.5
+        "slot": "ARMS",
+        "detectionRange": 25000
       }
     },
     "event": "NONE"
@@ -468,12 +542,12 @@
     },
     "event": "NONE"
   },
-  "Desc_ShockShank_C": {
-    "slug": "xeno-zapper",
-    "name": "Xeno-Zapper",
-    "description": "Standard issue electroshock self-defense weapon for melee range.",
+  "Desc_JumpingStilts_C": {
+    "slug": "blade-runners",
+    "name": "Blade Runners",
+    "description": "An exoskeleton for the lower legs that assists movement, allowing Pioneers to sprint faster and jump higher.\nAlso dampens the impact of landing.",
     "stackSize": 1,
-    "sinkPoints": 1880,
+    "sinkPoints": 4088,
     "isFluid": false,
     "isFuel": false,
     "isBiomass": false,
@@ -481,18 +555,19 @@
     "isEquipment": true,
     "meta": {
       "equipmentInfo": {
-        "slot": "ARMS",
-        "attackDistance": 350
+        "slot": "LEGS",
+        "sprintSpeedFactor": 1.5,
+        "jumpSpeedFactor": 1.5
       }
     },
     "event": "NONE"
   },
-  "Desc_StunSpear_C": {
-    "slug": "xeno-basher",
-    "name": "Xeno-Basher",
-    "description": "Heavy electroshock self-defense weapon for melee range.",
+  "Desc_ZipLine_C": {
+    "slug": "zipline",
+    "name": "Zipline",
+    "description": "Provides faster traversal in factories by allowing Pioneers to zip along Power lines.\nActivate the Zipline and aim at a nearby Power Line to connect to it.",
     "stackSize": 1,
-    "sinkPoints": 18800,
+    "sinkPoints": 5284,
     "isFluid": false,
     "isFuel": false,
     "isBiomass": false,
@@ -500,8 +575,7 @@
     "isEquipment": true,
     "meta": {
       "equipmentInfo": {
-        "slot": "ARMS",
-        "attackDistance": 400
+        "slot": "ARMS"
       }
     },
     "event": "NONE"
@@ -525,98 +599,6 @@
     },
     "event": "NONE"
   },
-  "Desc_PortableMiner_C": {
-    "slug": "portable-miner",
-    "name": "Portable Miner",
-    "description": "Can be set up on a resource node to automatically extract the resource. Note that it has limited storage space.",
-    "stackSize": 1,
-    "sinkPoints": 56,
-    "isFluid": false,
-    "isFuel": false,
-    "isBiomass": false,
-    "isRadioactive": false,
-    "isEquipment": true,
-    "meta": {
-      "equipmentInfo": {
-        "slot": "ARMS"
-      }
-    },
-    "event": "NONE"
-  },
-  "Desc_ObjectScanner_C": {
-    "slug": "object-scanner",
-    "name": "Object Scanner",
-    "description": "Scans the area for a set item. Beeps at a rate proportional to proximity and direction.",
-    "stackSize": 1,
-    "sinkPoints": 1400,
-    "isFluid": false,
-    "isFuel": false,
-    "isBiomass": false,
-    "isRadioactive": false,
-    "isEquipment": true,
-    "meta": {
-      "equipmentInfo": {
-        "slot": "ARMS",
-        "detectionRange": 25000
-      }
-    },
-    "event": "NONE"
-  },
-  "Desc_Gasmask_C": {
-    "slug": "gas-mask",
-    "name": "Gas Mask",
-    "description": "Allows Pioneers to breathe normally while in toxic gas areas.\nConsumes Gas Filters from the inventory when in use.",
-    "stackSize": 1,
-    "sinkPoints": 55000,
-    "isFluid": false,
-    "isFuel": false,
-    "isBiomass": false,
-    "isRadioactive": false,
-    "isEquipment": true,
-    "meta": {
-      "equipmentInfo": {
-        "slot": "HEAD",
-        "filterDuration": 240
-      }
-    },
-    "event": "NONE"
-  },
-  "Desc_HoverPack_C": {
-    "slug": "hover-pack",
-    "name": "Hover Pack",
-    "description": "Power consumption: 100 MW\n\nAllows for vertical movement and hovering in mid-air to improve building efficiency and factory traversal. Wirelessly connects to nearby power connections, such as Power Poles and Buildings, for power consumption.\n\nSlow-fall: Hold {Jump_Drift} after losing connection mid-air.\nDisable Hoverpack: Double tap {Crouch} while hovering.",
-    "stackSize": 1,
-    "sinkPoints": 413920,
-    "isFluid": false,
-    "isFuel": false,
-    "isBiomass": false,
-    "isRadioactive": false,
-    "isEquipment": true,
-    "meta": {
-      "equipmentInfo": {
-        "slot": "BACK"
-      }
-    },
-    "event": "NONE"
-  },
-  "Desc_ZipLine_C": {
-    "slug": "zipline",
-    "name": "Zipline",
-    "description": "Provides faster traversal in factories by allowing Pioneers to zip along Power lines.\nActivate the Zipline and aim at a nearby Power Line to connect to it.",
-    "stackSize": 1,
-    "sinkPoints": 5284,
-    "isFluid": false,
-    "isFuel": false,
-    "isBiomass": false,
-    "isRadioactive": false,
-    "isEquipment": true,
-    "meta": {
-      "equipmentInfo": {
-        "slot": "ARMS"
-      }
-    },
-    "event": "NONE"
-  },
   "Desc_CandyCane_C": {
     "slug": "candy-cane",
     "name": "Candy Cane",
@@ -635,6 +617,24 @@
       }
     },
     "event": "FICSMAS"
+  },
+  "Desc_GolfCart_C": {
+    "slug": "factory-cart",
+    "name": "Factory Cart™",
+    "description": "The one and only FICSIT Factory Cart™\nNow with special - FICSIT Foundation only - Grip Wheels, for an even smoother and faster factory floor experience!",
+    "stackSize": 1,
+    "sinkPoints": 1552,
+    "isFluid": false,
+    "isFuel": false,
+    "isBiomass": false,
+    "isRadioactive": false,
+    "isEquipment": true,
+    "meta": {
+      "equipmentInfo": {
+        "slot": "ARMS"
+      }
+    },
+    "event": "NONE"
   },
   "Desc_GolfCartGold_C": {
     "slug": "golden-factory-cart",
@@ -716,6 +716,78 @@
     "meta": {},
     "event": "NONE"
   },
+  "Desc_ColorCartridge_C": {
+    "slug": "color-cartridge",
+    "name": "Color Cartridge",
+    "description": "Used for applying Patterns to structures with the Customizer.\n\n(Patterns can be purchased in the AWESOME Shop.)",
+    "stackSize": 200,
+    "sinkPoints": 10,
+    "isFluid": false,
+    "isFuel": true,
+    "isBiomass": false,
+    "isRadioactive": false,
+    "isEquipment": false,
+    "meta": {
+      "energyValue": 900
+    },
+    "event": "NONE"
+  },
+  "Desc_Cable_C": {
+    "slug": "cable",
+    "name": "Cable",
+    "description": "Used for crafting.\nPrimarily used to build power lines.",
+    "stackSize": 200,
+    "sinkPoints": 24,
+    "isFluid": false,
+    "isFuel": false,
+    "isBiomass": false,
+    "isRadioactive": false,
+    "isEquipment": false,
+    "meta": {},
+    "event": "NONE"
+  },
+  "Desc_Cement_C": {
+    "slug": "concrete",
+    "name": "Concrete",
+    "description": "Used for building.\nGood for stable foundations.",
+    "stackSize": 500,
+    "sinkPoints": 12,
+    "isFluid": false,
+    "isFuel": false,
+    "isBiomass": false,
+    "isRadioactive": false,
+    "isEquipment": false,
+    "meta": {},
+    "event": "NONE"
+  },
+  "Desc_ModularFrame_C": {
+    "slug": "modular-frame",
+    "name": "Modular Frame",
+    "description": "Used for crafting.\nMulti-purpose building block.",
+    "stackSize": 50,
+    "sinkPoints": 408,
+    "isFluid": false,
+    "isFuel": false,
+    "isBiomass": false,
+    "isRadioactive": false,
+    "isEquipment": false,
+    "meta": {},
+    "event": "NONE"
+  },
+  "Desc_SteelPlate_C": {
+    "slug": "steel-beam",
+    "name": "Steel Beam",
+    "description": "Steel Beams are used most often when constructing a little more advanced buildings.",
+    "stackSize": 200,
+    "sinkPoints": 64,
+    "isFluid": false,
+    "isFuel": false,
+    "isBiomass": false,
+    "isRadioactive": false,
+    "isEquipment": false,
+    "meta": {},
+    "event": "NONE"
+  },
   "Desc_NonFissibleUranium_C": {
     "slug": "non-fissile-uranium",
     "name": "Non-fissile Uranium",
@@ -764,104 +836,6 @@
     },
     "event": "NONE"
   },
-  "Desc_Crystal_C": {
-    "slug": "blue-power-slug",
-    "name": "Blue Power Slug",
-    "description": "A strange slug radiating a weak strange power.",
-    "stackSize": 50,
-    "sinkPoints": 0,
-    "isFluid": false,
-    "isFuel": false,
-    "isBiomass": false,
-    "isRadioactive": false,
-    "isEquipment": false,
-    "meta": {},
-    "event": "NONE"
-  },
-  "Desc_IronRod_C": {
-    "slug": "iron-rod",
-    "name": "Iron Rod",
-    "description": "Used for crafting.\nOne of the most basic parts.",
-    "stackSize": 200,
-    "sinkPoints": 4,
-    "isFluid": false,
-    "isFuel": false,
-    "isBiomass": false,
-    "isRadioactive": false,
-    "isEquipment": false,
-    "meta": {},
-    "event": "NONE"
-  },
-  "Desc_IronScrew_C": {
-    "slug": "screw",
-    "name": "Screw",
-    "description": "Used for crafting.\nOne of the most basic parts.",
-    "stackSize": 500,
-    "sinkPoints": 2,
-    "isFluid": false,
-    "isFuel": false,
-    "isBiomass": false,
-    "isRadioactive": false,
-    "isEquipment": false,
-    "meta": {},
-    "event": "NONE"
-  },
-  "Desc_Wire_C": {
-    "slug": "wire",
-    "name": "Wire",
-    "description": "Used for crafting.\nOne of the most basic parts.",
-    "stackSize": 500,
-    "sinkPoints": 6,
-    "isFluid": false,
-    "isFuel": false,
-    "isBiomass": false,
-    "isRadioactive": false,
-    "isEquipment": false,
-    "meta": {},
-    "event": "NONE"
-  },
-  "Desc_Crystal_mk2_C": {
-    "slug": "yellow-power-slug",
-    "name": "Yellow Power Slug",
-    "description": "A strange slug radiating a strange power.",
-    "stackSize": 50,
-    "sinkPoints": 0,
-    "isFluid": false,
-    "isFuel": false,
-    "isBiomass": false,
-    "isRadioactive": false,
-    "isEquipment": false,
-    "meta": {},
-    "event": "NONE"
-  },
-  "Desc_Crystal_mk3_C": {
-    "slug": "purple-power-slug",
-    "name": "Purple Power Slug",
-    "description": "A strange slug radiating a powerful strange power.",
-    "stackSize": 50,
-    "sinkPoints": 0,
-    "isFluid": false,
-    "isFuel": false,
-    "isBiomass": false,
-    "isRadioactive": false,
-    "isEquipment": false,
-    "meta": {},
-    "event": "NONE"
-  },
-  "Desc_Cement_C": {
-    "slug": "concrete",
-    "name": "Concrete",
-    "description": "Used for building.\nGood for stable foundations.",
-    "stackSize": 500,
-    "sinkPoints": 12,
-    "isFluid": false,
-    "isFuel": false,
-    "isBiomass": false,
-    "isRadioactive": false,
-    "isEquipment": false,
-    "meta": {},
-    "event": "NONE"
-  },
   "Desc_Silica_C": {
     "slug": "silica",
     "name": "Silica",
@@ -890,36 +864,6 @@
     "meta": {},
     "event": "NONE"
   },
-  "Desc_SteelPlate_C": {
-    "slug": "steel-beam",
-    "name": "Steel Beam",
-    "description": "Steel Beams are used most often when constructing a little more advanced buildings.",
-    "stackSize": 200,
-    "sinkPoints": 64,
-    "isFluid": false,
-    "isFuel": false,
-    "isBiomass": false,
-    "isRadioactive": false,
-    "isEquipment": false,
-    "meta": {},
-    "event": "NONE"
-  },
-  "Desc_ColorCartridge_C": {
-    "slug": "color-cartridge",
-    "name": "Color Cartridge",
-    "description": "Used for applying Patterns to structures with the Customizer.\n\n(Patterns can be purchased in the AWESOME Shop.)",
-    "stackSize": 200,
-    "sinkPoints": 10,
-    "isFluid": false,
-    "isFuel": true,
-    "isBiomass": false,
-    "isRadioactive": false,
-    "isEquipment": false,
-    "meta": {
-      "energyValue": 900
-    },
-    "event": "NONE"
-  },
   "Desc_CrystalShard_C": {
     "slug": "power-shard",
     "name": "Power Shard",
@@ -934,12 +878,12 @@
     "meta": {},
     "event": "NONE"
   },
-  "Desc_Cable_C": {
-    "slug": "cable",
-    "name": "Cable",
-    "description": "Used for crafting.\nPrimarily used to build power lines.",
+  "Desc_IronRod_C": {
+    "slug": "iron-rod",
+    "name": "Iron Rod",
+    "description": "Used for crafting.\nOne of the most basic parts.",
     "stackSize": 200,
-    "sinkPoints": 24,
+    "sinkPoints": 4,
     "isFluid": false,
     "isFuel": false,
     "isBiomass": false,
@@ -948,72 +892,12 @@
     "meta": {},
     "event": "NONE"
   },
-  "Desc_ModularFrame_C": {
-    "slug": "modular-frame",
-    "name": "Modular Frame",
-    "description": "Used for crafting.\nMulti-purpose building block.",
-    "stackSize": 50,
-    "sinkPoints": 408,
-    "isFluid": false,
-    "isFuel": false,
-    "isBiomass": false,
-    "isRadioactive": false,
-    "isEquipment": false,
-    "meta": {},
-    "event": "NONE"
-  },
-  "Desc_Fuel_C": {
-    "slug": "packaged-fuel",
-    "name": "Packaged Fuel",
-    "description": "Fuel, packaged for alternative transport. Can be used as fuel for Vehicles or the Jetpack.",
-    "stackSize": 100,
-    "sinkPoints": 270,
-    "isFluid": false,
-    "isFuel": true,
-    "isBiomass": false,
-    "isRadioactive": false,
-    "isEquipment": false,
-    "meta": {
-      "energyValue": 750
-    },
-    "event": "NONE"
-  },
-  "Desc_TurboFuel_C": {
-    "slug": "packaged-turbofuel",
-    "name": "Packaged Turbofuel",
-    "description": "Turbofuel, packaged for alternative transport. Can be used as fuel for Vehicles.",
-    "stackSize": 100,
-    "sinkPoints": 570,
-    "isFluid": false,
-    "isFuel": true,
-    "isBiomass": false,
-    "isRadioactive": false,
-    "isEquipment": false,
-    "meta": {
-      "energyValue": 2000
-    },
-    "event": "NONE"
-  },
-  "Desc_HazmatFilter_C": {
-    "slug": "iodine-infused-filter",
-    "name": "Iodine Infused Filter",
-    "description": "Used in the Hazmat Suit to absorb radioactive particles.",
-    "stackSize": 50,
-    "sinkPoints": 2718,
-    "isFluid": false,
-    "isFuel": false,
-    "isBiomass": false,
-    "isRadioactive": false,
-    "isEquipment": false,
-    "meta": {},
-    "event": "NONE"
-  },
-  "Desc_Filter_C": {
-    "slug": "gas-filter",
-    "name": "Gas Filter",
-    "description": "Used in the Gas Mask to filter out toxics and pollutants from the air.",
-    "stackSize": 50,
-    "sinkPoints": 830,
+  "Desc_Wire_C": {
+    "slug": "wire",
+    "name": "Wire",
+    "description": "Used for crafting.\nOne of the most basic parts.",
+    "stackSize": 500,
+    "sinkPoints": 6,
     "isFluid": false,
     "isFuel": false,
     "isBiomass": false,
@@ -1036,426 +920,6 @@
     "meta": {},
     "event": "NONE"
   },
-  "Desc_IronPlateReinforced_C": {
-    "slug": "reinforced-iron-plate",
-    "name": "Reinforced Iron Plate",
-    "description": "Used for crafting.\nA sturdier and more durable Iron Plate.",
-    "stackSize": 100,
-    "sinkPoints": 120,
-    "isFluid": false,
-    "isFuel": false,
-    "isBiomass": false,
-    "isRadioactive": false,
-    "isEquipment": false,
-    "meta": {},
-    "event": "NONE"
-  },
-  "Desc_CopperIngot_C": {
-    "slug": "copper-ingot",
-    "name": "Copper Ingot",
-    "description": "Used for crafting.\nCrafted into the most basic parts.",
-    "stackSize": 100,
-    "sinkPoints": 6,
-    "isFluid": false,
-    "isFuel": false,
-    "isBiomass": false,
-    "isRadioactive": false,
-    "isEquipment": false,
-    "meta": {},
-    "event": "NONE"
-  },
-  "Desc_Gift_C": {
-    "slug": "ficsmas-gift",
-    "name": "FICSMAS Gift",
-    "description": "Special FICSMAS buildings and parts can be obtained and produced from this FICSIT Holiday present.\n\n*Watch the sky for deliveries from orbit!",
-    "stackSize": 500,
-    "sinkPoints": 1,
-    "isFluid": false,
-    "isFuel": false,
-    "isBiomass": false,
-    "isRadioactive": false,
-    "isEquipment": false,
-    "meta": {},
-    "event": "FICSMAS"
-  },
-  "Desc_XmasBranch_C": {
-    "slug": "ficsmas-tree-branch",
-    "name": "FICSMAS Tree Branch",
-    "description": "A special Tree Branch, used to produce parts and buildings during the FICSMAS Event.",
-    "stackSize": 500,
-    "sinkPoints": 1,
-    "isFluid": false,
-    "isFuel": false,
-    "isBiomass": false,
-    "isRadioactive": false,
-    "isEquipment": false,
-    "meta": {},
-    "event": "FICSMAS"
-  },
-  "Desc_XmasBow_C": {
-    "slug": "ficsmas-bow",
-    "name": "FICSMAS Bow",
-    "description": "A fancy Bow, maybe someone can wear this? You certainly can't! Probably, some parts and decorations can be made from this.",
-    "stackSize": 500,
-    "sinkPoints": 1,
-    "isFluid": false,
-    "isFuel": false,
-    "isBiomass": false,
-    "isRadioactive": false,
-    "isEquipment": false,
-    "meta": {},
-    "event": "FICSMAS"
-  },
-  "Desc_Snow_C": {
-    "slug": "actual-snow",
-    "name": "Actual Snow",
-    "description": "It's snow. Not the nice, thick, crunchy kind though... more the disgustingly wet, slushy kind... Guess we can make stuff from it.",
-    "stackSize": 500,
-    "sinkPoints": 1,
-    "isFluid": false,
-    "isFuel": false,
-    "isBiomass": false,
-    "isRadioactive": false,
-    "isEquipment": false,
-    "meta": {},
-    "event": "FICSMAS"
-  },
-  "Desc_XmasStar_C": {
-    "slug": "ficsmas-wonder-star",
-    "name": "FICSMAS Wonder Star",
-    "description": "This special FICSMAS Star signifies the productivity of FICSIT all across the universe. It also signifies the fact that you have nearly completed the Holiday Event, so it's time to get back to work.",
-    "stackSize": 50,
-    "sinkPoints": 1,
-    "isFluid": false,
-    "isFuel": false,
-    "isBiomass": false,
-    "isRadioactive": false,
-    "isEquipment": false,
-    "meta": {},
-    "event": "FICSMAS"
-  },
-  "Desc_XmasBall1_C": {
-    "slug": "red-ficsmas-ornament",
-    "name": "Red FICSMAS Ornament",
-    "description": "Used for making FICSMAS Decorations.",
-    "stackSize": 500,
-    "sinkPoints": 1,
-    "isFluid": false,
-    "isFuel": false,
-    "isBiomass": false,
-    "isRadioactive": false,
-    "isEquipment": false,
-    "meta": {},
-    "event": "FICSMAS"
-  },
-  "Desc_XmasBall2_C": {
-    "slug": "blue-ficsmas-ornament",
-    "name": "Blue FICSMAS Ornament",
-    "description": "Again, used for making FICSMAS Decorations.",
-    "stackSize": 500,
-    "sinkPoints": 1,
-    "isFluid": false,
-    "isFuel": false,
-    "isBiomass": false,
-    "isRadioactive": false,
-    "isEquipment": false,
-    "meta": {},
-    "event": "FICSMAS"
-  },
-  "Desc_XmasBall3_C": {
-    "slug": "copper-ficsmas-ornament",
-    "name": "Copper FICSMAS Ornament",
-    "description": "Still used for making FICSMAS Decorations.",
-    "stackSize": 200,
-    "sinkPoints": 1,
-    "isFluid": false,
-    "isFuel": false,
-    "isBiomass": false,
-    "isRadioactive": false,
-    "isEquipment": false,
-    "meta": {},
-    "event": "FICSMAS"
-  },
-  "Desc_XmasBall4_C": {
-    "slug": "iron-ficsmas-ornament",
-    "name": "Iron FICSMAS Ornament",
-    "description": "This super special... nope... still just used for making FICSMAS Decorations.",
-    "stackSize": 200,
-    "sinkPoints": 1,
-    "isFluid": false,
-    "isFuel": false,
-    "isBiomass": false,
-    "isRadioactive": false,
-    "isEquipment": false,
-    "meta": {},
-    "event": "FICSMAS"
-  },
-  "Desc_XmasBallCluster_C": {
-    "slug": "ficsmas-ornament-bundle",
-    "name": "FICSMAS Ornament Bundle",
-    "description": "All the FICSMAS Ornaments smashed together to make even more FICSMAS Decorations!",
-    "stackSize": 100,
-    "sinkPoints": 1,
-    "isFluid": false,
-    "isFuel": false,
-    "isBiomass": false,
-    "isRadioactive": false,
-    "isEquipment": false,
-    "meta": {},
-    "event": "FICSMAS"
-  },
-  "Desc_XmasWreath_C": {
-    "slug": "ficsmas-decoration",
-    "name": "FICSMAS Decoration",
-    "description": "A decoration used to make decorations. Its use cases are questionable.",
-    "stackSize": 100,
-    "sinkPoints": 1,
-    "isFluid": false,
-    "isFuel": false,
-    "isBiomass": false,
-    "isRadioactive": false,
-    "isEquipment": false,
-    "meta": {},
-    "event": "FICSMAS"
-  },
-  "Desc_ModularFrameFused_C": {
-    "slug": "fused-modular-frame",
-    "name": "Fused Modular Frame",
-    "description": "A corrosion resistant, nitride hardened, highly robust, yet lightweight modular frame.",
-    "stackSize": 50,
-    "sinkPoints": 62840,
-    "isFluid": false,
-    "isFuel": false,
-    "isBiomass": false,
-    "isRadioactive": false,
-    "isEquipment": false,
-    "meta": {},
-    "event": "NONE"
-  },
-  "Desc_CircuitBoard_C": {
-    "slug": "circuit-board",
-    "name": "Circuit Board",
-    "description": "Circuit Boards are advanced electronics that are used in a plethora of different ways.",
-    "stackSize": 200,
-    "sinkPoints": 696,
-    "isFluid": false,
-    "isFuel": false,
-    "isBiomass": false,
-    "isRadioactive": false,
-    "isEquipment": false,
-    "meta": {},
-    "event": "NONE"
-  },
-  "Desc_CopperSheet_C": {
-    "slug": "copper-sheet",
-    "name": "Copper Sheet",
-    "description": "Used for crafting.\nPrimarily used for pipelines due to its high corrosion resistance.",
-    "stackSize": 200,
-    "sinkPoints": 24,
-    "isFluid": false,
-    "isFuel": false,
-    "isBiomass": false,
-    "isRadioactive": false,
-    "isEquipment": false,
-    "meta": {},
-    "event": "NONE"
-  },
-  "Desc_CrystalOscillator_C": {
-    "slug": "crystal-oscillator",
-    "name": "Crystal Oscillator",
-    "description": "A crystal oscillator is an electronic oscillator circuit that uses the mechanical resonance of a vibrating crystal to create an electrical signal with a precise frequency.",
-    "stackSize": 100,
-    "sinkPoints": 3072,
-    "isFluid": false,
-    "isFuel": false,
-    "isBiomass": false,
-    "isRadioactive": false,
-    "isEquipment": false,
-    "meta": {},
-    "event": "NONE"
-  },
-  "Desc_SpaceElevatorPart_1_C": {
-    "slug": "smart-plating",
-    "name": "Smart Plating",
-    "description": "Project Part #1. Ship with the Space Elevator to complete phases of Project Assembly.",
-    "stackSize": 50,
-    "sinkPoints": 520,
-    "isFluid": false,
-    "isFuel": false,
-    "isBiomass": false,
-    "isRadioactive": false,
-    "isEquipment": false,
-    "meta": {},
-    "event": "NONE"
-  },
-  "Desc_SpaceElevatorPart_2_C": {
-    "slug": "versatile-framework",
-    "name": "Versatile Framework",
-    "description": "Project Part #2. Ship with the Space Elevator to complete phases of Project Assembly.",
-    "stackSize": 50,
-    "sinkPoints": 1176,
-    "isFluid": false,
-    "isFuel": false,
-    "isBiomass": false,
-    "isRadioactive": false,
-    "isEquipment": false,
-    "meta": {},
-    "event": "NONE"
-  },
-  "Desc_SpaceElevatorPart_3_C": {
-    "slug": "automated-wiring",
-    "name": "Automated Wiring",
-    "description": "Project Part #3. Ship with the Space Elevator to complete phases of Project Assembly.",
-    "stackSize": 50,
-    "sinkPoints": 1440,
-    "isFluid": false,
-    "isFuel": false,
-    "isBiomass": false,
-    "isRadioactive": false,
-    "isEquipment": false,
-    "meta": {},
-    "event": "NONE"
-  },
-  "Desc_SpaceElevatorPart_4_C": {
-    "slug": "modular-engine",
-    "name": "Modular Engine",
-    "description": "Project Part #4. Ship with the Space Elevator to complete phases of Project Assembly.",
-    "stackSize": 50,
-    "sinkPoints": 9960,
-    "isFluid": false,
-    "isFuel": false,
-    "isBiomass": false,
-    "isRadioactive": false,
-    "isEquipment": false,
-    "meta": {},
-    "event": "NONE"
-  },
-  "Desc_PackagedWater_C": {
-    "slug": "packaged-water",
-    "name": "Packaged Water",
-    "description": "Water, packaged for alternative transport.",
-    "stackSize": 100,
-    "sinkPoints": 130,
-    "isFluid": false,
-    "isFuel": false,
-    "isBiomass": false,
-    "isRadioactive": false,
-    "isEquipment": false,
-    "meta": {},
-    "event": "NONE"
-  },
-  "Desc_AlienDNACapsule_C": {
-    "slug": "alien-dna-capsule",
-    "name": "Alien DNA Capsule",
-    "description": "This data capsule translates organic chemicals into readable alien genetics information.\nUsed for researching alien organisms.\n\nGo the extra kilometer! Knowledge is power, and power is just efficiency with fewer steps. Depositing Alien DNA Capsules in the AWESOME Sink provides FICSIT with knowledge, and Pioneers with Coupons.",
-    "stackSize": 50,
-    "sinkPoints": 0,
-    "isFluid": false,
-    "isFuel": false,
-    "isBiomass": false,
-    "isRadioactive": false,
-    "isEquipment": false,
-    "meta": {},
-    "event": "NONE"
-  },
-  "Desc_HighSpeedConnector_C": {
-    "slug": "high-speed-connector",
-    "name": "High-Speed Connector",
-    "description": "The high-speed connector connects several cables and wires in a very efficient way. Uses a standard pattern so its applications are many and varied.",
-    "stackSize": 100,
-    "sinkPoints": 3776,
-    "isFluid": false,
-    "isFuel": false,
-    "isBiomass": false,
-    "isRadioactive": false,
-    "isEquipment": false,
-    "meta": {},
-    "event": "NONE"
-  },
-  "Desc_Motor_C": {
-    "slug": "motor",
-    "name": "Motor",
-    "description": "The Motor creates a mechanical force that is used to move things from machines to vehicles.",
-    "stackSize": 50,
-    "sinkPoints": 1520,
-    "isFluid": false,
-    "isFuel": false,
-    "isBiomass": false,
-    "isRadioactive": false,
-    "isEquipment": false,
-    "meta": {},
-    "event": "NONE"
-  },
-  "Desc_SpaceElevatorPart_5_C": {
-    "slug": "adaptive-control-unit",
-    "name": "Adaptive Control Unit",
-    "description": "Project Part #5. Ship with the Space Elevator to complete phases of Project Assembly.",
-    "stackSize": 50,
-    "sinkPoints": 86120,
-    "isFluid": false,
-    "isFuel": false,
-    "isBiomass": false,
-    "isRadioactive": false,
-    "isEquipment": false,
-    "meta": {},
-    "event": "NONE"
-  },
-  "Desc_SpaceElevatorPart_6_C": {
-    "slug": "magnetic-field-generator",
-    "name": "Magnetic Field Generator",
-    "description": "Project Part #7. Ship with the Space Elevator to complete phases of Project Assembly.\n\nThese modular generators use superconducting magnets and vast amounts of electricity to produce an easily expandable and powerful magnetic field.",
-    "stackSize": 50,
-    "sinkPoints": 15650,
-    "isFluid": false,
-    "isFuel": false,
-    "isBiomass": false,
-    "isRadioactive": false,
-    "isEquipment": false,
-    "meta": {},
-    "event": "NONE"
-  },
-  "Desc_SpaceElevatorPart_7_C": {
-    "slug": "assembly-director-system",
-    "name": "Assembly Director System",
-    "description": "Project Part #6. Ship with the Space Elevator to complete phases of Project Assembly.\n\nThis extremely fast and precise computing system is specifically designed to direct the Project Assembly: Assembly Phase.",
-    "stackSize": 50,
-    "sinkPoints": 543632,
-    "isFluid": false,
-    "isFuel": false,
-    "isBiomass": false,
-    "isRadioactive": false,
-    "isEquipment": false,
-    "meta": {},
-    "event": "NONE"
-  },
-  "Desc_SpaceElevatorPart_8_C": {
-    "slug": "thermal-propulsion-rocket",
-    "name": "Thermal Propulsion Rocket",
-    "description": "Project Part #8. Ship with the Space Elevator to complete phases of Project Assembly.\n\nUses extreme heat to produce the high pressure plasma required to get Project Assembly into motion.",
-    "stackSize": 50,
-    "sinkPoints": 732956,
-    "isFluid": false,
-    "isFuel": false,
-    "isBiomass": false,
-    "isRadioactive": false,
-    "isEquipment": false,
-    "meta": {},
-    "event": "NONE"
-  },
-  "Desc_SpaceElevatorPart_9_C": {
-    "slug": "nuclear-pasta",
-    "name": "Nuclear Pasta",
-    "description": "Project Part #9. Ship with the Space Elevator to complete phases of Project Assembly.\nPower Usage: 500-1500 MW (1000 MW average).\n\nNuclear Pasta is extremely dense degenerate matter, formed when extreme pressure forces protons and electrons together into neutrons. It is theorized to exist naturally within the crust of neutron stars.",
-    "stackSize": 50,
-    "sinkPoints": 543424,
-    "isFluid": false,
-    "isFuel": false,
-    "isBiomass": false,
-    "isRadioactive": false,
-    "isEquipment": false,
-    "meta": {},
-    "event": "NONE"
-  },
   "Desc_IronIngot_C": {
     "slug": "iron-ingot",
     "name": "Iron Ingot",
@@ -1470,12 +934,12 @@
     "meta": {},
     "event": "NONE"
   },
-  "Desc_AluminumPlate_C": {
-    "slug": "alclad-aluminum-sheet",
-    "name": "Alclad Aluminum Sheet",
-    "description": "Thin, lightweight, and highly durable sheets that are mainly used for products that require high heat conduction or a high specific strength.",
-    "stackSize": 200,
-    "sinkPoints": 266,
+  "Desc_IronPlateReinforced_C": {
+    "slug": "reinforced-iron-plate",
+    "name": "Reinforced Iron Plate",
+    "description": "Used for crafting.\nA sturdier and more durable Iron Plate.",
+    "stackSize": 100,
+    "sinkPoints": 120,
     "isFluid": false,
     "isFuel": false,
     "isBiomass": false,
@@ -1498,12 +962,128 @@
     "meta": {},
     "event": "NONE"
   },
-  "Desc_Rubber_C": {
-    "slug": "rubber",
-    "name": "Rubber",
-    "description": "Rubber is a material that is very flexible and has a lot of friction.",
+  "Desc_CopperSheet_C": {
+    "slug": "copper-sheet",
+    "name": "Copper Sheet",
+    "description": "Used for crafting.\nPrimarily used for pipelines due to its high corrosion resistance.",
     "stackSize": 200,
+    "sinkPoints": 24,
+    "isFluid": false,
+    "isFuel": false,
+    "isBiomass": false,
+    "isRadioactive": false,
+    "isEquipment": false,
+    "meta": {},
+    "event": "NONE"
+  },
+  "Desc_IronScrew_C": {
+    "slug": "screw",
+    "name": "Screw",
+    "description": "Used for crafting.\nOne of the most basic parts.",
+    "stackSize": 500,
+    "sinkPoints": 2,
+    "isFluid": false,
+    "isFuel": false,
+    "isBiomass": false,
+    "isRadioactive": false,
+    "isEquipment": false,
+    "meta": {},
+    "event": "NONE"
+  },
+  "Desc_CompactedCoal_C": {
+    "slug": "compacted-coal",
+    "name": "Compacted Coal",
+    "description": "A much more efficient alternative for Coal. Used as fuel for vehicles & coal generators.",
+    "stackSize": 100,
+    "sinkPoints": 28,
+    "isFluid": false,
+    "isFuel": true,
+    "isBiomass": false,
+    "isRadioactive": false,
+    "isEquipment": false,
+    "meta": {
+      "energyValue": 630
+    },
+    "event": "NONE"
+  },
+  "Desc_HeavyOilResidue_C": {
+    "slug": "heavy-oil-residue",
+    "name": "Heavy Oil Residue",
+    "description": "A by-product of Plastic and Rubber production. Can be further refined into Fuel and Petroleum Coke.",
+    "stackSize": 50,
+    "sinkPoints": 30,
+    "isFluid": true,
+    "isFuel": true,
+    "isBiomass": false,
+    "isRadioactive": false,
+    "isEquipment": false,
+    "meta": {
+      "fluidColor": {
+        "r": 109,
+        "g": 45,
+        "b": 120
+      },
+      "energyValue": 0.4
+    },
+    "event": "NONE"
+  },
+  "Desc_LiquidTurboFuel_C": {
+    "slug": "turbofuel",
+    "name": "Turbofuel",
+    "description": "A more efficient alternative to Fuel. Can be used to generate power or packaged to be used as fuel for Vehicles.",
+    "stackSize": 50,
+    "sinkPoints": 225,
+    "isFluid": true,
+    "isFuel": true,
+    "isBiomass": false,
+    "isRadioactive": false,
+    "isEquipment": false,
+    "meta": {
+      "fluidColor": {
+        "r": 212,
+        "g": 41,
+        "b": 46
+      },
+      "energyValue": 2
+    },
+    "event": "NONE"
+  },
+  "Desc_FluidCanister_C": {
+    "slug": "empty-canister",
+    "name": "Empty Canister",
+    "description": "Used to package fluids for transportation.",
+    "stackSize": 100,
     "sinkPoints": 60,
+    "isFluid": false,
+    "isFuel": false,
+    "isBiomass": false,
+    "isRadioactive": false,
+    "isEquipment": false,
+    "meta": {},
+    "event": "NONE"
+  },
+  "Desc_TurboFuel_C": {
+    "slug": "packaged-turbofuel",
+    "name": "Packaged Turbofuel",
+    "description": "Turbofuel, packaged for alternative transport. Can be used as fuel for Vehicles and the Jetpack.",
+    "stackSize": 100,
+    "sinkPoints": 570,
+    "isFluid": false,
+    "isFuel": true,
+    "isBiomass": false,
+    "isRadioactive": false,
+    "isEquipment": false,
+    "meta": {
+      "energyValue": 2000
+    },
+    "event": "NONE"
+  },
+  "Desc_CircuitBoard_C": {
+    "slug": "circuit-board",
+    "name": "Circuit Board",
+    "description": "Circuit Boards are advanced electronics that are used in a plethora of different ways.",
+    "stackSize": 200,
+    "sinkPoints": 696,
     "isFluid": false,
     "isFuel": false,
     "isBiomass": false,
@@ -1518,6 +1098,20 @@
     "description": "A versatile and easy to manufacture material that can be used for a lot of things.",
     "stackSize": 200,
     "sinkPoints": 75,
+    "isFluid": false,
+    "isFuel": false,
+    "isBiomass": false,
+    "isRadioactive": false,
+    "isEquipment": false,
+    "meta": {},
+    "event": "NONE"
+  },
+  "Desc_Motor_C": {
+    "slug": "motor",
+    "name": "Motor",
+    "description": "The Motor creates a mechanical force that is used to move things from machines to vehicles.",
+    "stackSize": 50,
+    "sinkPoints": 1520,
     "isFluid": false,
     "isFuel": false,
     "isBiomass": false,
@@ -1546,6 +1140,20 @@
     "description": "Steel Pipes are used most often when constructing a little more advanced buildings.",
     "stackSize": 200,
     "sinkPoints": 24,
+    "isFluid": false,
+    "isFuel": false,
+    "isBiomass": false,
+    "isRadioactive": false,
+    "isEquipment": false,
+    "meta": {},
+    "event": "NONE"
+  },
+  "Desc_Rubber_C": {
+    "slug": "rubber",
+    "name": "Rubber",
+    "description": "Rubber is a material that is very flexible and has a lot of friction.",
+    "stackSize": 200,
+    "sinkPoints": 60,
     "isFluid": false,
     "isFuel": false,
     "isBiomass": false,
@@ -1589,27 +1197,6 @@
     "meta": {},
     "event": "NONE"
   },
-  "Desc_HeavyOilResidue_C": {
-    "slug": "heavy-oil-residue",
-    "name": "Heavy Oil Residue",
-    "description": "A by-product of Plastic and Rubber production. Can be further refined into Fuel and Petroleum Coke.",
-    "stackSize": 50,
-    "sinkPoints": 30,
-    "isFluid": true,
-    "isFuel": true,
-    "isBiomass": false,
-    "isRadioactive": false,
-    "isEquipment": false,
-    "meta": {
-      "fluidColor": {
-        "r": 109,
-        "g": 45,
-        "b": 120
-      },
-      "energyValue": 0.4
-    },
-    "event": "NONE"
-  },
   "Desc_PetroleumCoke_C": {
     "slug": "petroleum-coke",
     "name": "Petroleum Coke",
@@ -1626,12 +1213,26 @@
     },
     "event": "NONE"
   },
-  "Desc_FluidCanister_C": {
-    "slug": "empty-canister",
-    "name": "Empty Canister",
-    "description": "Used to package fluids for transportation.",
+  "Desc_SteelIngot_C": {
+    "slug": "steel-ingot",
+    "name": "Steel Ingot",
+    "description": "Steel Ingots are made from Iron Ore that's been smelted with Coal. They are made into several parts used in building construction.",
     "stackSize": 100,
-    "sinkPoints": 60,
+    "sinkPoints": 8,
+    "isFluid": false,
+    "isFuel": false,
+    "isBiomass": false,
+    "isRadioactive": false,
+    "isEquipment": false,
+    "meta": {},
+    "event": "NONE"
+  },
+  "Desc_SpaceElevatorPart_2_C": {
+    "slug": "versatile-framework",
+    "name": "Versatile Framework",
+    "description": "Project Part #2. Ship with the Space Elevator to complete phases of Project Assembly.",
+    "stackSize": 50,
+    "sinkPoints": 1176,
     "isFluid": false,
     "isFuel": false,
     "isBiomass": false,
@@ -1652,6 +1253,22 @@
     "isRadioactive": false,
     "isEquipment": false,
     "meta": {},
+    "event": "NONE"
+  },
+  "Desc_Fuel_C": {
+    "slug": "packaged-fuel",
+    "name": "Packaged Fuel",
+    "description": "Fuel, packaged for alternative transport. Can be used as fuel for Vehicles and the Jetpack.",
+    "stackSize": 100,
+    "sinkPoints": 270,
+    "isFluid": false,
+    "isFuel": true,
+    "isBiomass": false,
+    "isRadioactive": false,
+    "isEquipment": false,
+    "meta": {
+      "energyValue": 750
+    },
     "event": "NONE"
   },
   "Desc_PackagedOil_C": {
@@ -1686,12 +1303,12 @@
     },
     "event": "NONE"
   },
-  "Desc_SteelIngot_C": {
-    "slug": "steel-ingot",
-    "name": "Steel Ingot",
-    "description": "Steel Ingots are made from Iron Ore that's been smelted with Coal. They are made into several parts used in building construction.",
+  "Desc_PackagedWater_C": {
+    "slug": "packaged-water",
+    "name": "Packaged Water",
+    "description": "Water, packaged for alternative transport.",
     "stackSize": 100,
-    "sinkPoints": 8,
+    "sinkPoints": 130,
     "isFluid": false,
     "isFuel": false,
     "isBiomass": false,
@@ -1700,24 +1317,46 @@
     "meta": {},
     "event": "NONE"
   },
-  "Desc_AluminaSolution_C": {
-    "slug": "alumina-solution",
-    "name": "Alumina Solution",
-    "description": "Dissolved Alumina, extracted from Bauxite. Can be further refined into Aluminum Scrap for Aluminum Ingot production.",
-    "stackSize": 50,
-    "sinkPoints": 20,
-    "isFluid": true,
+  "Desc_CopperIngot_C": {
+    "slug": "copper-ingot",
+    "name": "Copper Ingot",
+    "description": "Used for crafting.\nCrafted into the most basic parts.",
+    "stackSize": 100,
+    "sinkPoints": 6,
+    "isFluid": false,
     "isFuel": false,
     "isBiomass": false,
     "isRadioactive": false,
     "isEquipment": false,
-    "meta": {
-      "fluidColor": {
-        "r": 193,
-        "g": 193,
-        "b": 193
-      }
-    },
+    "meta": {},
+    "event": "NONE"
+  },
+  "Desc_QuartzCrystal_C": {
+    "slug": "quartz-crystal",
+    "name": "Quartz Crystal",
+    "description": "Derived from Raw Quartz. Used in the production of advanced radar technology and high-quality display screens.",
+    "stackSize": 200,
+    "sinkPoints": 50,
+    "isFluid": false,
+    "isFuel": false,
+    "isBiomass": false,
+    "isRadioactive": false,
+    "isEquipment": false,
+    "meta": {},
+    "event": "NONE"
+  },
+  "Desc_GoldIngot_C": {
+    "slug": "caterium-ingot",
+    "name": "Caterium Ingot",
+    "description": "Caterium Ingots are smelted from Caterium Ore. Caterium Ingots are mostly used for advanced electronics.",
+    "stackSize": 100,
+    "sinkPoints": 42,
+    "isFluid": false,
+    "isFuel": false,
+    "isBiomass": false,
+    "isRadioactive": false,
+    "isEquipment": false,
+    "meta": {},
     "event": "NONE"
   },
   "Desc_AluminumScrap_C": {
@@ -1846,6 +1485,20 @@
     "meta": {},
     "event": "NONE"
   },
+  "Desc_AluminumPlate_C": {
+    "slug": "alclad-aluminum-sheet",
+    "name": "Alclad Aluminum Sheet",
+    "description": "Thin, lightweight, and highly durable sheets that are mainly used for products that require high heat conduction or a high specific strength.",
+    "stackSize": 200,
+    "sinkPoints": 266,
+    "isFluid": false,
+    "isFuel": false,
+    "isBiomass": false,
+    "isRadioactive": false,
+    "isEquipment": false,
+    "meta": {},
+    "event": "NONE"
+  },
   "Desc_Computer_C": {
     "slug": "computer",
     "name": "Computer",
@@ -1860,12 +1513,12 @@
     "meta": {},
     "event": "NONE"
   },
-  "Desc_QuartzCrystal_C": {
-    "slug": "quartz-crystal",
-    "name": "Quartz Crystal",
-    "description": "Derived from Raw Quartz. Used in the production of advanced radar technology and high-quality display screens.",
-    "stackSize": 200,
-    "sinkPoints": 50,
+  "Desc_CrystalOscillator_C": {
+    "slug": "crystal-oscillator",
+    "name": "Crystal Oscillator",
+    "description": "A crystal oscillator is an electronic oscillator circuit that uses the mechanical resonance of a vibrating crystal to create an electrical signal with a precise frequency.",
+    "stackSize": 100,
+    "sinkPoints": 3072,
     "isFluid": false,
     "isFuel": false,
     "isBiomass": false,
@@ -1874,12 +1527,60 @@
     "meta": {},
     "event": "NONE"
   },
-  "Desc_GoldIngot_C": {
-    "slug": "caterium-ingot",
-    "name": "Caterium Ingot",
-    "description": "Caterium Ingots are smelted from Caterium Ore. Caterium Ingots are mostly used for advanced electronics.",
+  "Desc_AluminaSolution_C": {
+    "slug": "alumina-solution",
+    "name": "Alumina Solution",
+    "description": "Dissolved Alumina, extracted from Bauxite. Can be further refined into Aluminum Scrap for Aluminum Ingot production.",
+    "stackSize": 50,
+    "sinkPoints": 20,
+    "isFluid": true,
+    "isFuel": false,
+    "isBiomass": false,
+    "isRadioactive": false,
+    "isEquipment": false,
+    "meta": {
+      "fluidColor": {
+        "r": 193,
+        "g": 193,
+        "b": 193
+      }
+    },
+    "event": "NONE"
+  },
+  "Desc_SpaceElevatorPart_1_C": {
+    "slug": "smart-plating",
+    "name": "Smart Plating",
+    "description": "Project Part #1. Ship with the Space Elevator to complete phases of Project Assembly.",
+    "stackSize": 50,
+    "sinkPoints": 520,
+    "isFluid": false,
+    "isFuel": false,
+    "isBiomass": false,
+    "isRadioactive": false,
+    "isEquipment": false,
+    "meta": {},
+    "event": "NONE"
+  },
+  "Desc_HighSpeedConnector_C": {
+    "slug": "high-speed-connector",
+    "name": "High-Speed Connector",
+    "description": "The high-speed connector connects several cables and wires in a very efficient way. Uses a standard pattern so its applications are many and varied.",
     "stackSize": 100,
-    "sinkPoints": 42,
+    "sinkPoints": 3776,
+    "isFluid": false,
+    "isFuel": false,
+    "isBiomass": false,
+    "isRadioactive": false,
+    "isEquipment": false,
+    "meta": {},
+    "event": "NONE"
+  },
+  "Desc_SpaceElevatorPart_3_C": {
+    "slug": "automated-wiring",
+    "name": "Automated Wiring",
+    "description": "Project Part #3. Ship with the Space Elevator to complete phases of Project Assembly.",
+    "stackSize": 50,
+    "sinkPoints": 1440,
     "isFluid": false,
     "isFuel": false,
     "isBiomass": false,
@@ -1930,49 +1631,12 @@
     "meta": {},
     "event": "NONE"
   },
-  "Desc_CompactedCoal_C": {
-    "slug": "compacted-coal",
-    "name": "Compacted Coal",
-    "description": "A much more efficient alternative for Coal. Used as fuel for vehicles & coal generators.",
-    "stackSize": 100,
-    "sinkPoints": 28,
-    "isFluid": false,
-    "isFuel": true,
-    "isBiomass": false,
-    "isRadioactive": false,
-    "isEquipment": false,
-    "meta": {
-      "energyValue": 630
-    },
-    "event": "NONE"
-  },
-  "Desc_LiquidTurboFuel_C": {
-    "slug": "turbofuel",
-    "name": "Turbofuel",
-    "description": "A more efficient alternative to Fuel. Can be used to generate power or packaged to be used as fuel for Vehicles.",
+  "Desc_SpaceElevatorPart_4_C": {
+    "slug": "modular-engine",
+    "name": "Modular Engine",
+    "description": "Project Part #4. Ship with the Space Elevator to complete phases of Project Assembly.",
     "stackSize": 50,
-    "sinkPoints": 225,
-    "isFluid": true,
-    "isFuel": true,
-    "isBiomass": false,
-    "isRadioactive": false,
-    "isEquipment": false,
-    "meta": {
-      "fluidColor": {
-        "r": 212,
-        "g": 41,
-        "b": 46
-      },
-      "energyValue": 2
-    },
-    "event": "NONE"
-  },
-  "Desc_ComputerSuper_C": {
-    "slug": "supercomputer",
-    "name": "Supercomputer",
-    "description": "The supercomputer is the next-gen version of the computer.",
-    "stackSize": 50,
-    "sinkPoints": 99576,
+    "sinkPoints": 9960,
     "isFluid": false,
     "isFuel": false,
     "isBiomass": false,
@@ -1981,40 +1645,12 @@
     "meta": {},
     "event": "NONE"
   },
-  "Desc_GasTank_C": {
-    "slug": "empty-fluid-tank",
-    "name": "Empty Fluid Tank",
-    "description": "Used to package gases and volatile liquids for transportation.",
-    "stackSize": 100,
-    "sinkPoints": 225,
-    "isFluid": false,
-    "isFuel": false,
-    "isBiomass": false,
-    "isRadioactive": false,
-    "isEquipment": false,
-    "meta": {},
-    "event": "NONE"
-  },
-  "Desc_ElectromagneticControlRod_C": {
-    "slug": "electromagnetic-control-rod",
-    "name": "Electromagnetic Control Rod",
-    "description": "Control Rods regulate power output via electromagnetism.",
-    "stackSize": 100,
-    "sinkPoints": 2560,
-    "isFluid": false,
-    "isFuel": false,
-    "isBiomass": false,
-    "isRadioactive": false,
-    "isEquipment": false,
-    "meta": {},
-    "event": "NONE"
-  },
-  "Desc_PressureConversionCube_C": {
-    "slug": "pressure-conversion-cube",
-    "name": "Pressure Conversion Cube",
-    "description": "Converts outgoing force into internal pressure. Required to contain unstable, high-energy matter.",
+  "Desc_SpaceElevatorPart_5_C": {
+    "slug": "adaptive-control-unit",
+    "name": "Adaptive Control Unit",
+    "description": "Project Part #5. Ship with the Space Elevator to complete phases of Project Assembly.",
     "stackSize": 50,
-    "sinkPoints": 257312,
+    "sinkPoints": 86120,
     "isFluid": false,
     "isFuel": false,
     "isBiomass": false,
@@ -2037,12 +1673,138 @@
     "meta": {},
     "event": "NONE"
   },
+  "Desc_PressureConversionCube_C": {
+    "slug": "pressure-conversion-cube",
+    "name": "Pressure Conversion Cube",
+    "description": "Converts outgoing force into internal pressure. Required to contain unstable, high-energy matter.",
+    "stackSize": 50,
+    "sinkPoints": 257312,
+    "isFluid": false,
+    "isFuel": false,
+    "isBiomass": false,
+    "isRadioactive": false,
+    "isEquipment": false,
+    "meta": {},
+    "event": "NONE"
+  },
+  "Desc_ModularFrameFused_C": {
+    "slug": "fused-modular-frame",
+    "name": "Fused Modular Frame",
+    "description": "A corrosion resistant, nitride hardened, highly robust, yet lightweight modular frame.",
+    "stackSize": 50,
+    "sinkPoints": 62840,
+    "isFluid": false,
+    "isFuel": false,
+    "isBiomass": false,
+    "isRadioactive": false,
+    "isEquipment": false,
+    "meta": {},
+    "event": "NONE"
+  },
+  "Desc_ComputerSuper_C": {
+    "slug": "supercomputer",
+    "name": "Supercomputer",
+    "description": "The supercomputer is the next-gen version of the computer.",
+    "stackSize": 50,
+    "sinkPoints": 99576,
+    "isFluid": false,
+    "isFuel": false,
+    "isBiomass": false,
+    "isRadioactive": false,
+    "isEquipment": false,
+    "meta": {},
+    "event": "NONE"
+  },
+  "Desc_ElectromagneticControlRod_C": {
+    "slug": "electromagnetic-control-rod",
+    "name": "Electromagnetic Control Rod",
+    "description": "Control Rods regulate power output via electromagnetism.",
+    "stackSize": 100,
+    "sinkPoints": 2560,
+    "isFluid": false,
+    "isFuel": false,
+    "isBiomass": false,
+    "isRadioactive": false,
+    "isEquipment": false,
+    "meta": {},
+    "event": "NONE"
+  },
   "Desc_CopperDust_C": {
     "slug": "copper-powder",
     "name": "Copper Powder",
     "description": "Ground down Copper Ingots.\nThe high natural density of Copper, combined with the granularity of the powder, make this part fit for producing Nuclear Pasta in the Particle Accelerator.",
     "stackSize": 500,
     "sinkPoints": 72,
+    "isFluid": false,
+    "isFuel": false,
+    "isBiomass": false,
+    "isRadioactive": false,
+    "isEquipment": false,
+    "meta": {},
+    "event": "NONE"
+  },
+  "Desc_GasTank_C": {
+    "slug": "empty-fluid-tank",
+    "name": "Empty Fluid Tank",
+    "description": "Used to package gases and volatile liquids for transportation.",
+    "stackSize": 100,
+    "sinkPoints": 225,
+    "isFluid": false,
+    "isFuel": false,
+    "isBiomass": false,
+    "isRadioactive": false,
+    "isEquipment": false,
+    "meta": {},
+    "event": "NONE"
+  },
+  "Desc_SpaceElevatorPart_9_C": {
+    "slug": "nuclear-pasta",
+    "name": "Nuclear Pasta",
+    "description": "Project Part #9. Ship with the Space Elevator to complete phases of Project Assembly.\nPower Usage: 500-1500 MW (1000 MW average).\n\nNuclear Pasta is extremely dense degenerate matter, formed when extreme pressure forces protons and electrons together into neutrons. It is theorized to exist naturally within the crust of neutron stars.",
+    "stackSize": 50,
+    "sinkPoints": 543424,
+    "isFluid": false,
+    "isFuel": false,
+    "isBiomass": false,
+    "isRadioactive": false,
+    "isEquipment": false,
+    "meta": {},
+    "event": "NONE"
+  },
+  "Desc_SpaceElevatorPart_7_C": {
+    "slug": "assembly-director-system",
+    "name": "Assembly Director System",
+    "description": "Project Part #6. Ship with the Space Elevator to complete phases of Project Assembly.\n\nThis extremely fast and precise computing system is specifically designed to direct the Project Assembly: Assembly Phase.",
+    "stackSize": 50,
+    "sinkPoints": 543632,
+    "isFluid": false,
+    "isFuel": false,
+    "isBiomass": false,
+    "isRadioactive": false,
+    "isEquipment": false,
+    "meta": {},
+    "event": "NONE"
+  },
+  "Desc_SpaceElevatorPart_6_C": {
+    "slug": "magnetic-field-generator",
+    "name": "Magnetic Field Generator",
+    "description": "Project Part #7. Ship with the Space Elevator to complete phases of Project Assembly.\n\nThese modular generators use superconducting magnets and vast amounts of electricity to produce an easily expandable and powerful magnetic field.",
+    "stackSize": 50,
+    "sinkPoints": 15650,
+    "isFluid": false,
+    "isFuel": false,
+    "isBiomass": false,
+    "isRadioactive": false,
+    "isEquipment": false,
+    "meta": {},
+    "event": "NONE"
+  },
+  "Desc_SpaceElevatorPart_8_C": {
+    "slug": "thermal-propulsion-rocket",
+    "name": "Thermal Propulsion Rocket",
+    "description": "Project Part #8. Ship with the Space Elevator to complete phases of Project Assembly.\n\nUses extreme heat to produce the high pressure plasma required to get Project Assembly into motion.",
+    "stackSize": 50,
+    "sinkPoints": 732956,
     "isFluid": false,
     "isFuel": false,
     "isBiomass": false,
@@ -2065,11 +1827,95 @@
     "meta": {},
     "event": "NONE"
   },
+  "Desc_Filter_C": {
+    "slug": "gas-filter",
+    "name": "Gas Filter",
+    "description": "Used in the Gas Mask to filter out toxics and pollutants from the air.",
+    "stackSize": 50,
+    "sinkPoints": 830,
+    "isFluid": false,
+    "isFuel": false,
+    "isBiomass": false,
+    "isRadioactive": false,
+    "isEquipment": false,
+    "meta": {},
+    "event": "NONE"
+  },
+  "Desc_HazmatFilter_C": {
+    "slug": "iodine-infused-filter",
+    "name": "Iodine Infused Filter",
+    "description": "Used in the Hazmat Suit to absorb radioactive particles.",
+    "stackSize": 50,
+    "sinkPoints": 2718,
+    "isFluid": false,
+    "isFuel": false,
+    "isBiomass": false,
+    "isRadioactive": false,
+    "isEquipment": false,
+    "meta": {},
+    "event": "NONE"
+  },
+  "Desc_AlienDNACapsule_C": {
+    "slug": "alien-dna-capsule",
+    "name": "Alien DNA Capsule",
+    "description": "This data capsule translates organic chemicals into readable alien genetics information.\nUsed for researching alien organisms.\n\nGo the extra kilometer! Knowledge is power, and power is just efficiency with fewer steps. Depositing Alien DNA Capsules in the AWESOME Sink provides FICSIT with knowledge, and Pioneers with Coupons.",
+    "stackSize": 50,
+    "sinkPoints": 0,
+    "isFluid": false,
+    "isFuel": false,
+    "isBiomass": false,
+    "isRadioactive": false,
+    "isEquipment": false,
+    "meta": {},
+    "event": "NONE"
+  },
+  "Desc_Crystal_C": {
+    "slug": "blue-power-slug",
+    "name": "Blue Power Slug",
+    "description": "A strange slug radiating a weak strange power.",
+    "stackSize": 50,
+    "sinkPoints": 0,
+    "isFluid": false,
+    "isFuel": false,
+    "isBiomass": false,
+    "isRadioactive": false,
+    "isEquipment": false,
+    "meta": {},
+    "event": "NONE"
+  },
   "Desc_AlienProtein_C": {
     "slug": "alien-protein",
     "name": "Alien Protein",
     "description": "Ground down Alien Remains in a neat little package.\nUsed for medical purposes and to research alien organisms.",
     "stackSize": 100,
+    "sinkPoints": 0,
+    "isFluid": false,
+    "isFuel": false,
+    "isBiomass": false,
+    "isRadioactive": false,
+    "isEquipment": false,
+    "meta": {},
+    "event": "NONE"
+  },
+  "Desc_Crystal_mk3_C": {
+    "slug": "purple-power-slug",
+    "name": "Purple Power Slug",
+    "description": "A strange slug radiating a powerful strange power.",
+    "stackSize": 50,
+    "sinkPoints": 0,
+    "isFluid": false,
+    "isFuel": false,
+    "isBiomass": false,
+    "isRadioactive": false,
+    "isEquipment": false,
+    "meta": {},
+    "event": "NONE"
+  },
+  "Desc_Crystal_mk2_C": {
+    "slug": "yellow-power-slug",
+    "name": "Yellow Power Slug",
+    "description": "A strange slug radiating a strange power.",
+    "stackSize": 50,
     "sinkPoints": 0,
     "isFluid": false,
     "isFuel": false,
@@ -2093,37 +1939,159 @@
     "meta": {},
     "event": "NONE"
   },
-  "Desc_HogParts_C": {
-    "slug": "hog-remains",
-    "name": "Hog Remains",
-    "description": "The carapace of the alien Hog creature.\nUsed for MAM research.",
+  "Desc_XmasStar_C": {
+    "slug": "ficsmas-wonder-star",
+    "name": "FICSMAS Wonder Star",
+    "description": "This special FICSMAS Star signifies the productivity of FICSIT all across the universe. It also signifies the fact that you have nearly completed the Holiday Event, so it's time to get back to work.",
     "stackSize": 50,
-    "sinkPoints": 0,
+    "sinkPoints": 1,
     "isFluid": false,
-    "isFuel": true,
-    "isBiomass": true,
+    "isFuel": false,
+    "isBiomass": false,
     "isRadioactive": false,
     "isEquipment": false,
-    "meta": {
-      "energyValue": 250
-    },
-    "event": "NONE"
+    "meta": {},
+    "event": "FICSMAS"
   },
-  "Desc_SpitterParts_C": {
-    "slug": "plasma-spitter-remains",
-    "name": "Plasma Spitter Remains",
-    "description": "The remains of a plasma spitting alien creature.\nUsed for MAM research.",
-    "stackSize": 50,
-    "sinkPoints": 0,
+  "Desc_XmasBallCluster_C": {
+    "slug": "ficsmas-ornament-bundle",
+    "name": "FICSMAS Ornament Bundle",
+    "description": "All the FICSMAS Ornaments smashed together to make even more FICSMAS Decorations!",
+    "stackSize": 100,
+    "sinkPoints": 1,
     "isFluid": false,
-    "isFuel": true,
-    "isBiomass": true,
+    "isFuel": false,
+    "isBiomass": false,
     "isRadioactive": false,
     "isEquipment": false,
-    "meta": {
-      "energyValue": 250
-    },
-    "event": "NONE"
+    "meta": {},
+    "event": "FICSMAS"
+  },
+  "Desc_XmasWreath_C": {
+    "slug": "ficsmas-decoration",
+    "name": "FICSMAS Decoration",
+    "description": "A decoration used to make decorations. Its use cases are questionable.",
+    "stackSize": 100,
+    "sinkPoints": 1,
+    "isFluid": false,
+    "isFuel": false,
+    "isBiomass": false,
+    "isRadioactive": false,
+    "isEquipment": false,
+    "meta": {},
+    "event": "FICSMAS"
+  },
+  "Desc_Snow_C": {
+    "slug": "actual-snow",
+    "name": "Actual Snow",
+    "description": "It's snow. Not the nice, thick, crunchy kind though... more the disgustingly wet, slushy kind... Guess we can make stuff from it.",
+    "stackSize": 500,
+    "sinkPoints": 1,
+    "isFluid": false,
+    "isFuel": false,
+    "isBiomass": false,
+    "isRadioactive": false,
+    "isEquipment": false,
+    "meta": {},
+    "event": "FICSMAS"
+  },
+  "Desc_XmasBow_C": {
+    "slug": "ficsmas-bow",
+    "name": "FICSMAS Bow",
+    "description": "A fancy Bow, maybe someone can wear this? You certainly can't! Probably, some parts and decorations can be made from this.",
+    "stackSize": 500,
+    "sinkPoints": 1,
+    "isFluid": false,
+    "isFuel": false,
+    "isBiomass": false,
+    "isRadioactive": false,
+    "isEquipment": false,
+    "meta": {},
+    "event": "FICSMAS"
+  },
+  "Desc_XmasBall3_C": {
+    "slug": "copper-ficsmas-ornament",
+    "name": "Copper FICSMAS Ornament",
+    "description": "Still used for making FICSMAS Decorations.",
+    "stackSize": 200,
+    "sinkPoints": 1,
+    "isFluid": false,
+    "isFuel": false,
+    "isBiomass": false,
+    "isRadioactive": false,
+    "isEquipment": false,
+    "meta": {},
+    "event": "FICSMAS"
+  },
+  "Desc_XmasBall4_C": {
+    "slug": "iron-ficsmas-ornament",
+    "name": "Iron FICSMAS Ornament",
+    "description": "This super special... nope... still just used for making FICSMAS Decorations.",
+    "stackSize": 200,
+    "sinkPoints": 1,
+    "isFluid": false,
+    "isFuel": false,
+    "isBiomass": false,
+    "isRadioactive": false,
+    "isEquipment": false,
+    "meta": {},
+    "event": "FICSMAS"
+  },
+  "Desc_XmasBranch_C": {
+    "slug": "ficsmas-tree-branch",
+    "name": "FICSMAS Tree Branch",
+    "description": "A special Tree Branch, used to produce parts and buildings during the FICSMAS Event.",
+    "stackSize": 500,
+    "sinkPoints": 1,
+    "isFluid": false,
+    "isFuel": false,
+    "isBiomass": false,
+    "isRadioactive": false,
+    "isEquipment": false,
+    "meta": {},
+    "event": "FICSMAS"
+  },
+  "Desc_XmasBall1_C": {
+    "slug": "red-ficsmas-ornament",
+    "name": "Red FICSMAS Ornament",
+    "description": "Used for making FICSMAS Decorations.",
+    "stackSize": 500,
+    "sinkPoints": 1,
+    "isFluid": false,
+    "isFuel": false,
+    "isBiomass": false,
+    "isRadioactive": false,
+    "isEquipment": false,
+    "meta": {},
+    "event": "FICSMAS"
+  },
+  "Desc_XmasBall2_C": {
+    "slug": "blue-ficsmas-ornament",
+    "name": "Blue FICSMAS Ornament",
+    "description": "Again, used for making FICSMAS Decorations.",
+    "stackSize": 500,
+    "sinkPoints": 1,
+    "isFluid": false,
+    "isFuel": false,
+    "isBiomass": false,
+    "isRadioactive": false,
+    "isEquipment": false,
+    "meta": {},
+    "event": "FICSMAS"
+  },
+  "Desc_Gift_C": {
+    "slug": "ficsmas-gift",
+    "name": "FICSMAS Gift",
+    "description": "Special FICSMAS buildings and parts can be obtained and produced from this FICSIT Holiday present.\n\n*Watch the sky for deliveries from orbit!",
+    "stackSize": 500,
+    "sinkPoints": 1,
+    "isFluid": false,
+    "isFuel": false,
+    "isBiomass": false,
+    "isRadioactive": false,
+    "isEquipment": false,
+    "meta": {},
+    "event": "FICSMAS"
   },
   "Desc_FlowerPetals_C": {
     "slug": "flower-petals",
@@ -2138,38 +2106,6 @@
     "isEquipment": false,
     "meta": {
       "energyValue": 100
-    },
-    "event": "NONE"
-  },
-  "Desc_Leaves_C": {
-    "slug": "leaves",
-    "name": "Leaves",
-    "description": "Primarily used as fuel.\nBiomass Burners and vehicles can use it for power.",
-    "stackSize": 500,
-    "sinkPoints": 3,
-    "isFluid": false,
-    "isFuel": true,
-    "isBiomass": true,
-    "isRadioactive": false,
-    "isEquipment": false,
-    "meta": {
-      "energyValue": 15
-    },
-    "event": "NONE"
-  },
-  "Desc_Mycelia_C": {
-    "slug": "mycelia",
-    "name": "Mycelia",
-    "description": "Used for crafting.\nBiomass Burners and vehicles can use it for power.",
-    "stackSize": 200,
-    "sinkPoints": 10,
-    "isFluid": false,
-    "isFuel": true,
-    "isBiomass": true,
-    "isRadioactive": false,
-    "isEquipment": false,
-    "meta": {
-      "energyValue": 20
     },
     "event": "NONE"
   },
@@ -2189,35 +2125,19 @@
     },
     "event": "NONE"
   },
-  "Desc_HatcherParts_C": {
-    "slug": "hatcher-remains",
-    "name": "Hatcher Remains",
-    "description": "The shell-like remains an alien... thing.\nUsed for MAM research.",
-    "stackSize": 50,
-    "sinkPoints": 0,
+  "Desc_GenericBiomass_C": {
+    "slug": "biomass",
+    "name": "Biomass",
+    "description": "Primarily used as fuel.\nBiomass burners and vehicles can use it for power.\nBiomass is much more energy-efficient than raw biological matter.",
+    "stackSize": 200,
+    "sinkPoints": 12,
     "isFluid": false,
     "isFuel": true,
     "isBiomass": true,
     "isRadioactive": false,
     "isEquipment": false,
     "meta": {
-      "energyValue": 250
-    },
-    "event": "NONE"
-  },
-  "Desc_StingerParts_C": {
-    "slug": "stinger-remains",
-    "name": "Stinger Remains",
-    "description": "The remains of whatever that creepy thing was.\nUsed for MAM research.",
-    "stackSize": 50,
-    "sinkPoints": 0,
-    "isFluid": false,
-    "isFuel": true,
-    "isBiomass": true,
-    "isRadioactive": false,
-    "isEquipment": false,
-    "meta": {
-      "energyValue": 250
+      "energyValue": 180
     },
     "event": "NONE"
   },
@@ -2234,38 +2154,6 @@
     "isEquipment": false,
     "meta": {
       "energyValue": 450
-    },
-    "event": "NONE"
-  },
-  "Desc_PackagedBiofuel_C": {
-    "slug": "packaged-liquid-biofuel",
-    "name": "Packaged Liquid Biofuel",
-    "description": "Liquid Biofuel, packaged for alternative transport. Can be used as fuel for Vehicles.",
-    "stackSize": 100,
-    "sinkPoints": 370,
-    "isFluid": false,
-    "isFuel": true,
-    "isBiomass": true,
-    "isRadioactive": false,
-    "isEquipment": false,
-    "meta": {
-      "energyValue": 750
-    },
-    "event": "NONE"
-  },
-  "Desc_GenericBiomass_C": {
-    "slug": "biomass",
-    "name": "Biomass",
-    "description": "Primarily used as fuel.\nBiomass burners and vehicles can use it for power.\nBiomass is much more energy-efficient than raw biological matter.",
-    "stackSize": 200,
-    "sinkPoints": 12,
-    "isFluid": false,
-    "isFuel": true,
-    "isBiomass": true,
-    "isRadioactive": false,
-    "isEquipment": false,
-    "meta": {
-      "energyValue": 180
     },
     "event": "NONE"
   },
@@ -2290,26 +2178,28 @@
     },
     "event": "NONE"
   },
+  "Desc_PackagedBiofuel_C": {
+    "slug": "packaged-liquid-biofuel",
+    "name": "Packaged Liquid Biofuel",
+    "description": "Liquid Biofuel, packaged for alternative transport. Can be used as fuel for Vehicles and the Jetpack.",
+    "stackSize": 100,
+    "sinkPoints": 370,
+    "isFluid": false,
+    "isFuel": true,
+    "isBiomass": true,
+    "isRadioactive": false,
+    "isEquipment": false,
+    "meta": {
+      "energyValue": 750
+    },
+    "event": "NONE"
+  },
   "Desc_PackagedAlumina_C": {
     "slug": "packaged-alumina-solution",
     "name": "Packaged Alumina Solution",
     "description": "Alumina Solution, packaged for alternative transport.",
     "stackSize": 100,
     "sinkPoints": 160,
-    "isFluid": false,
-    "isFuel": false,
-    "isBiomass": true,
-    "isRadioactive": false,
-    "isEquipment": false,
-    "meta": {},
-    "event": "NONE"
-  },
-  "Desc_PackagedSulfuricAcid_C": {
-    "slug": "packaged-sulfuric-acid",
-    "name": "Packaged Sulfuric Acid",
-    "description": "Sulfuric Acid, packaged for alternative transport.",
-    "stackSize": 100,
-    "sinkPoints": 152,
     "isFluid": false,
     "isFuel": false,
     "isBiomass": true,
@@ -2346,12 +2236,122 @@
     "meta": {},
     "event": "NONE"
   },
+  "Desc_PackagedSulfuricAcid_C": {
+    "slug": "packaged-sulfuric-acid",
+    "name": "Packaged Sulfuric Acid",
+    "description": "Sulfuric Acid, packaged for alternative transport.",
+    "stackSize": 100,
+    "sinkPoints": 152,
+    "isFluid": false,
+    "isFuel": false,
+    "isBiomass": true,
+    "isRadioactive": false,
+    "isEquipment": false,
+    "meta": {},
+    "event": "NONE"
+  },
   "Desc_Fabric_C": {
     "slug": "fabric",
     "name": "Fabric",
     "description": "Used for equipment crafting.\nFlexible but durable fabric.",
     "stackSize": 100,
     "sinkPoints": 140,
+    "isFluid": false,
+    "isFuel": true,
+    "isBiomass": true,
+    "isRadioactive": false,
+    "isEquipment": false,
+    "meta": {
+      "energyValue": 15
+    },
+    "event": "NONE"
+  },
+  "Desc_StingerParts_C": {
+    "slug": "stinger-remains",
+    "name": "Stinger Remains",
+    "description": "The remains of whatever that creepy thing was.\nUsed for MAM research.",
+    "stackSize": 50,
+    "sinkPoints": 0,
+    "isFluid": false,
+    "isFuel": true,
+    "isBiomass": true,
+    "isRadioactive": false,
+    "isEquipment": false,
+    "meta": {
+      "energyValue": 250
+    },
+    "event": "NONE"
+  },
+  "Desc_SpitterParts_C": {
+    "slug": "plasma-spitter-remains",
+    "name": "Plasma Spitter Remains",
+    "description": "The remains of a plasma spitting alien creature.\nUsed for MAM research.",
+    "stackSize": 50,
+    "sinkPoints": 0,
+    "isFluid": false,
+    "isFuel": true,
+    "isBiomass": true,
+    "isRadioactive": false,
+    "isEquipment": false,
+    "meta": {
+      "energyValue": 250
+    },
+    "event": "NONE"
+  },
+  "Desc_HogParts_C": {
+    "slug": "hog-remains",
+    "name": "Hog Remains",
+    "description": "The carapace of the alien Hog creature.\nUsed for MAM research.",
+    "stackSize": 50,
+    "sinkPoints": 0,
+    "isFluid": false,
+    "isFuel": true,
+    "isBiomass": true,
+    "isRadioactive": false,
+    "isEquipment": false,
+    "meta": {
+      "energyValue": 250
+    },
+    "event": "NONE"
+  },
+  "Desc_HatcherParts_C": {
+    "slug": "hatcher-remains",
+    "name": "Hatcher Remains",
+    "description": "The shell-like remains an alien... thing.\nUsed for MAM research.",
+    "stackSize": 50,
+    "sinkPoints": 0,
+    "isFluid": false,
+    "isFuel": true,
+    "isBiomass": true,
+    "isRadioactive": false,
+    "isEquipment": false,
+    "meta": {
+      "energyValue": 250
+    },
+    "event": "NONE"
+  },
+  "Desc_Mycelia_C": {
+    "slug": "mycelia",
+    "name": "Mycelia",
+    "description": "Used for crafting.\nBiomass Burners and vehicles can use it for power.",
+    "stackSize": 200,
+    "sinkPoints": 10,
+    "isFluid": false,
+    "isFuel": true,
+    "isBiomass": true,
+    "isRadioactive": false,
+    "isEquipment": false,
+    "meta": {
+      "energyValue": 20
+    },
+    "event": "NONE"
+  },
+  "Desc_Leaves_C": {
+    "slug": "leaves",
+    "name": "Leaves",
+    "description": "Primarily used as fuel.\nBiomass Burners and vehicles can use it for power.",
+    "stackSize": 500,
+    "sinkPoints": 3,
     "isFluid": false,
     "isFuel": true,
     "isBiomass": true,
@@ -2396,48 +2396,24 @@
     },
     "event": "NONE"
   },
-  "Desc_Coal_C": {
-    "slug": "coal",
-    "name": "Coal",
-    "description": "Mainly used as fuel for vehicles & coal generators and for steel production.",
-    "stackSize": 100,
-    "sinkPoints": 3,
-    "isFluid": false,
-    "isFuel": true,
+  "Desc_Water_C": {
+    "slug": "water",
+    "name": "Water",
+    "description": "It's water.",
+    "stackSize": 50,
+    "sinkPoints": 5,
+    "isFluid": true,
+    "isFuel": false,
     "isBiomass": false,
     "isRadioactive": false,
     "isEquipment": false,
     "meta": {
-      "energyValue": 300
+      "fluidColor": {
+        "r": 122,
+        "g": 176,
+        "b": 212
+      }
     },
-    "event": "NONE"
-  },
-  "Desc_OreCopper_C": {
-    "slug": "copper-ore",
-    "name": "Copper Ore",
-    "description": "Used for crafting.\nBasic resource mainly used for electricity.",
-    "stackSize": 100,
-    "sinkPoints": 3,
-    "isFluid": false,
-    "isFuel": false,
-    "isBiomass": false,
-    "isRadioactive": false,
-    "isEquipment": false,
-    "meta": {},
-    "event": "NONE"
-  },
-  "Desc_OreGold_C": {
-    "slug": "caterium-ore",
-    "name": "Caterium Ore",
-    "description": "Caterium Ore is smelted into Caterium Ingots. Caterium Ingots are mostly used for advanced electronics.",
-    "stackSize": 100,
-    "sinkPoints": 7,
-    "isFluid": false,
-    "isFuel": false,
-    "isBiomass": false,
-    "isRadioactive": false,
-    "isEquipment": false,
-    "meta": {},
     "event": "NONE"
   },
   "Desc_OreIron_C": {
@@ -2446,20 +2422,6 @@
     "description": "Used for crafting.\nThe most essential basic resource.",
     "stackSize": 100,
     "sinkPoints": 1,
-    "isFluid": false,
-    "isFuel": false,
-    "isBiomass": false,
-    "isRadioactive": false,
-    "isEquipment": false,
-    "meta": {},
-    "event": "NONE"
-  },
-  "Desc_RawQuartz_C": {
-    "slug": "raw-quartz",
-    "name": "Raw Quartz",
-    "description": "Raw Quartz can be processed into Quartz Crystals and Silica, which both offer a variety of applications.",
-    "stackSize": 100,
-    "sinkPoints": 15,
     "isFluid": false,
     "isFuel": false,
     "isBiomass": false,
@@ -2480,6 +2442,22 @@
     "isRadioactive": false,
     "isEquipment": false,
     "meta": {},
+    "event": "NONE"
+  },
+  "Desc_Coal_C": {
+    "slug": "coal",
+    "name": "Coal",
+    "description": "Mainly used as fuel for vehicles & coal generators and for steel production.",
+    "stackSize": 100,
+    "sinkPoints": 3,
+    "isFluid": false,
+    "isFuel": true,
+    "isBiomass": false,
+    "isRadioactive": false,
+    "isEquipment": false,
+    "meta": {
+      "energyValue": 300
+    },
     "event": "NONE"
   },
   "Desc_Sulfur_C": {
@@ -2517,52 +2495,40 @@
     },
     "event": "NONE"
   },
-  "Desc_NitrogenGas_C": {
-    "slug": "nitrogen-gas",
-    "name": "Nitrogen Gas",
-    "description": "Nitrogen can be used in a variety of ways, such as metallurgy, cooling, and Nitric Acid production. On Massage-2(AB)b, it can be extracted from underground gas wells.",
-    "stackSize": 50,
-    "sinkPoints": 10,
-    "isFluid": true,
-    "isFuel": false,
-    "isBiomass": false,
-    "isRadioactive": false,
-    "isEquipment": false,
-    "meta": {
-      "fluidColor": {
-        "r": 89,
-        "g": 89,
-        "b": 89
-      }
-    },
-    "event": "NONE"
-  },
-  "Desc_Water_C": {
-    "slug": "water",
-    "name": "Water",
-    "description": "It's water.",
-    "stackSize": 50,
-    "sinkPoints": 5,
-    "isFluid": true,
-    "isFuel": false,
-    "isBiomass": false,
-    "isRadioactive": false,
-    "isEquipment": false,
-    "meta": {
-      "fluidColor": {
-        "r": 122,
-        "g": 176,
-        "b": 212
-      }
-    },
-    "event": "NONE"
-  },
-  "Desc_OreBauxite_C": {
-    "slug": "bauxite",
-    "name": "Bauxite",
-    "description": "Bauxite is used to produce Alumina, which can be further refined into the Aluminum Scrap required to produce Aluminum Ingots.",
+  "Desc_RawQuartz_C": {
+    "slug": "raw-quartz",
+    "name": "Raw Quartz",
+    "description": "Raw Quartz can be processed into Quartz Crystals and Silica, which both offer a variety of applications.",
     "stackSize": 100,
-    "sinkPoints": 8,
+    "sinkPoints": 15,
+    "isFluid": false,
+    "isFuel": false,
+    "isBiomass": false,
+    "isRadioactive": false,
+    "isEquipment": false,
+    "meta": {},
+    "event": "NONE"
+  },
+  "Desc_OreCopper_C": {
+    "slug": "copper-ore",
+    "name": "Copper Ore",
+    "description": "Used for crafting.\nBasic resource mainly used for electricity.",
+    "stackSize": 100,
+    "sinkPoints": 3,
+    "isFluid": false,
+    "isFuel": false,
+    "isBiomass": false,
+    "isRadioactive": false,
+    "isEquipment": false,
+    "meta": {},
+    "event": "NONE"
+  },
+  "Desc_OreGold_C": {
+    "slug": "caterium-ore",
+    "name": "Caterium Ore",
+    "description": "Caterium Ore is smelted into Caterium Ingots. Caterium Ingots are mostly used for advanced electronics.",
+    "stackSize": 100,
+    "sinkPoints": 7,
     "isFluid": false,
     "isFuel": false,
     "isBiomass": false,
@@ -2585,6 +2551,40 @@
     "meta": {
       "radioactiveDecay": 15
     },
+    "event": "NONE"
+  },
+  "Desc_NitrogenGas_C": {
+    "slug": "nitrogen-gas",
+    "name": "Nitrogen Gas",
+    "description": "Nitrogen can be used in a variety of ways, such as metallurgy, cooling, and Nitric Acid production. On Massage-2(AB)b, it can be extracted from underground gas wells.",
+    "stackSize": 50,
+    "sinkPoints": 10,
+    "isFluid": true,
+    "isFuel": false,
+    "isBiomass": false,
+    "isRadioactive": false,
+    "isEquipment": false,
+    "meta": {
+      "fluidColor": {
+        "r": 89,
+        "g": 89,
+        "b": 89
+      }
+    },
+    "event": "NONE"
+  },
+  "Desc_OreBauxite_C": {
+    "slug": "bauxite",
+    "name": "Bauxite",
+    "description": "Bauxite is used to produce Alumina, which can be further refined into the Aluminum Scrap required to produce Aluminum Ingots.",
+    "stackSize": 100,
+    "sinkPoints": 8,
+    "isFluid": false,
+    "isFuel": false,
+    "isBiomass": false,
+    "isRadioactive": false,
+    "isEquipment": false,
+    "meta": {},
     "event": "NONE"
   }
 }

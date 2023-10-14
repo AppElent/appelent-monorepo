@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import mermaid from 'mermaid';
-import { createGuid } from './create-guid';
+import { nanoid } from 'nanoid';
 
 mermaid.initialize({
   startOnLoad: true,
@@ -10,7 +10,7 @@ mermaid.initialize({
 });
 
 const Mermaid = ({ chart }) => {
-  const id = createGuid();
+  const id = nanoid();
   useEffect(() => {
     const element = document.getElementById(id);
     if (element.hasAttribute('data-processed')) element.removeAttribute('data-processed');

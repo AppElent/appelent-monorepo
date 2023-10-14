@@ -3,19 +3,13 @@ import { useTranslate } from '@refinedev/core';
 import { CardDefault } from 'src/components/app/card-default';
 import { tokens } from 'src/locales/tokens';
 import {
-  Autocomplete,
-  Box,
-  Button,
-  Checkbox,
   Grid,
-  Stack,
   Table,
   TableBody,
   TableCell,
   TableContainer,
   TableHead,
   TableRow,
-  TextField,
 } from '@mui/material';
 import { getFactoryStatistics, getSatisfactoryData } from 'src/custom/libs/satisfactory';
 import { useMemo } from 'react';

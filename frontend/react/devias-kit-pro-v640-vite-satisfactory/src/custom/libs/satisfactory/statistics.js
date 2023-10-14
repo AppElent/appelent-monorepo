@@ -1,5 +1,5 @@
+import { nanoid } from 'nanoid';
 import { getSatisfactoryData, getSatisfactoryDataArray } from '.';
-import { createGuid } from '../create-guid';
 
 // inputobject: [{recipe: 'class', amount: 2}]
 export const getFactoryStatistics = (factoryItems, version) => {
@@ -266,7 +266,7 @@ export const getRecipesByProduct = (
     }
   };
   productList.forEach((listItem) => {
-    getRecipes(listItem.product, listItem.amount, createGuid(false));
+    getRecipes(listItem.product, listItem.amount, nanoid());
   });
 
   returnObject.total.forEach((ret, index) => {

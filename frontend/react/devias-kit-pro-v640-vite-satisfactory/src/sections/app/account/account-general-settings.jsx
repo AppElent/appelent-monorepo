@@ -35,7 +35,6 @@ export const AccountGeneralSettings = (props) => {
     //validationSchema,
     onSubmit: async (values, helpers) => {
       try {
-        console.log(values);
         return await updateProfile(auth.currentUser, { displayName: values.name }); //user.update({ displayName: values.name });
       } catch (err) {
         console.error(err);

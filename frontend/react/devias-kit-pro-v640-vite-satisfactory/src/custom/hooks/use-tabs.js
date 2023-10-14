@@ -15,7 +15,6 @@ const useTabs = ({ initial = '', queryParamName, onTabChange }) => {
   }, [queryParamName, query]);
 
   const handleTabChange = useCallback((_e, newValue) => {
-    console.log(_e, newValue);
     if (queryParamName && setQuery) {
       setQuery(newValue);
     } else {

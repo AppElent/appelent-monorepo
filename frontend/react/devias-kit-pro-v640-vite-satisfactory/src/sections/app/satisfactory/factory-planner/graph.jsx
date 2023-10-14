@@ -89,7 +89,6 @@ const layout = {
 };
 
 const Graph = ({ data, setData }) => {
-  console.log(data, setData);
   return (
     <Cytoscape
       elements={data.elements}

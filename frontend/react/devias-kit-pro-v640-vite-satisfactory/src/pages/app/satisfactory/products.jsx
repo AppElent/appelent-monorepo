@@ -1,6 +1,5 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { Box, Button, Divider, Stack, TableCell, TableRow, Typography } from '@mui/material';
-import numeral from 'numeral';
 import { usePageView } from 'src/hooks/use-page-view';
 import { ItemDrawer } from 'src/components/app/list/item-drawer';
 import { ItemListContainer } from 'src/components/app/list/item-list-container';
@@ -10,7 +9,6 @@ import { ItemDetailsContainer } from 'src/components/app/list/item-drawer/item-d
 import { SeverityPill } from 'src/components/severity-pill';
 //import { useSearch, useItems } from "components/app/list/utils";
 
-import { paginate } from 'src/custom/libs/paginate';
 import { useRouter } from 'src/hooks/use-router';
 import {
   getSatisfactoryDataArray,
@@ -272,12 +270,7 @@ const Products = () => {
               >
                 {translate(tokens.satisfactory.pages.products.fullscreen)}
               </Button>
-              {currentItem && (
-                <SatisfactoryProductDetail
-                  product={currentItem}
-                  translate={translate}
-                />
-              )}
+              {currentItem && <SatisfactoryProductDetail product={currentItem} />}
             </ItemDetailsContainer>
           </ItemDrawer>
         </Box>

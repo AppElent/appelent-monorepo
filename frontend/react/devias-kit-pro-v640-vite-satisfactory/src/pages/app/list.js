@@ -24,6 +24,7 @@ import { ItemListTableContainer } from 'src/components/app/list/item-list-table'
 import { ItemDetailsContainer } from 'src/components/app/list/item-drawer/item-details';
 import { ItemEditContainer } from 'src/components/app/list/item-drawer/item-edit';
 import { SeverityPill } from 'src/components/severity-pill';
+import { logger } from 'src/custom/libs/logging';
 
 const statusMap = {
   complete: 'success',
@@ -138,7 +139,7 @@ const Page = () => {
     initialValues: currentItem,
     enableReinitialize: true,
     onSubmit: async (values, helpers) => {
-      console.log(values);
+      logger.log(values, helpers);
     },
   });
 

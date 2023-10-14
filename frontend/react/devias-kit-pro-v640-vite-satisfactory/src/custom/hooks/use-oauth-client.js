@@ -7,6 +7,7 @@ import { setDoc, doc } from 'firebase/firestore';
 import { db } from 'src/libs/firebase';
 import { useData } from 'src/custom/libs/data-framework';
 import { useRouter } from 'src/hooks/use-router';
+import { logger } from '../libs/logging';
 
 export const useOauthClient = (configuration) => {
   const router = useRouter();
@@ -18,7 +19,6 @@ export const useOauthClient = (configuration) => {
     const state = query.state;
     const config = query.config;
     const fetchToken = async (state) => {
-      console.log('fetch', state);
       //const configuration = configurations[config];
       const url = configuration.baseUrl
         ? `${configuration.baseUrl}${configuration.tokenUrl}`
@@ -80,7 +80,7 @@ export const useOauthClient = (configuration) => {
           token: token.token.refresh_token,
         });
       } catch (error) {
-        console.log('Error refreshing access token', error);
+        logger.log('Error refreshing access token', error);
         toast.error('Access token refresh failed: ' + error.message);
       }
       return newToken?.data;
@@ -101,7 +101,7 @@ export const useOauthClient = (configuration) => {
         await setDoc(doc(db, `users/${username}/tokens/${saveKey}`), data);
         toast.success('Access token saved');
       } catch (error) {
-        console.log(error);
+        logger.err(error);
         toast.error('Error: ' + error.message);
       }
     },

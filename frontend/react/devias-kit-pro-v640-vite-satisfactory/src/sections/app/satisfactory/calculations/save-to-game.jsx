@@ -9,6 +9,7 @@ import {
   TextField,
 } from '@mui/material';
 import { useData } from 'src/custom/libs/data-framework';
+import { logger } from 'src/custom/libs/logging';
 
 export const SaveToGame = ({ saveToGame, modalOpen, setModalState }) => {
   const gamesData = useData('satisfactory_games');
@@ -50,7 +51,7 @@ export const SaveToGame = ({ saveToGame, modalOpen, setModalState }) => {
         // }
         onChange={(e, value) => {
           if (value) {
-            console.log(value);
+            logger.log(value);
           }
         }}
         // onInputChange={(event, newInputValue) => {

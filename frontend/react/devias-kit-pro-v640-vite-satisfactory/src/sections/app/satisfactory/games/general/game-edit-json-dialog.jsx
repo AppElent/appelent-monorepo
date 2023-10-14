@@ -20,7 +20,6 @@ export const GameEditJsonDialog = ({ formik, modalOpen, setModalState }) => {
 
   const saveData = () => {
     const saveData = { ...formik.values, jsonData };
-    console.log(saveData);
   };
 
   return (
@@ -40,7 +39,6 @@ export const GameEditJsonDialog = ({ formik, modalOpen, setModalState }) => {
         onChange={(e) => {
           try {
             const objData = JSON.parse(e.target.value);
-            console.log(objData);
             setJsonData(objData);
           } catch {
             alert('Invalid JSON');

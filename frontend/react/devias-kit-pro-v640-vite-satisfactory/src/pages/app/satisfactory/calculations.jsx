@@ -1,19 +1,9 @@
 import { useState } from 'react';
-import {
-  Box,
-  Container,
-  Divider,
-  Stack,
-  Tab,
-  Tabs,
-  Typography,
-} from '@mui/material';
+import { Box, Container, Divider, Stack, Tab, Tabs, Typography } from '@mui/material';
 import { usePageView } from 'src/hooks/use-page-view';
 //import { useSearch, useItems } from "components/app/list/utils";
 
-import {
-  SatisfactoryCurrentVersion,
-} from 'src/custom/libs/satisfactory';
+import { SatisfactoryCurrentVersion } from 'src/custom/libs/satisfactory';
 import { Seo } from 'src/components/seo';
 import { useQueryParam } from 'use-query-params';
 import useTabs from 'src/custom/hooks/use-tabs';
@@ -32,8 +22,6 @@ const Calculations = () => {
   const tabs = useTabs({ initial: tabsData[0].value, tabname: 'tab' });
   const [preferredRecipes, setPreferredRecipes] = useState([]);
   const settings = useSettings();
-
-  console.log(preferredRecipes);
 
   usePageView();
 

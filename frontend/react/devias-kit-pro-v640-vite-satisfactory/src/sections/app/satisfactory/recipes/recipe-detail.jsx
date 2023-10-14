@@ -10,8 +10,10 @@ import {
 } from 'src/custom/libs/satisfactory';
 import Mermaid from 'src/custom/libs/mermaid';
 import { useMemo } from 'react';
+import { useTranslate } from '@refinedev/core';
 
-export const SatisfactoryRecipeDetail = ({ recipe, translate }) => {
+export const SatisfactoryRecipeDetail = ({ recipe }) => {
+  const translate = useTranslate();
   const machines = getSatisfactoryData('buildables');
   const schematics = useMemo(() => {
     return getSatisfactoryDataArray('schematics');
@@ -25,8 +27,6 @@ export const SatisfactoryRecipeDetail = ({ recipe, translate }) => {
     }
     return <SeverityPill color={status}>{text}</SeverityPill>;
   };
-
-  console.log(schematics, recipe);
 
   const propertyItems = [
     {
@@ -82,5 +82,4 @@ export const SatisfactoryRecipeDetail = ({ recipe, translate }) => {
 
 SatisfactoryRecipeDetail.propTypes = {
   recipe: PropTypes.object.isRequired,
-  translate: PropTypes.func,
 };

@@ -17,8 +17,6 @@ const Cytoscape = ({ elements, layout, ...options }) => {
   // graph page: https://github.com/Greven145/yet-another-factory-planner/blob/master/client/src/containers/ProductionPlanner/PlannerResults/ProductionGraphTab/index.tsx
   // tooltip: https://github.com/Greven145/yet-another-factory-planner/blob/master/client/src/components/GraphTooltip/index.tsx
 
-  console.log(elements, layout);
-
   /**
    *
    * @param {any} instance cy instance
@@ -38,9 +36,7 @@ const Cytoscape = ({ elements, layout, ...options }) => {
     if (graphRef?.current) {
       const bounds = graphRef.current.getBoundingClientRect();
       graphRef.current.style.height = `${window.innerHeight - bounds.top - 50}px`;
-      //console.log(graphRef.current.style.height);
       if (cyRef.current) {
-        //console.log(cyRef.current);
         cyRef.current.fit();
       }
     }
@@ -111,8 +107,6 @@ const Cytoscape = ({ elements, layout, ...options }) => {
     }
   }
 
-  console.log(popperRef.current, cyRef.current);
-
   /**
    *
    * @param {any} cy cy
@@ -161,8 +155,6 @@ const Cytoscape = ({ elements, layout, ...options }) => {
       window.removeEventListener('resize', resizeListener);
     };
   }, []);
-
-  console.log(popupNode);
 
   return (
     <Container

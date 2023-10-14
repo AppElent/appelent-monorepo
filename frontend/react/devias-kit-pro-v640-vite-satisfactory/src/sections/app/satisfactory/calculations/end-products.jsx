@@ -14,7 +14,6 @@ const EndProducts = ({ version }) => {
       !p.isEquipment &&
       !recipeArray.find((r) => r.ingredients.find((i) => i.itemClass === p.className))
   );
-  console.log(test, products, recipeArray, endProducts);
 
   return (
     <CardDefault title="End products">

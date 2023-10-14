@@ -11,11 +11,13 @@ import { collection, where } from 'firebase/firestore';
 import { db } from './libs/firebase';
 import { getAuth } from 'firebase/auth';
 import { useRouter } from './hooks/use-router';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { ActionType } from './custom/libs/data-framework/framework/ActionType';
 import { ConfirmProvider } from 'material-ui-confirm';
 import RecipeList from './components/app/satisfactory/recipe-list';
 import ProductListDialog from './components/app/satisfactory/product-list-dialog';
+import { GlobalContext } from './custom/libs/GlobalContext';
+import useModal from './custom/hooks/use-modal';
 
 const CustomApp = ({ children }) => {
   // Redirect to HTTPS if condition is TRUE
