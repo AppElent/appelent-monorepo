@@ -1,27 +1,26 @@
-import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { Box, Button, Divider, Stack, TableCell, TableRow, Typography } from '@mui/material';
-import { usePageView } from 'src/hooks/use-page-view';
+import { useTranslate } from '@refinedev/core';
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { ItemDrawer } from 'src/components/app/list/item-drawer';
+import { ItemDetailsContainer } from 'src/components/app/list/item-drawer/item-details';
 import { ItemListContainer } from 'src/components/app/list/item-list-container';
 import { ItemListSearch } from 'src/components/app/list/item-list-search';
 import { ItemListTableContainer } from 'src/components/app/list/item-list-table';
-import { ItemDetailsContainer } from 'src/components/app/list/item-drawer/item-details';
+import { Seo } from 'src/components/seo';
 import { SeverityPill } from 'src/components/severity-pill';
-//import { useSearch, useItems } from "components/app/list/utils";
-
-import { useRouter } from 'src/hooks/use-router';
+import { useItems } from 'src/custom/hooks/use-items';
 import {
   getSatisfactoryDataArray,
   getSatisfactoryItem,
   SatisfactoryCurrentVersion,
 } from 'src/custom/libs/satisfactory';
+import { usePageView } from 'src/hooks/use-page-view';
+//import { useSearch, useItems } from "components/app/list/utils";
+import { useRouter } from 'src/hooks/use-router';
+import { tokens } from 'src/locales/tokens';
 import { paths } from 'src/paths';
 import { SatisfactoryProductDetail } from 'src/sections/app/satisfactory/products/product-detail';
-import { useTranslate } from '@refinedev/core';
-import { tokens } from 'src/locales/tokens';
-import { Seo } from 'src/components/seo';
 import { StringParam, useQueryParam, withDefault } from 'use-query-params';
-import { useItems } from 'src/custom/hooks/use-items';
 //import ProductTableRows from 'src/sections/app/satisfactory/products/product-table-rows';
 
 const tabOptions = [

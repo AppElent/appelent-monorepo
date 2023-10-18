@@ -1,7 +1,3 @@
-import { useCallback, useEffect, useMemo, useState } from 'react';
-import Download01Icon from '@untitled-ui/icons-react/build/esm/Download01';
-import PlusIcon from '@untitled-ui/icons-react/build/esm/Plus';
-import Upload01Icon from '@untitled-ui/icons-react/build/esm/Upload01';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Card from '@mui/material/Card';
@@ -9,7 +5,10 @@ import Container from '@mui/material/Container';
 import Stack from '@mui/material/Stack';
 import SvgIcon from '@mui/material/SvgIcon';
 import Typography from '@mui/material/Typography';
-
+import Download01Icon from '@untitled-ui/icons-react/build/esm/Download01';
+import PlusIcon from '@untitled-ui/icons-react/build/esm/Plus';
+import Upload01Icon from '@untitled-ui/icons-react/build/esm/Upload01';
+import { useCallback, useEffect, useMemo, useState } from 'react';
 import { customersApi } from 'src/api/customers';
 import { Seo } from 'src/components/seo';
 import { useMounted } from 'src/hooks/use-mounted';

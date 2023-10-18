@@ -1,10 +1,10 @@
-import { useCallback, useState } from 'react';
-import PropTypes from 'prop-types';
-import PlusIcon from '@untitled-ui/icons-react/build/esm/Plus';
 import Button from '@mui/material/Button';
 import OutlinedInput from '@mui/material/OutlinedInput';
 import Stack from '@mui/material/Stack';
 import SvgIcon from '@mui/material/SvgIcon';
+import PlusIcon from '@untitled-ui/icons-react/build/esm/Plus';
+import PropTypes from 'prop-types';
+import { useCallback, useState } from 'react';
 
 export const TaskCheckItemAdd = (props) => {
   const { onAdd, ...other } = props;

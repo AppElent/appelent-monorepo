@@ -1,11 +1,10 @@
-import { useCallback, useState } from 'react';
 import Avatar from '@mui/material/Avatar';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import OutlinedInput from '@mui/material/OutlinedInput';
 import Rating from '@mui/material/Rating';
 import Stack from '@mui/material/Stack';
-
+import { useCallback, useState } from 'react';
 import { useMockedUser } from 'src/hooks/use-mocked-user';
 import { getInitials } from 'src/utils/get-initials';
 

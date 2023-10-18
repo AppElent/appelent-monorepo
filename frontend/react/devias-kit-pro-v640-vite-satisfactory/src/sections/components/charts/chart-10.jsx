@@ -1,12 +1,11 @@
-import numeral from 'numeral';
 import Box from '@mui/material/Box';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import CardHeader from '@mui/material/CardHeader';
 import Container from '@mui/material/Container';
-import Typography from '@mui/material/Typography';
 import { useTheme } from '@mui/material/styles';
-
+import Typography from '@mui/material/Typography';
+import numeral from 'numeral';
 import { Chart } from 'src/components/chart';
 
 const chartSeries = [14859, 35690, 45120];

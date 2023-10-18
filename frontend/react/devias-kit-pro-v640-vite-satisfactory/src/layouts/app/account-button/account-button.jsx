@@ -1,13 +1,12 @@
-import User01Icon from '@untitled-ui/icons-react/build/esm/User01';
 import Avatar from '@mui/material/Avatar';
 import Box from '@mui/material/Box';
 import ButtonBase from '@mui/material/ButtonBase';
 import SvgIcon from '@mui/material/SvgIcon';
-
+import User01Icon from '@untitled-ui/icons-react/build/esm/User01';
+import { useAuth } from 'src/hooks/use-auth';
 import { usePopover } from 'src/hooks/use-popover';
 
 import { AccountPopover } from './account-popover';
-import { useAuth } from 'src/hooks/use-auth';
 
 export const AccountButton = () => {
   const { user } = useAuth();

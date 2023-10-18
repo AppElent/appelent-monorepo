@@ -1,8 +1,8 @@
-import PropTypes from 'prop-types';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
+import PropTypes from 'prop-types';
 
 import { CompanyReview } from './company-review';
 import { CompanyReviewAdd } from './company-review-add';

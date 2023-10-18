@@ -1,6 +1,5 @@
 import { initializeApp } from 'firebase/app';
 import { getFirestore } from 'firebase/firestore';
-
 import { firebaseConfig } from 'src/config';
 
 export const firebaseApp = initializeApp(firebaseConfig);

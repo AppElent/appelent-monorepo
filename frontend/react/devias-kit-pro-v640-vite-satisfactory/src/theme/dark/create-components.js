@@ -1,10 +1,10 @@
-import { alpha } from '@mui/system/colorManipulator';
 import { backdropClasses } from '@mui/material/Backdrop';
+import { common } from '@mui/material/colors';
 import { filledInputClasses } from '@mui/material/FilledInput';
 import { outlinedInputClasses } from '@mui/material/OutlinedInput';
 import { paperClasses } from '@mui/material/Paper';
 import { tableCellClasses } from '@mui/material/TableCell';
-import { common } from '@mui/material/colors';
+import { alpha } from '@mui/system/colorManipulator';
 
 export const createComponents = ({ palette }) => {
   return {

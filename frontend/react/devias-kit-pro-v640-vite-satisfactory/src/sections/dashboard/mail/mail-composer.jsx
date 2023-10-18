@@ -1,10 +1,3 @@
-import { useCallback } from 'react';
-import PropTypes from 'prop-types';
-import Attachment01Icon from '@untitled-ui/icons-react/build/esm/Attachment01';
-import Expand01Icon from '@untitled-ui/icons-react/build/esm/Expand01';
-import Image01Icon from '@untitled-ui/icons-react/build/esm/Image01';
-import Minimize01Icon from '@untitled-ui/icons-react/build/esm/Minimize01';
-import XIcon from '@untitled-ui/icons-react/build/esm/X';
 import Backdrop from '@mui/material/Backdrop';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
@@ -17,7 +10,13 @@ import Stack from '@mui/material/Stack';
 import SvgIcon from '@mui/material/SvgIcon';
 import Tooltip from '@mui/material/Tooltip';
 import Typography from '@mui/material/Typography';
-
+import Attachment01Icon from '@untitled-ui/icons-react/build/esm/Attachment01';
+import Expand01Icon from '@untitled-ui/icons-react/build/esm/Expand01';
+import Image01Icon from '@untitled-ui/icons-react/build/esm/Image01';
+import Minimize01Icon from '@untitled-ui/icons-react/build/esm/Minimize01';
+import XIcon from '@untitled-ui/icons-react/build/esm/X';
+import PropTypes from 'prop-types';
+import { useCallback } from 'react';
 import { QuillEditor } from 'src/components/quill-editor';
 
 export const MailComposer = (props) => {

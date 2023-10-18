@@ -1,7 +1,7 @@
-import PropTypes from 'prop-types';
 import Grid from '@mui/material/Grid';
 import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
+import PropTypes from 'prop-types';
 
 import { CompanyMember } from './company-member';
 

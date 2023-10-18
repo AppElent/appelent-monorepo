@@ -1,9 +1,8 @@
-import PropTypes from 'prop-types';
 import Box from '@mui/material/Box';
 import ButtonBase from '@mui/material/ButtonBase';
 import Drawer from '@mui/material/Drawer';
 import Stack from '@mui/material/Stack';
-
+import PropTypes from 'prop-types';
 import { Logo } from 'src/components/logo';
 import { RouterLink } from 'src/components/router-link';
 import { usePathname } from 'src/hooks/use-pathname';

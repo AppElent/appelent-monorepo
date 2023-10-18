@@ -1,4 +1,3 @@
-import { formatDistanceStrict, subHours, subMinutes } from 'date-fns';
 import Avatar from '@mui/material/Avatar';
 import Badge from '@mui/material/Badge';
 import Box from '@mui/material/Box';
@@ -11,7 +10,7 @@ import ListItem from '@mui/material/ListItem';
 import ListItemAvatar from '@mui/material/ListItemAvatar';
 import ListItemText from '@mui/material/ListItemText';
 import Typography from '@mui/material/Typography';
-
+import { formatDistanceStrict, subHours, subMinutes } from 'date-fns';
 import { customLocale } from 'src/utils/date-locale';
 
 const now = new Date();

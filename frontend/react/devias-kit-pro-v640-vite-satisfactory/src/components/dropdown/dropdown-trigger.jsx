@@ -1,5 +1,5 @@
-import { cloneElement, useContext } from 'react';
 import PropTypes from 'prop-types';
+import { cloneElement, useContext } from 'react';
 
 import { DropdownContext } from './dropdown-context';
 

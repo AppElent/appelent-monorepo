@@ -1,8 +1,8 @@
 import { Box } from '@mui/material';
+import { siteSettings } from 'src/config';
+import { TermsAndConditions } from 'src/custom/components/terms-and-conditions';
 import { usePageView } from 'src/hooks/use-page-view';
 import { Layout as MarketingLayout } from 'src/layouts/marketing';
-import { TermsAndConditions } from 'src/custom/components/terms-and-conditions';
-import { siteSettings } from 'src/config';
 
 const Page = () => {
   usePageView();

@@ -1,17 +1,15 @@
 import { Box, Button, Container, Stack, Tab, Tabs, Typography } from '@mui/material';
-
+import { useMemo } from 'react';
+import ProductList from 'src/components/app/satisfactory/product-list';
+import { Seo } from 'src/components/seo';
+import useLocalStorage from 'src/custom/hooks/use-local-storage';
+import useModal from 'src/custom/hooks/use-modal';
+import useTabs from 'src/custom/hooks/use-tabs';
 import { usePageView } from 'src/hooks/use-page-view';
 import { useSettings } from 'src/hooks/use-settings';
-import { Seo } from 'src/components/seo';
-import { useMemo } from 'react';
-
-import { useQueryParam } from 'use-query-params';
-import useTabs from 'src/custom/hooks/use-tabs';
 import Graph from 'src/sections/app/satisfactory/factory-planner/graph';
-import useModal from 'src/custom/hooks/use-modal';
 import Input from 'src/sections/app/satisfactory/factory-planner/input';
-import useLocalStorage from 'src/custom/hooks/use-local-storage';
-import ProductList from 'src/components/app/satisfactory/product-list';
+import { useQueryParam } from 'use-query-params';
 
 const tabsData = [
   { label: 'Graph', value: 'graph' },

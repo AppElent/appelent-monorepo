@@ -1,13 +1,12 @@
-import DotsHorizontalIcon from '@untitled-ui/icons-react/build/esm/DotsHorizontal';
 import Box from '@mui/material/Box';
 import Card from '@mui/material/Card';
 import CardHeader from '@mui/material/CardHeader';
 import Divider from '@mui/material/Divider';
 import IconButton from '@mui/material/IconButton';
+import { useTheme } from '@mui/material/styles';
 import SvgIcon from '@mui/material/SvgIcon';
 import Typography from '@mui/material/Typography';
-import { useTheme } from '@mui/material/styles';
-
+import DotsHorizontalIcon from '@untitled-ui/icons-react/build/esm/DotsHorizontal';
 import { Chart } from 'src/components/chart';
 
 const chartSeries = [56, 24, 20];

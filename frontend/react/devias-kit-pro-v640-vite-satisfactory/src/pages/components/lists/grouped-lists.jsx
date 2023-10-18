@@ -1,11 +1,9 @@
 import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
 import Stack from '@mui/material/Stack';
-
 import { Seo } from 'src/components/seo';
 import { usePageView } from 'src/hooks/use-page-view';
 import { Layout as ComponentsLayout } from 'src/layouts/components';
-import { Previewer } from 'src/sections/components/previewer';
 import { GroupedList1 } from 'src/sections/components/grouped-lists/grouped-list-1';
 import { GroupedList2 } from 'src/sections/components/grouped-lists/grouped-list-2';
 import { GroupedList3 } from 'src/sections/components/grouped-lists/grouped-list-3';
@@ -17,6 +15,7 @@ import { GroupedList8 } from 'src/sections/components/grouped-lists/grouped-list
 import { GroupedList9 } from 'src/sections/components/grouped-lists/grouped-list-9';
 import { GroupedList10 } from 'src/sections/components/grouped-lists/grouped-list-10';
 import { GroupedList11 } from 'src/sections/components/grouped-lists/grouped-list-11';
+import { Previewer } from 'src/sections/components/previewer';
 
 const components = [
   {

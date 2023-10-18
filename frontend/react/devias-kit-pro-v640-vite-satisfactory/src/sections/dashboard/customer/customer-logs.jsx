@@ -1,5 +1,3 @@
-import PropTypes from 'prop-types';
-import { format } from 'date-fns';
 import Card from '@mui/material/Card';
 import CardHeader from '@mui/material/CardHeader';
 import Table from '@mui/material/Table';
@@ -9,7 +7,8 @@ import TableHead from '@mui/material/TableHead';
 import TablePagination from '@mui/material/TablePagination';
 import TableRow from '@mui/material/TableRow';
 import Typography from '@mui/material/Typography';
-
+import { format } from 'date-fns';
+import PropTypes from 'prop-types';
 import { MoreMenu } from 'src/components/more-menu';
 import { Scrollbar } from 'src/components/scrollbar';
 import { SeverityPill } from 'src/components/severity-pill';

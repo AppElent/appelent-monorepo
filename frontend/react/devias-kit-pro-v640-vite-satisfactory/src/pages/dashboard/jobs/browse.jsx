@@ -1,15 +1,14 @@
-import { useCallback, useEffect, useState } from 'react';
-import ChevronLeftIcon from '@untitled-ui/icons-react/build/esm/ChevronLeft';
-import ChevronRightIcon from '@untitled-ui/icons-react/build/esm/ChevronRight';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Container from '@mui/material/Container';
-import Grid from '@mui/material/Unstable_Grid2';
 import IconButton from '@mui/material/IconButton';
 import Stack from '@mui/material/Stack';
 import SvgIcon from '@mui/material/SvgIcon';
 import Typography from '@mui/material/Typography';
-
+import Grid from '@mui/material/Unstable_Grid2';
+import ChevronLeftIcon from '@untitled-ui/icons-react/build/esm/ChevronLeft';
+import ChevronRightIcon from '@untitled-ui/icons-react/build/esm/ChevronRight';
+import { useCallback, useEffect, useState } from 'react';
 import { jobsApi } from 'src/api/jobs';
 import { RouterLink } from 'src/components/router-link';
 import { Seo } from 'src/components/seo';

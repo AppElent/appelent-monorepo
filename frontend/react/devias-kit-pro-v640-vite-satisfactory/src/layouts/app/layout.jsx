@@ -1,5 +1,4 @@
 import PropTypes from 'prop-types';
-
 import { withAuthGuard } from 'src/hocs/with-auth-guard';
 import { useSettings } from 'src/hooks/use-settings';
 

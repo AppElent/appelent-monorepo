@@ -1,8 +1,3 @@
-import PropTypes from 'prop-types';
-import BookOpen01Icon from '@untitled-ui/icons-react/build/esm/BookOpen01';
-import Briefcase01Icon from '@untitled-ui/icons-react/build/esm/Briefcase01';
-import Home02Icon from '@untitled-ui/icons-react/build/esm/Home02';
-import Mail01Icon from '@untitled-ui/icons-react/build/esm/Mail01';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import CardHeader from '@mui/material/CardHeader';
@@ -15,6 +10,11 @@ import ListItemText from '@mui/material/ListItemText';
 import Stack from '@mui/material/Stack';
 import SvgIcon from '@mui/material/SvgIcon';
 import Typography from '@mui/material/Typography';
+import BookOpen01Icon from '@untitled-ui/icons-react/build/esm/BookOpen01';
+import Briefcase01Icon from '@untitled-ui/icons-react/build/esm/Briefcase01';
+import Home02Icon from '@untitled-ui/icons-react/build/esm/Home02';
+import Mail01Icon from '@untitled-ui/icons-react/build/esm/Mail01';
+import PropTypes from 'prop-types';
 
 export const SocialAbout = (props) => {
   const {

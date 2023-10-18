@@ -1,6 +1,6 @@
-import { useContext } from 'react';
-import PropTypes from 'prop-types';
 import Popover from '@mui/material/Popover';
+import PropTypes from 'prop-types';
+import { useContext } from 'react';
 
 import { DropdownContext } from './dropdown-context';
 

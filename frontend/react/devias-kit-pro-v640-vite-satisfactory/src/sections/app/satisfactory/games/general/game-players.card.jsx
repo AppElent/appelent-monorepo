@@ -1,4 +1,5 @@
-import PropTypes from 'prop-types';
+import DeleteIcon from '@mui/icons-material/Delete';
+import PersonIcon from '@mui/icons-material/Person';
 import {
   Avatar,
   Button,
@@ -10,11 +11,10 @@ import {
   TextField,
   Typography,
 } from '@mui/material';
-import PersonIcon from '@mui/icons-material/Person';
-import DeleteIcon from '@mui/icons-material/Delete';
 import { useTranslate } from '@refinedev/core';
 import { FieldArray } from 'formik';
 import { nanoid } from 'nanoid';
+import PropTypes from 'prop-types';
 import { CardDefault } from 'src/components/app/card-default';
 import { tokens } from 'src/locales/tokens';
 

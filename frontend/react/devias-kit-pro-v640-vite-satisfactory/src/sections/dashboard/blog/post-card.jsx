@@ -1,5 +1,3 @@
-import PropTypes from 'prop-types';
-import { format } from 'date-fns';
 import Avatar from '@mui/material/Avatar';
 import Box from '@mui/material/Box';
 import Card from '@mui/material/Card';
@@ -9,7 +7,8 @@ import Chip from '@mui/material/Chip';
 import Link from '@mui/material/Link';
 import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
-
+import { format } from 'date-fns';
+import PropTypes from 'prop-types';
 import { RouterLink } from 'src/components/router-link';
 import { paths } from 'src/paths';
 import { getInitials } from 'src/utils/get-initials';

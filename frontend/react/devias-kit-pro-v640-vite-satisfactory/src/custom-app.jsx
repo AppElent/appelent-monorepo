@@ -1,23 +1,21 @@
+import { getAuth } from 'firebase/auth';
+import { collection, where } from 'firebase/firestore';
+import { ConfirmProvider } from 'material-ui-confirm';
 import PropTypes from 'prop-types';
+import { useEffect } from 'react';
+import { useHttpsRedirect } from 'src/custom/hooks/use-https-redirect';
+import { logger, setLogger } from 'src/custom/libs/logging';
+import Refine from 'src/custom/libs/refine';
 import { QueryParamProvider } from 'use-query-params';
 import { ReactRouter6Adapter } from 'use-query-params/adapters/react-router-6';
 
-import { logger, setLogger } from 'src/custom/libs/logging';
-import Refine from 'src/custom/libs/refine';
-import { useHttpsRedirect } from 'src/custom/hooks/use-https-redirect';
+import ProductListDialog from './components/app/satisfactory/product-list-dialog';
+import RecipeList from './components/app/satisfactory/recipe-list';
 import useLocalStorage from './custom/hooks/use-local-storage';
 import { DataFramework, useData } from './custom/libs/data-framework';
-import { collection, where } from 'firebase/firestore';
-import { db } from './libs/firebase';
-import { getAuth } from 'firebase/auth';
-import { useRouter } from './hooks/use-router';
-import { useEffect, useState } from 'react';
 import { ActionType } from './custom/libs/data-framework/framework/ActionType';
-import { ConfirmProvider } from 'material-ui-confirm';
-import RecipeList from './components/app/satisfactory/recipe-list';
-import ProductListDialog from './components/app/satisfactory/product-list-dialog';
-import { GlobalContext } from './custom/libs/GlobalContext';
-import useModal from './custom/hooks/use-modal';
+import { useRouter } from './hooks/use-router';
+import { db } from './libs/firebase';
 
 const CustomApp = ({ children }) => {
   // Redirect to HTTPS if condition is TRUE

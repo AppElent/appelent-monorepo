@@ -1,6 +1,5 @@
-import { useEffect, useState } from 'react';
 import nProgress from 'nprogress';
-
+import { useEffect, useState } from 'react';
 import { useMounted } from 'src/hooks/use-mounted';
 import { usePathname } from 'src/hooks/use-pathname';
 

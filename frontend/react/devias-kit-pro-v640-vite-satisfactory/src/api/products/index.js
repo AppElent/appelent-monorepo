@@ -1,5 +1,6 @@
 import { applyPagination } from 'src/utils/apply-pagination';
 import { deepCopy } from 'src/utils/deep-copy';
+
 import { products } from './data';
 
 class ProductsApi {

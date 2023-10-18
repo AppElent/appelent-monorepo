@@ -1,9 +1,3 @@
-import { useCallback } from 'react';
-import PropTypes from 'prop-types';
-import { format } from 'date-fns';
-import Globe01Icon from '@untitled-ui/icons-react/build/esm/Globe03';
-import Star01Icon from '@untitled-ui/icons-react/build/esm/Star01';
-import DotsVerticalIcon from '@untitled-ui/icons-react/build/esm/DotsVertical';
 import Avatar from '@mui/material/Avatar';
 import AvatarGroup from '@mui/material/AvatarGroup';
 import Box from '@mui/material/Box';
@@ -14,7 +8,12 @@ import TableCell, { tableCellClasses } from '@mui/material/TableCell';
 import TableRow from '@mui/material/TableRow';
 import Tooltip from '@mui/material/Tooltip';
 import Typography from '@mui/material/Typography';
-
+import DotsVerticalIcon from '@untitled-ui/icons-react/build/esm/DotsVertical';
+import Globe01Icon from '@untitled-ui/icons-react/build/esm/Globe03';
+import Star01Icon from '@untitled-ui/icons-react/build/esm/Star01';
+import { format } from 'date-fns';
+import PropTypes from 'prop-types';
+import { useCallback } from 'react';
 import { usePopover } from 'src/hooks/use-popover';
 import { bytesToSize } from 'src/utils/bytes-to-size';
 

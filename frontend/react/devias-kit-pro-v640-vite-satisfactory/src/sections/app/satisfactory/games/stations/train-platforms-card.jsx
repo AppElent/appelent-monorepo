@@ -1,13 +1,3 @@
-import PropTypes from 'prop-types';
-import Box from '@mui/material/Box';
-import Card from '@mui/material/Card';
-import CardHeader from '@mui/material/CardHeader';
-import Table from '@mui/material/Table';
-import TableBody from '@mui/material/TableBody';
-import TableCell from '@mui/material/TableCell';
-import TableHead from '@mui/material/TableHead';
-import TableRow from '@mui/material/TableRow';
-
 import {
   Avatar,
   Button,
@@ -17,11 +7,20 @@ import {
   TableContainer,
   TextField,
 } from '@mui/material';
+import Box from '@mui/material/Box';
+import Card from '@mui/material/Card';
+import CardHeader from '@mui/material/CardHeader';
+import Table from '@mui/material/Table';
+import TableBody from '@mui/material/TableBody';
+import TableCell from '@mui/material/TableCell';
+import TableHead from '@mui/material/TableHead';
+import TableRow from '@mui/material/TableRow';
 import { GridDeleteIcon } from '@mui/x-data-grid';
-import { useMemo } from 'react';
-import { getSatisfactoryData } from 'src/custom/libs/satisfactory';
 import { useConfirm } from 'material-ui-confirm';
 import { nanoid } from 'nanoid';
+import PropTypes from 'prop-types';
+import { useMemo } from 'react';
+import { getSatisfactoryData } from 'src/custom/libs/satisfactory';
 import { STATION_IMAGES } from 'src/custom/libs/satisfactory/static';
 
 const PLATFORM_TEMPLATE = {

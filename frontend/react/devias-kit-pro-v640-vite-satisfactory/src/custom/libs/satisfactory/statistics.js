@@ -1,4 +1,5 @@
 import { nanoid } from 'nanoid';
+
 import { getSatisfactoryData, getSatisfactoryDataArray } from '.';
 
 // inputobject: [{recipe: 'class', amount: 2}]

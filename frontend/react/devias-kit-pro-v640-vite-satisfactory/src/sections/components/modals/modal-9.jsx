@@ -1,4 +1,3 @@
-import CheckIcon from '@untitled-ui/icons-react/build/esm/Check';
 import Avatar from '@mui/material/Avatar';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
@@ -6,6 +5,7 @@ import Container from '@mui/material/Container';
 import Paper from '@mui/material/Paper';
 import SvgIcon from '@mui/material/SvgIcon';
 import Typography from '@mui/material/Typography';
+import CheckIcon from '@untitled-ui/icons-react/build/esm/Check';
 
 export const Modal9 = () => (
   <Box

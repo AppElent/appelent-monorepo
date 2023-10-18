@@ -1,11 +1,3 @@
-import { useCallback, useEffect, useState } from 'react';
-import PropTypes from 'prop-types';
-import DotsHorizontalIcon from '@untitled-ui/icons-react/build/esm/DotsHorizontal';
-import ChevronLeftIcon from '@untitled-ui/icons-react/build/esm/ChevronLeft';
-import ChevronRightIcon from '@untitled-ui/icons-react/build/esm/ChevronRight';
-import Menu01Icon from '@untitled-ui/icons-react/build/esm/Menu01';
-import RefreshCcw02Icon from '@untitled-ui/icons-react/build/esm/RefreshCcw02';
-import SearchMdIcon from '@untitled-ui/icons-react/build/esm/SearchMd';
 import Box from '@mui/material/Box';
 import Checkbox from '@mui/material/Checkbox';
 import Divider from '@mui/material/Divider';
@@ -16,7 +8,14 @@ import Stack from '@mui/material/Stack';
 import SvgIcon from '@mui/material/SvgIcon';
 import Tooltip from '@mui/material/Tooltip';
 import Typography from '@mui/material/Typography';
-
+import ChevronLeftIcon from '@untitled-ui/icons-react/build/esm/ChevronLeft';
+import ChevronRightIcon from '@untitled-ui/icons-react/build/esm/ChevronRight';
+import DotsHorizontalIcon from '@untitled-ui/icons-react/build/esm/DotsHorizontal';
+import Menu01Icon from '@untitled-ui/icons-react/build/esm/Menu01';
+import RefreshCcw02Icon from '@untitled-ui/icons-react/build/esm/RefreshCcw02';
+import SearchMdIcon from '@untitled-ui/icons-react/build/esm/SearchMd';
+import PropTypes from 'prop-types';
+import { useCallback, useEffect, useState } from 'react';
 import { paths } from 'src/paths';
 import { useDispatch, useSelector } from 'src/store';
 import { thunks } from 'src/thunks/mail';

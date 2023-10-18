@@ -1,5 +1,3 @@
-import { useCallback, useEffect, useReducer } from 'react';
-import PropTypes from 'prop-types';
 import {
   createUserWithEmailAndPassword,
   getAuth,
@@ -9,9 +7,11 @@ import {
   signInWithPopup,
   signOut,
 } from 'firebase/auth';
-
+import PropTypes from 'prop-types';
+import { useCallback, useEffect, useReducer } from 'react';
 import { firebaseApp } from 'src/libs/firebase';
 import { Issuer } from 'src/utils/auth';
+
 import { AuthContext, initialState } from './auth-context';
 
 const auth = getAuth(firebaseApp);

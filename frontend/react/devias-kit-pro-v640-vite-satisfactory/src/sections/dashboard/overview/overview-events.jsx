@@ -1,7 +1,3 @@
-import PropTypes from 'prop-types';
-import { format } from 'date-fns';
-import ArrowRightIcon from '@untitled-ui/icons-react/build/esm/ArrowRight';
-import CalendarIcon from '@untitled-ui/icons-react/build/esm/Calendar';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Card from '@mui/material/Card';
@@ -17,6 +13,10 @@ import ListItemSecondaryAction from '@mui/material/ListItemSecondaryAction';
 import ListItemText from '@mui/material/ListItemText';
 import SvgIcon from '@mui/material/SvgIcon';
 import Typography from '@mui/material/Typography';
+import ArrowRightIcon from '@untitled-ui/icons-react/build/esm/ArrowRight';
+import CalendarIcon from '@untitled-ui/icons-react/build/esm/Calendar';
+import { format } from 'date-fns';
+import PropTypes from 'prop-types';
 
 export const OverviewEvents = (props) => {
   const { events } = props;

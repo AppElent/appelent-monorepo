@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { useQueryParam } from 'use-query-params';
 
 const useTabs = ({ initial = '', queryParamName, onTabChange }) => {

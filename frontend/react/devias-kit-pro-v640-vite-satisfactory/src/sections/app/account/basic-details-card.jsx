@@ -6,18 +6,14 @@ import {
   SvgIcon,
   TextField,
   Typography,
-  MenuItem,
-  Switch,
-  FormControlLabel,
 } from '@mui/material';
 import { alpha } from '@mui/material/styles';
 import Camera01Icon from '@untitled-ui/icons-react/build/esm/Camera01';
 import User01Icon from '@untitled-ui/icons-react/build/esm/User01';
 import { useFormik } from 'formik';
-
 import { CardDefault } from 'src/components/app/card-default';
-import { useMounted } from 'src/hooks/use-mounted';
 import { generateName } from 'src/custom/libs/random-name-generator';
+import { useMounted } from 'src/hooks/use-mounted';
 
 const BasicDetailsCard = ({ user, updateProfile, profilePublic, setProfilePublic }) => {
   const avatar = user.avatar || '';

@@ -1,19 +1,20 @@
-import React, { useEffect } from 'react';
-import PropTypes from 'prop-types';
 import { Box, Button, Stack } from '@mui/material';
-import { useQueryParam } from 'use-query-params';
-import { generateName } from 'src/custom/libs/random-name-generator';
-import { tokens } from 'src/locales/tokens';
-import { useSelected } from 'src/custom/hooks/use-selected';
-import TrainPlatformsCard from './stations/train-platforms-card';
-import { nanoid } from 'nanoid';
-import useModal from 'src/custom/hooks/use-modal';
-import PlatformProductSelectorDialog from 'src/sections/app/satisfactory/games/stations/platform-product-selector-dialog';
-import { useConfirm } from 'material-ui-confirm';
-import StationSelect from './stations/station-select';
-import StationInformationCard from './stations/station-information-card';
-import { removeFormikArrayItem, setFormikArrayItem } from 'src/custom/utils/formik-crud-functions';
 import { useTranslate } from '@refinedev/core';
+import { useConfirm } from 'material-ui-confirm';
+import { nanoid } from 'nanoid';
+import PropTypes from 'prop-types';
+import React, { useEffect } from 'react';
+import useModal from 'src/custom/hooks/use-modal';
+import { useSelected } from 'src/custom/hooks/use-selected';
+import { generateName } from 'src/custom/libs/random-name-generator';
+import { removeFormikArrayItem, setFormikArrayItem } from 'src/custom/utils/formik-crud-functions';
+import { tokens } from 'src/locales/tokens';
+import PlatformProductSelectorDialog from 'src/sections/app/satisfactory/games/stations/platform-product-selector-dialog';
+import { useQueryParam } from 'use-query-params';
+
+import StationInformationCard from './stations/station-information-card';
+import StationSelect from './stations/station-select';
+import TrainPlatformsCard from './stations/train-platforms-card';
 
 const TRANSPORT_TEMPLATE = {
   description: '',

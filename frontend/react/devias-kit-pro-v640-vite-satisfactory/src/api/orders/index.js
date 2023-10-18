@@ -1,7 +1,8 @@
-import { order, orders } from './data';
-import { deepCopy } from 'src/utils/deep-copy';
 import { applyPagination } from 'src/utils/apply-pagination';
 import { applySort } from 'src/utils/apply-sort';
+import { deepCopy } from 'src/utils/deep-copy';
+
+import { order, orders } from './data';
 
 class OrdersApi {
   getOrders(request = {}) {

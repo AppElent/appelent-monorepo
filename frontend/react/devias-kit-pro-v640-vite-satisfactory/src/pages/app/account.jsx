@@ -1,18 +1,18 @@
-import { useCallback, useState } from 'react';
 import { Box, Container, Divider, Stack, Tab, Tabs, Typography } from '@mui/material';
-import { usePageView } from '../../hooks/use-page-view';
+import { useUpdatePassword } from '@refinedev/core';
+import { EmailAuthProvider, getAuth, reauthenticateWithCredential } from 'firebase/auth';
+import { useCallback, useState } from 'react';
+import { toast } from 'react-hot-toast';
+import { Seo } from 'src/components/seo';
+import useLogger from 'src/custom/hooks/use-logger';
+import { useData } from 'src/custom/libs/data-framework';
+import { useAuth } from 'src/hooks/use-auth';
+import { useSettings } from 'src/hooks/use-settings';
 import { Layout as DashboardLayout } from 'src/layouts/dashboard';
 import TabGeneral from 'src/sections/app/account/tab-general';
 import TabSecurity from 'src/sections/app/account/tab-security';
-import { useAuth } from 'src/hooks/use-auth';
-import { useData } from 'src/custom/libs/data-framework';
-import { useUpdatePassword } from '@refinedev/core';
-import { toast } from 'react-hot-toast';
 
-import { EmailAuthProvider, getAuth, reauthenticateWithCredential } from 'firebase/auth';
-import { useSettings } from 'src/hooks/use-settings';
-import { Seo } from 'src/components/seo';
-import useLogger from 'src/custom/hooks/use-logger';
+import { usePageView } from '../../hooks/use-page-view';
 
 const tabs = [
   { label: 'General', value: 'general' },

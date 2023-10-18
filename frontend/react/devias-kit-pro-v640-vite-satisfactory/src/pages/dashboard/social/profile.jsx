@@ -1,11 +1,7 @@
-import { useCallback, useEffect, useState } from 'react';
-import MessageChatSquareIcon from '@untitled-ui/icons-react/build/esm/MessageChatSquare';
-import DotsHorizontalIcon from '@untitled-ui/icons-react/build/esm/DotsHorizontal';
-import Image01Icon from '@untitled-ui/icons-react/build/esm/Image01';
-import UserPlus02Icon from '@untitled-ui/icons-react/build/esm/UserPlus02';
 import Avatar from '@mui/material/Avatar';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
+import { blueGrey } from '@mui/material/colors';
 import Container from '@mui/material/Container';
 import Divider from '@mui/material/Divider';
 import IconButton from '@mui/material/IconButton';
@@ -15,8 +11,11 @@ import Tab from '@mui/material/Tab';
 import Tabs from '@mui/material/Tabs';
 import Tooltip from '@mui/material/Tooltip';
 import Typography from '@mui/material/Typography';
-import { blueGrey } from '@mui/material/colors';
-
+import DotsHorizontalIcon from '@untitled-ui/icons-react/build/esm/DotsHorizontal';
+import Image01Icon from '@untitled-ui/icons-react/build/esm/Image01';
+import MessageChatSquareIcon from '@untitled-ui/icons-react/build/esm/MessageChatSquare';
+import UserPlus02Icon from '@untitled-ui/icons-react/build/esm/UserPlus02';
+import { useCallback, useEffect, useState } from 'react';
 import { socialApi } from 'src/api/social';
 import { RouterLink } from 'src/components/router-link';
 import { Seo } from 'src/components/seo';

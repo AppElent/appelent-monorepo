@@ -1,5 +1,3 @@
-import { useMemo } from 'react';
-import SearchMdIcon from '@untitled-ui/icons-react/build/esm/SearchMd';
 import Box from '@mui/material/Box';
 import Checkbox from '@mui/material/Checkbox';
 import Chip from '@mui/material/Chip';
@@ -8,7 +6,8 @@ import FormControlLabel from '@mui/material/FormControlLabel';
 import Input from '@mui/material/Input';
 import Stack from '@mui/material/Stack';
 import SvgIcon from '@mui/material/SvgIcon';
-
+import SearchMdIcon from '@untitled-ui/icons-react/build/esm/SearchMd';
+import { useMemo } from 'react';
 import { MultiSelect } from 'src/components/multi-select';
 
 const categoryOptions = [

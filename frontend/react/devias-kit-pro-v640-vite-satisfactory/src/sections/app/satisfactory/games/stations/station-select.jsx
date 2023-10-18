@@ -1,4 +1,3 @@
-import PropTypes from 'prop-types';
 import {
   Autocomplete,
   Button,
@@ -6,6 +5,7 @@ import {
   TextField,
 } from '@mui/material';
 import { useTranslate } from '@refinedev/core';
+import PropTypes from 'prop-types';
 import { tokens } from 'src/locales/tokens';
 
 const StationSelect = ({ stations, setStation, selectedStation, createStation }) => {

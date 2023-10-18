@@ -1,5 +1,3 @@
-import Lock01Icon from '@untitled-ui/icons-react/build/esm/Lock01';
-import User01Icon from '@untitled-ui/icons-react/build/esm/User01';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Card from '@mui/material/Card';
@@ -12,7 +10,8 @@ import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
 import TableRow from '@mui/material/TableRow';
 import Typography from '@mui/material/Typography';
-
+import Lock01Icon from '@untitled-ui/icons-react/build/esm/Lock01';
+import User01Icon from '@untitled-ui/icons-react/build/esm/User01';
 import { SeverityPill } from 'src/components/severity-pill';
 
 export const DetailList2 = () => (

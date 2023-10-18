@@ -1,14 +1,13 @@
-import PropTypes from 'prop-types';
 import { Stack } from '@mui/material';
-import { FormikProvider } from 'formik';
-
-import { satisfactoryVersions } from 'src/custom/libs/satisfactory';
 import { getAuth } from 'firebase/auth';
+import { FormikProvider } from 'formik';
+import PropTypes from 'prop-types';
 import useModal from 'src/custom/hooks/use-modal';
-import { GameEditJsonDialog } from './general/game-edit-json-dialog';
-import GameInformationCard from './general/game-information-card';
+
 import GameDeleteCard from './general/game-delete-card';
 import GameDownloadCard from './general/game-download-card';
+import { GameEditJsonDialog } from './general/game-edit-json-dialog';
+import GameInformationCard from './general/game-information-card';
 import GamePlayersCard from './general/game-players.card';
 
 const TabGeneral = (props) => {

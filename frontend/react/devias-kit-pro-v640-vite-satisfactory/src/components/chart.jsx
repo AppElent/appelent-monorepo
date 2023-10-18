@@ -1,6 +1,6 @@
-import ApexChart from 'react-apexcharts';
-import { alpha } from '@mui/system/colorManipulator';
 import { styled } from '@mui/material/styles';
+import { alpha } from '@mui/system/colorManipulator';
+import ApexChart from 'react-apexcharts';
 
 export const Chart = styled(ApexChart)(({ theme }) => ({
   '& .apexcharts-xaxistooltip': {

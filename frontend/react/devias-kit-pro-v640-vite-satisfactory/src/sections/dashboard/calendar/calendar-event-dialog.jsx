@@ -1,10 +1,3 @@
-import { useCallback, useMemo } from 'react';
-import PropTypes from 'prop-types';
-import toast from 'react-hot-toast';
-import { addMinutes } from 'date-fns';
-import * as Yup from 'yup';
-import { useFormik } from 'formik';
-import Trash02Icon from '@untitled-ui/icons-react/build/esm/Trash02';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Dialog from '@mui/material/Dialog';
@@ -18,9 +11,15 @@ import Switch from '@mui/material/Switch';
 import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
 import { DateTimePicker } from '@mui/x-date-pickers/DateTimePicker';
-
+import Trash02Icon from '@untitled-ui/icons-react/build/esm/Trash02';
+import { addMinutes } from 'date-fns';
+import { useFormik } from 'formik';
+import PropTypes from 'prop-types';
+import { useCallback, useMemo } from 'react';
+import toast from 'react-hot-toast';
 import { useDispatch } from 'src/store';
 import { thunks } from 'src/thunks/calendar';
+import * as Yup from 'yup';
 
 const useInitialValues = (event, range) => {
   return useMemo(() => {

@@ -1,18 +1,17 @@
-import { useCallback, useEffect, useState } from 'react';
-import ArrowLeftIcon from '@untitled-ui/icons-react/build/esm/ArrowLeft';
-import ArrowRightIcon from '@untitled-ui/icons-react/build/esm/ArrowRight';
 import Box from '@mui/material/Box';
 import Breadcrumbs from '@mui/material/Breadcrumbs';
 import Button from '@mui/material/Button';
 import Card from '@mui/material/Card';
 import Container from '@mui/material/Container';
 import Divider from '@mui/material/Divider';
-import Grid from '@mui/material/Unstable_Grid2';
 import Link from '@mui/material/Link';
 import Stack from '@mui/material/Stack';
 import SvgIcon from '@mui/material/SvgIcon';
 import Typography from '@mui/material/Typography';
-
+import Grid from '@mui/material/Unstable_Grid2';
+import ArrowLeftIcon from '@untitled-ui/icons-react/build/esm/ArrowLeft';
+import ArrowRightIcon from '@untitled-ui/icons-react/build/esm/ArrowRight';
+import { useCallback, useEffect, useState } from 'react';
 import { blogApi } from 'src/api/blog';
 import { BreadcrumbsSeparator } from 'src/components/breadcrumbs-separator';
 import { RouterLink } from 'src/components/router-link';
@@ -20,8 +19,8 @@ import { Seo } from 'src/components/seo';
 import { useMounted } from 'src/hooks/use-mounted';
 import { usePageView } from 'src/hooks/use-page-view';
 import { paths } from 'src/paths';
-import { PostNewsletter } from 'src/sections/dashboard/blog/post-newsletter';
 import { PostCard } from 'src/sections/dashboard/blog/post-card';
+import { PostNewsletter } from 'src/sections/dashboard/blog/post-newsletter';
 
 const usePosts = () => {
   const isMounted = useMounted();

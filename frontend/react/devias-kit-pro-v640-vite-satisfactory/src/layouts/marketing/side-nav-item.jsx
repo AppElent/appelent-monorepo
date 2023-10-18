@@ -1,12 +1,11 @@
-import { useCallback, useState } from 'react';
-import PropTypes from 'prop-types';
-import ChevronDownIcon from '@untitled-ui/icons-react/build/esm/ChevronDown';
-import ChevronRightIcon from '@untitled-ui/icons-react/build/esm/ChevronRight';
 import Box from '@mui/material/Box';
 import ButtonBase from '@mui/material/ButtonBase';
 import Collapse from '@mui/material/Collapse';
 import SvgIcon from '@mui/material/SvgIcon';
-
+import ChevronDownIcon from '@untitled-ui/icons-react/build/esm/ChevronDown';
+import ChevronRightIcon from '@untitled-ui/icons-react/build/esm/ChevronRight';
+import PropTypes from 'prop-types';
+import { useCallback, useState } from 'react';
 import { RouterLink } from 'src/components/router-link';
 
 export const SideNavItem = (props) => {

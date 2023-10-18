@@ -12,7 +12,8 @@
   "plugins": [
     "react-refresh",
     "unused-imports",
-    "jsdoc"
+    "jsdoc",
+    "simple-import-sort"
   ],
   "overrides": [
     {
@@ -71,6 +72,23 @@
     //"react-refresh/only-export-components": "warn",
     "react/prop-types": "warn",
     "unused-imports/no-unused-imports": "error",
-    "unused-imports/no-unused-vars": "warn"
+    "unused-imports/no-unused-vars": "warn",
+    "simple-import-sort/imports": "error",
+    "simple-import-sort/exports": "error"
+    // "sort-imports": [
+    //   "error",
+    //   {
+    //     "ignoreCase": false,
+    //     "ignoreDeclarationSort": false,
+    //     "ignoreMemberSort": false,
+    //     "memberSyntaxSortOrder": [
+    //       "none",
+    //       "all",
+    //       "multiple",
+    //       "single"
+    //     ],
+    //     "allowSeparatedGroups": false
+    //   }
+    // ]
   }
 }

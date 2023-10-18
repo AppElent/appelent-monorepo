@@ -1,9 +1,8 @@
 import Box from '@mui/material/Box';
 import Card from '@mui/material/Card';
-import Grid from '@mui/material/Unstable_Grid2';
 import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
-
+import Grid from '@mui/material/Unstable_Grid2';
 import { SeverityPill } from 'src/components/severity-pill';
 
 export const QuickStats3 = () => (

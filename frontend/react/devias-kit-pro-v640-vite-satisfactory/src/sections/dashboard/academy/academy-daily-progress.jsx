@@ -1,11 +1,10 @@
-import PropTypes from 'prop-types';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
-import Typography from '@mui/material/Typography';
 import { useTheme } from '@mui/material/styles';
-
+import Typography from '@mui/material/Typography';
+import PropTypes from 'prop-types';
 import { Chart } from 'src/components/chart';
 
 const useChartOptions = (timeLeft) => {

@@ -1,7 +1,6 @@
-import { Draggable, Droppable } from 'react-beautiful-dnd';
-import PropTypes from 'prop-types';
 import Box from '@mui/material/Box';
-
+import PropTypes from 'prop-types';
+import { Draggable, Droppable } from 'react-beautiful-dnd';
 import { useSelector } from 'src/store';
 
 import { TaskAdd } from '../task-add';

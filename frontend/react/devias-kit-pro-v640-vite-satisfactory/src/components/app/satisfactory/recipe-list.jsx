@@ -27,15 +27,16 @@ import {
   useMediaQuery,
   useTheme,
 } from '@mui/material';
-import { useItems } from 'src/custom/hooks/use-items';
-import { getSatisfactoryData, getSatisfactoryDataArray } from 'src/custom/libs/satisfactory';
-import { useQueryParam } from 'use-query-params';
+import ArrowRightIcon from '@untitled-ui/icons-react/build/esm/ArrowRight';
 import SearchMdIcon from '@untitled-ui/icons-react/build/esm/SearchMd';
 import { useMemo, useState } from 'react';
 import { Scrollbar } from 'src/components/scrollbar';
-import ArrowRightIcon from '@untitled-ui/icons-react/build/esm/ArrowRight';
-import useModal from 'src/custom/hooks/use-modal';
+import { useItems } from 'src/custom/hooks/use-items';
 import { useKey } from 'src/custom/hooks/use-key';
+import useModal from 'src/custom/hooks/use-modal';
+import { getSatisfactoryData, getSatisfactoryDataArray } from 'src/custom/libs/satisfactory';
+import { useQueryParam } from 'use-query-params';
+
 import RecipeItemDialog from './recipe-item-dialog';
 
 const RecipeList = () => {

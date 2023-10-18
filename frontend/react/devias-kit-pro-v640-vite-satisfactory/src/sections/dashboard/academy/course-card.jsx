@@ -1,6 +1,3 @@
-import PropTypes from 'prop-types';
-import ArrowRightIcon from '@untitled-ui/icons-react/build/esm/ArrowRight';
-import ClockIcon from '@untitled-ui/icons-react/build/esm/Clock';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Card from '@mui/material/Card';
@@ -11,7 +8,9 @@ import Link from '@mui/material/Link';
 import Stack from '@mui/material/Stack';
 import SvgIcon from '@mui/material/SvgIcon';
 import Typography from '@mui/material/Typography';
-
+import ArrowRightIcon from '@untitled-ui/icons-react/build/esm/ArrowRight';
+import ClockIcon from '@untitled-ui/icons-react/build/esm/Clock';
+import PropTypes from 'prop-types';
 import { RouterLink } from 'src/components/router-link';
 import { paths } from 'src/paths';
 

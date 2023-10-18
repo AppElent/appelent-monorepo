@@ -1,6 +1,6 @@
-import PropTypes from 'prop-types';
 import MenuItem from '@mui/material/MenuItem';
 import Popover from '@mui/material/Popover';
+import PropTypes from 'prop-types';
 
 export const TenantPopover = (props) => {
   const { anchorEl, onChange, onClose, open = false, tenants, ...other } = props;

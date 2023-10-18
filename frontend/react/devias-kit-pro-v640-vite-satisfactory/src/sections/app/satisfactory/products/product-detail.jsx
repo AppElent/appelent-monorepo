@@ -1,15 +1,12 @@
-import PropTypes from 'prop-types';
 import { Card, CardContent, CardHeader, Stack, Typography } from '@mui/material';
-import { SeverityPill } from 'src/components/severity-pill';
-import { PropertyListTemplate } from 'src/components/app/property-list-template';
-import { tokens } from 'src/locales/tokens';
-import {
-  getSatisfactoryData,
-  getSatisfactoryDataArray,
-  recipeChart,
-} from 'src/custom/libs/satisfactory';
-import Mermaid from 'src/custom/libs/mermaid';
 import { useTranslate } from '@refinedev/core';
+import PropTypes from 'prop-types';
+import { PropertyListTemplate } from 'src/components/app/property-list-template';
+import { SeverityPill } from 'src/components/severity-pill';
+import Mermaid from 'src/custom/libs/mermaid';
+import { getSatisfactoryData, getSatisfactoryDataArray } from 'src/custom/libs/satisfactory';
+import { recipeChart } from 'src/custom/libs/satisfactory/charts';
+import { tokens } from 'src/locales/tokens';
 
 export const SatisfactoryProductDetail = ({ product }) => {
   const translate = useTranslate();

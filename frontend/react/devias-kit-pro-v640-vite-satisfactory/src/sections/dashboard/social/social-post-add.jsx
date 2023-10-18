@@ -1,7 +1,3 @@
-import Attachment01Icon from '@untitled-ui/icons-react/build/esm/Attachment01';
-import FaceSmileIcon from '@untitled-ui/icons-react/build/esm/FaceSmile';
-import Image01Icon from '@untitled-ui/icons-react/build/esm/Image01';
-import Link01Icon from '@untitled-ui/icons-react/build/esm/Link01';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import Card from '@mui/material/Card';
@@ -11,7 +7,10 @@ import OutlinedInput from '@mui/material/OutlinedInput';
 import Stack from '@mui/material/Stack';
 import SvgIcon from '@mui/material/SvgIcon';
 import useMediaQuery from '@mui/material/useMediaQuery';
-
+import Attachment01Icon from '@untitled-ui/icons-react/build/esm/Attachment01';
+import FaceSmileIcon from '@untitled-ui/icons-react/build/esm/FaceSmile';
+import Image01Icon from '@untitled-ui/icons-react/build/esm/Image01';
+import Link01Icon from '@untitled-ui/icons-react/build/esm/Link01';
 import { useMockedUser } from 'src/hooks/use-mocked-user';
 import { getInitials } from 'src/utils/get-initials';
 

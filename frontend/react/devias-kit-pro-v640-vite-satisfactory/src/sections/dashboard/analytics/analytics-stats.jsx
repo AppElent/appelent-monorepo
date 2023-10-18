@@ -1,12 +1,11 @@
-import PropTypes from 'prop-types';
 import Box from '@mui/material/Box';
 import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
 import Divider from '@mui/material/Divider';
 import Stack from '@mui/material/Stack';
-import Typography from '@mui/material/Typography';
 import { useTheme } from '@mui/material/styles';
-
+import Typography from '@mui/material/Typography';
+import PropTypes from 'prop-types';
 import { Chart } from 'src/components/chart';
 
 const useChartOptions = () => {

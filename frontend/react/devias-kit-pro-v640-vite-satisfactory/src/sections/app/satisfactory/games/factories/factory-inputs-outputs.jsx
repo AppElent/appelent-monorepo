@@ -1,7 +1,3 @@
-import PropTypes from 'prop-types';
-import { useTranslate } from '@refinedev/core';
-import { CardDefault } from 'src/components/app/card-default';
-import { tokens } from 'src/locales/tokens';
 import {
   Grid,
   Table,
@@ -11,8 +7,13 @@ import {
   TableHead,
   TableRow,
 } from '@mui/material';
-import { getFactoryStatistics, getSatisfactoryData } from 'src/custom/libs/satisfactory';
+import { useTranslate } from '@refinedev/core';
+import PropTypes from 'prop-types';
 import { useMemo } from 'react';
+import { CardDefault } from 'src/components/app/card-default';
+import { getSatisfactoryData } from 'src/custom/libs/satisfactory';
+import { getFactoryStatistics } from 'src/custom/libs/satisfactory/statistics';
+import { tokens } from 'src/locales/tokens';
 
 const FactoryInputsOutputs = ({ factories, selectedFactoryIndex, version }) => {
   const translate = useTranslate();

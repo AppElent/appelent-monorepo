@@ -1,10 +1,9 @@
-import PropTypes from 'prop-types';
-import { format, subDays } from 'date-fns';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import CardHeader from '@mui/material/CardHeader';
 import { useTheme } from '@mui/material/styles';
-
+import { format, subDays } from 'date-fns';
+import PropTypes from 'prop-types';
 import { Chart } from 'src/components/chart';
 
 const now = new Date();

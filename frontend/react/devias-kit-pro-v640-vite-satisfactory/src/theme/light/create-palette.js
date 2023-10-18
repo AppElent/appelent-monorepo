@@ -1,5 +1,6 @@
-import { alpha } from '@mui/system/colorManipulator';
 import { common } from '@mui/material/colors';
+import { alpha } from '@mui/system/colorManipulator';
+
 import { error, info, neutral, success, warning } from '../colors';
 import { getPrimary } from '../utils';
 

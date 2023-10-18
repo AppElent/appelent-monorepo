@@ -1,5 +1,3 @@
-import XIcon from '@untitled-ui/icons-react/build/esm/X';
-import SearchMdIcon from '@untitled-ui/icons-react/build/esm/SearchMd';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Container from '@mui/material/Container';
@@ -8,6 +6,8 @@ import InputAdornment from '@mui/material/InputAdornment';
 import OutlinedInput from '@mui/material/OutlinedInput';
 import Paper from '@mui/material/Paper';
 import SvgIcon from '@mui/material/SvgIcon';
+import SearchMdIcon from '@untitled-ui/icons-react/build/esm/SearchMd';
+import XIcon from '@untitled-ui/icons-react/build/esm/X';
 
 export const Modal3 = () => (
   <Box

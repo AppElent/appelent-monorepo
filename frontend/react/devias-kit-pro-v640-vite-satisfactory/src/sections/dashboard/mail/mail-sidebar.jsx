@@ -1,7 +1,3 @@
-import { Fragment, useCallback } from 'react';
-import PropTypes from 'prop-types';
-import PlusIcon from '@untitled-ui/icons-react/build/esm/Plus';
-import XIcon from '@untitled-ui/icons-react/build/esm/X';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Drawer from '@mui/material/Drawer';
@@ -12,7 +8,10 @@ import Stack from '@mui/material/Stack';
 import SvgIcon from '@mui/material/SvgIcon';
 import Typography from '@mui/material/Typography';
 import useMediaQuery from '@mui/material/useMediaQuery';
-
+import PlusIcon from '@untitled-ui/icons-react/build/esm/Plus';
+import XIcon from '@untitled-ui/icons-react/build/esm/X';
+import PropTypes from 'prop-types';
+import { Fragment, useCallback } from 'react';
 import { useRouter } from 'src/hooks/use-router';
 import { paths } from 'src/paths';
 

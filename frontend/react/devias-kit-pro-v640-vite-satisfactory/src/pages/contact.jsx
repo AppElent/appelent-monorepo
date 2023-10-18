@@ -1,5 +1,3 @@
-import ArrowLeftIcon from '@untitled-ui/icons-react/build/esm/ArrowLeft';
-import Mail01Icon from '@untitled-ui/icons-react/build/esm/Mail01';
 import Avatar from '@mui/material/Avatar';
 import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
@@ -7,7 +5,8 @@ import Link from '@mui/material/Link';
 import Stack from '@mui/material/Stack';
 import SvgIcon from '@mui/material/SvgIcon';
 import Typography from '@mui/material/Typography';
-
+import ArrowLeftIcon from '@untitled-ui/icons-react/build/esm/ArrowLeft';
+import Mail01Icon from '@untitled-ui/icons-react/build/esm/Mail01';
 import { LogoAccenture } from 'src/components/logos/logo-accenture';
 import { LogoAtt } from 'src/components/logos/logo-att';
 import { LogoAws } from 'src/components/logos/logo-aws';

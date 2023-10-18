@@ -1,5 +1,5 @@
-import { Helmet } from 'react-helmet-async';
 import PropTypes from 'prop-types';
+import { Helmet } from 'react-helmet-async';
 import { siteSettings } from 'src/config';
 
 export const Seo = (props) => {

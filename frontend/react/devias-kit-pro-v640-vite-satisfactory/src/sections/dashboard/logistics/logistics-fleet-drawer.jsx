@@ -1,10 +1,10 @@
-import PropTypes from 'prop-types';
-import XIcon from '@untitled-ui/icons-react/build/esm/X';
 import Drawer from '@mui/material/Drawer';
 import IconButton from '@mui/material/IconButton';
 import Stack from '@mui/material/Stack';
 import SvgIcon from '@mui/material/SvgIcon';
 import Typography from '@mui/material/Typography';
+import XIcon from '@untitled-ui/icons-react/build/esm/X';
+import PropTypes from 'prop-types';
 
 export const LogisticsFleetDrawer = (props) => {
   const { children, container, open, onClose } = props;

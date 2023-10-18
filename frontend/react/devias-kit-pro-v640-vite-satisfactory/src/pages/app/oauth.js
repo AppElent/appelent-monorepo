@@ -1,9 +1,9 @@
 import { Box, Stack, Typography } from '@mui/material';
-import { usePageView } from 'src/hooks/use-page-view';
-import { Layout as DashboardLayout } from 'src/layouts/dashboard';
 //import { useSearch, useItems } from "components/app/list/utils";
 import { useOauthClient } from 'src/custom/hooks/use-oauth-client';
 import { useData } from 'src/custom/libs/data-framework';
+import { usePageView } from 'src/hooks/use-page-view';
+import { Layout as DashboardLayout } from 'src/layouts/dashboard';
 
 const oauthConfigurations = {};
 

@@ -1,5 +1,3 @@
-import PropTypes from 'prop-types';
-import { useEffect, useMemo, useState } from 'react';
 import {
   Autocomplete,
   Button,
@@ -14,14 +12,16 @@ import {
   TextField,
   Typography,
 } from '@mui/material';
-import { usePageView } from 'src/hooks/use-page-view';
-//import { useSearch, useItems } from "components/app/list/utils";
-
-import { getRecipesByProduct, getSatisfactoryData } from 'src/custom/libs/satisfactory';
-import { NumberParam, useQueryParam, withDefault } from 'use-query-params';
-import { CardDefault } from 'src/components/app/card-default';
 import _ from 'lodash';
+import PropTypes from 'prop-types';
+import { useEffect, useMemo, useState } from 'react';
 import toast from 'react-hot-toast';
+import { CardDefault } from 'src/components/app/card-default';
+//import { useSearch, useItems } from "components/app/list/utils";
+import { getSatisfactoryData } from 'src/custom/libs/satisfactory';
+import { getRecipesByProduct } from 'src/custom/libs/satisfactory/statistics';
+import { usePageView } from 'src/hooks/use-page-view';
+import { NumberParam, useQueryParam, withDefault } from 'use-query-params';
 
 const tabsData = [
   { label: 'Recipe list by Product', value: 'recipe_list' },

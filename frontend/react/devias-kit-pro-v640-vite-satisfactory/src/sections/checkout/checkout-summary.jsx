@@ -1,5 +1,3 @@
-import PropTypes from 'prop-types';
-import numeral from 'numeral';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Card from '@mui/material/Card';
@@ -14,6 +12,8 @@ import MenuItem from '@mui/material/MenuItem';
 import OutlinedInput from '@mui/material/OutlinedInput';
 import Select from '@mui/material/Select';
 import Typography from '@mui/material/Typography';
+import numeral from 'numeral';
+import PropTypes from 'prop-types';
 
 const calculateAmounts = (products) => {
   const shippingTax = 12;

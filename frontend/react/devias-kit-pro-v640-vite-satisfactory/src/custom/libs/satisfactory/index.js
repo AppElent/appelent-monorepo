@@ -1,20 +1,21 @@
-import items_v700 from './data/v700/items.json';
-import buildables_v700 from './data/v700/buildables.json';
+import _ from 'lodash';
+
 import buildableRecipes_v700 from './data/v700/buildableRecipes.json';
+import buildables_v700 from './data/v700/buildables.json';
+import items_v700 from './data/v700/items.json';
 import productionRecipes_v700 from './data/v700/productionRecipes.json';
 import resources_v700 from './data/v700/resources.json';
 import schematics_v700 from './data/v700/schematics.json';
 import tierList_v700 from './data/v700/tierList.json';
-import items_v800 from './data/v800/items.json';
-import buildables_v800 from './data/v800/buildables.json';
 import buildableRecipes_v800 from './data/v800/buildableRecipes.json';
+import buildables_v800 from './data/v800/buildables.json';
+import items_v800 from './data/v800/items.json';
 import productionRecipes_v800 from './data/v800/productionRecipes.json';
 import resources_v800 from './data/v800/resources.json';
 import schematics_v800 from './data/v800/schematics.json';
-import _ from 'lodash';
 
-export { recipeChart } from './charts';
-export { getFactoryStatistics, getRecipesByProduct } from './statistics';
+// export { recipeChart } from './charts';
+// export { getFactoryStatistics, getRecipesByProduct } from './statistics';
 
 const satisfactory_data = {
   v600: {

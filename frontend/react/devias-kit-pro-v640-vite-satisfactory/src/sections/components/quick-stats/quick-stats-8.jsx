@@ -1,12 +1,11 @@
-import RefreshCcw02Icon from '@untitled-ui/icons-react/build/esm/RefreshCcw02';
 import Avatar from '@mui/material/Avatar';
 import Box from '@mui/material/Box';
 import Card from '@mui/material/Card';
 import Stack from '@mui/material/Stack';
+import { useTheme } from '@mui/material/styles';
 import SvgIcon from '@mui/material/SvgIcon';
 import Typography from '@mui/material/Typography';
-import { useTheme } from '@mui/material/styles';
-
+import RefreshCcw02Icon from '@untitled-ui/icons-react/build/esm/RefreshCcw02';
 import { Chart } from 'src/components/chart';
 
 const chartSeries = [

@@ -1,5 +1,3 @@
-import InfoCircleIcon from '@untitled-ui/icons-react/build/esm/InfoCircle';
-import Link01Icon from '@untitled-ui/icons-react/build/esm/Link01';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Card from '@mui/material/Card';
@@ -8,6 +6,8 @@ import CardContent from '@mui/material/CardContent';
 import Divider from '@mui/material/Divider';
 import SvgIcon from '@mui/material/SvgIcon';
 import Typography from '@mui/material/Typography';
+import InfoCircleIcon from '@untitled-ui/icons-react/build/esm/InfoCircle';
+import Link01Icon from '@untitled-ui/icons-react/build/esm/Link01';
 
 export const OverviewHelp = (props) => (
   <Card {...props}>

@@ -1,9 +1,9 @@
-import PropTypes from 'prop-types';
 import { MenuItem, Stack, TextField } from '@mui/material';
 import { useTranslate } from '@refinedev/core';
+import PropTypes from 'prop-types';
 import { CardDefault } from 'src/components/app/card-default';
-import { tokens } from 'src/locales/tokens';
 import { satisfactoryVersions } from 'src/custom/libs/satisfactory';
+import { tokens } from 'src/locales/tokens';
 
 const GameInformationCard = ({ errors, handleChange, game }) => {
   const translate = useTranslate();

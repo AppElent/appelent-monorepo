@@ -1,11 +1,10 @@
-import PropTypes from 'prop-types';
-import Settings04Icon from '@untitled-ui/icons-react/build/esm/Settings04';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Stack from '@mui/material/Stack';
 import SvgIcon from '@mui/material/SvgIcon';
 import Typography from '@mui/material/Typography';
-
+import Settings04Icon from '@untitled-ui/icons-react/build/esm/Settings04';
+import PropTypes from 'prop-types';
 import { useSettings } from 'src/hooks/use-settings';
 
 export const OverviewBanner = (props) => {

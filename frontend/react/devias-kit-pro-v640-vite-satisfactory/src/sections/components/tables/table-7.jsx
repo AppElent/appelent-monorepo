@@ -1,5 +1,3 @@
-import numeral from 'numeral';
-import InfoCircleIcon from '@untitled-ui/icons-react/build/esm/InfoCircle';
 import Box from '@mui/material/Box';
 import Card from '@mui/material/Card';
 import CardHeader from '@mui/material/CardHeader';
@@ -11,6 +9,8 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Tooltip from '@mui/material/Tooltip';
 import Typography from '@mui/material/Typography';
+import InfoCircleIcon from '@untitled-ui/icons-react/build/esm/InfoCircle';
+import numeral from 'numeral';
 
 const pages = [
   {

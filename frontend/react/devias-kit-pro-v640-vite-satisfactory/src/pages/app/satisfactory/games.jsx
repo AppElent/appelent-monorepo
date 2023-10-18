@@ -1,48 +1,48 @@
 import { Box, Button, Container, Divider, Grid, Tab, Tabs, Typography } from '@mui/material';
-import { usePageView } from 'src/hooks/use-page-view';
-import { useSettings } from 'src/hooks/use-settings';
-import React, { useMemo, useEffect, useCallback } from 'react';
+import { Stack } from '@mui/system';
+import { useTranslate } from '@refinedev/core';
+import { getAuth } from 'firebase/auth';
+import { useFormik } from 'formik';
+import _ from 'lodash';
+import { nanoid } from 'nanoid';
+import React, { useCallback, useEffect, useMemo } from 'react';
+import { toast } from 'react-hot-toast';
+import { Seo } from 'src/components/seo';
+import { useKey } from 'src/custom/hooks/use-key';
+import useQueryOrLocalStorage from 'src/custom/hooks/use-query-or-localstorage';
+import useTabs from 'src/custom/hooks/use-tabs';
+import { useConfirm } from 'src/custom/libs/confirmation';
+import { useData } from 'src/custom/libs/data-framework';
+import { logger } from 'src/custom/libs/logging';
+import { generateName } from 'src/custom/libs/random-name-generator';
 import {
-  SatisfactoryCurrentVersion,
+  getSatisfactoryData,
   //   createSatisfactoryGame,
   //   deleteSatisfactoryGame,
   //   saveSatisfactoryGame,
   getSatisfactoryDataArray,
-  getSatisfactoryData,
+  SatisfactoryCurrentVersion,
   satisfactoryVersions,
 } from 'src/custom/libs/satisfactory/index';
-import { Stack } from '@mui/system';
-import _ from 'lodash';
-import useTabs from 'src/custom/hooks/use-tabs';
-import { useData } from 'src/custom/libs/data-framework';
-import TabGeneral from 'src/sections/app/satisfactory/games/tab-general';
-import { getAuth } from 'firebase/auth';
-import { useFormik } from 'formik';
-import { useConfirm } from 'src/custom/libs/confirmation';
-import { toast } from 'react-hot-toast';
-import TabScribble from 'src/sections/app/satisfactory/games/tab-scribble';
-import TabFactories from 'src/sections/app/satisfactory/games/tab-factories';
-import TabTransport from 'src/sections/app/satisfactory/games/tab-transport';
-import { generateName } from 'src/custom/libs/random-name-generator';
-import { useKey } from 'src/custom/hooks/use-key';
-import { useTranslate } from '@refinedev/core';
-import { tokens } from 'src/locales/tokens';
-import { Seo } from 'src/components/seo';
-import useQueryOrLocalStorage from 'src/custom/hooks/use-query-or-localstorage';
-import { useMounted } from 'src/hooks/use-mounted';
-import TabOverview from 'src/sections/app/satisfactory/games/tab-overview';
-import TabVehicles from 'src/sections/app/satisfactory/games/tab-vehicles';
-import * as Yup from 'yup';
-import { nanoid } from 'nanoid';
-import GameSelect from 'src/sections/app/satisfactory/games/game-select';
-import TabPowerStations from 'src/sections/app/satisfactory/games/tab-power-stations';
 import {
   addFormikArrayItem,
   removeFormikArrayItem,
   setFormikArrayItem,
 } from 'src/custom/utils/formik-crud-functions';
-import { logger } from 'src/custom/libs/logging';
+import { useMounted } from 'src/hooks/use-mounted';
+import { usePageView } from 'src/hooks/use-page-view';
+import { useSettings } from 'src/hooks/use-settings';
+import { tokens } from 'src/locales/tokens';
+import GameSelect from 'src/sections/app/satisfactory/games/game-select';
+import TabFactories from 'src/sections/app/satisfactory/games/tab-factories';
+import TabGeneral from 'src/sections/app/satisfactory/games/tab-general';
+import TabOverview from 'src/sections/app/satisfactory/games/tab-overview';
+import TabPowerStations from 'src/sections/app/satisfactory/games/tab-power-stations';
+import TabScribble from 'src/sections/app/satisfactory/games/tab-scribble';
 import TabTodo from 'src/sections/app/satisfactory/games/tab-todo';
+import TabTransport from 'src/sections/app/satisfactory/games/tab-transport';
+import TabVehicles from 'src/sections/app/satisfactory/games/tab-vehicles';
+import * as Yup from 'yup';
 
 const Page = () => {
   const isMounted = useMounted();

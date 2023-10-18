@@ -1,8 +1,7 @@
-import PropTypes from 'prop-types';
 import Box from '@mui/material/Box';
 import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
-
+import PropTypes from 'prop-types';
 import { Logo } from 'src/components/logo';
 
 const options = [

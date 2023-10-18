@@ -1,7 +1,3 @@
-import { useCallback, useRef } from 'react';
-import PropTypes from 'prop-types';
-import SearchMdIcon from '@untitled-ui/icons-react/build/esm/SearchMd';
-import XIcon from '@untitled-ui/icons-react/build/esm/X';
 import Box from '@mui/material/Box';
 import Checkbox from '@mui/material/Checkbox';
 import Drawer from '@mui/material/Drawer';
@@ -17,7 +13,10 @@ import Switch from '@mui/material/Switch';
 import Typography from '@mui/material/Typography';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
-
+import SearchMdIcon from '@untitled-ui/icons-react/build/esm/SearchMd';
+import XIcon from '@untitled-ui/icons-react/build/esm/X';
+import PropTypes from 'prop-types';
+import { useCallback, useRef } from 'react';
 import { Scrollbar } from 'src/components/scrollbar';
 
 const customers = [

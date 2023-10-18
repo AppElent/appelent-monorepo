@@ -1,9 +1,3 @@
-import PropTypes from 'prop-types';
-import { format } from 'date-fns';
-import User01Icon from '@untitled-ui/icons-react/build/esm/User01';
-import Mail04Icon from '@untitled-ui/icons-react/build/esm/Mail04';
-import MessageChatSquareIcon from '@untitled-ui/icons-react/build/esm/MessageChatSquare';
-import XIcon from '@untitled-ui/icons-react/build/esm/X';
 import Avatar from '@mui/material/Avatar';
 import Box from '@mui/material/Box';
 import IconButton from '@mui/material/IconButton';
@@ -17,7 +11,12 @@ import Stack from '@mui/material/Stack';
 import SvgIcon from '@mui/material/SvgIcon';
 import Tooltip from '@mui/material/Tooltip';
 import Typography from '@mui/material/Typography';
-
+import Mail04Icon from '@untitled-ui/icons-react/build/esm/Mail04';
+import MessageChatSquareIcon from '@untitled-ui/icons-react/build/esm/MessageChatSquare';
+import User01Icon from '@untitled-ui/icons-react/build/esm/User01';
+import XIcon from '@untitled-ui/icons-react/build/esm/X';
+import { format } from 'date-fns';
+import PropTypes from 'prop-types';
 import { Scrollbar } from 'src/components/scrollbar';
 
 const renderContent = (notification) => {

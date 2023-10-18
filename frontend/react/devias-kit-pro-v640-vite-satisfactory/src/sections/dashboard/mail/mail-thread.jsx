@@ -1,9 +1,8 @@
-import { useEffect } from 'react';
-import PropTypes from 'prop-types';
 import Box from '@mui/material/Box';
 import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
-
+import PropTypes from 'prop-types';
+import { useEffect } from 'react';
 import { paths } from 'src/paths';
 import { useDispatch, useSelector } from 'src/store';
 import { thunks } from 'src/thunks/mail';

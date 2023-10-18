@@ -1,7 +1,7 @@
-import { useEffect } from 'react';
-import PropTypes from 'prop-types';
 import createCache from '@emotion/cache';
 import { CacheProvider } from '@emotion/react';
+import PropTypes from 'prop-types';
+import { useEffect } from 'react';
 import stylisRTLPlugin from 'stylis-plugin-rtl';
 
 const styleCache = () =>

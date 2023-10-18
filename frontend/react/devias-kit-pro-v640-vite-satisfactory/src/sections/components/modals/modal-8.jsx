@@ -1,4 +1,3 @@
-import AlertTriangleIcon from '@untitled-ui/icons-react/build/esm/AlertTriangle';
 import Avatar from '@mui/material/Avatar';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
@@ -7,6 +6,7 @@ import Paper from '@mui/material/Paper';
 import Stack from '@mui/material/Stack';
 import SvgIcon from '@mui/material/SvgIcon';
 import Typography from '@mui/material/Typography';
+import AlertTriangleIcon from '@untitled-ui/icons-react/build/esm/AlertTriangle';
 
 export const Modal8 = () => (
   <Box

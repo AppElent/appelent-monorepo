@@ -1,9 +1,9 @@
-import PropTypes from 'prop-types';
-import CytoscapeComponent from 'react-cytoscapejs';
-import { useEffect, useRef, useState } from 'react';
-import popper from 'cytoscape-popper';
-import DefaultCytoscape from 'cytoscape';
 import { Button, Container, Stack } from '@mui/material';
+import DefaultCytoscape from 'cytoscape';
+import popper from 'cytoscape-popper';
+import PropTypes from 'prop-types';
+import { useEffect, useRef, useState } from 'react';
+import CytoscapeComponent from 'react-cytoscapejs';
 
 DefaultCytoscape.use(popper);
 

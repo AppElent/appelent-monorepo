@@ -1,5 +1,3 @@
-import ArrowRightIcon from '@untitled-ui/icons-react/build/esm/ArrowRight';
-import InfoCircleIcon from '@untitled-ui/icons-react/build/esm/InfoCircle';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Card from '@mui/material/Card';
@@ -7,10 +5,11 @@ import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
 import CardHeader from '@mui/material/CardHeader';
 import Container from '@mui/material/Container';
+import { useTheme } from '@mui/material/styles';
 import SvgIcon from '@mui/material/SvgIcon';
 import Tooltip from '@mui/material/Tooltip';
-import { useTheme } from '@mui/material/styles';
-
+import ArrowRightIcon from '@untitled-ui/icons-react/build/esm/ArrowRight';
+import InfoCircleIcon from '@untitled-ui/icons-react/build/esm/InfoCircle';
 import { Chart } from 'src/components/chart';
 
 const labels = ['Linkedin', 'Facebook', 'Instagram', 'Twitter', 'Other'];

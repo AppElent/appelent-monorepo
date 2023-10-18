@@ -1,6 +1,7 @@
-import { useCallback, useEffect, useReducer } from 'react';
 import PropTypes from 'prop-types';
-import { NotificationContext, initialState } from './context';
+import { useReducer } from 'react';
+
+import { initialState,NotificationContext } from './context';
 
 var ActionType;
 (function (ActionType) {

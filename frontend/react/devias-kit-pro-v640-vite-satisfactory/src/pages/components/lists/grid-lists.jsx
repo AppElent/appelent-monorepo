@@ -1,17 +1,16 @@
 import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
 import Stack from '@mui/material/Stack';
-
 import { Seo } from 'src/components/seo';
 import { usePageView } from 'src/hooks/use-page-view';
 import { Layout as ComponentsLayout } from 'src/layouts/components';
-import { Previewer } from 'src/sections/components/previewer';
 import { GridList1 } from 'src/sections/components/grid-lists/grid-list-1';
 import { GridList2 } from 'src/sections/components/grid-lists/grid-list-2';
 import { GridList3 } from 'src/sections/components/grid-lists/grid-list-3';
 import { GridList4 } from 'src/sections/components/grid-lists/grid-list-4';
 import { GridList5 } from 'src/sections/components/grid-lists/grid-list-5';
 import { GridList6 } from 'src/sections/components/grid-lists/grid-list-6';
+import { Previewer } from 'src/sections/components/previewer';
 
 const components = [
   {

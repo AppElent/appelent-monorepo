@@ -1,11 +1,9 @@
 import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
 import Stack from '@mui/material/Stack';
-
 import { Seo } from 'src/components/seo';
 import { usePageView } from 'src/hooks/use-page-view';
 import { Layout as ComponentsLayout } from 'src/layouts/components';
-import { Previewer } from 'src/sections/components/previewer';
 import { Modal1 } from 'src/sections/components/modals/modal-1';
 import { Modal2 } from 'src/sections/components/modals/modal-2';
 import { Modal3 } from 'src/sections/components/modals/modal-3';
@@ -16,6 +14,7 @@ import { Modal7 } from 'src/sections/components/modals/modal-7';
 import { Modal8 } from 'src/sections/components/modals/modal-8';
 import { Modal9 } from 'src/sections/components/modals/modal-9';
 import { Modal10 } from 'src/sections/components/modals/modal-10';
+import { Previewer } from 'src/sections/components/previewer';
 
 const components = [
   {

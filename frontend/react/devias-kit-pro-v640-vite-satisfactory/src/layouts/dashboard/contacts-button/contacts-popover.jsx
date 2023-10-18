@@ -1,5 +1,3 @@
-import { formatDistanceStrict } from 'date-fns';
-import PropTypes from 'prop-types';
 import Avatar from '@mui/material/Avatar';
 import Box from '@mui/material/Box';
 import Link from '@mui/material/Link';
@@ -9,7 +7,8 @@ import ListItemAvatar from '@mui/material/ListItemAvatar';
 import ListItemText from '@mui/material/ListItemText';
 import Popover from '@mui/material/Popover';
 import Typography from '@mui/material/Typography';
-
+import { formatDistanceStrict } from 'date-fns';
+import PropTypes from 'prop-types';
 import { Presence } from 'src/components/presence';
 import { customLocale } from 'src/utils/date-locale';
 

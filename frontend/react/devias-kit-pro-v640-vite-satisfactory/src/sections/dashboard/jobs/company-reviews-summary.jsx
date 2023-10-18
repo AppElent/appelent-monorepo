@@ -1,9 +1,9 @@
-import PropTypes from 'prop-types';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import Rating from '@mui/material/Rating';
 import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
+import PropTypes from 'prop-types';
 
 export const CompanyReviewsSummary = (props) => {
   const { averageRating, totalReviews } = props;

@@ -1,12 +1,12 @@
-import { useCallback, useEffect, useState } from 'react';
-import PropTypes from 'prop-types';
-import Trash02Icon from '@untitled-ui/icons-react/build/esm/Trash02';
 import Button from '@mui/material/Button';
 import Checkbox from '@mui/material/Checkbox';
 import IconButton from '@mui/material/IconButton';
 import Input from '@mui/material/Input';
 import Stack from '@mui/material/Stack';
 import SvgIcon from '@mui/material/SvgIcon';
+import Trash02Icon from '@untitled-ui/icons-react/build/esm/Trash02';
+import PropTypes from 'prop-types';
+import { useCallback, useEffect, useState } from 'react';
 
 export const TaskCheckItem = (props) => {
   const {

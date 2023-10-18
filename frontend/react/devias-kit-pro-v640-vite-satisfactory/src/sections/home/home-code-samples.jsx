@@ -1,12 +1,11 @@
-import { useCallback, useMemo, useState } from 'react';
-import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
-import { alpha } from '@mui/system/colorManipulator';
 import Box from '@mui/material/Box';
 import Stack from '@mui/material/Stack';
 import Tab from '@mui/material/Tab';
 import Tabs from '@mui/material/Tabs';
 import Typography from '@mui/material/Typography';
-
+import { alpha } from '@mui/system/colorManipulator';
+import { useCallback, useMemo, useState } from 'react';
+import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { codeStyle } from 'src/utils/code-style';
 
 const samples = [

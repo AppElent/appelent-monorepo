@@ -1,7 +1,3 @@
-import PropTypes from 'prop-types';
-import { format } from 'date-fns';
-import numeral from 'numeral';
-import Edit02Icon from '@untitled-ui/icons-react/build/esm/Edit02';
 import Button from '@mui/material/Button';
 import Stack from '@mui/material/Stack';
 import SvgIcon from '@mui/material/SvgIcon';
@@ -12,11 +8,14 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Typography from '@mui/material/Typography';
 import useMediaQuery from '@mui/material/useMediaQuery';
-
+import Edit02Icon from '@untitled-ui/icons-react/build/esm/Edit02';
+import { format } from 'date-fns';
+import numeral from 'numeral';
+import PropTypes from 'prop-types';
 import { PropertyList } from 'src/components/property-list';
 import { PropertyListItem } from 'src/components/property-list-item';
-import { SeverityPill } from 'src/components/severity-pill';
 import { Scrollbar } from 'src/components/scrollbar';
+import { SeverityPill } from 'src/components/severity-pill';
 
 const statusMap = {
   canceled: 'warning',

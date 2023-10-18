@@ -1,7 +1,3 @@
-import PropTypes from 'prop-types';
-import { useDropzone } from 'react-dropzone';
-import Upload01Icon from '@untitled-ui/icons-react/build/esm/Upload01';
-import XIcon from '@untitled-ui/icons-react/build/esm/X';
 import Avatar from '@mui/material/Avatar';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
@@ -14,7 +10,10 @@ import Stack from '@mui/material/Stack';
 import SvgIcon from '@mui/material/SvgIcon';
 import Tooltip from '@mui/material/Tooltip';
 import Typography from '@mui/material/Typography';
-
+import Upload01Icon from '@untitled-ui/icons-react/build/esm/Upload01';
+import XIcon from '@untitled-ui/icons-react/build/esm/X';
+import PropTypes from 'prop-types';
+import { useDropzone } from 'react-dropzone';
 import { FileIcon } from 'src/components/file-icon';
 import { bytesToSize } from 'src/utils/bytes-to-size';
 

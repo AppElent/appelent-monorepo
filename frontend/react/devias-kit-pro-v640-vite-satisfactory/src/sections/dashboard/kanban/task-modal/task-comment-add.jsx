@@ -1,10 +1,10 @@
-import { useCallback, useState } from 'react';
-import PropTypes from 'prop-types';
 import Avatar from '@mui/material/Avatar';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import OutlinedInput from '@mui/material/OutlinedInput';
 import Stack from '@mui/material/Stack';
+import PropTypes from 'prop-types';
+import { useCallback, useState } from 'react';
 
 export const TaskCommentAdd = (props) => {
   const { avatar, onAdd, ...other } = props;

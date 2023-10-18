@@ -1,10 +1,10 @@
-import CheckIcon from '@untitled-ui/icons-react/build/esm/Check';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import Card from '@mui/material/Card';
 import Stack from '@mui/material/Stack';
 import SvgIcon from '@mui/material/SvgIcon';
 import Typography from '@mui/material/Typography';
+import CheckIcon from '@untitled-ui/icons-react/build/esm/Check';
 
 export const JobPreview = () => (
   <Stack spacing={2}>

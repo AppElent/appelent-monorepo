@@ -1,6 +1,3 @@
-import { useCallback, useState } from 'react';
-import PropTypes from 'prop-types';
-import ArrowRightIcon from '@untitled-ui/icons-react/build/esm/ArrowRight';
 import Button from '@mui/material/Button';
 import Chip from '@mui/material/Chip';
 import InputAdornment from '@mui/material/InputAdornment';
@@ -9,6 +6,9 @@ import SvgIcon from '@mui/material/SvgIcon';
 import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
 import { MobileDatePicker } from '@mui/x-date-pickers/MobileDatePicker';
+import ArrowRightIcon from '@untitled-ui/icons-react/build/esm/ArrowRight';
+import PropTypes from 'prop-types';
+import { useCallback, useState } from 'react';
 
 export const JobDetailsStep = (props) => {
   const { onBack, onNext, ...other } = props;

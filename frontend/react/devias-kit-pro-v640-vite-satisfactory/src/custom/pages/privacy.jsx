@@ -1,8 +1,8 @@
 import { Box } from '@mui/material';
+import { siteSettings } from 'src/config';
+import { PrivacyPolicy } from 'src/custom/components/privacy-policy';
 import { usePageView } from 'src/hooks/use-page-view';
 import { Layout as MarketingLayout } from 'src/layouts/marketing';
-import { PrivacyPolicy } from 'src/custom/components/privacy-policy';
-import { siteSettings } from 'src/config';
 
 const Page = () => {
   usePageView();

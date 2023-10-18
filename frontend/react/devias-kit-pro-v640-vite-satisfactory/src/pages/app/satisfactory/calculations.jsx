@@ -1,16 +1,15 @@
-import { useState } from 'react';
 import { Box, Container, Divider, Stack, Tab, Tabs, Typography } from '@mui/material';
-import { usePageView } from 'src/hooks/use-page-view';
-//import { useSearch, useItems } from "components/app/list/utils";
-
-import { SatisfactoryCurrentVersion } from 'src/custom/libs/satisfactory';
+import { useState } from 'react';
 import { Seo } from 'src/components/seo';
-import { useQueryParam } from 'use-query-params';
 import useTabs from 'src/custom/hooks/use-tabs';
-import RecipeList from 'src/sections/app/satisfactory/calculations/recipe-list';
-import PreferredRecipes from 'src/sections/app/satisfactory/calculations/preferred-recipes';
+//import { useSearch, useItems } from "components/app/list/utils";
+import { SatisfactoryCurrentVersion } from 'src/custom/libs/satisfactory';
+import { usePageView } from 'src/hooks/use-page-view';
 import { useSettings } from 'src/hooks/use-settings';
 import EndProducts from 'src/sections/app/satisfactory/calculations/end-products';
+import PreferredRecipes from 'src/sections/app/satisfactory/calculations/preferred-recipes';
+import RecipeList from 'src/sections/app/satisfactory/calculations/recipe-list';
+import { useQueryParam } from 'use-query-params';
 
 const tabsData = [
   { label: 'Recipe list by Product', value: 'recipe_list' },

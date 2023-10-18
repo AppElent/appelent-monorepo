@@ -1,10 +1,10 @@
-import PropTypes from 'prop-types';
-import { alpha } from '@mui/system/colorManipulator';
 import Avatar from '@mui/material/Avatar';
 import Box from '@mui/material/Box';
 import Card from '@mui/material/Card';
 import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
+import { alpha } from '@mui/system/colorManipulator';
+import PropTypes from 'prop-types';
 
 export const LogisticsRouteVehicles = (props) => {
   const { amount } = props;

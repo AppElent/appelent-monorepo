@@ -1,35 +1,26 @@
-import PropTypes from 'prop-types';
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import {
   Avatar,
   Box,
   Button,
-  Card,
   Dialog,
   DialogActions,
   DialogContent,
-  Divider,
   IconButton,
-  InputAdornment,
   Link,
-  MenuItem,
-  OutlinedInput,
   Stack,
   SvgIcon,
-  Tab,
   Table,
   TableBody,
   TableCell,
   TableContainer,
   TableHead,
-  TablePagination,
   TableRow,
-  Tabs,
-  TextField,
   Typography,
   useMediaQuery,
   useTheme,
 } from '@mui/material';
-import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+import PropTypes from 'prop-types';
 import { useMemo } from 'react';
 import { SeverityPill } from 'src/components/severity-pill';
 import { getSatisfactoryData, getSatisfactoryDataArray } from 'src/custom/libs/satisfactory';

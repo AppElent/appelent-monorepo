@@ -1,7 +1,3 @@
-import PropTypes from 'prop-types';
-import CheckVerified01 from '@untitled-ui/icons-react/build/esm/CheckVerified01';
-import Star01Icon from '@untitled-ui/icons-react/build/esm/Star01';
-import Users01Icon from '@untitled-ui/icons-react/build/esm/Users01';
 import Avatar from '@mui/material/Avatar';
 import Box from '@mui/material/Box';
 import Card from '@mui/material/Card';
@@ -10,7 +6,10 @@ import Link from '@mui/material/Link';
 import Stack from '@mui/material/Stack';
 import SvgIcon from '@mui/material/SvgIcon';
 import Typography from '@mui/material/Typography';
-
+import CheckVerified01 from '@untitled-ui/icons-react/build/esm/CheckVerified01';
+import Star01Icon from '@untitled-ui/icons-react/build/esm/Star01';
+import Users01Icon from '@untitled-ui/icons-react/build/esm/Users01';
+import PropTypes from 'prop-types';
 import { RouterLink } from 'src/components/router-link';
 import { paths } from 'src/paths';
 import { getInitials } from 'src/utils/get-initials';

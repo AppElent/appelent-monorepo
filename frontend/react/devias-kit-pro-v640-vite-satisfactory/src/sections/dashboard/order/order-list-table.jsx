@@ -1,6 +1,3 @@
-import PropTypes from 'prop-types';
-import { format } from 'date-fns';
-import numeral from 'numeral';
 import Box from '@mui/material/Box';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
@@ -8,6 +5,9 @@ import TableCell from '@mui/material/TableCell';
 import TablePagination from '@mui/material/TablePagination';
 import TableRow from '@mui/material/TableRow';
 import Typography from '@mui/material/Typography';
+import { format } from 'date-fns';
+import numeral from 'numeral';
+import PropTypes from 'prop-types';
 import { SeverityPill } from 'src/components/severity-pill';
 
 const statusMap = {

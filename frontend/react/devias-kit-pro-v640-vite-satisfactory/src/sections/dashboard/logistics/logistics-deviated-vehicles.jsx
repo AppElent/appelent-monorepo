@@ -1,10 +1,10 @@
-import PropTypes from 'prop-types';
-import AlertCircleIcon from '@untitled-ui/icons-react/build/esm/AlertCircle';
 import Avatar from '@mui/material/Avatar';
 import Card from '@mui/material/Card';
 import Stack from '@mui/material/Stack';
 import SvgIcon from '@mui/material/SvgIcon';
 import Typography from '@mui/material/Typography';
+import AlertCircleIcon from '@untitled-ui/icons-react/build/esm/AlertCircle';
+import PropTypes from 'prop-types';
 
 export const LogisticsDeviatedVehicles = (props) => {
   const { amount } = props;

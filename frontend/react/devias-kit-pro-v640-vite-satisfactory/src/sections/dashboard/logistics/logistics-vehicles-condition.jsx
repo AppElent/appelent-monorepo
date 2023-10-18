@@ -1,11 +1,11 @@
-import PropTypes from 'prop-types';
-import { alpha } from '@mui/system/colorManipulator';
 import Box from '@mui/material/Box';
 import Card from '@mui/material/Card';
 import CardHeader from '@mui/material/CardHeader';
-import Grid from '@mui/material/Unstable_Grid2';
-import Typography from '@mui/material/Typography';
 import { useTheme } from '@mui/material/styles';
+import Typography from '@mui/material/Typography';
+import Grid from '@mui/material/Unstable_Grid2';
+import { alpha } from '@mui/system/colorManipulator';
+import PropTypes from 'prop-types';
 import { Chart } from 'src/components/chart';
 
 const categories = [

@@ -1,9 +1,3 @@
-import { forwardRef } from 'react';
-import PropTypes from 'prop-types';
-import EyeIcon from '@untitled-ui/icons-react/build/esm/Eye';
-import FileCheck03Icon from '@untitled-ui/icons-react/build/esm/FileCheck03';
-import ListIcon from '@untitled-ui/icons-react/build/esm/List';
-import MessageDotsCircleIcon from '@untitled-ui/icons-react/build/esm/MessageDotsCircle';
 import Avatar from '@mui/material/Avatar';
 import AvatarGroup from '@mui/material/AvatarGroup';
 import Box from '@mui/material/Box';
@@ -13,6 +7,12 @@ import Chip from '@mui/material/Chip';
 import Stack from '@mui/material/Stack';
 import SvgIcon from '@mui/material/SvgIcon';
 import Typography from '@mui/material/Typography';
+import EyeIcon from '@untitled-ui/icons-react/build/esm/Eye';
+import FileCheck03Icon from '@untitled-ui/icons-react/build/esm/FileCheck03';
+import ListIcon from '@untitled-ui/icons-react/build/esm/List';
+import MessageDotsCircleIcon from '@untitled-ui/icons-react/build/esm/MessageDotsCircle';
+import PropTypes from 'prop-types';
+import { forwardRef } from 'react';
 import { useSelector } from 'src/store';
 
 const useTask = (taskId) => {

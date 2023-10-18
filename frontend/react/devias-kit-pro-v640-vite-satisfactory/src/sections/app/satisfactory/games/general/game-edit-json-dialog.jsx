@@ -1,4 +1,3 @@
-import PropTypes from 'prop-types';
 import {
   Button,
   Dialog,
@@ -7,6 +6,7 @@ import {
   DialogTitle,
   TextField,
 } from '@mui/material';
+import PropTypes from 'prop-types';
 import { useEffect, useState } from 'react';
 
 export const GameEditJsonDialog = ({ formik, modalOpen, setModalState }) => {

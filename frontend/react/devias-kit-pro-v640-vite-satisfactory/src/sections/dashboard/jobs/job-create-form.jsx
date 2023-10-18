@@ -1,6 +1,3 @@
-import { useCallback, useMemo, useState } from 'react';
-import PropTypes from 'prop-types';
-import CheckIcon from '@untitled-ui/icons-react/build/esm/Check';
 import Avatar from '@mui/material/Avatar';
 import Step from '@mui/material/Step';
 import StepContent from '@mui/material/StepContent';
@@ -8,6 +5,9 @@ import StepLabel from '@mui/material/StepLabel';
 import Stepper from '@mui/material/Stepper';
 import SvgIcon from '@mui/material/SvgIcon';
 import Typography from '@mui/material/Typography';
+import CheckIcon from '@untitled-ui/icons-react/build/esm/Check';
+import PropTypes from 'prop-types';
+import { useCallback, useMemo, useState } from 'react';
 
 import { JobCategoryStep } from './job-category-step';
 import { JobDescriptionStep } from './job-description-step';

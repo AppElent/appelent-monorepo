@@ -1,23 +1,24 @@
-import React, { useEffect } from 'react';
-import PropTypes from 'prop-types';
 import { Box, Button, Stack } from '@mui/material';
-import { useQueryParam } from 'use-query-params';
-import { generateName } from 'src/custom/libs/random-name-generator';
-import { useSelected } from 'src/custom/hooks/use-selected';
-import { VehicleStops } from './vehicles/vehicle-stops';
-import { getSatisfactoryData, getSatisfactoryDataArray } from 'src/custom/libs/satisfactory';
-import { nanoid } from 'nanoid';
-import useModal from 'src/custom/hooks/use-modal';
-import { useConfirm } from 'material-ui-confirm';
 import { useTranslate } from '@refinedev/core';
-import VehicleConfigurationDialog from './vehicles/vehicle-configuration-dialog';
+import { useConfirm } from 'material-ui-confirm';
+import { nanoid } from 'nanoid';
+import PropTypes from 'prop-types';
+import React, { useEffect } from 'react';
+import useModal from 'src/custom/hooks/use-modal';
+import { useSelected } from 'src/custom/hooks/use-selected';
+import { generateName } from 'src/custom/libs/random-name-generator';
+import { getSatisfactoryData, getSatisfactoryDataArray } from 'src/custom/libs/satisfactory';
 import {
   addFormikArrayItem,
   removeFormikArrayItem,
   setFormikArrayItem,
 } from 'src/custom/utils/formik-crud-functions';
-import VehicleSelect from './vehicles/vehicle-select';
+import { useQueryParam } from 'use-query-params';
+
+import VehicleConfigurationDialog from './vehicles/vehicle-configuration-dialog';
 import VehicleInformationCard from './vehicles/vehicle-information-card';
+import VehicleSelect from './vehicles/vehicle-select';
+import { VehicleStops } from './vehicles/vehicle-stops';
 
 /**
  * Vehicle type

@@ -1,11 +1,10 @@
-import PropTypes from 'prop-types';
-import { formatDistanceStrict } from 'date-fns';
 import Avatar, { avatarClasses } from '@mui/material/Avatar';
 import AvatarGroup from '@mui/material/AvatarGroup';
 import Box from '@mui/material/Box';
 import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
-
+import { formatDistanceStrict } from 'date-fns';
+import PropTypes from 'prop-types';
 import { useMockedUser } from 'src/hooks/use-mocked-user';
 import { customLocale } from 'src/utils/date-locale';
 

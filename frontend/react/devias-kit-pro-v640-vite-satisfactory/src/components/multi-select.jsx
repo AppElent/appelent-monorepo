@@ -1,13 +1,12 @@
-import { useCallback } from 'react';
-import PropTypes from 'prop-types';
-import ChevronDownIcon from '@untitled-ui/icons-react/build/esm/ChevronDown';
 import Button from '@mui/material/Button';
 import Checkbox from '@mui/material/Checkbox';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import SvgIcon from '@mui/material/SvgIcon';
-
+import ChevronDownIcon from '@untitled-ui/icons-react/build/esm/ChevronDown';
+import PropTypes from 'prop-types';
+import { useCallback } from 'react';
 import { usePopover } from 'src/hooks/use-popover';
 
 export const MultiSelect = (props) => {

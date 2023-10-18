@@ -1,6 +1,5 @@
 import PropTypes from 'prop-types';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
-
 import { codeStyle } from 'src/utils/code-style';
 
 export const Code = (props) => {

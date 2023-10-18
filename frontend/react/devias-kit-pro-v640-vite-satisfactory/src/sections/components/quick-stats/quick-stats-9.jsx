@@ -1,6 +1,3 @@
-import numeral from 'numeral';
-import TrendUp02Icon from '@untitled-ui/icons-react/build/esm/TrendUp02';
-import TrendDown02Icon from '@untitled-ui/icons-react/build/esm/TrendDown02';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Card from '@mui/material/Card';
@@ -9,10 +6,12 @@ import CardContent from '@mui/material/CardContent';
 import CardHeader from '@mui/material/CardHeader';
 import Divider from '@mui/material/Divider';
 import Stack from '@mui/material/Stack';
+import { useTheme } from '@mui/material/styles';
 import SvgIcon from '@mui/material/SvgIcon';
 import Typography from '@mui/material/Typography';
-import { useTheme } from '@mui/material/styles';
-
+import TrendDown02Icon from '@untitled-ui/icons-react/build/esm/TrendDown02';
+import TrendUp02Icon from '@untitled-ui/icons-react/build/esm/TrendUp02';
+import numeral from 'numeral';
 import { Chart } from 'src/components/chart';
 
 const chartSeries = [21500, 15300, 1076.81];

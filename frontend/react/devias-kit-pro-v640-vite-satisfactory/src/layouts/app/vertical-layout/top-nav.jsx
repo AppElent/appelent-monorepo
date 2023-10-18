@@ -1,11 +1,11 @@
-import PropTypes from 'prop-types';
-import Menu01Icon from '@untitled-ui/icons-react/build/esm/Menu01';
-import { alpha } from '@mui/system/colorManipulator';
 import Box from '@mui/material/Box';
 import IconButton from '@mui/material/IconButton';
 import Stack from '@mui/material/Stack';
 import SvgIcon from '@mui/material/SvgIcon';
 import useMediaQuery from '@mui/material/useMediaQuery';
+import { alpha } from '@mui/system/colorManipulator';
+import Menu01Icon from '@untitled-ui/icons-react/build/esm/Menu01';
+import PropTypes from 'prop-types';
 
 import { AccountButton } from '../account-button';
 import { ContactsButton } from '../contacts-button';

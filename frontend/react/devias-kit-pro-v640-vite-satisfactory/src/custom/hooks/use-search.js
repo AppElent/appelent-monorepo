@@ -1,4 +1,4 @@
-import { useState, useMemo, useCallback } from 'react';
+import { useCallback, useMemo, useState } from 'react';
 
 // Concatenate the values of the item attributes
 const getItemString = (item, attributes) =>

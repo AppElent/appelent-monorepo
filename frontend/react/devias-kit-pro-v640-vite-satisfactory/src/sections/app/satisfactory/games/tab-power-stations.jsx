@@ -1,8 +1,9 @@
-import PropTypes from 'prop-types';
 import { Button, Grid, Stack } from '@mui/material';
-import PowerStationCard from './power/power-station-card';
 import { nanoid } from 'nanoid';
+import PropTypes from 'prop-types';
 import { generateName } from 'src/custom/libs/random-name-generator';
+
+import PowerStationCard from './power/power-station-card';
 
 const TabPowerStations = ({
   powerStations,

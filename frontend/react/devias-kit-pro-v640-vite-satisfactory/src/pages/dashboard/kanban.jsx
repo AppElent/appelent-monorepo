@@ -1,15 +1,14 @@
-import { useCallback, useEffect, useState } from 'react';
-import { DragDropContext } from 'react-beautiful-dnd';
-import toast from 'react-hot-toast';
 import Box from '@mui/material/Box';
 import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
-
+import { useCallback, useEffect, useState } from 'react';
+import { DragDropContext } from 'react-beautiful-dnd';
+import toast from 'react-hot-toast';
 import { Seo } from 'src/components/seo';
 import { usePageView } from 'src/hooks/use-page-view';
-import { TaskModal } from 'src/sections/dashboard/kanban/task-modal';
-import { ColumnCard } from 'src/sections/dashboard/kanban/column-card';
 import { ColumnAdd } from 'src/sections/dashboard/kanban/column-add';
+import { ColumnCard } from 'src/sections/dashboard/kanban/column-card';
+import { TaskModal } from 'src/sections/dashboard/kanban/task-modal';
 import { useDispatch, useSelector } from 'src/store';
 import { thunks } from 'src/thunks/kanban';
 

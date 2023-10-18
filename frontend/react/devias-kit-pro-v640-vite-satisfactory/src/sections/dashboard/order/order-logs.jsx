@@ -1,6 +1,9 @@
-import PropTypes from 'prop-types';
-import { format } from 'date-fns';
-import ShoppingCart03Icon from '@untitled-ui/icons-react/build/esm/ShoppingCart03';
+import Timeline from '@mui/lab/Timeline';
+import TimelineConnector from '@mui/lab/TimelineConnector';
+import TimelineContent from '@mui/lab/TimelineContent';
+import TimelineDot from '@mui/lab/TimelineDot';
+import TimelineItem from '@mui/lab/TimelineItem';
+import TimelineSeparator from '@mui/lab/TimelineSeparator';
 import Avatar from '@mui/material/Avatar';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
@@ -9,12 +12,9 @@ import CardContent from '@mui/material/CardContent';
 import CardHeader from '@mui/material/CardHeader';
 import SvgIcon from '@mui/material/SvgIcon';
 import Typography from '@mui/material/Typography';
-import Timeline from '@mui/lab/Timeline';
-import TimelineConnector from '@mui/lab/TimelineConnector';
-import TimelineContent from '@mui/lab/TimelineContent';
-import TimelineDot from '@mui/lab/TimelineDot';
-import TimelineItem from '@mui/lab/TimelineItem';
-import TimelineSeparator from '@mui/lab/TimelineSeparator';
+import ShoppingCart03Icon from '@untitled-ui/icons-react/build/esm/ShoppingCart03';
+import { format } from 'date-fns';
+import PropTypes from 'prop-types';
 
 export const OrderLogs = (props) => {
   const { logs, ...other } = props;

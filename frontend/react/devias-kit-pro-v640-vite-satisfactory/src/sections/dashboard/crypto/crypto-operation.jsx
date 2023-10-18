@@ -1,6 +1,3 @@
-import { useCallback, useState } from 'react';
-import PropTypes from 'prop-types';
-import SwitchVertical01Icon from '@untitled-ui/icons-react/build/esm/SwitchVertical01';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Card from '@mui/material/Card';
@@ -12,6 +9,9 @@ import Tab from '@mui/material/Tab';
 import Tabs from '@mui/material/Tabs';
 import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
+import SwitchVertical01Icon from '@untitled-ui/icons-react/build/esm/SwitchVertical01';
+import PropTypes from 'prop-types';
+import { useCallback, useState } from 'react';
 
 const logoMap = {
   BTC: '/assets/logos/logo-bitcoin.svg',

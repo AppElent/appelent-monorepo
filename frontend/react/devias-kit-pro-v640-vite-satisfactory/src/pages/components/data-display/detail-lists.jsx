@@ -1,11 +1,9 @@
 import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
 import Stack from '@mui/material/Stack';
-
 import { Seo } from 'src/components/seo';
 import { usePageView } from 'src/hooks/use-page-view';
 import { Layout as ComponentsLayout } from 'src/layouts/components';
-import { Previewer } from 'src/sections/components/previewer';
 import { DetailList1 } from 'src/sections/components/detail-lists/detail-list-1';
 import { DetailList2 } from 'src/sections/components/detail-lists/detail-list-2';
 import { DetailList3 } from 'src/sections/components/detail-lists/detail-list-3';
@@ -14,6 +12,7 @@ import { DetailList5 } from 'src/sections/components/detail-lists/detail-list-5'
 import { DetailList6 } from 'src/sections/components/detail-lists/detail-list-6';
 import { DetailList7 } from 'src/sections/components/detail-lists/detail-list-7';
 import { DetailList8 } from 'src/sections/components/detail-lists/detail-list-8';
+import { Previewer } from 'src/sections/components/previewer';
 
 const components = [
   {

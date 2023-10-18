@@ -1,5 +1,3 @@
-import PropTypes from 'prop-types';
-import numeral from 'numeral';
 import Box from '@mui/material/Box';
 import Card from '@mui/material/Card';
 import CardHeader from '@mui/material/CardHeader';
@@ -10,6 +8,8 @@ import TableHead from '@mui/material/TableHead';
 import TablePagination from '@mui/material/TablePagination';
 import TableRow from '@mui/material/TableRow';
 import Typography from '@mui/material/Typography';
+import numeral from 'numeral';
+import PropTypes from 'prop-types';
 import { Scrollbar } from 'src/components/scrollbar';
 
 export const OrderItems = (props) => {

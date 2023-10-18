@@ -1,10 +1,10 @@
-import PropTypes from 'prop-types';
 import {
   Autocomplete,
   Button,
   Stack,
   TextField,
 } from '@mui/material';
+import PropTypes from 'prop-types';
 
 const VehicleSelect = ({ vehicles, setVehicleId, vehicle, createVehicle }) => {
   return (

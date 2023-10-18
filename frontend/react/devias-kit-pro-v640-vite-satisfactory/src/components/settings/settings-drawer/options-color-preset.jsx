@@ -1,8 +1,8 @@
-import PropTypes from 'prop-types';
 import Box from '@mui/material/Box';
 import Chip from '@mui/material/Chip';
 import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
+import PropTypes from 'prop-types';
 import { blue, green, indigo, purple } from 'src/theme/colors';
 
 export const OptionsColorPreset = (props) => {

@@ -1,12 +1,3 @@
-import PropTypes from 'prop-types';
-import { formatDistanceToNowStrict } from 'date-fns';
-import ArchiveIcon from '@untitled-ui/icons-react/build/esm/Archive';
-import Bell01Icon from '@untitled-ui/icons-react/build/esm/Bell01';
-import Camera01Icon from '@untitled-ui/icons-react/build/esm/Camera01';
-import DotsHorizontalIcon from '@untitled-ui/icons-react/build/esm/DotsHorizontal';
-import PhoneIcon from '@untitled-ui/icons-react/build/esm/Phone';
-import SlashCircle01Icon from '@untitled-ui/icons-react/build/esm/SlashCircle01';
-import Trash02Icon from '@untitled-ui/icons-react/build/esm/Trash02';
 import Avatar from '@mui/material/Avatar';
 import AvatarGroup from '@mui/material/AvatarGroup';
 import IconButton from '@mui/material/IconButton';
@@ -18,7 +9,15 @@ import Stack from '@mui/material/Stack';
 import SvgIcon from '@mui/material/SvgIcon';
 import Tooltip from '@mui/material/Tooltip';
 import Typography from '@mui/material/Typography';
-
+import ArchiveIcon from '@untitled-ui/icons-react/build/esm/Archive';
+import Bell01Icon from '@untitled-ui/icons-react/build/esm/Bell01';
+import Camera01Icon from '@untitled-ui/icons-react/build/esm/Camera01';
+import DotsHorizontalIcon from '@untitled-ui/icons-react/build/esm/DotsHorizontal';
+import PhoneIcon from '@untitled-ui/icons-react/build/esm/Phone';
+import SlashCircle01Icon from '@untitled-ui/icons-react/build/esm/SlashCircle01';
+import Trash02Icon from '@untitled-ui/icons-react/build/esm/Trash02';
+import { formatDistanceToNowStrict } from 'date-fns';
+import PropTypes from 'prop-types';
 import { useMockedUser } from 'src/hooks/use-mocked-user';
 import { usePopover } from 'src/hooks/use-popover';
 

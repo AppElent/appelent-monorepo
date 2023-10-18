@@ -1,11 +1,9 @@
 import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
 import Stack from '@mui/material/Stack';
-
 import { Seo } from 'src/components/seo';
 import { usePageView } from 'src/hooks/use-page-view';
 import { Layout as ComponentsLayout } from 'src/layouts/components';
-import { Previewer } from 'src/sections/components/previewer';
 import { Chart1 } from 'src/sections/components/charts/chart-1';
 import { Chart2 } from 'src/sections/components/charts/chart-2';
 import { Chart3 } from 'src/sections/components/charts/chart-3';
@@ -19,6 +17,7 @@ import { Chart10 } from 'src/sections/components/charts/chart-10';
 import { Chart11 } from 'src/sections/components/charts/chart-11';
 import { Chart12 } from 'src/sections/components/charts/chart-12';
 import { Chart13 } from 'src/sections/components/charts/chart-13';
+import { Previewer } from 'src/sections/components/previewer';
 
 const components = [
   {

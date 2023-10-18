@@ -1,5 +1,4 @@
 import Box from '@mui/material/Box';
-
 import { Logo } from 'src/components/app/logo';
 
 export const SplashScreen = () => (

@@ -1,4 +1,3 @@
-import { formatDistanceToNowStrict, subDays, subHours, subMinutes } from 'date-fns';
 import Avatar from '@mui/material/Avatar';
 import Box from '@mui/material/Box';
 import Link from '@mui/material/Link';
@@ -8,7 +7,7 @@ import ListItemAvatar from '@mui/material/ListItemAvatar';
 import ListItemText from '@mui/material/ListItemText';
 import Paper from '@mui/material/Paper';
 import Typography from '@mui/material/Typography';
-
+import { formatDistanceToNowStrict, subDays, subHours, subMinutes } from 'date-fns';
 import { Presence } from 'src/components/presence';
 
 const now = new Date();

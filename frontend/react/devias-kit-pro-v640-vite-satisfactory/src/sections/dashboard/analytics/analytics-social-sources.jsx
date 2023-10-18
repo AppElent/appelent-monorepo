@@ -1,16 +1,15 @@
-import PropTypes from 'prop-types';
-import InfoCircleIcon from '@untitled-ui/icons-react/build/esm/InfoCircle';
 import Box from '@mui/material/Box';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import CardHeader from '@mui/material/CardHeader';
-import Grid from '@mui/material/Unstable_Grid2';
 import Stack from '@mui/material/Stack';
+import { useTheme } from '@mui/material/styles';
 import SvgIcon from '@mui/material/SvgIcon';
 import Tooltip from '@mui/material/Tooltip';
 import Typography from '@mui/material/Typography';
-import { useTheme } from '@mui/material/styles';
-
+import Grid from '@mui/material/Unstable_Grid2';
+import InfoCircleIcon from '@untitled-ui/icons-react/build/esm/InfoCircle';
+import PropTypes from 'prop-types';
 import { Chart } from 'src/components/chart';
 
 const useChartOptions = (labels) => {

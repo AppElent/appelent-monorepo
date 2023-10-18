@@ -1,12 +1,12 @@
-import PropTypes from 'prop-types';
-import numeral from 'numeral';
 import Box from '@mui/material/Box';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import CardHeader from '@mui/material/CardHeader';
-import Grid from '@mui/material/Unstable_Grid2';
 import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
+import Grid from '@mui/material/Unstable_Grid2';
+import numeral from 'numeral';
+import PropTypes from 'prop-types';
 
 export const EcommerceStats = (props) => {
   const { cost, profit, sales } = props;

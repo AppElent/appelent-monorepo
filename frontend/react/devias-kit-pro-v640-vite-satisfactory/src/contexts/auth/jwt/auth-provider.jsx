@@ -1,8 +1,8 @@
-import { useCallback, useEffect, useReducer } from 'react';
 import PropTypes from 'prop-types';
-
+import { useCallback, useEffect, useReducer } from 'react';
 import { authApi } from 'src/api/auth';
 import { Issuer } from 'src/utils/auth';
+
 import { AuthContext, initialState } from './auth-context';
 
 const STORAGE_KEY = 'accessToken';

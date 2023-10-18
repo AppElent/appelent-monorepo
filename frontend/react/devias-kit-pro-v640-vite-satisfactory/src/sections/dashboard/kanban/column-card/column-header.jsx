@@ -1,6 +1,3 @@
-import { useCallback, useEffect, useState } from 'react';
-import PropTypes from 'prop-types';
-import DotsHorizontalIcon from '@untitled-ui/icons-react/build/esm/DotsHorizontal';
 import Chip from '@mui/material/Chip';
 import IconButton from '@mui/material/IconButton';
 import Input from '@mui/material/Input';
@@ -8,7 +5,9 @@ import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import Stack from '@mui/material/Stack';
 import SvgIcon from '@mui/material/SvgIcon';
-
+import DotsHorizontalIcon from '@untitled-ui/icons-react/build/esm/DotsHorizontal';
+import PropTypes from 'prop-types';
+import { useCallback, useEffect, useState } from 'react';
 import { usePopover } from 'src/hooks/use-popover';
 
 export const ColumnHeader = (props) => {

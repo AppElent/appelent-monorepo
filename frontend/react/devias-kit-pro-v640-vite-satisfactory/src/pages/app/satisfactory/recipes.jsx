@@ -1,4 +1,3 @@
-import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import {
   Box,
   Divider,
@@ -7,27 +6,27 @@ import {
   TableRow,
   Typography,
 } from '@mui/material';
-import { usePageView } from 'src/hooks/use-page-view';
-import { Layout as DashboardLayout } from 'src/layouts/app';
+import { useTranslate } from '@refinedev/core';
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { ItemDrawer } from 'src/components/app/list/item-drawer';
+import { ItemDetailsContainer } from 'src/components/app/list/item-drawer/item-details';
 import { ItemListContainer } from 'src/components/app/list/item-list-container';
 import { ItemListSearch } from 'src/components/app/list/item-list-search';
 import { ItemListTableContainer } from 'src/components/app/list/item-list-table';
-import { ItemDetailsContainer } from 'src/components/app/list/item-drawer/item-details';
+import { Seo } from 'src/components/seo';
 import { SeverityPill } from 'src/components/severity-pill';
+import { useItems } from 'src/custom/hooks/use-items';
 //import { useSearch, useItems } from "components/app/list/utils";
-
 import {
   getSatisfactoryData,
   getSatisfactoryDataArray,
   SatisfactoryCurrentVersion,
 } from 'src/custom/libs/satisfactory';
-import { SatisfactoryRecipeDetail } from 'src/sections/app/satisfactory/recipes/recipe-detail';
-import { useTranslate } from '@refinedev/core';
+import { usePageView } from 'src/hooks/use-page-view';
+import { Layout as DashboardLayout } from 'src/layouts/app';
 import { tokens } from 'src/locales/tokens';
-import { Seo } from 'src/components/seo';
+import { SatisfactoryRecipeDetail } from 'src/sections/app/satisfactory/recipes/recipe-detail';
 import { StringParam, useQueryParam, withDefault } from 'use-query-params';
-import { useItems } from 'src/custom/hooks/use-items';
 
 const tabOptions = [
   {

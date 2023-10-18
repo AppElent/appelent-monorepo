@@ -1,10 +1,10 @@
-import { useCallback, useEffect, useReducer } from 'react';
-import PropTypes from 'prop-types';
 import { Auth0Client } from '@auth0/auth0-spa-js';
-
+import PropTypes from 'prop-types';
+import { useCallback, useEffect, useReducer } from 'react';
 import { auth0Config } from 'src/config';
 import { paths } from 'src/paths';
 import { Issuer } from 'src/utils/auth';
+
 import { AuthContext, initialState } from './auth-context';
 
 const auth0Client = new Auth0Client({

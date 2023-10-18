@@ -1,4 +1,3 @@
-import PropTypes from 'prop-types';
 import {
   Box,
   Button,
@@ -11,7 +10,9 @@ import {
   Stack,
   Typography,
 } from '@mui/material';
+import PropTypes from 'prop-types';
 import { useRouter } from 'src/hooks/use-router';
+
 import { CardDefault } from '../card-default';
 
 const SimpleCard = ({ title, content, onClick }) => {

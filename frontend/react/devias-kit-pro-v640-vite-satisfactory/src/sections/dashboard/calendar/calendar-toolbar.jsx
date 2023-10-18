@@ -1,9 +1,3 @@
-import { useCallback, useMemo } from 'react';
-import PropTypes from 'prop-types';
-import { format } from 'date-fns';
-import ChevronLeftIcon from '@untitled-ui/icons-react/build/esm/ChevronLeft';
-import ChevronRightIcon from '@untitled-ui/icons-react/build/esm/ChevronRight';
-import PlusIcon from '@untitled-ui/icons-react/build/esm/Plus';
 import Button from '@mui/material/Button';
 import IconButton from '@mui/material/IconButton';
 import Stack from '@mui/material/Stack';
@@ -11,6 +5,12 @@ import SvgIcon from '@mui/material/SvgIcon';
 import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
 import useMediaQuery from '@mui/material/useMediaQuery';
+import ChevronLeftIcon from '@untitled-ui/icons-react/build/esm/ChevronLeft';
+import ChevronRightIcon from '@untitled-ui/icons-react/build/esm/ChevronRight';
+import PlusIcon from '@untitled-ui/icons-react/build/esm/Plus';
+import { format } from 'date-fns';
+import PropTypes from 'prop-types';
+import { useCallback, useMemo } from 'react';
 
 const viewOptions = [
   {

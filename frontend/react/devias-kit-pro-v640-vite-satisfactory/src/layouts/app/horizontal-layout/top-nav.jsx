@@ -1,14 +1,14 @@
-import { useMemo } from 'react';
-import PropTypes from 'prop-types';
-import Menu01Icon from '@untitled-ui/icons-react/build/esm/Menu01';
 import Box from '@mui/material/Box';
 import IconButton from '@mui/material/IconButton';
 import Stack from '@mui/material/Stack';
+import { useTheme } from '@mui/material/styles';
 import SvgIcon from '@mui/material/SvgIcon';
 import useMediaQuery from '@mui/material/useMediaQuery';
-import { useTheme } from '@mui/material/styles';
-
+import Menu01Icon from '@untitled-ui/icons-react/build/esm/Menu01';
+import PropTypes from 'prop-types';
+import { useMemo } from 'react';
 import { Logo } from 'src/components/app/logo';
+import VersionSelector from 'src/components/app/satisfactory/version-selector';
 import { RouterLink } from 'src/components/router-link';
 import { Scrollbar } from 'src/components/scrollbar';
 import { usePathname } from 'src/hooks/use-pathname';
@@ -20,7 +20,6 @@ import { LanguageSwitch } from '../language-switch';
 import { NotificationsButton } from '../notifications-button';
 import { TenantSwitch } from '../tenant-switch';
 import { TopNavSection } from './top-nav-section';
-import VersionSelector from 'src/components/app/satisfactory/version-selector';
 
 const useCssVars = (color) => {
   const theme = useTheme();

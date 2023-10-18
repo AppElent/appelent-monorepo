@@ -1,10 +1,9 @@
-import { alpha } from '@mui/system/colorManipulator';
 import Box from '@mui/material/Box';
 import Card from '@mui/material/Card';
 import CardHeader from '@mui/material/CardHeader';
-import Typography from '@mui/material/Typography';
 import { useTheme } from '@mui/material/styles';
-
+import Typography from '@mui/material/Typography';
+import { alpha } from '@mui/system/colorManipulator';
 import { Chart } from 'src/components/chart';
 import { Scrollbar } from 'src/components/scrollbar';
 

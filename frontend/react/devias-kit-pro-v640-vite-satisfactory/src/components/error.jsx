@@ -1,9 +1,8 @@
-import PropTypes from 'prop-types';
 import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
 import Typography from '@mui/material/Typography';
 import useMediaQuery from '@mui/material/useMediaQuery';
-
+import PropTypes from 'prop-types';
 import { Seo } from 'src/components/seo';
 
 export const Error = (props) => {

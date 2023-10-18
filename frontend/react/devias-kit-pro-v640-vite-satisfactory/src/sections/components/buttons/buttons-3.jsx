@@ -1,5 +1,3 @@
-import { useCallback, useRef, useState } from 'react';
-import ChevronDownIcon from '@untitled-ui/icons-react/build/esm/ChevronDown';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import ButtonGroup from '@mui/material/ButtonGroup';
@@ -10,6 +8,8 @@ import MenuList from '@mui/material/MenuList';
 import Paper from '@mui/material/Paper';
 import Popper from '@mui/material/Popper';
 import SvgIcon from '@mui/material/SvgIcon';
+import ChevronDownIcon from '@untitled-ui/icons-react/build/esm/ChevronDown';
+import { useCallback, useRef, useState } from 'react';
 
 const options = ['Create a merge commit', 'Squash and merge', 'Rebase and merge'];
 

@@ -1,18 +1,17 @@
-import { useFormik } from 'formik';
-import * as Yup from 'yup';
 import Button from '@mui/material/Button';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import CardHeader from '@mui/material/CardHeader';
 import FormHelperText from '@mui/material/FormHelperText';
 import TextField from '@mui/material/TextField';
-
+import { useFormik } from 'formik';
 import { Seo } from 'src/components/seo';
 import { useAuth } from 'src/hooks/use-auth';
 import { useMounted } from 'src/hooks/use-mounted';
 import { usePageView } from 'src/hooks/use-page-view';
 import { useRouter } from 'src/hooks/use-router';
 import { paths } from 'src/paths';
+import * as Yup from 'yup';
 
 const initialValues = {
   email: '',

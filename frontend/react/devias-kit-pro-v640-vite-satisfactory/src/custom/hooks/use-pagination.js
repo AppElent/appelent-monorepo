@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useMemo, useRef, useReducer } from 'react';
+import { useCallback, useEffect, useMemo, useReducer, useRef } from 'react';
 
 export const getPreviousEnabled = (currentPage) => currentPage > 0;
 

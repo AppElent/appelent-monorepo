@@ -1,13 +1,13 @@
-import PropTypes from 'prop-types';
-import SearchMdIcon from '@untitled-ui/icons-react/build/esm/SearchMd';
 import Box from '@mui/material/Box';
 import Card from '@mui/material/Card';
 import CardHeader from '@mui/material/CardHeader';
 import Divider from '@mui/material/Divider';
-import Grid from '@mui/material/Unstable_Grid2';
 import Input from '@mui/material/Input';
 import Stack from '@mui/material/Stack';
 import SvgIcon from '@mui/material/SvgIcon';
+import Grid from '@mui/material/Unstable_Grid2';
+import SearchMdIcon from '@untitled-ui/icons-react/build/esm/SearchMd';
+import PropTypes from 'prop-types';
 
 import { SocialConnection } from './social-connection';
 

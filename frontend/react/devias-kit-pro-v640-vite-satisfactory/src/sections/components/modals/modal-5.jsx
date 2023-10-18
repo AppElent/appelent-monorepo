@@ -1,7 +1,3 @@
-import { subDays, subHours } from 'date-fns';
-import CreditCard02Icon from '@untitled-ui/icons-react/build/esm/CreditCard02';
-import MessageChatSquareIcon from '@untitled-ui/icons-react/build/esm/MessageChatSquare';
-import ShoppingCart03Icon from '@untitled-ui/icons-react/build/esm/ShoppingCart03';
 import Avatar from '@mui/material/Avatar';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
@@ -13,6 +9,10 @@ import ListItemText from '@mui/material/ListItemText';
 import Paper from '@mui/material/Paper';
 import SvgIcon from '@mui/material/SvgIcon';
 import Typography from '@mui/material/Typography';
+import CreditCard02Icon from '@untitled-ui/icons-react/build/esm/CreditCard02';
+import MessageChatSquareIcon from '@untitled-ui/icons-react/build/esm/MessageChatSquare';
+import ShoppingCart03Icon from '@untitled-ui/icons-react/build/esm/ShoppingCart03';
+import { subDays, subHours } from 'date-fns';
 
 const now = new Date();
 

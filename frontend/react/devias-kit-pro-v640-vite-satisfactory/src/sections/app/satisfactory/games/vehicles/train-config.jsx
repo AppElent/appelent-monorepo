@@ -1,4 +1,4 @@
-import PropTypes from 'prop-types';
+import { Button, CardContent, MenuItem, TableContainer, TextField } from '@mui/material';
 import Box from '@mui/material/Box';
 import Card from '@mui/material/Card';
 import CardHeader from '@mui/material/CardHeader';
@@ -7,10 +7,9 @@ import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
-
-import { Button, CardContent, MenuItem, TableContainer, TextField } from '@mui/material';
 import { GridDeleteIcon } from '@mui/x-data-grid';
 import { nanoid } from 'nanoid';
+import PropTypes from 'prop-types';
 
 const VEHICLE_TEMPLATE = {
   type: 'station',

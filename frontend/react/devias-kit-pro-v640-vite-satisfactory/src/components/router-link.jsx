@@ -1,6 +1,6 @@
+import PropTypes from 'prop-types';
 import { forwardRef } from 'react';
 import { Link } from 'react-router-dom';
-import PropTypes from 'prop-types';
 
 /**
  * This is an adapted for `react-router-dom/link` component.

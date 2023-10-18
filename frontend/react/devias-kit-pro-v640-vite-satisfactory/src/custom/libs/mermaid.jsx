@@ -1,6 +1,6 @@
-import { useEffect } from 'react';
 import mermaid from 'mermaid';
 import { nanoid } from 'nanoid';
+import { useEffect } from 'react';
 
 mermaid.initialize({
   startOnLoad: true,

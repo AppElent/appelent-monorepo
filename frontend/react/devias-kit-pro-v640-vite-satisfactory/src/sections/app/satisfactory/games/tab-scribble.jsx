@@ -1,9 +1,8 @@
-import PropTypes from 'prop-types';
 import { Stack } from '@mui/material';
-
+import { useTranslate } from '@refinedev/core';
+import PropTypes from 'prop-types';
 import { QuillEditor } from 'src/components/quill-editor';
 import { tokens } from 'src/locales/tokens';
-import { useTranslate } from '@refinedev/core';
 
 const TabScribble = (props) => {
   const translate = useTranslate();

@@ -1,7 +1,3 @@
-import BookOpen01Icon from '@untitled-ui/icons-react/build/esm/BookOpen01';
-import Briefcase01Icon from '@untitled-ui/icons-react/build/esm/Briefcase01';
-import Home02Icon from '@untitled-ui/icons-react/build/esm/Home02';
-import Mail01Icon from '@untitled-ui/icons-react/build/esm/Mail01';
 import Box from '@mui/material/Box';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
@@ -13,6 +9,10 @@ import ListItemAvatar from '@mui/material/ListItemAvatar';
 import ListItemText from '@mui/material/ListItemText';
 import SvgIcon from '@mui/material/SvgIcon';
 import Typography from '@mui/material/Typography';
+import BookOpen01Icon from '@untitled-ui/icons-react/build/esm/BookOpen01';
+import Briefcase01Icon from '@untitled-ui/icons-react/build/esm/Briefcase01';
+import Home02Icon from '@untitled-ui/icons-react/build/esm/Home02';
+import Mail01Icon from '@untitled-ui/icons-react/build/esm/Mail01';
 
 export const DetailList8 = () => (
   <Box

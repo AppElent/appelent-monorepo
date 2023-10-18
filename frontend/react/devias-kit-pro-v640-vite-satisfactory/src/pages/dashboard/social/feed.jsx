@@ -1,9 +1,8 @@
-import { useCallback, useEffect, useState } from 'react';
 import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
 import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
-
+import { useCallback, useEffect, useState } from 'react';
 import { socialApi } from 'src/api/social';
 import { Seo } from 'src/components/seo';
 import { useMounted } from 'src/hooks/use-mounted';

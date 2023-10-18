@@ -1,21 +1,20 @@
-import { useCallback, useEffect, useState } from 'react';
-import ArrowLeftIcon from '@untitled-ui/icons-react/build/esm/ArrowLeft';
-import ChevronDownIcon from '@untitled-ui/icons-react/build/esm/ChevronDown';
-import Edit02Icon from '@untitled-ui/icons-react/build/esm/Edit02';
 import Avatar from '@mui/material/Avatar';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Chip from '@mui/material/Chip';
 import Container from '@mui/material/Container';
 import Divider from '@mui/material/Divider';
-import Grid from '@mui/material/Unstable_Grid2';
 import Link from '@mui/material/Link';
 import Stack from '@mui/material/Stack';
 import SvgIcon from '@mui/material/SvgIcon';
 import Tab from '@mui/material/Tab';
 import Tabs from '@mui/material/Tabs';
 import Typography from '@mui/material/Typography';
-
+import Grid from '@mui/material/Unstable_Grid2';
+import ArrowLeftIcon from '@untitled-ui/icons-react/build/esm/ArrowLeft';
+import ChevronDownIcon from '@untitled-ui/icons-react/build/esm/ChevronDown';
+import Edit02Icon from '@untitled-ui/icons-react/build/esm/Edit02';
+import { useCallback, useEffect, useState } from 'react';
 import { customersApi } from 'src/api/customers';
 import { RouterLink } from 'src/components/router-link';
 import { Seo } from 'src/components/seo';
@@ -26,8 +25,8 @@ import { CustomerBasicDetails } from 'src/sections/dashboard/customer/customer-b
 import { CustomerDataManagement } from 'src/sections/dashboard/customer/customer-data-management';
 import { CustomerEmailsSummary } from 'src/sections/dashboard/customer/customer-emails-summary';
 import { CustomerInvoices } from 'src/sections/dashboard/customer/customer-invoices';
-import { CustomerPayment } from 'src/sections/dashboard/customer/customer-payment';
 import { CustomerLogs } from 'src/sections/dashboard/customer/customer-logs';
+import { CustomerPayment } from 'src/sections/dashboard/customer/customer-payment';
 import { getInitials } from 'src/utils/get-initials';
 
 const tabs = [

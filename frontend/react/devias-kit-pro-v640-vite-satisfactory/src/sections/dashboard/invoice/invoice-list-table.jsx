@@ -1,7 +1,3 @@
-import { format } from 'date-fns';
-import numeral from 'numeral';
-import PropTypes from 'prop-types';
-import ArrowRightIcon from '@untitled-ui/icons-react/build/esm/ArrowRight';
 import Avatar from '@mui/material/Avatar';
 import Card from '@mui/material/Card';
 import IconButton from '@mui/material/IconButton';
@@ -13,7 +9,10 @@ import TableCell from '@mui/material/TableCell';
 import TablePagination from '@mui/material/TablePagination';
 import TableRow from '@mui/material/TableRow';
 import Typography from '@mui/material/Typography';
-
+import ArrowRightIcon from '@untitled-ui/icons-react/build/esm/ArrowRight';
+import { format } from 'date-fns';
+import numeral from 'numeral';
+import PropTypes from 'prop-types';
 import { RouterLink } from 'src/components/router-link';
 import { Scrollbar } from 'src/components/scrollbar';
 import { SeverityPill } from 'src/components/severity-pill';

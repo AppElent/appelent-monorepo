@@ -1,5 +1,5 @@
-import PropTypes from 'prop-types';
 import { styled } from '@mui/material/styles';
+import PropTypes from 'prop-types';
 
 const CircularProgressRoot = styled('div')({
   height: 56,

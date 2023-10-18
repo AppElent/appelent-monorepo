@@ -1,8 +1,3 @@
-import { useCallback, useMemo, useState } from 'react';
-import PropTypes from 'prop-types';
-import numeral from 'numeral';
-import ArrowRightIcon from '@untitled-ui/icons-react/build/esm/ArrowRight';
-import InfoCircleIcon from '@untitled-ui/icons-react/build/esm/InfoCircle';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Card from '@mui/material/Card';
@@ -18,7 +13,11 @@ import TableRow from '@mui/material/TableRow';
 import TableSortLabel from '@mui/material/TableSortLabel';
 import Tooltip from '@mui/material/Tooltip';
 import Typography from '@mui/material/Typography';
-
+import ArrowRightIcon from '@untitled-ui/icons-react/build/esm/ArrowRight';
+import InfoCircleIcon from '@untitled-ui/icons-react/build/esm/InfoCircle';
+import numeral from 'numeral';
+import PropTypes from 'prop-types';
+import { useCallback, useMemo, useState } from 'react';
 import { applySort } from 'src/utils/apply-sort';
 
 const flagMap = {

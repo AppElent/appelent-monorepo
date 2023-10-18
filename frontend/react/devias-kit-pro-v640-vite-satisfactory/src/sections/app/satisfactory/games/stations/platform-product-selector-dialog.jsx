@@ -1,8 +1,7 @@
-import PropTypes from 'prop-types';
 import { useTheme } from '@emotion/react';
 import {
-  Button,
   Box,
+  Button,
   Checkbox,
   Dialog,
   DialogActions,
@@ -10,6 +9,7 @@ import {
   DialogTitle,
   FormControlLabel,
   FormGroup,
+  FormHelperText,
   Stack,
   Switch,
   Table,
@@ -19,11 +19,12 @@ import {
   TableHead,
   TableRow,
   useMediaQuery,
-  FormHelperText,
 } from '@mui/material';
+import PropTypes from 'prop-types';
 import React, { useMemo, useState } from 'react';
-import { getFactoryStatistics, getSatisfactoryData } from 'src/custom/libs/satisfactory';
+import { getSatisfactoryData } from 'src/custom/libs/satisfactory';
 import { STATION_IMAGES } from 'src/custom/libs/satisfactory/static';
+import { getFactoryStatistics } from 'src/custom/libs/satisfactory/statistics';
 
 const IMAGES = STATION_IMAGES;
 

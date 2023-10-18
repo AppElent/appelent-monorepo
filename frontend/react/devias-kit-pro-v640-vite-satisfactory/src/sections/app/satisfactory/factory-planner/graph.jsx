@@ -1,6 +1,5 @@
 import PropTypes from 'prop-types';
 import Cytoscape from 'src/custom/libs/Cytoscape';
-
 import { stylesheet } from 'src/custom/libs/satisfactory/graph';
 
 /**

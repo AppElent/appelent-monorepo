@@ -1,6 +1,3 @@
-import ChevronRightIcon from '@untitled-ui/icons-react/build/esm/ChevronRight';
-import FilePlus02Icon from '@untitled-ui/icons-react/build/esm/FilePlus02';
-import UserPlus02Icon from '@untitled-ui/icons-react/build/esm/UserPlus02';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Card from '@mui/material/Card';
@@ -9,6 +6,9 @@ import Divider from '@mui/material/Divider';
 import Stack from '@mui/material/Stack';
 import SvgIcon from '@mui/material/SvgIcon';
 import Typography from '@mui/material/Typography';
+import ChevronRightIcon from '@untitled-ui/icons-react/build/esm/ChevronRight';
+import FilePlus02Icon from '@untitled-ui/icons-react/build/esm/FilePlus02';
+import UserPlus02Icon from '@untitled-ui/icons-react/build/esm/UserPlus02';
 
 export const AcademyFind = () => {
   return (

@@ -1,9 +1,3 @@
-import numeral from 'numeral';
-import { subDays, subHours } from 'date-fns';
-import ArrowRightIcon from '@untitled-ui/icons-react/build/esm/ArrowRight';
-import Edit02Icon from '@untitled-ui/icons-react/build/esm/Edit02';
-import Image01Icon from '@untitled-ui/icons-react/build/esm/Image01';
-import SearchMdIcon from '@untitled-ui/icons-react/build/esm/SearchMd';
 import Box from '@mui/material/Box';
 import Card from '@mui/material/Card';
 import Checkbox from '@mui/material/Checkbox';
@@ -22,7 +16,12 @@ import TableHead from '@mui/material/TableHead';
 import TablePagination from '@mui/material/TablePagination';
 import TableRow from '@mui/material/TableRow';
 import TextField from '@mui/material/TextField';
-
+import ArrowRightIcon from '@untitled-ui/icons-react/build/esm/ArrowRight';
+import Edit02Icon from '@untitled-ui/icons-react/build/esm/Edit02';
+import Image01Icon from '@untitled-ui/icons-react/build/esm/Image01';
+import SearchMdIcon from '@untitled-ui/icons-react/build/esm/SearchMd';
+import { subDays, subHours } from 'date-fns';
+import numeral from 'numeral';
 import { Scrollbar } from 'src/components/scrollbar';
 import { SeverityPill } from 'src/components/severity-pill';
 

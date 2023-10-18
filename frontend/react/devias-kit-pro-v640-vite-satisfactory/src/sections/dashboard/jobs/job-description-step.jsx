@@ -1,11 +1,10 @@
-import { useCallback, useState } from 'react';
-import PropTypes from 'prop-types';
-import ArrowRightIcon from '@untitled-ui/icons-react/build/esm/ArrowRight';
 import Button from '@mui/material/Button';
 import Stack from '@mui/material/Stack';
 import SvgIcon from '@mui/material/SvgIcon';
 import Typography from '@mui/material/Typography';
-
+import ArrowRightIcon from '@untitled-ui/icons-react/build/esm/ArrowRight';
+import PropTypes from 'prop-types';
+import { useCallback, useState } from 'react';
 import { QuillEditor } from 'src/components/quill-editor';
 
 export const JobDescriptionStep = (props) => {

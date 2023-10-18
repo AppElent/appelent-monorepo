@@ -1,7 +1,8 @@
-import { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
-import { useData } from '../../framework/useData';
+import { useEffect, useState } from 'react';
+
 import { ActionType } from '../../framework/ActionType';
+import { useData } from '../../framework/useData';
 
 const GlobalData = ({ resource }) => {
   //useGlobalDataFirestoreCollection(storeKey);

@@ -1,6 +1,6 @@
+import Box from '@mui/material/Box';
 import PropTypes from 'prop-types';
 import Slider from 'react-slick';
-import Box from '@mui/material/Box';
 
 import { CryptoCard } from './crypto-card';
 

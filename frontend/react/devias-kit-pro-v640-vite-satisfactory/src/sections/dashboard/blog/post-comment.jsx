@@ -1,9 +1,9 @@
-import PropTypes from 'prop-types';
-import { formatDistanceToNow } from 'date-fns';
 import Avatar from '@mui/material/Avatar';
 import Box from '@mui/material/Box';
 import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
+import { formatDistanceToNow } from 'date-fns';
+import PropTypes from 'prop-types';
 
 export const PostComment = (props) => {
   const { authorAvatar, authorName, content, createdAt, ...other } = props;

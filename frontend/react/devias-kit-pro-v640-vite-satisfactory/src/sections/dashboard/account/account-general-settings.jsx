@@ -1,19 +1,19 @@
-import PropTypes from 'prop-types';
-import Camera01Icon from '@untitled-ui/icons-react/build/esm/Camera01';
-import User01Icon from '@untitled-ui/icons-react/build/esm/User01';
-import { alpha } from '@mui/system/colorManipulator';
 import Avatar from '@mui/material/Avatar';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import Divider from '@mui/material/Divider';
-import Grid from '@mui/material/Unstable_Grid2';
 import Stack from '@mui/material/Stack';
 import SvgIcon from '@mui/material/SvgIcon';
 import Switch from '@mui/material/Switch';
 import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
+import Grid from '@mui/material/Unstable_Grid2';
+import { alpha } from '@mui/system/colorManipulator';
+import Camera01Icon from '@untitled-ui/icons-react/build/esm/Camera01';
+import User01Icon from '@untitled-ui/icons-react/build/esm/User01';
+import PropTypes from 'prop-types';
 
 export const AccountGeneralSettings = (props) => {
   const { avatar, email, name } = props;

@@ -1,7 +1,7 @@
 import Box from '@mui/material/Box';
-import Grid from '@mui/material/Unstable_Grid2';
 import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
+import Grid from '@mui/material/Unstable_Grid2';
 
 export const Typography1 = () => (
   <Box sx={{ p: 3 }}>

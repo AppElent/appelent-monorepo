@@ -8,7 +8,6 @@ import {
   Divider,
   IconButton,
   InputAdornment,
-  Link,
   MenuItem,
   OutlinedInput,
   Stack,
@@ -27,19 +26,19 @@ import {
   useMediaQuery,
   useTheme,
 } from '@mui/material';
-import { useItems } from 'src/custom/hooks/use-items';
-import { getSatisfactoryData, getSatisfactoryDataArray } from 'src/custom/libs/satisfactory';
-import { useQueryParam } from 'use-query-params';
+import ArrowRightIcon from '@untitled-ui/icons-react/build/esm/ArrowRight';
 import SearchMdIcon from '@untitled-ui/icons-react/build/esm/SearchMd';
 import { useMemo, useState } from 'react';
-import { Scrollbar } from 'src/components/scrollbar';
-import ArrowRightIcon from '@untitled-ui/icons-react/build/esm/ArrowRight';
-import useModal from 'src/custom/hooks/use-modal';
-import { useKey } from 'src/custom/hooks/use-key';
-import ProductItemDialog from './product-item-dialog';
-import { useGlobalData } from 'src/custom/libs/GlobalContext';
 import { Resizable } from 'react-resizable';
+import { Scrollbar } from 'src/components/scrollbar';
 import useDialog from 'src/custom/hooks/use-dialog';
+import { useItems } from 'src/custom/hooks/use-items';
+import { useKey } from 'src/custom/hooks/use-key';
+import useModal from 'src/custom/hooks/use-modal';
+import { getSatisfactoryData, getSatisfactoryDataArray } from 'src/custom/libs/satisfactory';
+import { useQueryParam } from 'use-query-params';
+
+import ProductItemDialog from './product-item-dialog';
 
 const ProductListDialog = () => {
   const theme = useTheme();

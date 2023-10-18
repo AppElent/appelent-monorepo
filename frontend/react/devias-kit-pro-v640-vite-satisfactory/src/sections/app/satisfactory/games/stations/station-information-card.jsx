@@ -1,4 +1,3 @@
-import PropTypes from 'prop-types';
 import {
   Button,
   Checkbox,
@@ -11,12 +10,12 @@ import {
 } from '@mui/material';
 import { useTranslate } from '@refinedev/core';
 import _ from 'lodash';
-
-import { CardDefault } from 'src/components/app/card-default';
-import { tokens } from 'src/locales/tokens';
 import { useConfirm } from 'material-ui-confirm';
 import { nanoid } from 'nanoid';
+import PropTypes from 'prop-types';
+import { CardDefault } from 'src/components/app/card-default';
 import { STATION_TYPES } from 'src/custom/libs/satisfactory/static';
+import { tokens } from 'src/locales/tokens';
 
 const StationInformationCard = ({
   factories,

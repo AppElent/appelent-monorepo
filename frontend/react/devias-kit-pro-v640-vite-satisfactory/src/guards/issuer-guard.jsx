@@ -1,5 +1,4 @@
 import PropTypes from 'prop-types';
-
 import { Error } from 'src/components/error';
 import { useAuth } from 'src/hooks/use-auth';
 

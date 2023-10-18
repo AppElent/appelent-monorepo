@@ -1,10 +1,9 @@
-import PropTypes from 'prop-types';
-import { format } from 'date-fns';
 import Avatar from '@mui/material/Avatar';
 import Paper from '@mui/material/Paper';
 import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
-
+import { format } from 'date-fns';
+import PropTypes from 'prop-types';
 import { useSelector } from 'src/store';
 
 const useAuthor = (authorId) => {

@@ -1,6 +1,3 @@
-import ArrowRightIcon from '@untitled-ui/icons-react/build/esm/ArrowRight';
-import ChevronDownIcon from '@untitled-ui/icons-react/build/esm/ChevronDown';
-import ChevronUpIcon from '@untitled-ui/icons-react/build/esm/ChevronUp';
 import Avatar from '@mui/material/Avatar';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
@@ -8,12 +5,14 @@ import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
 import Divider from '@mui/material/Divider';
-import Grid from '@mui/material/Unstable_Grid2';
 import Stack from '@mui/material/Stack';
+import { useTheme } from '@mui/material/styles';
 import SvgIcon from '@mui/material/SvgIcon';
 import Typography from '@mui/material/Typography';
-import { useTheme } from '@mui/material/styles';
-
+import Grid from '@mui/material/Unstable_Grid2';
+import ArrowRightIcon from '@untitled-ui/icons-react/build/esm/ArrowRight';
+import ChevronDownIcon from '@untitled-ui/icons-react/build/esm/ChevronDown';
+import ChevronUpIcon from '@untitled-ui/icons-react/build/esm/ChevronUp';
 import { Chart } from 'src/components/chart';
 
 const chartSeries = [83];

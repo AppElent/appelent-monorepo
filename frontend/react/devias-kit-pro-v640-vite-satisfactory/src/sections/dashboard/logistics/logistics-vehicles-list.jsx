@@ -1,5 +1,3 @@
-import PropTypes from 'prop-types';
-import Truck02Icon from '@untitled-ui/icons-react/build/esm/Truck02';
 import Avatar from '@mui/material/Avatar';
 import Box from '@mui/material/Box';
 import Card from '@mui/material/Card';
@@ -12,7 +10,8 @@ import TableCell from '@mui/material/TableCell';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Typography from '@mui/material/Typography';
-
+import Truck02Icon from '@untitled-ui/icons-react/build/esm/Truck02';
+import PropTypes from 'prop-types';
 import { Scrollbar } from 'src/components/scrollbar';
 import { SeverityPill } from 'src/components/severity-pill';
 

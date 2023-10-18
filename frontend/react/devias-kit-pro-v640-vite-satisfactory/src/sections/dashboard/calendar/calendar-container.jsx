@@ -1,5 +1,5 @@
-import { alpha } from '@mui/system/colorManipulator';
 import { styled } from '@mui/material/styles';
+import { alpha } from '@mui/system/colorManipulator';
 
 export const CalendarContainer = styled('div')(({ theme }) => ({
   '& .fc-license-message': {

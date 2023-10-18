@@ -1,5 +1,3 @@
-import { useCallback, useEffect, useState } from 'react';
-import { format, subHours } from 'date-fns';
 import Avatar from '@mui/material/Avatar';
 import Box from '@mui/material/Box';
 import Breadcrumbs from '@mui/material/Breadcrumbs';
@@ -11,7 +9,8 @@ import Divider from '@mui/material/Divider';
 import Link from '@mui/material/Link';
 import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
-
+import { format, subHours } from 'date-fns';
+import { useCallback, useEffect, useState } from 'react';
 import { blogApi } from 'src/api/blog';
 import { BreadcrumbsSeparator } from 'src/components/breadcrumbs-separator';
 import { RouterLink } from 'src/components/router-link';
@@ -21,8 +20,8 @@ import { usePageView } from 'src/hooks/use-page-view';
 import { paths } from 'src/paths';
 import { PostComment } from 'src/sections/dashboard/blog/post-comment';
 import { PostCommentAdd } from 'src/sections/dashboard/blog/post-comment-add';
-import { PostNewsletter } from 'src/sections/dashboard/blog/post-newsletter';
 import { PostContent } from 'src/sections/dashboard/blog/post-content';
+import { PostNewsletter } from 'src/sections/dashboard/blog/post-newsletter';
 
 const useComments = () => {
   return [

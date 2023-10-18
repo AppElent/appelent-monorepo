@@ -1,5 +1,3 @@
-import * as Yup from 'yup';
-import { useFormik } from 'formik';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Card from '@mui/material/Card';
@@ -11,7 +9,7 @@ import Link from '@mui/material/Link';
 import Stack from '@mui/material/Stack';
 import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
-
+import { useFormik } from 'formik';
 import { RouterLink } from 'src/components/router-link';
 import { Seo } from 'src/components/seo';
 import { useAuth } from 'src/hooks/use-auth';
@@ -20,6 +18,7 @@ import { usePageView } from 'src/hooks/use-page-view';
 import { useRouter } from 'src/hooks/use-router';
 import { paths } from 'src/paths';
 import { AuthIssuer } from 'src/sections/auth/auth-issuer';
+import * as Yup from 'yup';
 
 const initialValues = {
   email: '',

@@ -3,11 +3,10 @@ import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import Container from '@mui/material/Container';
 import Divider from '@mui/material/Divider';
-import Grid from '@mui/material/Unstable_Grid2';
 import Rating from '@mui/material/Rating';
 import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
-
+import Grid from '@mui/material/Unstable_Grid2';
 import { LogoAccenture } from 'src/components/logos/logo-accenture';
 import { LogoAtt } from 'src/components/logos/logo-att';
 import { LogoAws } from 'src/components/logos/logo-aws';

@@ -1,9 +1,3 @@
-import PropTypes from 'prop-types';
-import { format } from 'date-fns';
-import numeral from 'numeral';
-import ArrowRightIcon from '@untitled-ui/icons-react/build/esm/ArrowRight';
-import TrendUp02Icon from '@untitled-ui/icons-react/build/esm/TrendUp02';
-import TrendDown02Icon from '@untitled-ui/icons-react/build/esm/TrendDown02';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import Card from '@mui/material/Card';
@@ -16,6 +10,12 @@ import ListItemSecondaryAction from '@mui/material/ListItemSecondaryAction';
 import ListItemText from '@mui/material/ListItemText';
 import SvgIcon from '@mui/material/SvgIcon';
 import Typography from '@mui/material/Typography';
+import ArrowRightIcon from '@untitled-ui/icons-react/build/esm/ArrowRight';
+import TrendDown02Icon from '@untitled-ui/icons-react/build/esm/TrendDown02';
+import TrendUp02Icon from '@untitled-ui/icons-react/build/esm/TrendUp02';
+import { format } from 'date-fns';
+import numeral from 'numeral';
+import PropTypes from 'prop-types';
 
 export const CryptoTransactions = (props) => {
   const { transactions } = props;

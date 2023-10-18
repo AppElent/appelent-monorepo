@@ -1,23 +1,22 @@
-import { subDays, subHours, subMinutes } from 'date-fns';
-import PlusIcon from '@untitled-ui/icons-react/build/esm/Plus';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Container from '@mui/material/Container';
-import Grid from '@mui/material/Unstable_Grid2';
 import Stack from '@mui/material/Stack';
+import { useTheme } from '@mui/material/styles';
 import SvgIcon from '@mui/material/SvgIcon';
 import Typography from '@mui/material/Typography';
-import { useTheme } from '@mui/material/styles';
-
+import Grid from '@mui/material/Unstable_Grid2';
+import PlusIcon from '@untitled-ui/icons-react/build/esm/Plus';
+import { subDays, subHours, subMinutes } from 'date-fns';
 import { Seo } from 'src/components/seo';
 import { usePageView } from 'src/hooks/use-page-view';
 import { useSettings } from 'src/hooks/use-settings';
 import { CryptoCards } from 'src/sections/dashboard/crypto/crypto-cards';
+import { CryptoCurrentBalance } from 'src/sections/dashboard/crypto/crypto-current-balance';
 import { CryptoOperation } from 'src/sections/dashboard/crypto/crypto-operation';
-import { CryptoWallet } from 'src/sections/dashboard/crypto/crypto-wallet';
 import { CryptoTransactions } from 'src/sections/dashboard/crypto/crypto-transactions';
 import { CryptoUpgrade } from 'src/sections/dashboard/crypto/crypto-upgrade';
-import { CryptoCurrentBalance } from 'src/sections/dashboard/crypto/crypto-current-balance';
+import { CryptoWallet } from 'src/sections/dashboard/crypto/crypto-wallet';
 
 const now = new Date();
 

@@ -1,8 +1,7 @@
 import { Box, Container } from '@mui/material';
-
+import { Seo } from 'src/components/seo';
 import { usePageView } from 'src/hooks/use-page-view';
 import { useSettings } from 'src/hooks/use-settings';
-import { Seo } from 'src/components/seo';
 
 const EndProducts = () => {
   usePageView();

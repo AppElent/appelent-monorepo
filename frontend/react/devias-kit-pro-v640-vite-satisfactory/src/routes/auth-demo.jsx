@@ -1,8 +1,7 @@
-import { lazy, Suspense } from 'react';
-
+import { lazy,Suspense } from 'react';
+import { Outlet } from 'react-router-dom';
 import { Layout as AuthClassicLayout } from 'src/layouts/auth/classic-layout';
 import { Layout as AuthModernLayout } from 'src/layouts/auth/modern-layout';
-import { Outlet } from 'react-router-dom';
 
 const ForgotPasswordClassicPage = lazy(() => import('src/pages/auth-demo/forgot-password/classic'));
 const ForgotPasswordModernPage = lazy(() => import('src/pages/auth-demo/forgot-password/modern'));

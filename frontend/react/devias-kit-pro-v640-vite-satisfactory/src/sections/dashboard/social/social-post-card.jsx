@@ -1,9 +1,3 @@
-import { useCallback, useState } from 'react';
-import PropTypes from 'prop-types';
-import { formatDistanceToNowStrict } from 'date-fns';
-import ClockIcon from '@untitled-ui/icons-react/build/esm/Clock';
-import HeartIcon from '@untitled-ui/icons-react/build/esm/Heart';
-import Share07Icon from '@untitled-ui/icons-react/build/esm/Share07';
 import Avatar from '@mui/material/Avatar';
 import Box from '@mui/material/Box';
 import Card from '@mui/material/Card';
@@ -17,6 +11,12 @@ import Stack from '@mui/material/Stack';
 import SvgIcon from '@mui/material/SvgIcon';
 import Tooltip from '@mui/material/Tooltip';
 import Typography from '@mui/material/Typography';
+import ClockIcon from '@untitled-ui/icons-react/build/esm/Clock';
+import HeartIcon from '@untitled-ui/icons-react/build/esm/Heart';
+import Share07Icon from '@untitled-ui/icons-react/build/esm/Share07';
+import { formatDistanceToNowStrict } from 'date-fns';
+import PropTypes from 'prop-types';
+import { useCallback, useState } from 'react';
 
 import { SocialComment } from './social-comment';
 import { SocialCommentAdd } from './social-comment-add';

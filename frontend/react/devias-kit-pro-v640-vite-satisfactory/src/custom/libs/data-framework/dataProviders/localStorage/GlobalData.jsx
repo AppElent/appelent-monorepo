@@ -1,7 +1,8 @@
-import { useState, useEffect, useMemo } from 'react';
 import PropTypes from 'prop-types';
-import { useData } from '../../framework/useData';
+import { useEffect, useMemo, useState } from 'react';
+
 import { ActionType } from '../../framework/ActionType';
+import { useData } from '../../framework/useData';
 
 /**
  *

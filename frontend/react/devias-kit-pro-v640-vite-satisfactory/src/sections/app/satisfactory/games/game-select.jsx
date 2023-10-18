@@ -1,6 +1,6 @@
-import PropTypes from 'prop-types';
 import { Autocomplete, TextField } from '@mui/material';
 import { useTranslate } from '@refinedev/core';
+import PropTypes from 'prop-types';
 import { tokens } from 'src/locales/tokens';
 
 const GameSelect = ({ games, onGameChange, selectedGame }) => {

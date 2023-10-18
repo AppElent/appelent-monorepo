@@ -1,11 +1,11 @@
-import { useState, useEffect, useMemo } from 'react';
-import PropTypes from 'prop-types';
-import { useData } from '../../framework/useData';
-import { ActionType } from '../../framework/ActionType';
 import { addDoc, deleteDoc, doc, query, setDoc, updateDoc } from 'firebase/firestore';
 import _ from 'lodash';
-
+import PropTypes from 'prop-types';
+import { useEffect, useMemo, useState } from 'react';
 import { useCollection, useDocument } from 'react-firebase-hooks/firestore';
+
+import { ActionType } from '../../framework/ActionType';
+import { useData } from '../../framework/useData';
 
 const useFirestoreDocument = (query, options, process) => {
   const [values, loading, error, snapshot] = useDocument(query, options);

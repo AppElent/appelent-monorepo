@@ -1,9 +1,8 @@
-import User01Icon from '@untitled-ui/icons-react/build/esm/User01';
 import Avatar from '@mui/material/Avatar';
 import Box from '@mui/material/Box';
 import ButtonBase from '@mui/material/ButtonBase';
 import SvgIcon from '@mui/material/SvgIcon';
-
+import User01Icon from '@untitled-ui/icons-react/build/esm/User01';
 import { useMockedUser } from 'src/hooks/use-mocked-user';
 import { usePopover } from 'src/hooks/use-popover';
 

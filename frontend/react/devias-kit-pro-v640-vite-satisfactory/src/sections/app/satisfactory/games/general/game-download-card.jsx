@@ -1,4 +1,3 @@
-import PropTypes from 'prop-types';
 import {
   Button,
   Stack,
@@ -6,6 +5,7 @@ import {
   Unstable_Grid2 as Grid,
 } from '@mui/material';
 import { useTranslate } from '@refinedev/core';
+import PropTypes from 'prop-types';
 import { CardDefault } from 'src/components/app/card-default';
 import { tokens } from 'src/locales/tokens';
 

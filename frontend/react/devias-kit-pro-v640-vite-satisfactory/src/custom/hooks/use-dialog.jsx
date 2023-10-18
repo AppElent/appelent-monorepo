@@ -1,8 +1,11 @@
 import { Paper } from '@mui/material';
 import { useState } from 'react';
 import Draggable from 'react-draggable';
-import { Resizable } from 'react-resizable';
 
+/**
+ *
+ * @param props
+ */
 function PaperComponent(props) {
   return (
     <Draggable

@@ -1,6 +1,6 @@
-import PropTypes from 'prop-types';
 import Divider from '@mui/material/Divider';
 import Stack from '@mui/material/Stack';
+import PropTypes from 'prop-types';
 
 import { LogisticsFleetVehicle } from './logistics-fleet-vehicle';
 

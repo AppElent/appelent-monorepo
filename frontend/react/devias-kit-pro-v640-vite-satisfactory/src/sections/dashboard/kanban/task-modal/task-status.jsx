@@ -1,11 +1,10 @@
-import { useCallback, useEffect, useState } from 'react';
-import PropTypes from 'prop-types';
-import ChevronDownIcon from '@untitled-ui/icons-react/build/esm/ChevronDown';
 import Button from '@mui/material/Button';
 import ButtonGroup from '@mui/material/ButtonGroup';
 import MenuItem from '@mui/material/MenuItem';
 import Popover from '@mui/material/Popover';
-
+import ChevronDownIcon from '@untitled-ui/icons-react/build/esm/ChevronDown';
+import PropTypes from 'prop-types';
+import { useCallback, useEffect, useState } from 'react';
 import { usePopover } from 'src/hooks/use-popover';
 
 export const TaskStatus = (props) => {

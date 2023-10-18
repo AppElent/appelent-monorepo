@@ -1,7 +1,3 @@
-import CreditCard02Icon from '@untitled-ui/icons-react/build/esm/CreditCard02';
-import Mail01Icon from '@untitled-ui/icons-react/build/esm/Mail01';
-import Send01Icon from '@untitled-ui/icons-react/build/esm/Send01';
-import ChevronRightIcon from '@untitled-ui/icons-react/build/esm/ChevronRight';
 import Box from '@mui/material/Box';
 import Card from '@mui/material/Card';
 import IconButton from '@mui/material/IconButton';
@@ -13,6 +9,10 @@ import ListItemText from '@mui/material/ListItemText';
 import SvgIcon from '@mui/material/SvgIcon';
 import Tooltip from '@mui/material/Tooltip';
 import Typography from '@mui/material/Typography';
+import ChevronRightIcon from '@untitled-ui/icons-react/build/esm/ChevronRight';
+import CreditCard02Icon from '@untitled-ui/icons-react/build/esm/CreditCard02';
+import Mail01Icon from '@untitled-ui/icons-react/build/esm/Mail01';
+import Send01Icon from '@untitled-ui/icons-react/build/esm/Send01';
 
 const notifications = [
   {

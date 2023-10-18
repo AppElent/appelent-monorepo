@@ -1,5 +1,3 @@
-import propTypes from 'prop-types';
-import CheckIcon from '@untitled-ui/icons-react/build/esm/Check';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Card from '@mui/material/Card';
@@ -7,6 +5,8 @@ import Divider from '@mui/material/Divider';
 import Stack from '@mui/material/Stack';
 import SvgIcon from '@mui/material/SvgIcon';
 import Typography from '@mui/material/Typography';
+import CheckIcon from '@untitled-ui/icons-react/build/esm/Check';
+import propTypes from 'prop-types';
 
 export const PricingPlan = (props) => {
   const { cta, currency, description, features, icon, name, popular, price, sx, ...other } = props;

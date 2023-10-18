@@ -1,10 +1,10 @@
 import { Button, Stack, TextField } from '@mui/material';
+import { useTranslate } from '@refinedev/core';
 import { useFormik } from 'formik';
-import * as Yup from 'yup';
 import { CardDefault } from 'src/components/app/card-default';
 import { useMounted } from 'src/hooks/use-mounted';
-import { useTranslate } from '@refinedev/core';
 import { tokens } from 'src/locales/tokens';
+import * as Yup from 'yup';
 
 const ChangePasswordCard = ({ updatePassword }) => {
   const isMounted = useMounted();

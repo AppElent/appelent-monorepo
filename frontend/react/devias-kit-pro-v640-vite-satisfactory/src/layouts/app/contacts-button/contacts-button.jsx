@@ -1,8 +1,7 @@
-import Users03Icon from '@untitled-ui/icons-react/build/esm/Users03';
 import IconButton from '@mui/material/IconButton';
 import SvgIcon from '@mui/material/SvgIcon';
 import Tooltip from '@mui/material/Tooltip';
-
+import Users03Icon from '@untitled-ui/icons-react/build/esm/Users03';
 import { usePopover } from 'src/hooks/use-popover';
 
 import { ContactsPopover } from './contacts-popover';

@@ -1,14 +1,13 @@
 import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
 import Stack from '@mui/material/Stack';
-
 import { Seo } from 'src/components/seo';
 import { usePageView } from 'src/hooks/use-page-view';
 import { Layout as ComponentsLayout } from 'src/layouts/components';
-import { Previewer } from 'src/sections/components/previewer';
 import { Buttons1 } from 'src/sections/components/buttons/buttons-1';
 import { Buttons2 } from 'src/sections/components/buttons/buttons-2';
 import { Buttons3 } from 'src/sections/components/buttons/buttons-3';
+import { Previewer } from 'src/sections/components/previewer';
 
 const components = [
   {

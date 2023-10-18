@@ -1,7 +1,3 @@
-import PropTypes from 'prop-types';
-import numeral from 'numeral';
-import InfoCircleIcon from '@untitled-ui/icons-react/build/esm/InfoCircle';
-import LinkExternal01Icon from '@untitled-ui/icons-react/build/esm/LinkExternal01';
 import Card from '@mui/material/Card';
 import CardHeader from '@mui/material/CardHeader';
 import Link from '@mui/material/Link';
@@ -14,7 +10,10 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Tooltip from '@mui/material/Tooltip';
 import Typography from '@mui/material/Typography';
-
+import InfoCircleIcon from '@untitled-ui/icons-react/build/esm/InfoCircle';
+import LinkExternal01Icon from '@untitled-ui/icons-react/build/esm/LinkExternal01';
+import numeral from 'numeral';
+import PropTypes from 'prop-types';
 import { Scrollbar } from 'src/components/scrollbar';
 
 export const AnalyticsMostVisited = (props) => {

@@ -1,20 +1,19 @@
-import { useContext, useMemo } from 'react';
-import PropTypes from 'prop-types';
+import { Button } from '@mui/material';
 import Box from '@mui/material/Box';
 import Drawer from '@mui/material/Drawer';
 import Stack from '@mui/material/Stack';
 import { useTheme } from '@mui/material/styles';
-
+import PropTypes from 'prop-types';
+import { useMemo } from 'react';
 import { Logo } from 'src/components/app/logo';
+import VersionSelector from 'src/components/app/satisfactory/version-selector';
 import { RouterLink } from 'src/components/router-link';
 import { Scrollbar } from 'src/components/scrollbar';
 import { usePathname } from 'src/hooks/use-pathname';
 import { paths } from 'src/paths';
+
 import { TenantSwitch } from '../tenant-switch';
 import { SideNavSection } from './side-nav-section';
-import VersionSelector from 'src/components/app/satisfactory/version-selector';
-import { Button } from '@mui/material';
-import { useGlobalData } from 'src/custom/libs/GlobalContext';
 
 const SIDE_NAV_WIDTH = 280;
 

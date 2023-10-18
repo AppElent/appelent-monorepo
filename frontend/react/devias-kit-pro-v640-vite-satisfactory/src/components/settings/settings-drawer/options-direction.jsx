@@ -1,10 +1,10 @@
-import PropTypes from 'prop-types';
-import LeftIndent01Icon from '@untitled-ui/icons-react/build/esm/LeftIndent01';
-import RightIndent01Icon from '@untitled-ui/icons-react/build/esm/RightIndent01';
 import Chip from '@mui/material/Chip';
 import Stack from '@mui/material/Stack';
 import SvgIcon from '@mui/material/SvgIcon';
 import Typography from '@mui/material/Typography';
+import LeftIndent01Icon from '@untitled-ui/icons-react/build/esm/LeftIndent01';
+import RightIndent01Icon from '@untitled-ui/icons-react/build/esm/RightIndent01';
+import PropTypes from 'prop-types';
 
 const options = [
   {

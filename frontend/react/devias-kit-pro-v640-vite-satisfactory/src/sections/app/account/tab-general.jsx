@@ -1,28 +1,20 @@
-import { useState } from 'react';
-import PropTypes from 'prop-types';
-import Camera01Icon from '@untitled-ui/icons-react/build/esm/Camera01';
-import User01Icon from '@untitled-ui/icons-react/build/esm/User01';
 import {
-  Avatar,
-  Box,
   Button,
+  MenuItem,
   Stack,
-  SvgIcon,
   TextField,
   Typography,
-  MenuItem,
 } from '@mui/material';
-import { alpha } from '@mui/material/styles';
-import { useFormik } from 'formik';
-
-import { CardDefault } from 'src/components/app/card-default';
 import { getAuth, updateProfile } from 'firebase/auth';
-import { generateName } from 'src/custom/libs/random-name-generator';
+import { useFormik } from 'formik';
+import PropTypes from 'prop-types';
+import { useState } from 'react';
+import { CardDefault } from 'src/components/app/card-default';
+import { useData } from 'src/custom/libs/data-framework';
+import { logger,LogLevelOptions } from 'src/custom/libs/logging';
 import { useMounted } from 'src/hooks/use-mounted';
 
-import { LogLevelOptions, logger } from 'src/custom/libs/logging';
 import BasicDetailsCard from './basic-details-card';
-import { useData } from 'src/custom/libs/data-framework';
 import PublicProfileCard from './public-profile-card';
 
 const TabGeneral = (props) => {

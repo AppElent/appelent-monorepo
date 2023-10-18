@@ -1,8 +1,7 @@
-import { useTranslation } from 'react-i18next';
 import Box from '@mui/material/Box';
 import IconButton from '@mui/material/IconButton';
 import Tooltip from '@mui/material/Tooltip';
-
+import { useTranslation } from 'react-i18next';
 import { usePopover } from 'src/hooks/use-popover';
 
 import { LanguagePopover } from './language-popover';

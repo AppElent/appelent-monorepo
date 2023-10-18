@@ -1,10 +1,10 @@
-import PropTypes from 'prop-types';
-import AlertTriangleIcon from '@untitled-ui/icons-react/build/esm/AlertTriangle';
 import Avatar from '@mui/material/Avatar';
 import Card from '@mui/material/Card';
 import Stack from '@mui/material/Stack';
 import SvgIcon from '@mui/material/SvgIcon';
 import Typography from '@mui/material/Typography';
+import AlertTriangleIcon from '@untitled-ui/icons-react/build/esm/AlertTriangle';
+import PropTypes from 'prop-types';
 
 export const LogisticsErrorVehicles = (props) => {
   const { amount } = props;

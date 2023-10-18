@@ -1,19 +1,18 @@
-import ArrowRightIcon from '@untitled-ui/icons-react/build/esm/ArrowRight';
-import PlusIcon from '@untitled-ui/icons-react/build/esm/Plus';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Container from '@mui/material/Container';
-import Grid from '@mui/material/Unstable_Grid2';
 import Stack from '@mui/material/Stack';
 import SvgIcon from '@mui/material/SvgIcon';
 import Typography from '@mui/material/Typography';
-
+import Grid from '@mui/material/Unstable_Grid2';
+import ArrowRightIcon from '@untitled-ui/icons-react/build/esm/ArrowRight';
+import PlusIcon from '@untitled-ui/icons-react/build/esm/Plus';
 import { Seo } from 'src/components/seo';
 import { usePageView } from 'src/hooks/use-page-view';
 import { useSettings } from 'src/hooks/use-settings';
-import { AnalyticsStats } from 'src/sections/dashboard/analytics/analytics-stats';
 import { AnalyticsMostVisited } from 'src/sections/dashboard/analytics/analytics-most-visited';
 import { AnalyticsSocialSources } from 'src/sections/dashboard/analytics/analytics-social-sources';
+import { AnalyticsStats } from 'src/sections/dashboard/analytics/analytics-stats';
 import { AnalyticsTrafficSources } from 'src/sections/dashboard/analytics/analytics-traffic-sources';
 import { AnalyticsVisitsByCountry } from 'src/sections/dashboard/analytics/analytics-visits-by-country';
 

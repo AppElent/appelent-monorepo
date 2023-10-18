@@ -1,5 +1,5 @@
-import PropTypes from 'prop-types';
 import { Dialog, DialogContent, DialogTitle } from '@mui/material';
+import PropTypes from 'prop-types';
 
 const DefaultDialog = ({ open, handleClose }) => {
   return (

@@ -1,4 +1,3 @@
-import PropTypes from 'prop-types';
 import { useTheme } from '@emotion/react';
 import {
   Box,
@@ -21,7 +20,8 @@ import {
   useMediaQuery,
 } from '@mui/material';
 import { nanoid } from 'nanoid';
-import React, { useMemo, useEffect } from 'react';
+import PropTypes from 'prop-types';
+import React, { useEffect, useMemo } from 'react';
 import { getSatisfactoryData } from 'src/custom/libs/satisfactory';
 import {
   PLATFORM_TYPES,

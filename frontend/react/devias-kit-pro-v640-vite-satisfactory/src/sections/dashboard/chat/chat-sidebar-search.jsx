@@ -1,6 +1,3 @@
-import { forwardRef, useCallback } from 'react';
-import PropTypes from 'prop-types';
-import SearchMdIcon from '@untitled-ui/icons-react/build/esm/SearchMd';
 import Avatar from '@mui/material/Avatar';
 import Box from '@mui/material/Box';
 import ClickAwayListener from '@mui/material/ClickAwayListener';
@@ -12,7 +9,9 @@ import ListItemText from '@mui/material/ListItemText';
 import OutlinedInput from '@mui/material/OutlinedInput';
 import SvgIcon from '@mui/material/SvgIcon';
 import Typography from '@mui/material/Typography';
-
+import SearchMdIcon from '@untitled-ui/icons-react/build/esm/SearchMd';
+import PropTypes from 'prop-types';
+import { forwardRef, useCallback } from 'react';
 import { Tip } from 'src/components/tip';
 
 export const ChatSidebarSearch = forwardRef(function ChatSidebarSearch(props, ref) {

@@ -1,6 +1,6 @@
-import Markdown from 'react-markdown';
-import PropTypes from 'prop-types';
 import { styled } from '@mui/material/styles';
+import PropTypes from 'prop-types';
+import Markdown from 'react-markdown';
 
 const MarkdownWrapper = styled('div')(({ theme }) => ({
   color: theme.palette.text.primary,

@@ -1,4 +1,8 @@
-import PropTypes from 'prop-types';
+import Box from '@mui/material/Box';
+import ButtonBase from '@mui/material/ButtonBase';
+import ListItem from '@mui/material/ListItem';
+import SvgIcon from '@mui/material/SvgIcon';
+import Typography from '@mui/material/Typography';
 import AlertCircleIcon from '@untitled-ui/icons-react/build/esm/AlertCircle';
 import BookmarkIcon from '@untitled-ui/icons-react/build/esm/Bookmark';
 import Inbox01Icon from '@untitled-ui/icons-react/build/esm/Inbox01';
@@ -8,11 +12,7 @@ import Send01Icon from '@untitled-ui/icons-react/build/esm/Send01';
 import Star01Icon from '@untitled-ui/icons-react/build/esm/Star01';
 import Tag01Icon from '@untitled-ui/icons-react/build/esm/Tag01';
 import Trash02Icon from '@untitled-ui/icons-react/build/esm/Trash02';
-import Box from '@mui/material/Box';
-import ButtonBase from '@mui/material/ButtonBase';
-import ListItem from '@mui/material/ListItem';
-import SvgIcon from '@mui/material/SvgIcon';
-import Typography from '@mui/material/Typography';
+import PropTypes from 'prop-types';
 
 const systemLabelIcons = {
   all: <Mail01Icon />,

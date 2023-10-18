@@ -1,5 +1,3 @@
-import Settings01Icon from '@untitled-ui/icons-react/build/esm/Settings01';
-import User01Icon from '@untitled-ui/icons-react/build/esm/User01';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Divider from '@mui/material/Divider';
@@ -9,6 +7,8 @@ import MenuItem from '@mui/material/MenuItem';
 import Paper from '@mui/material/Paper';
 import SvgIcon from '@mui/material/SvgIcon';
 import Typography from '@mui/material/Typography';
+import Settings01Icon from '@untitled-ui/icons-react/build/esm/Settings01';
+import User01Icon from '@untitled-ui/icons-react/build/esm/User01';
 
 export const Modal6 = () => (
   <Box

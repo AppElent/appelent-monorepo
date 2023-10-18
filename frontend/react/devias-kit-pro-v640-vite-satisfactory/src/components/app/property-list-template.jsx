@@ -1,5 +1,5 @@
-import PropTypes from 'prop-types';
 import { useMediaQuery } from '@mui/material';
+import PropTypes from 'prop-types';
 import { PropertyList } from 'src/components/property-list';
 import { PropertyListItem } from 'src/components/property-list-item';
 

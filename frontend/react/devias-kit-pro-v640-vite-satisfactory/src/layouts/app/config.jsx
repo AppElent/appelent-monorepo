@@ -1,7 +1,6 @@
+import SvgIcon from '@mui/material/SvgIcon';
 import { useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
-import SvgIcon from '@mui/material/SvgIcon';
-
 import CheckDone01Icon from 'src/icons/untitled-ui/duocolor/check-done-01';
 import HomeSmileIcon from 'src/icons/untitled-ui/duocolor/home-smile';
 import Users03Icon from 'src/icons/untitled-ui/duocolor/users-03';

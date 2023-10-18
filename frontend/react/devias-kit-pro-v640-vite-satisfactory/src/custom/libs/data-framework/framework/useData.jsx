@@ -1,8 +1,8 @@
-import { useEffect, useState } from 'react';
 import _ from 'lodash';
-import { ActionType } from './ActionType';
+import { useEffect, useState } from 'react';
 
 import { useDataFramwork } from '../index';
+import { ActionType } from './ActionType';
 
 export const useData = (key, options) => {
   const globalData = useDataFramwork();

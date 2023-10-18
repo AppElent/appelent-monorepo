@@ -1,8 +1,8 @@
+import { Refine as RefineDev } from '@refinedev/core';
+import RestDataProvider from '@refinedev/simple-rest';
 import PropTypes from 'prop-types';
 import { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Refine as RefineDev } from '@refinedev/core';
-import RestDataProvider from '@refinedev/simple-rest';
 
 const Refine = ({ authProvider, resources, dataProvider, children, ...refineOptions }) => {
   /**?

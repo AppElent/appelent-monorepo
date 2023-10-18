@@ -1,15 +1,14 @@
-import { useCallback, useEffect, useMemo, useState } from 'react';
-import PropTypes from 'prop-types';
-import Moon01Icon from '@untitled-ui/icons-react/build/esm/Moon01';
-import SunIcon from '@untitled-ui/icons-react/build/esm/Sun';
 import Box from '@mui/material/Box';
 import Card from '@mui/material/Card';
 import CardHeader from '@mui/material/CardHeader';
 import Divider from '@mui/material/Divider';
 import IconButton from '@mui/material/IconButton';
-import SvgIcon from '@mui/material/SvgIcon';
 import { ThemeProvider } from '@mui/material/styles';
-
+import SvgIcon from '@mui/material/SvgIcon';
+import Moon01Icon from '@untitled-ui/icons-react/build/esm/Moon01';
+import SunIcon from '@untitled-ui/icons-react/build/esm/Sun';
+import PropTypes from 'prop-types';
+import { useCallback, useEffect, useMemo, useState } from 'react';
 import { useSettings } from 'src/hooks/use-settings';
 import { createTheme } from 'src/theme';
 

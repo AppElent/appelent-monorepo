@@ -1,6 +1,3 @@
-import { useCallback, useRef, useState } from 'react';
-import PropTypes from 'prop-types';
-import SearchMdIcon from '@untitled-ui/icons-react/build/esm/SearchMd';
 import Avatar from '@mui/material/Avatar';
 import Box from '@mui/material/Box';
 import Chip from '@mui/material/Chip';
@@ -16,7 +13,9 @@ import Popper from '@mui/material/Popper';
 import Stack from '@mui/material/Stack';
 import SvgIcon from '@mui/material/SvgIcon';
 import Typography from '@mui/material/Typography';
-
+import SearchMdIcon from '@untitled-ui/icons-react/build/esm/SearchMd';
+import PropTypes from 'prop-types';
+import { useCallback, useRef, useState } from 'react';
 import { chatApi } from 'src/api/chat';
 import { Scrollbar } from 'src/components/scrollbar';
 

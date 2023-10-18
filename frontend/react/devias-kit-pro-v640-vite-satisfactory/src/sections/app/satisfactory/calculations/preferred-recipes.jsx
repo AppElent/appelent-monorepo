@@ -1,4 +1,3 @@
-import PropTypes from 'prop-types';
 import {
   Autocomplete,
   Button,
@@ -12,13 +11,13 @@ import {
   TableRow,
   TextField,
 } from '@mui/material';
+import _ from 'lodash';
+import PropTypes from 'prop-types';
 import { useEffect, useMemo } from 'react';
 import { CardDefault } from 'src/components/app/card-default';
-import { getSatisfactoryData, getSatisfactoryDataArray } from 'src/custom/libs/satisfactory';
-import _ from 'lodash';
-
-import { usePageView } from 'src/hooks/use-page-view';
 import useLocalStorage from 'src/custom/hooks/use-local-storage';
+import { getSatisfactoryData, getSatisfactoryDataArray } from 'src/custom/libs/satisfactory';
+import { usePageView } from 'src/hooks/use-page-view';
 
 const PreferredRecipes = ({ preferredRecipes, setPreferredRecipes, version }) => {
   usePageView();

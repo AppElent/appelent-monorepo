@@ -1,5 +1,3 @@
-import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
-import ArrowRightIcon from '@untitled-ui/icons-react/build/esm/ArrowRight';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Card from '@mui/material/Card';
@@ -9,10 +7,11 @@ import Container from '@mui/material/Container';
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import ListItemText from '@mui/material/ListItemText';
+import { useTheme } from '@mui/material/styles';
 import SvgIcon from '@mui/material/SvgIcon';
 import Typography from '@mui/material/Typography';
-import { useTheme } from '@mui/material/styles';
-
+import ArrowRightIcon from '@untitled-ui/icons-react/build/esm/ArrowRight';
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { Chart } from 'src/components/chart';
 import { useMounted } from 'src/hooks/use-mounted';
 import { getRandomInt } from 'src/utils/get-random-int';

@@ -1,24 +1,24 @@
 import { Autocomplete, Box, Container, TextField, Typography } from '@mui/material';
-import { usePageView } from 'src/hooks/use-page-view';
-import { useSettings } from 'src/hooks/use-settings';
-import { useRouter } from 'src/hooks/use-router';
-import { useMemo, useEffect } from 'react';
+import { Stack } from '@mui/system';
+import { useTranslate } from '@refinedev/core';
+import _ from 'lodash';
+import { useEffect, useMemo } from 'react';
+import { useParams } from 'react-router';
+import { Seo } from 'src/components/seo';
 import {
+  getSatisfactoryData,
   getSatisfactoryDataArray,
   getSatisfactoryItem,
-  satisfactoryVersions,
   SatisfactoryCurrentVersion,
-  getSatisfactoryData,
+  satisfactoryVersions,
 } from 'src/custom/libs/satisfactory';
-import { Stack } from '@mui/system';
-import { SatisfactoryProductDetail } from 'src/sections/app/satisfactory/products/product-detail';
-import { paths } from 'src/paths';
-import _ from 'lodash';
-import { SatisfactoryProductRecipeTable } from 'src/sections/app/satisfactory/products/product-recipe-table';
-import { useTranslate } from '@refinedev/core';
+import { usePageView } from 'src/hooks/use-page-view';
+import { useRouter } from 'src/hooks/use-router';
+import { useSettings } from 'src/hooks/use-settings';
 import { tokens } from 'src/locales/tokens';
-import { Seo } from 'src/components/seo';
-import { useParams } from 'react-router';
+import { paths } from 'src/paths';
+import { SatisfactoryProductDetail } from 'src/sections/app/satisfactory/products/product-detail';
+import { SatisfactoryProductRecipeTable } from 'src/sections/app/satisfactory/products/product-recipe-table';
 import { useQueryParam } from 'use-query-params';
 
 const Page = () => {

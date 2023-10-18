@@ -1,14 +1,8 @@
 import {
-  Avatar,
-  Box,
-  Button,
-  Stack,
-  SvgIcon,
-  TextField,
-  Typography,
-  MenuItem,
   Divider,
+  Stack,
   Switch,
+  Typography,
 } from '@mui/material';
 import { CardDefault } from 'src/components/app/card-default';
 

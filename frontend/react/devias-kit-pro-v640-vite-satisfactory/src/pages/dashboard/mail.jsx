@@ -1,16 +1,15 @@
-import { useCallback, useEffect, useRef, useState } from 'react';
 import Box from '@mui/material/Box';
 import Divider from '@mui/material/Divider';
 import useMediaQuery from '@mui/material/useMediaQuery';
-
+import { useCallback, useEffect, useRef, useState } from 'react';
 import { Seo } from 'src/components/seo';
 import { usePageView } from 'src/hooks/use-page-view';
 import { useSearchParams } from 'src/hooks/use-search-params';
 import { MailComposer } from 'src/sections/dashboard/mail/mail-composer';
-import { MailThread } from 'src/sections/dashboard/mail/mail-thread';
 import { MailContainer } from 'src/sections/dashboard/mail/mail-container';
 import { MailList } from 'src/sections/dashboard/mail/mail-list';
 import { MailSidebar } from 'src/sections/dashboard/mail/mail-sidebar';
+import { MailThread } from 'src/sections/dashboard/mail/mail-thread';
 import { useDispatch, useSelector } from 'src/store';
 import { thunks } from 'src/thunks/mail';
 

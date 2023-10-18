@@ -1,5 +1,3 @@
-import { formatDistanceToNowStrict, subHours, subMinutes } from 'date-fns';
-import Download01Icon from '@untitled-ui/icons-react/build/esm/Download01';
 import Avatar from '@mui/material/Avatar';
 import Box from '@mui/material/Box';
 import Card from '@mui/material/Card';
@@ -7,6 +5,8 @@ import Link from '@mui/material/Link';
 import Stack from '@mui/material/Stack';
 import SvgIcon from '@mui/material/SvgIcon';
 import Typography from '@mui/material/Typography';
+import Download01Icon from '@untitled-ui/icons-react/build/esm/Download01';
+import { formatDistanceToNowStrict, subHours, subMinutes } from 'date-fns';
 
 const now = new Date();
 

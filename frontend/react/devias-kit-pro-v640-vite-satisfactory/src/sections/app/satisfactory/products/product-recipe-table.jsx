@@ -1,25 +1,24 @@
-import PropTypes from 'prop-types';
 import {
   Card,
+  CardContent,
   CardHeader,
   Table,
+  TableBody,
+  TableCell,
+  TableContainer,
   TableHead,
   TableRow,
-  TableCell,
-  TableBody,
-  CardContent,
   Tooltip,
-  TableContainer,
 } from '@mui/material';
-import React from 'react';
-
-import { SeverityPill } from 'src/components/severity-pill';
-import { tokens } from 'src/locales/tokens';
-import { recipeChart } from 'src/custom/libs/satisfactory';
-import Mermaid from 'src/custom/libs/mermaid';
-import { Link } from 'react-router-dom';
-import { paths } from 'src/paths';
 import { useTranslate } from '@refinedev/core';
+import PropTypes from 'prop-types';
+import React from 'react';
+import { Link } from 'react-router-dom';
+import { SeverityPill } from 'src/components/severity-pill';
+import Mermaid from 'src/custom/libs/mermaid';
+import { recipeChart } from 'src/custom/libs/satisfactory/charts';
+import { tokens } from 'src/locales/tokens';
+import { paths } from 'src/paths';
 
 export const SatisfactoryProductRecipeTable = ({
   recipes,

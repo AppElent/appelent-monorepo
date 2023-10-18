@@ -1,18 +1,17 @@
-import ArrowLeftIcon from '@untitled-ui/icons-react/build/esm/ArrowLeft';
 import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
-import Grid from '@mui/material/Unstable_Grid2';
 import Link from '@mui/material/Link';
 import Stack from '@mui/material/Stack';
 import SvgIcon from '@mui/material/SvgIcon';
 import Typography from '@mui/material/Typography';
-
+import Grid from '@mui/material/Unstable_Grid2';
+import ArrowLeftIcon from '@untitled-ui/icons-react/build/esm/ArrowLeft';
 import { RouterLink } from 'src/components/router-link';
 import { Seo } from 'src/components/seo';
 import { usePageView } from 'src/hooks/use-page-view';
 import { paths } from 'src/paths';
-import { CourseSummary } from 'src/sections/dashboard/academy/course-summary';
 import { CourseChapter } from 'src/sections/dashboard/academy/course-chapter';
+import { CourseSummary } from 'src/sections/dashboard/academy/course-summary';
 
 const useCourse = () => {
   return {

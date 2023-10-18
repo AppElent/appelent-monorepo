@@ -1,24 +1,24 @@
-import PropTypes from 'prop-types';
-import { format } from 'date-fns';
-import Edit02Icon from '@untitled-ui/icons-react/build/esm/Edit02';
-import Star01Icon from '@untitled-ui/icons-react/build/esm/Star01';
-import Trash02Icon from '@untitled-ui/icons-react/build/esm/Trash02';
-import XIcon from '@untitled-ui/icons-react/build/esm/X';
 import Avatar from '@mui/material/Avatar';
 import { backdropClasses } from '@mui/material/Backdrop';
 import Box from '@mui/material/Box';
 import Divider from '@mui/material/Divider';
 import Drawer from '@mui/material/Drawer';
-import Grid from '@mui/material/Unstable_Grid2';
 import IconButton from '@mui/material/IconButton';
 import Stack from '@mui/material/Stack';
 import SvgIcon from '@mui/material/SvgIcon';
 import Typography from '@mui/material/Typography';
+import Grid from '@mui/material/Unstable_Grid2';
+import Edit02Icon from '@untitled-ui/icons-react/build/esm/Edit02';
+import Star01Icon from '@untitled-ui/icons-react/build/esm/Star01';
+import Trash02Icon from '@untitled-ui/icons-react/build/esm/Trash02';
+import XIcon from '@untitled-ui/icons-react/build/esm/X';
+import { format } from 'date-fns';
+import PropTypes from 'prop-types';
 import { bytesToSize } from 'src/utils/bytes-to-size';
 
 import { ItemIcon } from '../item-icon';
-import { ItemTags } from './item-tags';
 import { ItemShared } from './item-shared';
+import { ItemTags } from './item-tags';
 
 export const ItemDrawer = (props) => {
   const { item, onClose, onDelete, onFavorite, onTagsChange, open = false } = props;

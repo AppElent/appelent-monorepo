@@ -1,6 +1,5 @@
-import { lazy, Suspense } from 'react';
+import { lazy,Suspense } from 'react';
 import { Outlet } from 'react-router-dom';
-
 import { Layout as DashboardLayout } from 'src/layouts/app';
 
 const OverviewPage = lazy(() => import('src/pages/app/index'));

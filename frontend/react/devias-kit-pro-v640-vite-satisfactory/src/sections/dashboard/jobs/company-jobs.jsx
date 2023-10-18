@@ -1,10 +1,10 @@
-import PropTypes from 'prop-types';
-import { formatDistanceStrict } from 'date-fns';
 import Button from '@mui/material/Button';
 import Card from '@mui/material/Card';
 import Divider from '@mui/material/Divider';
 import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
+import { formatDistanceStrict } from 'date-fns';
+import PropTypes from 'prop-types';
 
 export const CompanyJobs = (props) => {
   const { jobs = [], ...other } = props;

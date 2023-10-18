@@ -1,11 +1,11 @@
-import { useCallback, useMemo, useState } from 'react';
-import Bell01Icon from '@untitled-ui/icons-react/build/esm/Bell01';
 import Badge from '@mui/material/Badge';
 import IconButton from '@mui/material/IconButton';
 import SvgIcon from '@mui/material/SvgIcon';
 import Tooltip from '@mui/material/Tooltip';
-
+import Bell01Icon from '@untitled-ui/icons-react/build/esm/Bell01';
+import { useCallback, useMemo, useState } from 'react';
 import { usePopover } from 'src/hooks/use-popover';
+
 import { notifications as initialNotifications } from './notifications';
 import { NotificationsPopover } from './notifications-popover';
 

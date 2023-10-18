@@ -1,13 +1,12 @@
 import { lazy } from 'react';
 import { Outlet } from 'react-router-dom';
-
 import { Layout as MarketingLayout } from 'src/layouts/marketing';
 
+import { appRoutes } from './app';
 import { authRoutes } from './auth';
 import { authDemoRoutes } from './auth-demo';
 import { componentsRoutes } from './components';
 import { dashboardRoutes } from './dashboard';
-import { appRoutes } from './app';
 
 const Error401Page = lazy(() => import('src/pages/401'));
 const Error404Page = lazy(() => import('src/pages/404'));

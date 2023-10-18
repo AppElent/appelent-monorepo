@@ -1,5 +1,5 @@
-import { Editor as Draft } from 'react-draft-wysiwyg';
 import { styled } from '@mui/material/styles';
+import { Editor as Draft } from 'react-draft-wysiwyg';
 
 // For some unknown reason, styling Draft directly throws an error.
 

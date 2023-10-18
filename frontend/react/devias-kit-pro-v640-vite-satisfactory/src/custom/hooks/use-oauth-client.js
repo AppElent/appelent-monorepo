@@ -1,12 +1,13 @@
 import axios from 'axios';
-import { useCallback, useEffect } from 'react';
-import { getUrlParams } from '../libs/get-url-params';
-import toast from 'react-hot-toast';
 import { getAuth } from 'firebase/auth';
-import { setDoc, doc } from 'firebase/firestore';
-import { db } from 'src/libs/firebase';
+import { doc, setDoc } from 'firebase/firestore';
+import { useCallback, useEffect } from 'react';
+import toast from 'react-hot-toast';
 import { useData } from 'src/custom/libs/data-framework';
 import { useRouter } from 'src/hooks/use-router';
+import { db } from 'src/libs/firebase';
+
+import { getUrlParams } from '../libs/get-url-params';
 import { logger } from '../libs/logging';
 
 export const useOauthClient = (configuration) => {

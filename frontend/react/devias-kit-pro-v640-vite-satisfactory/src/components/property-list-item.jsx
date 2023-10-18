@@ -1,8 +1,8 @@
-import PropTypes from 'prop-types';
 import Box from '@mui/material/Box';
 import ListItem from '@mui/material/ListItem';
 import ListItemText from '@mui/material/ListItemText';
 import Typography from '@mui/material/Typography';
+import PropTypes from 'prop-types';
 
 export const PropertyListItem = (props) => {
   const { align = 'vertical', children, disableGutters, value, label, ...other } = props;

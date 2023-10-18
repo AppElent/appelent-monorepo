@@ -1,8 +1,3 @@
-import { useCallback, useRef, useState } from 'react';
-import PropTypes from 'prop-types';
-import Attachment01Icon from '@untitled-ui/icons-react/build/esm/Attachment01';
-import Camera01Icon from '@untitled-ui/icons-react/build/esm/Camera01';
-import Send01Icon from '@untitled-ui/icons-react/build/esm/Send01';
 import Avatar from '@mui/material/Avatar';
 import Box from '@mui/material/Box';
 import IconButton from '@mui/material/IconButton';
@@ -10,7 +5,11 @@ import OutlinedInput from '@mui/material/OutlinedInput';
 import Stack from '@mui/material/Stack';
 import SvgIcon from '@mui/material/SvgIcon';
 import Tooltip from '@mui/material/Tooltip';
-
+import Attachment01Icon from '@untitled-ui/icons-react/build/esm/Attachment01';
+import Camera01Icon from '@untitled-ui/icons-react/build/esm/Camera01';
+import Send01Icon from '@untitled-ui/icons-react/build/esm/Send01';
+import PropTypes from 'prop-types';
+import { useCallback, useRef, useState } from 'react';
 import { useMockedUser } from 'src/hooks/use-mocked-user';
 
 export const ChatMessageAdd = (props) => {

@@ -1,5 +1,5 @@
-import { Issuer } from 'src/utils/auth';
 import { createContext } from 'react';
+import { Issuer } from 'src/utils/auth';
 
 export const initialState = {
   isAuthenticated: false,

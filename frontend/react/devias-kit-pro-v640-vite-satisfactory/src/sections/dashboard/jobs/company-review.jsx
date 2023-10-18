@@ -1,12 +1,11 @@
-import PropTypes from 'prop-types';
-import { formatDistanceStrict } from 'date-fns';
 import Avatar from '@mui/material/Avatar';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import Rating from '@mui/material/Rating';
 import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
-
+import { formatDistanceStrict } from 'date-fns';
+import PropTypes from 'prop-types';
 import { getInitials } from 'src/utils/get-initials';
 
 export const CompanyReview = (props) => {

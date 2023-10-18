@@ -1,6 +1,3 @@
-import * as Yup from 'yup';
-import { useFormik } from 'formik';
-import ArrowLeftIcon from '@untitled-ui/icons-react/build/esm/ArrowLeft';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Card from '@mui/material/Card';
@@ -11,10 +8,12 @@ import Stack from '@mui/material/Stack';
 import SvgIcon from '@mui/material/SvgIcon';
 import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
-
+import ArrowLeftIcon from '@untitled-ui/icons-react/build/esm/ArrowLeft';
+import { useFormik } from 'formik';
 import { RouterLink } from 'src/components/router-link';
 import { Seo } from 'src/components/seo';
 import { paths } from 'src/paths';
+import * as Yup from 'yup';
 
 const initialValues = {
   email: 'demo@devias.io',

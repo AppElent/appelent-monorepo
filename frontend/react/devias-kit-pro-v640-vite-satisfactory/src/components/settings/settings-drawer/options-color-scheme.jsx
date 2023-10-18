@@ -1,10 +1,10 @@
-import PropTypes from 'prop-types';
-import Moon01Icon from '@untitled-ui/icons-react/build/esm/Moon01';
-import SunIcon from '@untitled-ui/icons-react/build/esm/Sun';
 import Chip from '@mui/material/Chip';
 import Stack from '@mui/material/Stack';
 import SvgIcon from '@mui/material/SvgIcon';
 import Typography from '@mui/material/Typography';
+import Moon01Icon from '@untitled-ui/icons-react/build/esm/Moon01';
+import SunIcon from '@untitled-ui/icons-react/build/esm/Sun';
+import PropTypes from 'prop-types';
 
 const options = [
   {

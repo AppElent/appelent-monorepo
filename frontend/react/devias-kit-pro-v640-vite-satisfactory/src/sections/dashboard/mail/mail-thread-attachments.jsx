@@ -1,10 +1,10 @@
-import PropTypes from 'prop-types';
-import Download01Icon from '@untitled-ui/icons-react/build/esm/Download01';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import Stack from '@mui/material/Stack';
 import SvgIcon from '@mui/material/SvgIcon';
 import Typography from '@mui/material/Typography';
+import Download01Icon from '@untitled-ui/icons-react/build/esm/Download01';
+import PropTypes from 'prop-types';
 
 export const MailThreadAttachments = (props) => {
   const { attachments = [] } = props;

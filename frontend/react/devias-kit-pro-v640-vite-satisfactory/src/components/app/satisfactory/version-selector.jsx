@@ -1,5 +1,5 @@
+import { Box, MenuItem, TextField } from '@mui/material';
 import PropTypes from 'prop-types';
-import { MenuItem, TextField, Box } from '@mui/material';
 import { useEffect } from 'react';
 import useLocalStorage from 'src/custom/hooks/use-local-storage';
 import { SatisfactoryCurrentVersion, satisfactoryVersions } from 'src/custom/libs/satisfactory';

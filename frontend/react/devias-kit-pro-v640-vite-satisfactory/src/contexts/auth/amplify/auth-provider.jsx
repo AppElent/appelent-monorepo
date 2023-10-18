@@ -1,9 +1,9 @@
-import { useCallback, useEffect, useReducer } from 'react';
-import PropTypes from 'prop-types';
 import { Auth } from '@aws-amplify/auth';
-
+import PropTypes from 'prop-types';
+import { useCallback, useEffect, useReducer } from 'react';
 import { amplifyConfig } from 'src/config';
 import { Issuer } from 'src/utils/auth';
+
 import { AuthContext, initialState } from './auth-context';
 
 Auth.configure({

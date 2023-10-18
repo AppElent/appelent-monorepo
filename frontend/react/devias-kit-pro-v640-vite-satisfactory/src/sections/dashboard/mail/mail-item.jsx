@@ -1,9 +1,3 @@
-import { useCallback } from 'react';
-import PropTypes from 'prop-types';
-import { format } from 'date-fns';
-import Attachment01Icon from '@untitled-ui/icons-react/build/esm/Attachment01';
-import BookmarkIcon from '@untitled-ui/icons-react/build/esm/Bookmark';
-import Star01Icon from '@untitled-ui/icons-react/build/esm/Star01';
 import Avatar from '@mui/material/Avatar';
 import Box from '@mui/material/Box';
 import Checkbox from '@mui/material/Checkbox';
@@ -12,7 +6,12 @@ import IconButton from '@mui/material/IconButton';
 import SvgIcon from '@mui/material/SvgIcon';
 import Tooltip from '@mui/material/Tooltip';
 import Typography from '@mui/material/Typography';
-
+import Attachment01Icon from '@untitled-ui/icons-react/build/esm/Attachment01';
+import BookmarkIcon from '@untitled-ui/icons-react/build/esm/Bookmark';
+import Star01Icon from '@untitled-ui/icons-react/build/esm/Star01';
+import { format } from 'date-fns';
+import PropTypes from 'prop-types';
+import { useCallback } from 'react';
 import { RouterLink } from 'src/components/router-link';
 import { getInitials } from 'src/utils/get-initials';
 

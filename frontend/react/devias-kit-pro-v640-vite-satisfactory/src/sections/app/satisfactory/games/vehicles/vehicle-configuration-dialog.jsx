@@ -1,10 +1,11 @@
-import PropTypes from 'prop-types';
 import {
   Button,
   Dialog,
   DialogActions,
   DialogContent,
 } from '@mui/material';
+import PropTypes from 'prop-types';
+
 import { TrainConfig } from './train-config';
 
 const VehicleConfigurationDialog = ({

@@ -1,13 +1,12 @@
-import { useCallback, useEffect, useState } from 'react';
-import PropTypes from 'prop-types';
-import XIcon from '@untitled-ui/icons-react/build/esm/X';
 import Dialog from '@mui/material/Dialog';
 import DialogContent from '@mui/material/DialogContent';
 import IconButton from '@mui/material/IconButton';
 import Stack from '@mui/material/Stack';
 import SvgIcon from '@mui/material/SvgIcon';
 import Typography from '@mui/material/Typography';
-
+import XIcon from '@untitled-ui/icons-react/build/esm/X';
+import PropTypes from 'prop-types';
+import { useCallback, useEffect, useState } from 'react';
 import { FileDropzone } from 'src/components/file-dropzone';
 
 export const FileUploader = (props) => {

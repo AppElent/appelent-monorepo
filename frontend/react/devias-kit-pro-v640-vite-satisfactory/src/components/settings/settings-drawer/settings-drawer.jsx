@@ -1,22 +1,21 @@
-import { useCallback } from 'react';
-import PropTypes from 'prop-types';
-import RefreshCcw01Icon from '@untitled-ui/icons-react/build/esm/RefreshCcw01';
-import XIcon from '@untitled-ui/icons-react/build/esm/X';
 import Badge, { badgeClasses } from '@mui/material/Badge';
 import Drawer from '@mui/material/Drawer';
 import IconButton from '@mui/material/IconButton';
 import Stack from '@mui/material/Stack';
 import SvgIcon from '@mui/material/SvgIcon';
 import Typography from '@mui/material/Typography';
-
+import RefreshCcw01Icon from '@untitled-ui/icons-react/build/esm/RefreshCcw01';
+import XIcon from '@untitled-ui/icons-react/build/esm/X';
+import PropTypes from 'prop-types';
+import { useCallback } from 'react';
 import { Scrollbar } from 'src/components/scrollbar';
 
 import { OptionsColorPreset } from './options-color-preset';
+import { OptionsColorScheme } from './options-color-scheme';
 import { OptionsContrast } from './options-contrast';
 import { OptionsDirection } from './options-direction';
 import { OptionsLayout } from './options-layout';
 import { OptionsNavColor } from './options-nav-color';
-import { OptionsColorScheme } from './options-color-scheme';
 import { OptionsStretch } from './options-stretch';
 
 export const SettingsDrawer = (props) => {

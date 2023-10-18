@@ -1,5 +1,5 @@
-import { memo } from 'react';
 import PropTypes from 'prop-types';
+import { memo } from 'react';
 
 const EcommerceWorldMap = (props) => {
   const { markerColor } = props;

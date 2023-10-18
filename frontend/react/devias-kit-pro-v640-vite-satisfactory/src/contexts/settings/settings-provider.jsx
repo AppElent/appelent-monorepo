@@ -1,7 +1,8 @@
-import { useCallback, useEffect, useMemo, useState } from 'react';
-import PropTypes from 'prop-types';
 import isEqual from 'lodash.isequal';
-import { SettingsContext, initialState, defaultSettings } from './settings-context';
+import PropTypes from 'prop-types';
+import { useCallback, useEffect, useMemo, useState } from 'react';
+
+import { defaultSettings, initialState,SettingsContext } from './settings-context';
 
 const STORAGE_KEY = 'app.settings';
 

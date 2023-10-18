@@ -1,9 +1,9 @@
-import { useMemo } from 'react';
-import PropTypes from 'prop-types';
+import { useTheme } from '@mui/material/styles';
+import { Document, Image, Page, StyleSheet, Text, View } from '@react-pdf/renderer';
 import { format } from 'date-fns';
 import numeral from 'numeral';
-import { Document, Image, Page, StyleSheet, Text, View } from '@react-pdf/renderer';
-import { useTheme } from '@mui/material/styles';
+import PropTypes from 'prop-types';
+import { useMemo } from 'react';
 
 const useStyles = () => {
   const theme = useTheme();

@@ -1,6 +1,3 @@
-import PropTypes from 'prop-types';
-import CheckIcon from '@untitled-ui/icons-react/build/esm/Check';
-import ClockIcon from '@untitled-ui/icons-react/build/esm/Clock';
 import Avatar from '@mui/material/Avatar';
 import Box from '@mui/material/Box';
 import LinearProgress from '@mui/material/LinearProgress';
@@ -10,6 +7,9 @@ import StepLabel from '@mui/material/StepLabel';
 import Stepper from '@mui/material/Stepper';
 import SvgIcon from '@mui/material/SvgIcon';
 import Typography from '@mui/material/Typography';
+import CheckIcon from '@untitled-ui/icons-react/build/esm/Check';
+import ClockIcon from '@untitled-ui/icons-react/build/esm/Clock';
+import PropTypes from 'prop-types';
 
 const StepIcon = (props) => {
   const { active, completed, icon } = props;

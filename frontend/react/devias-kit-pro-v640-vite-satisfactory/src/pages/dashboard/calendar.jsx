@@ -1,8 +1,7 @@
-import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
-import Calendar from '@fullcalendar/react';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import interactionPlugin from '@fullcalendar/interaction';
 import listPlugin from '@fullcalendar/list';
+import Calendar from '@fullcalendar/react';
 import timeGridPlugin from '@fullcalendar/timegrid';
 import timelinePlugin from '@fullcalendar/timeline';
 import Box from '@mui/material/Box';
@@ -10,13 +9,13 @@ import Card from '@mui/material/Card';
 import Container from '@mui/material/Container';
 import Stack from '@mui/material/Stack';
 import useMediaQuery from '@mui/material/useMediaQuery';
-
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { Seo } from 'src/components/seo';
 import { useDialog } from 'src/hooks/use-dialog';
 import { usePageView } from 'src/hooks/use-page-view';
+import { CalendarContainer } from 'src/sections/dashboard/calendar/calendar-container';
 import { CalendarEventDialog } from 'src/sections/dashboard/calendar/calendar-event-dialog';
 import { CalendarToolbar } from 'src/sections/dashboard/calendar/calendar-toolbar';
-import { CalendarContainer } from 'src/sections/dashboard/calendar/calendar-container';
 import { useDispatch, useSelector } from 'src/store';
 import { thunks } from 'src/thunks/calendar';
 

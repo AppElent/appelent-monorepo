@@ -1,6 +1,3 @@
-import FileCheck03Icon from '@untitled-ui/icons-react/build/esm/FileCheck03';
-import Download01Icon from '@untitled-ui/icons-react/build/esm/Download01';
-import DotsHorizontalIcon from '@untitled-ui/icons-react/build/esm/DotsHorizontal';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Card from '@mui/material/Card';
@@ -8,12 +5,14 @@ import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Divider from '@mui/material/Divider';
-import Grid from '@mui/material/Unstable_Grid2';
 import IconButton from '@mui/material/IconButton';
 import SvgIcon from '@mui/material/SvgIcon';
 import Tooltip from '@mui/material/Tooltip';
 import Typography from '@mui/material/Typography';
-
+import Grid from '@mui/material/Unstable_Grid2';
+import DotsHorizontalIcon from '@untitled-ui/icons-react/build/esm/DotsHorizontal';
+import Download01Icon from '@untitled-ui/icons-react/build/esm/Download01';
+import FileCheck03Icon from '@untitled-ui/icons-react/build/esm/FileCheck03';
 import { bytesToSize } from 'src/utils/bytes-to-size';
 
 const files = [

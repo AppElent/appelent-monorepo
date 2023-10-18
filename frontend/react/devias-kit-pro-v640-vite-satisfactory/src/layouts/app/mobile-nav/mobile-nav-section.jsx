@@ -1,6 +1,6 @@
-import PropTypes from 'prop-types';
 import Box from '@mui/material/Box';
 import Stack from '@mui/material/Stack';
+import PropTypes from 'prop-types';
 
 import { MobileNavItem } from './mobile-nav-item';
 

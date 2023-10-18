@@ -1,11 +1,3 @@
-import { format } from 'date-fns';
-import PropTypes from 'prop-types';
-import ArrowLeftIcon from '@untitled-ui/icons-react/build/esm/ArrowLeft';
-import ChevronLeftIcon from '@untitled-ui/icons-react/build/esm/ChevronLeft';
-import ChevronRightIcon from '@untitled-ui/icons-react/build/esm/ChevronRight';
-import DotsHorizontalIcon from '@untitled-ui/icons-react/build/esm/DotsHorizontal';
-import SearchMdIcon from '@untitled-ui/icons-react/build/esm/SearchMd';
-import Trash02Icon from '@untitled-ui/icons-react/build/esm/Trash02';
 import ReplyIcon from '@mui/icons-material/Reply';
 import ReplyAllIcon from '@mui/icons-material/ReplyAll';
 import Avatar from '@mui/material/Avatar';
@@ -19,7 +11,14 @@ import SvgIcon from '@mui/material/SvgIcon';
 import Tooltip from '@mui/material/Tooltip';
 import Typography from '@mui/material/Typography';
 import useMediaQuery from '@mui/material/useMediaQuery';
-
+import ArrowLeftIcon from '@untitled-ui/icons-react/build/esm/ArrowLeft';
+import ChevronLeftIcon from '@untitled-ui/icons-react/build/esm/ChevronLeft';
+import ChevronRightIcon from '@untitled-ui/icons-react/build/esm/ChevronRight';
+import DotsHorizontalIcon from '@untitled-ui/icons-react/build/esm/DotsHorizontal';
+import SearchMdIcon from '@untitled-ui/icons-react/build/esm/SearchMd';
+import Trash02Icon from '@untitled-ui/icons-react/build/esm/Trash02';
+import { format } from 'date-fns';
+import PropTypes from 'prop-types';
 import { RouterLink } from 'src/components/router-link';
 import { getInitials } from 'src/utils/get-initials';
 

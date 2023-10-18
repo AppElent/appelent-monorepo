@@ -1,6 +1,3 @@
-import { useCallback, useEffect, useState } from 'react';
-import PropTypes from 'prop-types';
-import Trash02Icon from '@untitled-ui/icons-react/build/esm/Trash02';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Card from '@mui/material/Card';
@@ -11,6 +8,9 @@ import LinearProgress, { linearProgressClasses } from '@mui/material/LinearProgr
 import Stack from '@mui/material/Stack';
 import SvgIcon from '@mui/material/SvgIcon';
 import Typography from '@mui/material/Typography';
+import Trash02Icon from '@untitled-ui/icons-react/build/esm/Trash02';
+import PropTypes from 'prop-types';
+import { useCallback, useEffect, useState } from 'react';
 
 import { TaskCheckItem } from './task-check-item';
 import { TaskCheckItemAdd } from './task-check-item-add';

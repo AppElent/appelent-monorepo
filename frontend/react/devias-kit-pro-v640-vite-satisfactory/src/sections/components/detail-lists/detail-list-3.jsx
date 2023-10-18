@@ -1,5 +1,3 @@
-import CurrencyDollarIcon from '@untitled-ui/icons-react/build/esm/CurrencyDollar';
-import ReceiptIcon from '@untitled-ui/icons-react/build/esm/Receipt';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Card from '@mui/material/Card';
@@ -12,6 +10,8 @@ import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
 import TableRow from '@mui/material/TableRow';
 import Typography from '@mui/material/Typography';
+import CurrencyDollarIcon from '@untitled-ui/icons-react/build/esm/CurrencyDollar';
+import ReceiptIcon from '@untitled-ui/icons-react/build/esm/Receipt';
 
 export const DetailList3 = () => (
   <Box

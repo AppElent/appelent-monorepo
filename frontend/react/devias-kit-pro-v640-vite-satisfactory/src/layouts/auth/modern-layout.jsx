@@ -1,15 +1,14 @@
-import PropTypes from 'prop-types';
 import Box from '@mui/material/Box';
-import Typography from '@mui/material/Typography';
 import Stack from '@mui/material/Stack';
-
+import Typography from '@mui/material/Typography';
+import PropTypes from 'prop-types';
 import { Logo } from 'src/components/app/logo';
-import { LogoSamsung } from 'src/components/logos/logo-samsung';
-import { LogoVisma } from 'src/components/logos/logo-visma';
-import { LogoBolt } from 'src/components/logos/logo-bolt';
-import { LogoAws } from 'src/components/logos/logo-aws';
 import { LogoAccenture } from 'src/components/logos/logo-accenture';
 import { LogoAtt } from 'src/components/logos/logo-att';
+import { LogoAws } from 'src/components/logos/logo-aws';
+import { LogoBolt } from 'src/components/logos/logo-bolt';
+import { LogoSamsung } from 'src/components/logos/logo-samsung';
+import { LogoVisma } from 'src/components/logos/logo-visma';
 import { RouterLink } from 'src/components/router-link';
 import { paths } from 'src/paths';
 

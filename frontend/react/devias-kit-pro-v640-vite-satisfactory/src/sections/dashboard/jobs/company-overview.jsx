@@ -1,17 +1,16 @@
-import PropTypes from 'prop-types';
-import Markdown from 'react-markdown';
-import ArrowRightIcon from '@untitled-ui/icons-react/build/esm/ArrowRight';
 import Box from '@mui/material/Box';
 import Divider from '@mui/material/Divider';
-import Grid from '@mui/material/Unstable_Grid2';
 import ImageList from '@mui/material/ImageList';
 import ImageListItem from '@mui/material/ImageListItem';
 import Link from '@mui/material/Link';
 import Stack from '@mui/material/Stack';
+import { styled } from '@mui/material/styles';
 import SvgIcon from '@mui/material/SvgIcon';
 import Typography from '@mui/material/Typography';
-import { styled } from '@mui/material/styles';
-
+import Grid from '@mui/material/Unstable_Grid2';
+import ArrowRightIcon from '@untitled-ui/icons-react/build/esm/ArrowRight';
+import PropTypes from 'prop-types';
+import Markdown from 'react-markdown';
 import { RouterLink } from 'src/components/router-link';
 import { paths } from 'src/paths';
 

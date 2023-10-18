@@ -1,12 +1,11 @@
-import InfoCircleIcon from '@untitled-ui/icons-react/build/esm/InfoCircle';
 import Box from '@mui/material/Box';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import CardHeader from '@mui/material/CardHeader';
+import { useTheme } from '@mui/material/styles';
 import SvgIcon from '@mui/material/SvgIcon';
 import Tooltip from '@mui/material/Tooltip';
-import { useTheme } from '@mui/material/styles';
-
+import InfoCircleIcon from '@untitled-ui/icons-react/build/esm/InfoCircle';
 import { Chart } from 'src/components/chart';
 
 const chartSeries = [

@@ -1,5 +1,5 @@
-import Quill from 'react-quill';
 import { styled } from '@mui/material/styles';
+import Quill from 'react-quill';
 
 // For some unknown reason, styling Quill directly throws an error.
 

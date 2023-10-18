@@ -1,12 +1,12 @@
-import PropTypes from 'prop-types';
-import Globe01Icon from '@untitled-ui/icons-react/build/esm/Globe03';
-import PlusIcon from '@untitled-ui/icons-react/build/esm/Plus';
 import Avatar from '@mui/material/Avatar';
 import AvatarGroup from '@mui/material/AvatarGroup';
 import IconButton from '@mui/material/IconButton';
 import Stack from '@mui/material/Stack';
 import SvgIcon from '@mui/material/SvgIcon';
 import Tooltip from '@mui/material/Tooltip';
+import Globe01Icon from '@untitled-ui/icons-react/build/esm/Globe03';
+import PlusIcon from '@untitled-ui/icons-react/build/esm/Plus';
+import PropTypes from 'prop-types';
 
 export const ItemShared = (props) => {
   const { isPublic, shared } = props;

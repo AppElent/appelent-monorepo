@@ -1,7 +1,3 @@
-import PropTypes from 'prop-types';
-import { formatDistanceStrict } from 'date-fns';
-import ArrowRightIcon from '@untitled-ui/icons-react/build/esm/ArrowRight';
-import RefreshCcw01Icon from '@untitled-ui/icons-react/build/esm/RefreshCcw01';
 import Avatar from '@mui/material/Avatar';
 import Badge from '@mui/material/Badge';
 import Button from '@mui/material/Button';
@@ -16,7 +12,10 @@ import ListItemAvatar from '@mui/material/ListItemAvatar';
 import ListItemText from '@mui/material/ListItemText';
 import SvgIcon from '@mui/material/SvgIcon';
 import Typography from '@mui/material/Typography';
-
+import ArrowRightIcon from '@untitled-ui/icons-react/build/esm/ArrowRight';
+import RefreshCcw01Icon from '@untitled-ui/icons-react/build/esm/RefreshCcw01';
+import { formatDistanceStrict } from 'date-fns';
+import PropTypes from 'prop-types';
 import { customLocale } from 'src/utils/date-locale';
 
 export const OverviewInbox = (props) => {

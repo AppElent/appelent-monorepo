@@ -1,5 +1,3 @@
-import { useCallback, useState } from 'react';
-import { subDays, subHours, subMinutes, subMonths } from 'date-fns';
 import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
 import Divider from '@mui/material/Divider';
@@ -7,15 +5,16 @@ import Stack from '@mui/material/Stack';
 import Tab from '@mui/material/Tab';
 import Tabs from '@mui/material/Tabs';
 import Typography from '@mui/material/Typography';
-
+import { subDays, subHours, subMinutes, subMonths } from 'date-fns';
+import { useCallback, useState } from 'react';
 import { Seo } from 'src/components/seo';
 import { useMockedUser } from 'src/hooks/use-mocked-user';
 import { usePageView } from 'src/hooks/use-page-view';
 import { AccountBillingSettings } from 'src/sections/dashboard/account/account-billing-settings';
 import { AccountGeneralSettings } from 'src/sections/dashboard/account/account-general-settings';
 import { AccountNotificationsSettings } from 'src/sections/dashboard/account/account-notifications-settings';
-import { AccountTeamSettings } from 'src/sections/dashboard/account/account-team-settings';
 import { AccountSecuritySettings } from 'src/sections/dashboard/account/account-security-settings';
+import { AccountTeamSettings } from 'src/sections/dashboard/account/account-team-settings';
 
 const now = new Date();
 

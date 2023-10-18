@@ -1,22 +1,23 @@
-import React from 'react';
-import PropTypes from 'prop-types';
 import {
   Box,
   Button,
   Stack,
 } from '@mui/material';
-import FactoryRecipeCard from './factories/factory-recipe-card';
-import { useQueryParam } from 'use-query-params';
-import { generateName } from 'src/custom/libs/random-name-generator';
-import { tokens } from 'src/locales/tokens';
-import { useSelected } from 'src/custom/hooks/use-selected';
-import { useConfirm } from 'material-ui-confirm';
-import FactorySelect from './factories/factory-select';
-import FactoryInputsOutputs from './factories/factory-inputs-outputs';
-import FactoryInformationCard from './factories/factory-information-card';
 import { useTranslate } from '@refinedev/core';
-import { setFormikArrayItem } from 'src/custom/utils/formik-crud-functions';
+import { useConfirm } from 'material-ui-confirm';
 import { nanoid } from 'nanoid';
+import PropTypes from 'prop-types';
+import React from 'react';
+import { useSelected } from 'src/custom/hooks/use-selected';
+import { generateName } from 'src/custom/libs/random-name-generator';
+import { setFormikArrayItem } from 'src/custom/utils/formik-crud-functions';
+import { tokens } from 'src/locales/tokens';
+import { useQueryParam } from 'use-query-params';
+
+import FactoryInformationCard from './factories/factory-information-card';
+import FactoryInputsOutputs from './factories/factory-inputs-outputs';
+import FactoryRecipeCard from './factories/factory-recipe-card';
+import FactorySelect from './factories/factory-select';
 
 const FACTORY_TEMPLATE = {
   description: '',

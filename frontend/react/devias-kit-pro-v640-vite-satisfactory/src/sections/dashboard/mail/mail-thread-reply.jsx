@@ -1,8 +1,3 @@
-import { useCallback, useRef, useState } from 'react';
-import Attachment01Icon from '@untitled-ui/icons-react/build/esm/Attachment01';
-import FaceSmileIcon from '@untitled-ui/icons-react/build/esm/FaceSmile';
-import Image01Icon from '@untitled-ui/icons-react/build/esm/Image01';
-import Link01Icon from '@untitled-ui/icons-react/build/esm/Link01';
 import Avatar from '@mui/material/Avatar';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
@@ -11,7 +6,11 @@ import Stack from '@mui/material/Stack';
 import SvgIcon from '@mui/material/SvgIcon';
 import TextField from '@mui/material/TextField';
 import Tooltip from '@mui/material/Tooltip';
-
+import Attachment01Icon from '@untitled-ui/icons-react/build/esm/Attachment01';
+import FaceSmileIcon from '@untitled-ui/icons-react/build/esm/FaceSmile';
+import Image01Icon from '@untitled-ui/icons-react/build/esm/Image01';
+import Link01Icon from '@untitled-ui/icons-react/build/esm/Link01';
+import { useCallback, useRef, useState } from 'react';
 import { useMockedUser } from 'src/hooks/use-mocked-user';
 
 export const MailThreadReply = (props) => {

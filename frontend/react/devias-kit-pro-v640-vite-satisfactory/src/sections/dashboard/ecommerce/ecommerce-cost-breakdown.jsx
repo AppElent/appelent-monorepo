@@ -1,17 +1,16 @@
-import PropTypes from 'prop-types';
-import numeral from 'numeral';
 import Box from '@mui/material/Box';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import CardHeader from '@mui/material/CardHeader';
+import { useTheme } from '@mui/material/styles';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell, { tableCellClasses } from '@mui/material/TableCell';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Typography from '@mui/material/Typography';
-import { useTheme } from '@mui/material/styles';
-
+import numeral from 'numeral';
+import PropTypes from 'prop-types';
 import { Chart } from 'src/components/chart';
 
 const useChartOptions = (labels) => {

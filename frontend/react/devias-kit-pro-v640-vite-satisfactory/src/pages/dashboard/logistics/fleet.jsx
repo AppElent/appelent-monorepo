@@ -1,9 +1,8 @@
-import { useCallback, useRef, useState } from 'react';
 import Box from '@mui/material/Box';
 import Divider from '@mui/material/Divider';
 import Typography from '@mui/material/Typography';
 import useMediaQuery from '@mui/material/useMediaQuery';
-
+import { useCallback, useRef, useState } from 'react';
 import { Seo } from 'src/components/seo';
 import { LogisticsFleetDrawer } from 'src/sections/dashboard/logistics/logistics-fleet-drawer';
 import { LogisticsFleetList } from 'src/sections/dashboard/logistics/logistics-fleet-list';

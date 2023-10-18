@@ -1,4 +1,3 @@
-import PropTypes from 'prop-types';
 import {
   Autocomplete,
   Button,
@@ -8,6 +7,7 @@ import {
   DialogTitle,
   TextField,
 } from '@mui/material';
+import PropTypes from 'prop-types';
 import { useData } from 'src/custom/libs/data-framework';
 import { logger } from 'src/custom/libs/logging';
 

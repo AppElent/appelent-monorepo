@@ -1,10 +1,10 @@
-import PropTypes from 'prop-types';
-import { PDFViewer } from '@react-pdf/renderer';
-import ArrowLeftIcon from '@untitled-ui/icons-react/build/esm/ArrowLeft';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Dialog from '@mui/material/Dialog';
 import SvgIcon from '@mui/material/SvgIcon';
+import { PDFViewer } from '@react-pdf/renderer';
+import ArrowLeftIcon from '@untitled-ui/icons-react/build/esm/ArrowLeft';
+import PropTypes from 'prop-types';
 
 import { InvoicePdfDocument } from './invoice-pdf-document';
 

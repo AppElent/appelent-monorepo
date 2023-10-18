@@ -1,6 +1,6 @@
-import PropTypes from 'prop-types';
 import { Button, Checkbox, Stack, TextField } from '@mui/material';
 import { useTranslate } from '@refinedev/core';
+import PropTypes from 'prop-types';
 import { CardDefault } from 'src/components/app/card-default';
 import { tokens } from 'src/locales/tokens';
 

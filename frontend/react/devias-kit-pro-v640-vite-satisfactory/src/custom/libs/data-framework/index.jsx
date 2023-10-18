@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types';
 import { createContext, useContext, useReducer } from 'react';
+
 import { reducer } from './caching';
 import { useData } from './framework/useData';
 
@@ -7,7 +8,6 @@ export { useData } from './framework/useData';
 export { useResource } from './framework/useResource';
 
 import useFirestoreMount from './dataProviders/firestore/useFirestoreMount';
-
 import useLocalStorageMount from './dataProviders/localStorage/useLocalStorageMount';
 import useStateMount from './dataProviders/state/useStateMount';
 

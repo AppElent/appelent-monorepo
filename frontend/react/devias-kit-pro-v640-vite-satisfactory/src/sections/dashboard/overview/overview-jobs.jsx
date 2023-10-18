@@ -1,5 +1,3 @@
-import Briefcase01Icon from '@untitled-ui/icons-react/build/esm/Briefcase01';
-import ArrowRightIcon from '@untitled-ui/icons-react/build/esm/ArrowRight';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Card from '@mui/material/Card';
@@ -8,6 +6,8 @@ import CardContent from '@mui/material/CardContent';
 import Divider from '@mui/material/Divider';
 import SvgIcon from '@mui/material/SvgIcon';
 import Typography from '@mui/material/Typography';
+import ArrowRightIcon from '@untitled-ui/icons-react/build/esm/ArrowRight';
+import Briefcase01Icon from '@untitled-ui/icons-react/build/esm/Briefcase01';
 
 export const OverviewJobs = (props) => (
   <Card {...props}>

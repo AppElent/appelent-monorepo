@@ -1,6 +1,5 @@
-import { useDispatch as useReduxDispatch, useSelector as useReduxSelector } from 'react-redux';
 import { configureStore } from '@reduxjs/toolkit';
-
+import { useDispatch as useReduxDispatch, useSelector as useReduxSelector } from 'react-redux';
 import { enableDevTools } from 'src/config';
 
 import { rootReducer } from './root-reducer';

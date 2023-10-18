@@ -1,5 +1,4 @@
 import { useCallback, useEffect, useState } from 'react';
-
 import { usePathname } from 'src/hooks/use-pathname';
 
 export const useMobileNav = () => {

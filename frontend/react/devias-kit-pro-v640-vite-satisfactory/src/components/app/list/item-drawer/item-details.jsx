@@ -1,6 +1,6 @@
-import PropTypes from 'prop-types';
-import Edit02Icon from '@untitled-ui/icons-react/build/esm/Edit02';
 import { Button, Stack, SvgIcon, Typography } from '@mui/material';
+import Edit02Icon from '@untitled-ui/icons-react/build/esm/Edit02';
+import PropTypes from 'prop-types';
 
 export const ItemDetailsContainer = (props) => {
   const { onEdit, children } = props;

@@ -1,6 +1,5 @@
-import PropTypes from 'prop-types';
 import { Stack } from '@mui/material';
-
+import PropTypes from 'prop-types';
 import { CardDefault } from 'src/components/app/card-default';
 
 const TabOverview = (props) => {

@@ -1,9 +1,9 @@
-import PropTypes from 'prop-types';
-import Menu01Icon from '@untitled-ui/icons-react/build/esm/Menu01';
 import Box from '@mui/material/Box';
 import Card from '@mui/material/Card';
 import IconButton from '@mui/material/IconButton';
 import SvgIcon from '@mui/material/SvgIcon';
+import Menu01Icon from '@untitled-ui/icons-react/build/esm/Menu01';
+import PropTypes from 'prop-types';
 
 export const LogisticsFleetToolbar = (props) => {
   const { onDrawerOpen } = props;

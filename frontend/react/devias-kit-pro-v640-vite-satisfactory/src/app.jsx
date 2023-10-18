@@ -1,26 +1,25 @@
-import { useRoutes } from 'react-router-dom';
-import { Helmet } from 'react-helmet-async';
-import { Provider as ReduxProvider } from 'react-redux';
-import CssBaseline from '@mui/material/CssBaseline';
-import { ThemeProvider } from '@mui/material/styles';
-import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
-import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
-
 import 'src/global.css';
 // Remove if locales are not used
 //import 'src/locales/i18n';
 import 'src/custom/locales/i18n'; //Changed to custom Locale configuration
 
+import CssBaseline from '@mui/material/CssBaseline';
+import { ThemeProvider } from '@mui/material/styles';
+import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
+import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
+import { Helmet } from 'react-helmet-async';
+import { Provider as ReduxProvider } from 'react-redux';
+import { useRoutes } from 'react-router-dom';
 import { RTL } from 'src/components/rtl';
-import { SplashScreen } from 'src/components/splash-screen';
 import { SettingsButton } from 'src/components/settings/settings-button';
 import { SettingsDrawer } from 'src/components/settings/settings-drawer';
+import { SplashScreen } from 'src/components/splash-screen';
 import { Toaster } from 'src/components/toaster';
+import { gtmConfig } from 'src/config';
 import { AuthConsumer, AuthProvider } from 'src/contexts/auth/firebase';
 import { SettingsConsumer, SettingsProvider } from 'src/contexts/settings';
-import { gtmConfig } from 'src/config';
-import { useNprogress } from 'src/hooks/use-nprogress';
 import { useAnalytics } from 'src/hooks/use-analytics';
+import { useNprogress } from 'src/hooks/use-nprogress';
 import { routes } from 'src/routes';
 import { store } from 'src/store';
 import { createTheme } from 'src/theme';

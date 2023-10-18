@@ -1,9 +1,9 @@
 import { Box, Container } from '@mui/material';
+import Index from 'src/components/app/satisfactory';
+import { Seo } from 'src/components/seo';
+
 import { usePageView } from '../../hooks/use-page-view';
 import { useSettings } from '../../hooks/use-settings';
-
-import { Seo } from 'src/components/seo';
-import Index from 'src/components/app/satisfactory';
 
 const Page = () => {
   const settings = useSettings();

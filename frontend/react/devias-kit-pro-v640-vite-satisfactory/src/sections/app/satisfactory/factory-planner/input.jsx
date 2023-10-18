@@ -1,4 +1,3 @@
-import PropTypes from 'prop-types';
 import {
   Button,
   Dialog,
@@ -14,9 +13,11 @@ import {
   useMediaQuery,
   useTheme,
 } from '@mui/material';
+import PropTypes from 'prop-types';
 import useTabs from 'src/custom/hooks/use-tabs';
-import TabProduction from './tab-production';
+
 import TabInputs from './tab-inputs';
+import TabProduction from './tab-production';
 import TabRecipes from './tab-recipes';
 
 const tabsData = [
