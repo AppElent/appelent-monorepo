@@ -118,10 +118,8 @@ const PlatformProductSelectorDialog = ({ modal, station, factories, setProducts,
             <TableBody>
               <TableRow>
                 {station?.platforms?.map((platform, index) => {
-                  console.log(platform);
                   const imageUrl =
                     station.type !== 'train' ? IMAGES[station.type] : IMAGES[platform.type];
-                  console.log(imageUrl);
                   return (
                     <TableCell key={platform.id}>
                       <Box
@@ -141,7 +139,6 @@ const PlatformProductSelectorDialog = ({ modal, station, factories, setProducts,
               </TableRow>
               <TableRow>
                 {station?.platforms?.map((platform, index) => {
-                  console.log(platform.products);
                   const direction =
                     station.type === 'train' ? platform.direction : station.direction;
                   const productList =
@@ -160,7 +157,6 @@ const PlatformProductSelectorDialog = ({ modal, station, factories, setProducts,
                   // The extra list contains products that are added previously but are not part of the current factory list
                   const extraList =
                     platform.products?.filter((p) => !defProductList.includes(p)) || [];
-                  console.log(extraList);
                   if (station.type === 'train' && ['empty', 'station'].includes(platform.type))
                     return <TableCell key={platform.id}></TableCell>;
                   return (

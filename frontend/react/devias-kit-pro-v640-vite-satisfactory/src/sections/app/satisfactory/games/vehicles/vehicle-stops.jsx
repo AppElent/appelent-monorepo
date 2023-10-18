@@ -1,3 +1,4 @@
+/* eslint-disable react/display-name */
 import PropTypes from 'prop-types';
 import Box from '@mui/material/Box';
 import Card from '@mui/material/Card';
@@ -7,6 +8,7 @@ import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
+import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 
 import {
   Avatar,
@@ -33,8 +35,63 @@ const STOP_TEMPLATE = {
   direction: 'in',
 };
 
+const getItemStyle = (isDragging, draggableStyle) => ({
+  // styles we need to apply on draggables
+  ...draggableStyle,
+
+  // ...(isDragging && {
+  //   background: 'rgb(235,235,235)',
+  // }),
+});
+
+const DraggableComponent = (id, index) => (props) => {
+  return (
+    <Draggable
+      draggableId={id}
+      index={index}
+    >
+      {(provided, snapshot) => (
+        <TableRow
+          ref={provided.innerRef}
+          {...provided.draggableProps}
+          {...provided.dragHandleProps}
+          style={getItemStyle(snapshot.isDragging, provided.draggableProps.style)}
+          {...props}
+        >
+          {props.children}
+        </TableRow>
+      )}
+    </Draggable>
+  );
+};
+
+const DroppableComponent = (onDragEnd) => (props) => {
+  return (
+    <DragDropContext onDragEnd={onDragEnd}>
+      <Droppable
+        droppableId={'1'}
+        direction="vertical"
+      >
+        {(provided) => {
+          return (
+            <TableBody
+              ref={provided.innerRef}
+              {...provided.droppableProps}
+              {...props}
+            >
+              {props.children}
+              {provided.placeholder}
+            </TableBody>
+          );
+        }}
+      </Droppable>
+    </DragDropContext>
+  );
+};
+
 export const VehicleStops = (props) => {
-  const { addStop, deleteStop, setStop, stops, stations, vehicle, factories, products } = props;
+  const { addStop, deleteStop, setStop, setStops, stops, stations, vehicle, factories, products } =
+    props;
   const modal = useModal();
 
   const filteredStations = stations.filter((station) => {
@@ -45,6 +102,27 @@ export const VehicleStops = (props) => {
     // else if (station.type === 'drone' && vehicle.type === 'drone') return true;
     // else return false;
   });
+
+  // a little function to help us with reordering the result
+  const reorder = (list, startIndex, endIndex) => {
+    const result = Array.from(list);
+    const [removed] = result.splice(startIndex, 1);
+    result.splice(endIndex, 0, removed);
+
+    return result;
+  };
+
+  const onDragEnd = (result) => {
+    // dropped outside the list
+    if (!result.destination) {
+      return;
+    }
+
+    console.log(`dragEnd ${result.source.index} to  ${result.destination.index}`);
+    const items = reorder(stops, result.source.index, result.destination.index);
+
+    setStops([...items]);
+  };
 
   return (
     <Card>
@@ -68,7 +146,7 @@ export const VehicleStops = (props) => {
       />
       <CardHeader
         title="Vehicle stops"
-        //subheader="Condition and temperature"
+        subheader="You can reorder the stops by dragging and dropping"
         action={
           <Button
             variant="contained"
@@ -97,7 +175,7 @@ export const VehicleStops = (props) => {
                     <TableCell></TableCell>
                   </TableRow>
                 </TableHead>
-                <TableBody>
+                <TableBody component={DroppableComponent(onDragEnd)}>
                   <TableRow>
                     <TableCell></TableCell>
                     <TableCell></TableCell>
@@ -124,7 +202,7 @@ export const VehicleStops = (props) => {
                     })}
                     <TableCell></TableCell>
                   </TableRow>
-                  {stops.map((stop) => {
+                  {stops.map((stop, index) => {
                     const station = stations.find((station) => station.id === stop.station) || null;
                     // const direction =
                     //   vehicle.type === 'train'
@@ -147,6 +225,7 @@ export const VehicleStops = (props) => {
                     return (
                       <TableRow
                         key={stop.id}
+                        component={DraggableComponent(stop.id, index)}
                         sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                       >
                         <TableCell>
@@ -182,7 +261,6 @@ export const VehicleStops = (props) => {
                           const indexNr = vehicle.type === 'train' ? index + 1 : '';
 
                           const carFound = stop.products?.find((prod) => prod.car === car.id);
-                          console.log(carFound);
 
                           const direction =
                             vehicle.type === 'train'
@@ -255,28 +333,33 @@ export const VehicleStops = (props) => {
                           productList?.map((product) => {
                             return <div key={product}>{products[product]?.name}</div>;
                           })} */}
-                          <Button
-                            onClick={() => {
-                              modal.setData({
-                                stop,
-                              });
-                              modal.setModalState(true);
-                            }}
+                          <Stack
+                            direction="row"
+                            spacing={1}
                           >
-                            Configure products
-                          </Button>
-                          {/* </TableCell>
+                            <Button
+                              onClick={() => {
+                                modal.setData({
+                                  stop,
+                                });
+                                modal.setModalState(true);
+                              }}
+                            >
+                              Configure products
+                            </Button>
+                            {/* </TableCell>
 
                       <TableCell> */}
-                          <Button
-                            variant="contained"
-                            color="error"
-                            onClick={() => {
-                              deleteStop(stop.id);
-                            }}
-                          >
-                            <GridDeleteIcon>Delete</GridDeleteIcon>
-                          </Button>
+                            <Button
+                              variant="contained"
+                              color="error"
+                              onClick={() => {
+                                deleteStop(stop.id);
+                              }}
+                            >
+                              <GridDeleteIcon>Delete</GridDeleteIcon>
+                            </Button>
+                          </Stack>
                         </TableCell>
                       </TableRow>
                     );

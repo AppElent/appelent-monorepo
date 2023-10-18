@@ -8,7 +8,15 @@ import TableCell from '@mui/material/TableCell';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 
-import { Button, CardContent, MenuItem, Stack, TableContainer, TextField } from '@mui/material';
+import {
+  Avatar,
+  Button,
+  CardContent,
+  MenuItem,
+  Stack,
+  TableContainer,
+  TextField,
+} from '@mui/material';
 import { GridDeleteIcon } from '@mui/x-data-grid';
 import { useMemo } from 'react';
 import { getSatisfactoryData } from 'src/custom/libs/satisfactory';
@@ -148,7 +156,7 @@ const TrainPlatformsCard = (props) => {
                         )}
 
                         <TableCell>
-                          {platform.type !== 'station' && (
+                          {!['station', 'empty'].includes(platform.type) && (
                             <TextField
                               label="Direction"
                               sx={{ flexGrow: 1, minWidth: 100 }}
@@ -198,9 +206,26 @@ const TrainPlatformsCard = (props) => {
                           )}
                         </TableCell>
                         <TableCell>
-                          {platform.products?.map((p) => (
-                            <div key={p}>{products[p]?.name}</div>
-                          ))}
+                          {platform.products?.map((p) => {
+                            return (
+                              <Stack
+                                key={p}
+                                direction="row"
+                                spacing={1}
+                                alignItems={'center'}
+                                sx={{ mt: 1 }}
+                              >
+                                <Avatar
+                                  src={`/assets/satisfactory/products/${p}.jpg`}
+                                  sx={{
+                                    height: 45,
+                                    width: 45,
+                                  }}
+                                />
+                                <Box>{products[p]?.name}</Box>
+                              </Stack>
+                            );
+                          })}
                         </TableCell>
                         <TableCell>
                           {index !== 0 && (

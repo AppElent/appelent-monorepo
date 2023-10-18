@@ -17,6 +17,7 @@ import {
   Table,
   TableBody,
   TableCell,
+  TableContainer,
   TableHead,
   TablePagination,
   TableRow,
@@ -54,7 +55,7 @@ const RecipeList = () => {
   const { items, pageItems, search, handlers } = useItems(recipeArray, {
     sortBy: 'name',
     filters: { isFuel: { min: true } },
-    rowsPerPage: 5,
+    rowsPerPage: 25,
   });
 
   const sortOptions = [
@@ -166,97 +167,102 @@ const RecipeList = () => {
               </TextField>
             </Stack>
             <Scrollbar>
-              <Table sx={{ minWidth: 700 }}>
-                <TableHead>
-                  <TableRow>
-                    {/* <TableCell padding="checkbox">
+              <TableContainer style={{ maxHeight: '50vh' }}>
+                <Table
+                  sx={{ minWidth: 700 }}
+                  stickyHeader
+                >
+                  <TableHead>
+                    <TableRow>
+                      {/* <TableCell padding="checkbox">
                     <Checkbox />
                   </TableCell> */}
-                    <TableCell>Name</TableCell>
-                    <TableCell>Inputs</TableCell>
-                    <TableCell>Machine</TableCell>
-                    <TableCell>Outputs</TableCell>
-                    <TableCell align="right">Details</TableCell>
-                  </TableRow>
-                </TableHead>
-                <TableBody>
-                  {pageItems.map((item) => {
-                    const productUrl = `/assets/satisfactory/products/${item.products?.[0]?.itemClass}.jpg`;
-                    const cyclesMin = 60 / parseFloat(item.craftTime);
-                    return (
-                      <TableRow
-                        hover
-                        sx={{ pl: 5, height: '101px' }}
-                        key={item.className}
-                        onClick={() => {
-                          recipeModal.setData(item);
-                          recipeModal.setModalState(true);
-                          console.log(item, recipeModal);
-                        }}
-                      >
-                        {/* <TableCell padding="checkbox">
+                      <TableCell>Name</TableCell>
+                      <TableCell>Inputs</TableCell>
+                      <TableCell>Machine</TableCell>
+                      <TableCell>Outputs</TableCell>
+                      <TableCell align="right">Details</TableCell>
+                    </TableRow>
+                  </TableHead>
+                  <TableBody>
+                    {pageItems.map((item) => {
+                      const productUrl = `/assets/satisfactory/products/${item.products?.[0]?.itemClass}.jpg`;
+                      const cyclesMin = 60 / parseFloat(item.craftTime);
+                      return (
+                        <TableRow
+                          hover
+                          sx={{ pl: 5 }}
+                          key={item.className}
+                          onClick={() => {
+                            recipeModal.setData(item);
+                            recipeModal.setModalState(true);
+                            console.log(item, recipeModal);
+                          }}
+                        >
+                          {/* <TableCell padding="checkbox">
                         <Checkbox />
                       </TableCell> */}
-                        <TableCell>
-                          <Stack
-                            alignItems="center"
-                            direction="row"
-                            spacing={1}
-                          >
-                            <Avatar
-                              src={productUrl}
-                              sx={{
-                                height: 42,
-                                width: 42,
-                              }}
-                            />
-                            <div>
-                              <Link
-                                color="inherit"
-                                variant="subtitle2"
-                              >
-                                {item.name}
-                              </Link>
-                              <Typography
-                                color="text.secondary"
-                                variant="body2"
-                              >
-                                {item.email}
-                              </Typography>
-                            </div>
-                          </Stack>
-                        </TableCell>
-                        <TableCell>
-                          {item.ingredients.map((p) => (
-                            <div key={p.itemClass}>
-                              {p.quantity} x {products[p.itemClass]?.name} (
-                              {+parseFloat(cyclesMin * p.quantity).toPrecision(3)}/min)
-                            </div>
-                          ))}
-                        </TableCell>
-                        <TableCell>
-                          {machines[item.producedIn]?.name} - {item.craftTime}s
-                        </TableCell>
-                        <TableCell>
-                          {item.products.map((p) => (
-                            <div key={p.itemClass}>
-                              {p.quantity} x {products[p.itemClass]?.name} (
-                              {+parseFloat(cyclesMin * p.quantity).toPrecision(3)}/min)
-                            </div>
-                          ))}
-                        </TableCell>
-                        <TableCell align="right">
-                          <IconButton>
-                            <SvgIcon>
-                              <ArrowRightIcon />
-                            </SvgIcon>
-                          </IconButton>
-                        </TableCell>
-                      </TableRow>
-                    );
-                  })}
-                </TableBody>
-              </Table>
+                          <TableCell>
+                            <Stack
+                              alignItems="center"
+                              direction="row"
+                              spacing={1}
+                            >
+                              <Avatar
+                                src={productUrl}
+                                sx={{
+                                  height: 42,
+                                  width: 42,
+                                }}
+                              />
+                              <div>
+                                <Link
+                                  color="inherit"
+                                  variant="subtitle2"
+                                >
+                                  {item.name}
+                                </Link>
+                                <Typography
+                                  color="text.secondary"
+                                  variant="body2"
+                                >
+                                  {item.email}
+                                </Typography>
+                              </div>
+                            </Stack>
+                          </TableCell>
+                          <TableCell>
+                            {item.ingredients.map((p) => (
+                              <div key={p.itemClass}>
+                                {p.quantity} x {products[p.itemClass]?.name} (
+                                {+parseFloat(cyclesMin * p.quantity).toPrecision(3)}/min)
+                              </div>
+                            ))}
+                          </TableCell>
+                          <TableCell>
+                            {machines[item.producedIn]?.name} - {item.craftTime}s
+                          </TableCell>
+                          <TableCell>
+                            {item.products.map((p) => (
+                              <div key={p.itemClass}>
+                                {p.quantity} x {products[p.itemClass]?.name} (
+                                {+parseFloat(cyclesMin * p.quantity).toPrecision(3)}/min)
+                              </div>
+                            ))}
+                          </TableCell>
+                          <TableCell align="right">
+                            <IconButton>
+                              <SvgIcon>
+                                <ArrowRightIcon />
+                              </SvgIcon>
+                            </IconButton>
+                          </TableCell>
+                        </TableRow>
+                      );
+                    })}
+                  </TableBody>
+                </Table>
+              </TableContainer>
             </Scrollbar>
             <TablePagination
               component="div"
@@ -265,7 +271,7 @@ const RecipeList = () => {
               onRowsPerPageChange={handlers.handleRowsPerPageChange}
               page={search.page}
               rowsPerPage={search.rowsPerPage}
-              rowsPerPageOptions={[5, 10, 25]}
+              rowsPerPageOptions={[5, 10, 25, 100, 200]}
             />
           </Card>
         </Box>

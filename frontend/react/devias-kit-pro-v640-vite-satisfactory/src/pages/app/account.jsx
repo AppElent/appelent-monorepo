@@ -1,10 +1,9 @@
 import { useCallback, useState } from 'react';
-import { subDays, subHours, subMinutes } from 'date-fns';
 import { Box, Container, Divider, Stack, Tab, Tabs, Typography } from '@mui/material';
 import { usePageView } from '../../hooks/use-page-view';
 import { Layout as DashboardLayout } from 'src/layouts/dashboard';
-import { AccountGeneralSettings } from 'src/sections/app/account/account-general-settings';
-import { AccountSecuritySettings } from 'src/sections/app/account/account-security-settings';
+import TabGeneral from 'src/sections/app/account/tab-general';
+import TabSecurity from 'src/sections/app/account/tab-security';
 import { useAuth } from 'src/hooks/use-auth';
 import { useData } from 'src/custom/libs/data-framework';
 import { useUpdatePassword } from '@refinedev/core';
@@ -14,8 +13,6 @@ import { EmailAuthProvider, getAuth, reauthenticateWithCredential } from 'fireba
 import { useSettings } from 'src/hooks/use-settings';
 import { Seo } from 'src/components/seo';
 import useLogger from 'src/custom/hooks/use-logger';
-
-const now = new Date();
 
 const tabs = [
   { label: 'General', value: 'general' },
@@ -35,27 +32,6 @@ const Page = () => {
 
   const updatePasswordFn = useCallback(
     async (oldPassword, newPassword) => {
-      // onSubmit={async (values, { setSubmitting }) => {
-      //   try {
-      //     const auth = getAuth();
-      //     const credential = EmailAuthProvider.credential(
-      //       auth.currentUser.email,
-      //       values.oldpassword
-      //     );
-      //     await reauthenticateWithCredential(auth.currentUser, credential);
-      //     await updatePassword(auth.currentUser, values.password);
-      //     // Update successful.
-      //     enqueueSnackbar('Successfully updated password', { variant: 'success' });
-      //   } catch (error) {
-      //     console.log(error);
-      //     let { message } = error;
-      //     if (error.code === 'auth/wrong-password') message = "Old password doesn't match";
-      //     enqueueSnackbar(`Error updating password: ${message}`, { variant: 'error' });
-      //   } finally {
-      //     setSubmitting(false);
-      //   }
-      // }}
-
       try {
         const auth = getAuth();
         logger.log('Old and new password', oldPassword, newPassword);
@@ -113,7 +89,7 @@ const Page = () => {
             </div>
           </Stack>
           {currentTab === 'general' && (
-            <AccountGeneralSettings
+            <TabGeneral
               avatar={user.avatar || ''}
               email={user.email || ''}
               name={user.name || ''}
@@ -169,23 +145,23 @@ const Page = () => {
           )} */}
           {/* {currentTab === "notifications" && <AccountNotificationsSettings />} */}
           {currentTab === 'security' && (
-            <AccountSecuritySettings
-              loginEvents={[
-                {
-                  id: '1bd6d44321cb78fd915462fa',
-                  createdAt: subDays(subHours(subMinutes(now, 5), 7), 1).getTime(),
-                  ip: '95.130.17.84',
-                  type: 'Credential login',
-                  userAgent: 'Chrome, Mac OS 10.15.7',
-                },
-                {
-                  id: 'bde169c2fe9adea5d4598ea9',
-                  createdAt: subDays(subHours(subMinutes(now, 25), 9), 1).getTime(),
-                  ip: '95.130.17.84',
-                  type: 'Credential login',
-                  userAgent: 'Chrome, Mac OS 10.15.7',
-                },
-              ]}
+            <TabSecurity
+              // loginEvents={[
+              //   {
+              //     id: '1bd6d44321cb78fd915462fa',
+              //     createdAt: subDays(subHours(subMinutes(now, 5), 7), 1).getTime(),
+              //     ip: '95.130.17.84',
+              //     type: 'Credential login',
+              //     userAgent: 'Chrome, Mac OS 10.15.7',
+              //   },
+              //   {
+              //     id: 'bde169c2fe9adea5d4598ea9',
+              //     createdAt: subDays(subHours(subMinutes(now, 25), 9), 1).getTime(),
+              //     ip: '95.130.17.84',
+              //     type: 'Credential login',
+              //     userAgent: 'Chrome, Mac OS 10.15.7',
+              //   },
+              // ]}
               updatePassword={updatePasswordFn}
             />
           )}

@@ -86,7 +86,6 @@ export const TrainConfig = (props) => {
                             select
                             name={`type`}
                             onChange={(e) => {
-                              console.log(e.target.value);
                               setCar(car.id, { ...car, type: e.target.value });
                             }}
                             value={car.type || ''}

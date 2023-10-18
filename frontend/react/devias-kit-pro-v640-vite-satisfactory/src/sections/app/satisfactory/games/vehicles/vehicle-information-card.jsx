@@ -67,7 +67,6 @@ const VehicleInformationCard = ({
           name={`${formikNamespace}.type`}
           //onChange={handleChange}
           onChange={(e) => {
-            console.log(e.target.value);
             const type = e.target.value === 'train' ? 'locomotive' : '';
             const car = { id: nanoid(), type };
             setVehicle(vehicle.id, { ...vehicle, type: e.target.value, cars: [car], stops: [] });

@@ -67,8 +67,6 @@ const VehicleProductSelectorDialog = ({
     return vehicle.stops?.find((st) => st.id === modal.data?.stop?.id);
   }, [modal.data, vehicle]);
 
-  console.log(currentStop);
-
   return (
     <Dialog
       onClose={() => modal.setModalState(false)}
@@ -178,7 +176,6 @@ const VehicleProductSelectorDialog = ({
                   const restProducts = carFound?.products.filter(
                     (pr) => !productsPossible.includes(pr)
                   );
-                  console.log(restProducts);
 
                   if (car.type === 'locomotive') {
                     return <TableCell key={car.id}></TableCell>;

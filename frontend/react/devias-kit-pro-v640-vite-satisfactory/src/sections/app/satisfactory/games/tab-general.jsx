@@ -1,7 +1,5 @@
 import PropTypes from 'prop-types';
-import {
-  Stack,
-} from '@mui/material';
+import { Stack } from '@mui/material';
 import { FormikProvider } from 'formik';
 
 import { satisfactoryVersions } from 'src/custom/libs/satisfactory';
@@ -36,7 +34,7 @@ const TabGeneral = (props) => {
         <GameInformationCard
           errors={formik.errors}
           game={formik.values}
-          satisfactoryVersions={satisfactoryVersions}
+          handleChange={formik.handleChange}
         />
         <GamePlayersCard
           players={formik.values.players || []}

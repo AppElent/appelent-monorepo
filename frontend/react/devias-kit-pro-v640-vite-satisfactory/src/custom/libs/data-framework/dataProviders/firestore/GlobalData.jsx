@@ -185,6 +185,7 @@ const GlobalData = ({ resource }) => {
       },
       update: async (value) => {
         const ref = doc(resource.options?.collection, resource.options?.document);
+        console.log(ref, value);
         if (ref) {
           return await updateDoc(ref, value);
         }

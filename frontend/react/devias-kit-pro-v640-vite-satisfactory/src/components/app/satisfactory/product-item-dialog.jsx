@@ -138,7 +138,9 @@ const ProductItemDialog = ({ product, open, setOpen, setProductId, previousProdu
               </TableHead>
               <TableBody>
                 {productRecipes.map((recipe) => {
-                  const machineUrl = `/assets/satisfactory/buildables/${recipe.producedIn}.jpg`;
+                  const machineUrl = `/assets/satisfactory/buildables/${
+                    recipe.producedIn || 'Desc_WorkBench_C'
+                  }.jpg`;
                   const cyclesMin = 60 / parseFloat(recipe.craftTime);
                   return (
                     <TableRow key={recipe.className}>

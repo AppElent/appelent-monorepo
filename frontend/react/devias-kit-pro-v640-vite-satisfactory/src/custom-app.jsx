@@ -62,6 +62,14 @@ const CustomApp = ({ children }) => {
       },
     },
     {
+      name: 'user_profiles',
+      options: {
+        collection: collection(db, 'documents'),
+        document: 'user_profiles',
+        dataProviderName: 'firestore',
+      },
+    },
+    {
       name: 'testdocument',
       options: {
         collection: collection(db, 'dummy'),

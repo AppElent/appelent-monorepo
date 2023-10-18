@@ -21,32 +21,21 @@ import { generateName } from 'src/custom/libs/random-name-generator';
 import { useMounted } from 'src/hooks/use-mounted';
 
 import { LogLevelOptions, logger } from 'src/custom/libs/logging';
+import BasicDetailsCard from './basic-details-card';
+import { useData } from 'src/custom/libs/data-framework';
+import PublicProfileCard from './public-profile-card';
 
-export const AccountGeneralSettings = (props) => {
+const TabGeneral = (props) => {
   const isMounted = useMounted();
   const auth = getAuth();
+  const userProfiles = useData('user_profiles');
+
+  console.log(userProfiles);
 
   const { updatesettings, ...rest } = props;
   const { avatar, email, name, user, settings } = rest;
   const initialValues = { ...settings };
   const [loglevel, setLoglevel] = useState(logger.level);
-  const formik = useFormik({
-    initialValues: { name: name, backend: settings?.backend },
-    //validationSchema,
-    onSubmit: async (values, helpers) => {
-      try {
-        return await updateProfile(auth.currentUser, { displayName: values.name }); //user.update({ displayName: values.name });
-      } catch (err) {
-        console.error(err);
-
-        if (isMounted()) {
-          helpers.setStatus({ success: false });
-          helpers.setErrors({ submit: err.message });
-          helpers.setSubmitting(false);
-        }
-      }
-    },
-  });
 
   const formikSettings = useFormik({
     initialValues,
@@ -65,19 +54,13 @@ export const AccountGeneralSettings = (props) => {
       }
     },
   });
-  const [isEditing, setIsEditing] = useState(false);
-
-  const generateRandomName = () => {
-    const generatedName = generateName();
-    formik.setFieldValue('name', generatedName);
-  };
 
   return (
     <Stack
       spacing={4}
       {...rest}
     >
-      <CardDefault title="Basic details">
+      {/* <CardDefault title="Basic details">
         <Stack spacing={3}>
           <Stack
             alignItems="center"
@@ -222,7 +205,55 @@ export const AccountGeneralSettings = (props) => {
             />
           </Stack>
         </Stack>
-      </CardDefault>
+      </CardDefault> */}
+      <BasicDetailsCard
+        user={auth?.currentUser || {}}
+        updateProfile={updateProfile}
+      />
+      <PublicProfileCard
+        user={auth?.currentUser || {}}
+        profilePublic={
+          !!userProfiles.data?.profiles?.find((profile) => profile.uid === auth?.currentUser?.uid)
+        }
+        setProfilePublic={(setPublic, uid, name) => {
+          console.log(userProfiles, setPublic, uid, name, userProfiles.resource.actions.update);
+          const method = userProfiles.data?.profiles ? 'update' : 'set';
+          if (setPublic && !userProfiles.data?.profiles?.find((profile) => profile.uid === uid)) {
+            const currentProfiles = userProfiles.data?.profiles || [];
+            userProfiles.resource.actions[method]({
+              profiles: [...currentProfiles, { uid, name }],
+            });
+          } else if (
+            !setPublic &&
+            userProfiles.data?.profiles?.find((profile) => profile.uid === uid)
+          ) {
+            const currentProfiles = (userProfiles.data?.profiles || []).filter(
+              (p) => p.uid !== uid
+            );
+            userProfiles.resource.actions[method]({
+              profiles: [...currentProfiles],
+            });
+          }
+        }}
+        available={!!userProfiles.data?.available?.find((a) => a === auth?.currentUser?.uid)}
+        setAvailable={(setPublic, uid) => {
+          const method = 'update';
+          if (setPublic && !userProfiles.data?.available?.find((profile) => profile === uid)) {
+            const currentProfiles = userProfiles.data?.available || [];
+            userProfiles.resource.actions[method]({
+              available: [...currentProfiles, uid],
+            });
+          } else if (
+            !setPublic &&
+            userProfiles.data?.available?.find((profile) => profile === uid)
+          ) {
+            const currentProfiles = (userProfiles.data?.available || []).filter((p) => p !== uid);
+            userProfiles.resource.actions[method]({
+              available: [...currentProfiles],
+            });
+          }
+        }}
+      />
       <CardDefault title="Settings">
         <Stack
           alignItems="center"
@@ -348,7 +379,7 @@ export const AccountGeneralSettings = (props) => {
   );
 };
 
-AccountGeneralSettings.propTypes = {
+TabGeneral.propTypes = {
   avatar: PropTypes.string.isRequired,
   email: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
@@ -356,3 +387,5 @@ AccountGeneralSettings.propTypes = {
   settings: PropTypes.object,
   updatesettings: PropTypes.func.isRequired,
 };
+
+export default TabGeneral;

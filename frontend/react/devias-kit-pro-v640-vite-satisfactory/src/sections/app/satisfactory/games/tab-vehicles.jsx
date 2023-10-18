@@ -415,6 +415,9 @@ export const TabVehicles = (props) => {
           `transport.vehicles.${selectedVehicleIndex}.stops`
         )}
         setStop={setFormikArrayItem(formik, `transport.vehicles.${selectedVehicleIndex}.stops`)}
+        setStops={(stops) =>
+          formik.setFieldValue(`transport.vehicles.${selectedVehicleIndex}.stops`, stops)
+        }
       />
     </Stack>
   );
