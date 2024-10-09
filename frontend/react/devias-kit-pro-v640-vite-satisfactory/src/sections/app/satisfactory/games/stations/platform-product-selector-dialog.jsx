@@ -31,7 +31,8 @@ const IMAGES = STATION_IMAGES;
 const PlatformProductSelectorDialog = ({ modal, station, factories, setProducts, version }) => {
   const theme = useTheme();
   const matches = useMediaQuery(theme.breakpoints.up('sm'));
-  const [showAll, setShowAll] = useState(true);
+  const [showAll, setShowAll] = useState(false);
+  const [showInputs, setShowInputs] = useState(false);
   const products = useMemo(() => getSatisfactoryData('items', version), [version]);
 
   const stationFactories = useMemo(
@@ -49,20 +50,21 @@ const PlatformProductSelectorDialog = ({ modal, station, factories, setProducts,
 
     stationFactories.forEach((factory) => {
       const statistics = getFactoryStatistics(factory?.recipes, version);
-      statistics?.inputs?.forEach(
+      console.log(statistics);
+      statistics?.totalInputs?.forEach(
         (input) =>
           !returnObject.inputs.includes(input.product) && returnObject.inputs.push(input.product)
       );
-      statistics?.outputs?.forEach(
+      statistics?.totalOutputs?.forEach(
         (input) =>
           !returnObject.outputs.includes(input.product) && returnObject.outputs.push(input.product)
       );
-      statistics?.totalInputs?.forEach(
+      statistics?.inputs?.forEach(
         (input) =>
           !returnObject.allInputs.includes(input.product) &&
           returnObject.allInputs.push(input.product)
       );
-      statistics?.totalOutputs?.forEach(
+      statistics?.outputs?.forEach(
         (input) =>
           !returnObject.allOutputs.includes(input.product) &&
           returnObject.allOutputs.push(input.product)
@@ -86,17 +88,30 @@ const PlatformProductSelectorDialog = ({ modal, station, factories, setProducts,
           direction="row"
         >
           <div>{station.name} - Platform product selection</div>
-          <FormControlLabel
-            control={
-              <Switch
-                checked={showAll}
-                onChange={(e) => {
-                  setShowAll(e.target.checked);
-                }}
-              />
-            }
-            label="Show only factory inputs/outputs"
-          />
+          <Stack>
+            <FormControlLabel
+              control={
+                <Switch
+                  checked={showAll}
+                  onChange={(e) => {
+                    setShowAll(e.target.checked);
+                  }}
+                />
+              }
+              label="Show all inputs/outputs"
+            />
+            <FormControlLabel
+              control={
+                <Switch
+                  checked={showInputs}
+                  onChange={(e) => {
+                    setShowInputs(e.target.checked);
+                  }}
+                />
+              }
+              label="Show inputs as outputs"
+            />
+          </Stack>
         </Stack>
       </DialogTitle>
       <DialogContent>
@@ -142,14 +157,21 @@ const PlatformProductSelectorDialog = ({ modal, station, factories, setProducts,
                 {station?.platforms?.map((platform, index) => {
                   const direction =
                     station.type === 'train' ? platform.direction : station.direction;
+                  console.log(factoryProducts);
                   const productList =
                     direction === 'in'
                       ? showAll
                         ? factoryProducts.allInputs
                         : factoryProducts.inputs
                       : showAll
-                      ? factoryProducts.allOutputs
+                      ? showInputs
+                        ? [...factoryProducts.allOutputs, ...factoryProducts.allInputs]
+                        : factoryProducts.allOutputs
+                      : showInputs
+                      ? [...factoryProducts.outputs, ...factoryProducts.inputs]
                       : factoryProducts.outputs;
+
+                  console.log(productList, direction, showAll);
                   //TODO: only show fluids or not
                   const fluidList = productList.filter((product) => products[product]?.isFluid);
                   const solidList = productList.filter((product) => !products[product]?.isFluid);

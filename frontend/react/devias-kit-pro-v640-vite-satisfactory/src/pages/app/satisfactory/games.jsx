@@ -164,12 +164,16 @@ const Page = () => {
         logger.log('Saving values', values);
         // eslint-disable-next-line unused-imports/no-unused-vars
         let { meta, ...rest } = values;
-        if (!rest.players.find((player) => player.uid === values.owner)) {
-          rest.players.push({
-            uid: values.owner,
-            name: auth.currentUser.displayName,
-          });
+        // if (!rest.players.find((player) => player.uid === values.owner)) {
+        //   rest.players.push({
+        //     uid: values.owner,
+        //     name: auth.currentUser.displayName,
+        //   });
+        // }
+        if (!rest.playerIds.find((player) => player === values.owner)) {
+          rest.players.push(values.owner);
         }
+        rest.players = [...new Set(rest.players)];
 
         // For each station, check if it is a train station. If not, add 1 platform. If it is a train, add train station
         if (rest.transport?.stations?.length > 0) {
@@ -199,7 +203,7 @@ const Page = () => {
           endLinebreaks = rest.scribble.endsWith('<p><br></p>');
         }
 
-        rest.playerIds = rest.players.map((player) => player.uid);
+        //rest.playerIds = rest.players.map((player) => player.uid);
         await gamesData.resource?.actions?.update(values.id, rest);
         //await saveSatisfactoryGame(gamesData.meta.path, values.id, rest);
         toast.success(translate(tokens.common.notifications.savedSuccess));
@@ -548,6 +552,7 @@ const Page = () => {
                   createPowerStation={addFormikArrayItem(formik, 'power.stations')}
                   deletePowerStation={removeFormikArrayItem(formik, 'power.stations')}
                   setPowerStation={setFormikArrayItem(formik, 'power.stations')}
+                  formik={formik}
                 />
               )}
             </Stack>

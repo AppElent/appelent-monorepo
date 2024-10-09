@@ -36,6 +36,7 @@ import { useKey } from 'src/custom/hooks/use-key';
 import useModal from 'src/custom/hooks/use-modal';
 import { getSatisfactoryData, getSatisfactoryDataArray } from 'src/custom/libs/satisfactory';
 import { useQueryParam } from 'use-query-params';
+import ClearIcon from '@mui/icons-material/Clear';
 
 import RecipeItemDialog from './recipe-item-dialog';
 
@@ -143,6 +144,18 @@ const RecipeList = () => {
                     <SvgIcon>
                       <SearchMdIcon />
                     </SvgIcon>
+                  </InputAdornment>
+                }
+                endAdornment={
+                  <InputAdornment position="end">
+                    <IconButton
+                      aria-label="clear"
+                      onClick={(e) => handlers.handleSearchChange('')}
+                      onMouseDown={(e) => e.preventDefault()}
+                      edge="end"
+                    >
+                      <ClearIcon />
+                    </IconButton>
                   </InputAdornment>
                 }
                 autoFocus

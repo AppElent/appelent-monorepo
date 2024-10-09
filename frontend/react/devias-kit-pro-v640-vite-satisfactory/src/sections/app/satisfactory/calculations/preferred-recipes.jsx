@@ -18,6 +18,7 @@ import { CardDefault } from 'src/components/app/card-default';
 import useLocalStorage from 'src/custom/hooks/use-local-storage';
 import { getSatisfactoryData, getSatisfactoryDataArray } from 'src/custom/libs/satisfactory';
 import { usePageView } from 'src/hooks/use-page-view';
+import PreferredRecipesTable from './preferred-recipes-table';
 
 const PreferredRecipes = ({ preferredRecipes, setPreferredRecipes, version }) => {
   usePageView();
@@ -53,7 +54,7 @@ Usage:
 
 Note: if you click Save to browser, it will save your preference to the browser for the next time."
     >
-      <TableContainer>
+      {/* <TableContainer>
         <Table size="small">
           <TableHead>
             <TableRow>
@@ -193,7 +194,7 @@ Note: if you click Save to browser, it will save your preference to the browser 
         >
           Save
         </Button> */}
-        {/* <Button
+      {/* <Button
           sx={{ align: 'right', maxWidth: 200 }}
           variant="contained"
           disabled={_.isEqual(savedRecipeList.sort() === savedRecipeList.sort())}
@@ -217,7 +218,12 @@ Note: if you click Save to browser, it will save your preference to the browser 
         >
           Delete from browser
         </Button> */}
-      </Stack>
+      {/* </Stack> */}
+      <PreferredRecipesTable
+        preferredRecipes={savedRecipeList}
+        setPreferredRecipes={setSavedRecipeList}
+        version={version}
+      />
     </CardDefault>
   );
 };

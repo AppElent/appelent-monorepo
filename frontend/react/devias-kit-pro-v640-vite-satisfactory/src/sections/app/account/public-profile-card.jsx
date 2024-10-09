@@ -1,9 +1,5 @@
-import {
-  Divider,
-  Stack,
-  Switch,
-  Typography,
-} from '@mui/material';
+import { Divider, Stack, Switch, Typography } from '@mui/material';
+import PropTypes from 'prop-types';
 import { CardDefault } from 'src/components/app/card-default';
 
 const PublicProfileCard = ({ user, profilePublic, setProfilePublic, available, setAvailable }) => {
@@ -42,13 +38,12 @@ const PublicProfileCard = ({ user, profilePublic, setProfilePublic, available, s
           spacing={3}
         >
           <Stack spacing={1}>
-            <Typography variant="subtitle1">Available to play</Typography>
+            <Typography variant="subtitle1">Allow people to add as contact</Typography>
             <Typography
               color="text.secondary"
               variant="body2"
             >
-              Toggling this will let everyone know that you are available for starting new
-              Satisfactory games.
+              Toggling this will let everyone know that they can add you as a contact.
             </Typography>
           </Stack>
           <Switch
@@ -61,6 +56,14 @@ const PublicProfileCard = ({ user, profilePublic, setProfilePublic, available, s
       </Stack>
     </CardDefault>
   );
+};
+
+PublicProfileCard.propTypes = {
+  available: PropTypes.bool,
+  profilePublic: PropTypes.bool,
+  setAvailable: PropTypes.func,
+  setProfilePublic: PropTypes.func,
+  user: PropTypes.object,
 };
 
 export default PublicProfileCard;

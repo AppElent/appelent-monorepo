@@ -9,24 +9,25 @@ import {
   Switch,
   Tab,
   Tabs,
-  TextField,
   useMediaQuery,
   useTheme,
 } from '@mui/material';
 import PropTypes from 'prop-types';
 import useTabs from 'src/custom/hooks/use-tabs';
 
-import TabInputs from './tab-inputs';
 import TabProduction from './tab-production';
 import TabRecipes from './tab-recipes';
+import TabResources from './tab-resources';
+import TabInputs from './tab-inputs';
 
 const tabsData = [
   { label: 'Production', value: 'production' },
+  { label: 'Resources', value: 'resources' },
   { label: 'Inputs', value: 'inputs' },
   { label: 'Recipes', value: 'recipes' },
 ];
 
-const Input = ({ handleClose, open, config, setConfig }) => {
+const Input = ({ handleClose, open, config, setConfig, resetConfig }) => {
   const tabs = useTabs({ initial: tabsData[0].value });
   const theme = useTheme();
   const matches = useMediaQuery(theme.breakpoints.up('sm'));
@@ -37,15 +38,22 @@ const Input = ({ handleClose, open, config, setConfig }) => {
       open={open}
       fullWidth
       fullScreen={!matches}
-      maxWidth="md"
+      maxWidth="xl"
     >
       <DialogTitle>Factory planner input</DialogTitle>
       <DialogContent>
         <FormControlLabel
-          control={<Switch defaultChecked />}
+          control={
+            <Switch
+              checked={config.autoUpdate}
+              onChange={(e) => {
+                setConfig('autoUpdate', e.target.checked);
+              }}
+            />
+          }
           label="Auto calculate (disable if things get laggy)"
         />
-        <Grid
+        {/* <Grid
           container
           spacing={1}
         >
@@ -67,7 +75,7 @@ const Input = ({ handleClose, open, config, setConfig }) => {
               disabled={true}
             />
           </Grid>
-        </Grid>
+        </Grid> */}
         <Tabs
           indicatorColor="primary"
           onChange={tabs.handleTabChange}
@@ -84,29 +92,62 @@ const Input = ({ handleClose, open, config, setConfig }) => {
             />
           ))}
         </Tabs>
-        {tabs.tab === 'production' && <TabProduction />}
-        {tabs.tab === 'inputs' && <TabInputs />}
-        {tabs.tab === 'recipes' && <TabRecipes />}
+        {tabs.tab === 'production' && (
+          <TabProduction
+            products={config.products}
+            setProducts={(products) => setConfig('products', products)}
+            version={config.version}
+          />
+        )}
+        {tabs.tab === 'resources' && (
+          <TabResources
+            resources={config.resources || []}
+            setResources={(newResources) => {
+              setConfig('resources', newResources);
+            }}
+          />
+        )}
+        {tabs.tab === 'recipes' && (
+          <TabRecipes
+            recipes={config.recipes}
+            setRecipes={(newRecipes) => {
+              setConfig('recipes', newRecipes);
+            }}
+          />
+        )}
+        {tabs.tab === 'inputs' && (
+          <TabInputs
+            inputs={config.inputs}
+            setInputs={(newInputs) => {
+              setConfig('inputs', newInputs);
+            }}
+          />
+        )}
       </DialogContent>
       <DialogActions>
         <Button
           color="error"
-          onClick={() => {}}
+          onClick={() => {
+            resetConfig();
+          }}
         >
           Reset all
         </Button>
         <Button
           autoFocus
           onClick={handleClose}
+          variant="outlined"
         >
-          Cancel
+          Close
         </Button>
-        <Button
-          onClick={() => {}}
-          variant="contained"
-        >
-          Calculate
-        </Button>
+        {!config.autoUpdate && (
+          <Button
+            onClick={() => {}}
+            variant="contained"
+          >
+            Calculate
+          </Button>
+        )}
       </DialogActions>
     </Dialog>
   );

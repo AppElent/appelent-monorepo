@@ -9,11 +9,15 @@ import GameDownloadCard from './general/game-download-card';
 import { GameEditJsonDialog } from './general/game-edit-json-dialog';
 import GameInformationCard from './general/game-information-card';
 import GamePlayersCard from './general/game-players.card';
+import { useData } from 'src/custom/libs/data-framework';
 
 const TabGeneral = (props) => {
   const { game, formik, handleDeleteGame } = props;
   // const [secondary, setSecondary] = useState(false);
   const { modalOpen, setData, setModalState } = useModal(false, formik.values);
+  const userProfiles = useData('user_profiles');
+
+  console.log(888, userProfiles);
 
   const handleDownloadGame = () => {
     // eslint-disable-next-line unused-imports/no-unused-vars
@@ -36,7 +40,8 @@ const TabGeneral = (props) => {
           handleChange={formik.handleChange}
         />
         <GamePlayersCard
-          players={formik.values.players || []}
+          players={formik.values.playerIds || []}
+          playerList={userProfiles?.data?.profiles || []}
           owner={game.owner}
           handleChange={formik.handleChange}
           isOwner={game.owner === getAuth().currentUser.uid}

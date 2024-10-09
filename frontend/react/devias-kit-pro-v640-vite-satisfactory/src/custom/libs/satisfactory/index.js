@@ -13,6 +13,12 @@ import items_v800 from './data/v800/items.json';
 import productionRecipes_v800 from './data/v800/productionRecipes.json';
 import resources_v800 from './data/v800/resources.json';
 import schematics_v800 from './data/v800/schematics.json';
+import buildableRecipes_v1000 from './data/v800/buildableRecipes.json';
+import buildables_v1000 from './data/v800/buildables.json';
+import items_v1000 from './data/v800/items.json';
+import productionRecipes_v1000 from './data/v800/productionRecipes.json';
+import resources_v1000 from './data/v800/resources.json';
+import schematics_v1000 from './data/v800/schematics.json';
 
 // export { recipeChart } from './charts';
 // export { getFactoryStatistics, getRecipesByProduct } from './statistics';
@@ -45,9 +51,22 @@ const satisfactory_data = {
     schematics: schematics_v800,
     tierList: tierList_v700,
   },
+  v1000: {
+    items: items_v1000,
+    buildables: buildables_v1000,
+    buildableRecipes: buildableRecipes_v1000,
+    recipes: productionRecipes_v1000,
+    resources: resources_v1000,
+    schematics: schematics_v1000,
+    tierList: tierList_v700,
+  },
 };
 
 export const satisfactoryVersions = [
+  {
+    label: 'Update 1.0',
+    key: 'v1000',
+  },
   {
     label: 'Update 8 (Experimental)',
     key: 'v800',
@@ -62,7 +81,7 @@ export const satisfactoryVersions = [
   },
 ];
 
-export const SatisfactoryCurrentVersion = 'v700';
+export const SatisfactoryCurrentVersion = 'v1000';
 
 export const getSatisfactoryData = (type, version) => {
   const localVersion = version ? version : SatisfactoryCurrentVersion;
